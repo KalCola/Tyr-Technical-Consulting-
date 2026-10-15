@@ -24,7 +24,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install -g html-validator@7 http-server pa11y@6 lighthouse
+          npm install -g html-validator@latest http-server pa11y@6 lighthouse
 
       - name: Validate repository structure
         run: |
@@ -45,7 +45,7 @@ jobs:
       - name: Check asset URLs return HTTP 200
         run: |
           set -e
-          grep -oP '(?<=src=")[^"]+|(?<=href=")[^"]+' index.html | while read -r asset; do
+          grep -oP '(?<=src=")[^"']+|(?<=href=")[^"']+' index.html | while read -r asset; do
             case "$asset" in
               ""|\#*|data:*) continue ;;
               http*) url="$asset" ;;
@@ -112,7 +112,7 @@ jobs:
       - name: Image size warning check
         run: |
           set -e
-          for img in $(grep -oP '(?<=src=")[^"]+' index.html | grep -E '\.(jpg|jpeg|png|webp|gif)$' || true); do
+          for img in $(grep -oP '(?<=src=")[^"']+' index.html | grep -E '\.(jpg|jpeg|png|webp|gif)$' || true); do
             if [ -f "$img" ]; then
               size=$(stat -c%s "$img")
               echo "$img: $size bytes"
@@ -140,4 +140,3 @@ jobs:
             lighthouse-report.json
             headers.txt
             /tmp/http-server.log
-
