@@ -1,0 +1,143 @@
+name: GitHub Pages verification
+
+on:
+  push:
+    branches: [main, add/pages-verification]
+  workflow_dispatch:
+
+env:
+  IMAGE_MAX_BYTES: 300000
+  LIGHTHOUSE_THRESHOLD: 90
+  SITE_URL: http://127.0.0.1:8080
+
+jobs:
+  pages-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: |
+          npm install -g html-validator@7 http-server pa11y@6 lighthouse
+
+      - name: Validate repository structure
+        run: |
+          set -e
+          for f in index.html 404.html CNAME; do
+            if [ ! -f "$f" ]; then
+              echo "Missing required file: $f" >&2
+              exit 1
+            fi
+          done
+          echo "Repository structure looks valid."
+
+      - name: Validate HTML
+        run: |
+          set -e
+          html-validator --file=index.html --verbose
+
+      - name: Check asset URLs return HTTP 200
+        run: |
+          set -e
+          grep -oP '(?<=src=")[^"]+|(?<=href=")[^"]+' index.html | while read -r asset; do
+            case "$asset" in
+              ""|\#*|data:*) continue ;;
+              http*) url="$asset" ;;
+              *) url="https://raw.githubusercontent.com/${{ github.repository }}/main/$asset" ;;
+            esac
+            echo "Checking $url"
+            status=$(curl -s -L -o /dev/null -w "%{http_code}" "$url")
+            if [ "$status" != "200" ]; then
+              echo "Asset check failed for $url (HTTP $status)" >&2
+              exit 1
+            fi
+          done
+
+      - name: Start local HTTP server
+        run: |
+          nohup http-server -p 8080 . >/tmp/http-server.log 2>&1 &
+          for i in $(seq 1 20); do
+            curl -fsS "$SITE_URL" >/dev/null && break
+            sleep 1
+          done
+
+      - name: Run accessibility scan
+        run: |
+          set -e
+          pa11y "$SITE_URL" --reporter json > pa11y-results.json || true
+          node -e "const fs=require('fs'); const r=JSON.parse(fs.readFileSync('pa11y-results.json','utf8')); console.log(JSON.stringify(r,null,2));" | head
+
+      - name: Run Lighthouse
+        run: |
+          set -e
+          lighthouse "$SITE_URL" \
+            --chrome-flags='--headless --no-sandbox --disable-dev-shm-usage --disable-gpu' \
+            --output=json \
+            --output-path=./lighthouse-report.json \
+            --quiet || true
+
+      - name: Enforce Lighthouse thresholds
+        run: |
+          set -e
+          node <<'NODE'
+          const fs = require('fs');
+          const path = './lighthouse-report.json';
+          if (!fs.existsSync(path)) {
+            console.error('Lighthouse report was not generated');
+            process.exit(1);
+          }
+          const report = JSON.parse(fs.readFileSync(path, 'utf8'));
+          const cats = ['performance', 'accessibility', 'best-practices', 'seo'];
+          const scores = {};
+          for (const cat of cats) {
+            const raw = report.categories?.[cat]?.score;
+            const score = raw == null ? 0 : Math.round(raw * 100);
+            scores[cat] = score;
+            console.log(`${cat}: ${score}`);
+          }
+          const threshold = Number(process.env.LIGHTHOUSE_THRESHOLD || 90);
+          const bad = Object.entries(scores).filter(([, v]) => v < threshold);
+          if (bad.length) {
+            console.error('One or more Lighthouse categories fell below the threshold:', bad);
+            process.exit(1);
+          }
+          NODE
+
+      - name: Image size warning check
+        run: |
+          set -e
+          for img in $(grep -oP '(?<=src=")[^"]+' index.html | grep -E '\.(jpg|jpeg|png|webp|gif)$' || true); do
+            if [ -f "$img" ]; then
+              size=$(stat -c%s "$img")
+              echo "$img: $size bytes"
+              if [ "$size" -gt "$IMAGE_MAX_BYTES" ]; then
+                echo "::warning file=$img::Image exceeds $IMAGE_MAX_BYTES bytes ($size). Consider optimizing."
+              fi
+            fi
+          done
+
+      - name: Check security headers & custom-domain DNS hints
+        run: |
+          set -e
+          echo "Checking headers from local site..."
+          curl -sSLI "$SITE_URL" | tee headers.txt
+          echo "\nCustom domain configured in CNAME:"
+          cat CNAME
+
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pages-verification-artifacts
+          path: |
+            pa11y-results.json
+            lighthouse-report.json
+            headers.txt
+            /tmp/http-server.log
+
