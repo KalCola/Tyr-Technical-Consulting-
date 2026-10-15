@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="0; url=/">
+    <title>TYR Technical Consulting | Redirecting to Storefront...</title>
+    <script>
+        // Instant client-side route redirection to main storefront
+        (function() {
+            var path = window.location.pathname.toLowerCase();
+            var target = '/';
+            if (path.indexOf('resume') !== -1 || path.indexOf('contract') !== -1) target = '/#top';
+            window.location.replace(target);
+        })();
+    </script>
+    <style>
+        body {
+            background-color: #060609;
+            color: #f4f5f8;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .card {
+            max-width: 520px;
+            background: #11131a;
+            border: 1px solid rgba(220, 38, 38, 0.55);
+            border-top: 4px solid #dc2626;
+            border-radius: 10px;
+            padding: 28px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.75);
+        }
+        .rune {
+            display: inline-flex;
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #dc2626, #7f1d1d);
+            border: 1px solid #fbbf24;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 1.3em;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+        h1 {
+            font-size: 1.25em;
+            margin: 0 0 8px 0;
+            color: #ffffff;
+        }
+        p {
+            font-size: 0.9em;
+            color: #cbd5e1;
+            margin: 0 0 18px 0;
+            line-height: 1.5;
+        }
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: #ffffff;
+            border: 1px solid #f87171;
+            padding: 9px 18px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.85em;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="rune">ᛏ</div>
+        <h1>TYR | TECHNICAL CONSULTING</h1>
+        <p>Redirecting you to the Nine Realms Storefront at <strong>tyrprotocol.pro</strong>...</p>
+        <a class="btn" href="/">Enter Storefront &rarr;</a>
+    </div>
+</body>
+</html>
