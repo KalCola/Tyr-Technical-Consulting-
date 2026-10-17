@@ -3,16 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta id="viewport-meta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18518856067"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'AW-18518856067');
-</script>  <!-- Standards-Compliant HTTP User-Agent Client Hints Negotiation -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18518856067"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'AW-18518856067');
+    </script>
+
+    <!-- Event snippet for Page view conversion page -->
+    <script>
+      gtag('event', 'conversion', {
+          'send_to': 'AW-18518856067/dUg4CNiWnKAdEIOjvf5E',
+          'value': 1.0,
+          'currency': 'USD'
+      });
+    </script>
+
+    <!-- Helper to call when a button/link is clicked -->
+    <script>
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof url !== 'undefined') {
+          window.location = url;
+        }
+      };
+
+      gtag('event', 'conversion', {
+          'send_to': 'AW-18518856067/dUg4CNiWnKAdEIOjvf5E',
+          'value': 1.0,
+          'currency': 'USD',
+          'event_callback': callback
+      });
+
+      return false;
+    }
+    </script>
+
     <meta http-equiv="Accept-CH" content="Sec-CH-UA, Sec-CH-UA-Mobile, Sec-CH-UA-Platform, Sec-CH-UA-Platform-Version, Sec-CH-UA-Model, Sec-CH-UA-Form-Factors, Viewport-Width, DPR">
+
     <script>
         // Synchronous pre-paint device classification (prevents Flash of Desktop Layout on Mobile)
         (function() {
@@ -22,36 +53,10 @@
             document.documentElement.setAttribute('data-device', isMob ? 'mobile' : 'desktop');
         })();
     </script>
+
     <title>TYR Technical Consulting | Nine Realms Paginated Storefront (15 Services &amp; Monthly Optimization Plans)</title>
-        <style>
-            <!-- Event snippet for Page view conversion page -->
-<script>
-  gtag('event', 'conversion', {
-      'send_to': 'AW-18518856067/dUg4CNiWnKAdEIOjvf5E',
-      'value': 1.0,
-      'currency': 'USD'
-  });
-</script>
-      <!-- Event snippet for Page view conversion page
-In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
-<script>
-function gtag_report_conversion(url) {
-  var callback = function () {
-    if (typeof(url) != 'undefined') {
-      window.location = url;
-    }
-  };
-  gtag('event', 'conversion', {
-      'send_to': 'AW-18518856067/dUg4CNiWnKAdEIOjvf5E',
-      'value': 1.0,
-      'currency': 'USD',
-      'event_callback': callback
-  });
-  return false;
-}
-</script>
 
-
+    <style>
         :root {
             /* Core Obsidian & Blood Red Foundation */
             --bg-obsidian: #060609;
@@ -65,34 +70,34 @@ function gtag_report_conversion(url) {
             --steel-silver: #e2e8f0;
 
             /* Nine Realms Color Palette Tokens */
-            /* 1. Midgard (Websites & Public Presence) — Sovereign Blood Crimson */
+            /* 1. Midgard (Websites & Public Presence) - Blood Crimson */
             --midgard-main: #dc2626;
             --midgard-light: #f87171;
             --midgard-bg: rgba(220, 38, 38, 0.13);
             --midgard-border: rgba(220, 38, 38, 0.52);
             --midgard-grad: linear-gradient(180deg, rgba(220, 38, 38, 0.12) 0%, #11131a 44%);
-
-            /* 2. Asgard (Domains, Email Shield & Watchtower) — Imperial Bifrost Gold */
+            
+            /* 2. Asgard (Domains, Email Shield & Watchtower) - Imperial Bifrost Gold */
             --asgard-main: #d97706;
             --asgard-light: #fbbf24;
             --asgard-bg: rgba(245, 158, 11, 0.13);
             --asgard-border: rgba(245, 158, 11, 0.52);
             --asgard-grad: linear-gradient(180deg, rgba(245, 158, 11, 0.12) 0%, #11131a 44%);
-
-            /* 3. Vanaheim (QR Menus, Forms & Local Commerce) — Verdant Harvest Emerald */
+            
+            /* 3. Vanaheim (QR Menus, Forms & Local Commerce) - Verdant Harvest Emerald */
             --vanaheim-main: #059669;
             --vanaheim-light: #34d399;
             --vanaheim-bg: rgba(16, 185, 129, 0.13);
             --vanaheim-border: rgba(16, 185, 129, 0.52);
             --vanaheim-grad: linear-gradient(180deg, rgba(16, 185, 129, 0.12) 0%, #11131a 44%);
 
-            /* 4. Alfheim (Resumes, Bids & Admin Concierge) — Luminous Starlight Cyan */
+            /* 4. Alfheim (Resumes, Bids & Admin Concierge) Luminous Starlight Cyan */
             --alfheim-main: #0284c7;
             --alfheim-light: #38bdf8;
             --alfheim-bg: rgba(56, 189, 248, 0.13);
             --alfheim-border: rgba(56, 189, 248, 0.52);
             --alfheim-grad: linear-gradient(180deg, rgba(56, 189, 248, 0.12) 0%, #11131a 44%);
-
+            
             /* 5. Nidavellir (3-Doc Fillable E-Sign Contracts) — Dwarven Forge Copper/Bronze */
             --nidavellir-main: #ea580c;
             --nidavellir-light: #fb923c;
