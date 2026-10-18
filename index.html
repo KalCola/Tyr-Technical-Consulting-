@@ -2,7 +2,7 @@
 <html lang="en" data-device="desktop" data-uach="auto">
 <head>
     <meta charset="UTF-8">
-    <meta id="viewport-meta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta id="viewport-meta" name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Preconnect for Google Tag Manager -->
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
@@ -40,11 +40,21 @@
     }
     </script>
 
-    <!-- Google Consent Mode v2: default to denied until user grants consent -->
+    <!-- Consolidated dataLayer, gtag stub, and Consent Mode v2 defaults -->
     <script>
-      // Ensure dataLayer exists and a lightweight gtag stub is available before loading gtag.js
+      // Lightweight, consolidated analytics consent bootstrapping.
       window.dataLayer = window.dataLayer || [];
+      window.__pendingGtagEvents = window.__pendingGtagEvents || [];
+
       function gtag(){ window.dataLayer.push(arguments); }
+      window.gtag = window.gtag || gtag;
+
+      // Safe access to localStorage (wrap to avoid SecurityError in restricted contexts)
+      try {
+        window._tyr_gtag_consent = (window.localStorage && window.localStorage.getItem('tyr_gtag_consent') === 'granted');
+      } catch (e) {
+        window._tyr_gtag_consent = false;
+      }
 
       try {
         gtag('consent', 'default', {
@@ -62,18 +72,11 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18518856067"></script>
     <script>
-      // Initialize safe dataLayer and gtag wrapper
-      window.dataLayer = window.dataLayer || [];
-      window.__pendingGtagEvents = window.__pendingGtagEvents || [];
-      window._tyr_gtag_consent = window.localStorage && window.localStorage.getItem('tyr_gtag_consent') === 'granted';
-
-      window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
-
       try {
+        // Init gtag safely; the stub above ensures calls queue even when gtag.js doesn't load
         gtag('js', new Date());
         gtag('config', 'AW-18518856067');
       } catch (e) {
-        // fail silently if gtag is blocked
         console.warn('gtag init error', e);
       }
 
@@ -109,11 +112,13 @@
         }
       }
 
-      // Consent helpers
+      // Consent helpers with safe localStorage writes
       function _tyr_grantConsent() {
         try {
           window._tyr_gtag_consent = true;
-          if (window.localStorage) window.localStorage.setItem('tyr_gtag_consent', 'granted');
+          try {
+            if (window.localStorage) window.localStorage.setItem('tyr_gtag_consent', 'granted');
+          } catch (e) { /* localStorage write failed (e.g. blocked) */ }
 
           // Update Google Consent Mode for all keys
           try {
@@ -136,7 +141,9 @@
       function _tyr_denyConsent() {
         try {
           window._tyr_gtag_consent = false;
-          if (window.localStorage) window.localStorage.setItem('tyr_gtag_consent', 'denied');
+          try {
+            if (window.localStorage) window.localStorage.setItem('tyr_gtag_consent', 'denied');
+          } catch (e) { /* localStorage write failed (e.g. blocked) */ }
 
           // Explicitly set consent denied for all keys
           try {
@@ -162,33 +169,23 @@
       window._tyr_grantConsent = _tyr_grantConsent;
       window._tyr_denyConsent = _tyr_denyConsent;
 
-      // Page-load conversion should be queued/sent based on consent state
-      (function () {
-        var conversionPayload = {
-          'send_to': 'AW-18518856067/dUg4CNiWnKAdEIOjvf5E',
-          'value': 1.0,
-          'currency': 'USD'
-        };
-
-        try {
-          _tyr_sendOrQueueConversion(conversionPayload);
-        } catch (e) {
-          console.warn('initial conversion queueing failed', e);
-        }
-      })();
-
       // Global helper for onclick handlers to use (keeps global function available)
       window.gtag_report_conversion = function(url) {
-        var callbackCalled = false;
-        var callback = function () {
-          if (callbackCalled) return;
-          callbackCalled = true;
-          if (typeof url !== 'undefined' && url) {
+        var done = false;
+        var timer = null;
+        var callback = function() {
+          if (done) return;
+          done = true;
+          if (timer) clearTimeout(timer);
+          if (url) {
             try { window.location.assign(url); } catch (e) { window.location = url; }
           }
         };
 
-        var eventObj = {
+        // Always schedule fallback navigation to avoid stalling when analytics is blocked
+        timer = setTimeout(callback, 400);
+
+        var ev = {
           'send_to': 'AW-18518856067/dUg4CNiWnKAdEIOjvf5E',
           'value': 1.0,
           'currency': 'USD',
@@ -196,26 +193,21 @@
         };
 
         try {
-          // If consent and gtag available, send directly
           if (window._tyr_gtag_consent && typeof gtag === 'function') {
-            try { gtag('event', 'conversion', eventObj); }
-            catch (e) { console.warn('direct conversion failed', e); window.__pendingGtagEvents.push(eventObj); setTimeout(callback, 1500); }
-          } else {
-            // Queue or fallback navigation
-            window.__pendingGtagEvents.push(eventObj);
-            // Ensure navigation still happens if analytics never fires
-            setTimeout(callback, 1500);
+            gtag('event', 'conversion', ev);
+          } else if (window.__pendingGtagEvents) {
+            // Queue minimal fields until consent or gtag loads
+            window.__pendingGtagEvents.push({
+              'send_to': ev.send_to,
+              'value': ev.value,
+              'currency': ev.currency
+            });
           }
-        } catch (e) {
-          console.warn('gtag_report_conversion error', e);
-          setTimeout(callback, 150);
-        }
+        } catch (e) { /* silent */ }
 
-        return false; // allow usage in onclick="return gtag_report_conversion(url)"
+        return false;
       };
     </script>
-
-    <meta http-equiv="Accept-CH" content="Sec-CH-UA, Sec-CH-UA-Mobile, Sec-CH-UA-Platform, Sec-CH-UA-Platform-Version, Sec-CH-UA-Model, Sec-CH-UA-Form-Factors, Viewport-Width, DPR">
 
     <script>
         // Synchronous pre-paint device classification (prevents Flash of Desktop Layout on Mobile)
@@ -345,6 +337,9 @@
             border-radius: 6px;
         }
 
+        /* Ensure logo has intrinsic dimensions to avoid layout shifts */
+        .logo-img { width: 52px; height: 52px; aspect-ratio: 1 / 1; object-fit: cover; }
+
         /* Remaining CSS unchanged (omitted here for brevity in this edit response) */
     </style>
 </head>
@@ -361,7 +356,7 @@
     <nav class="top-nav">
         <div class="nav-inner">
             <a href="#top" class="nav-brand" aria-label="TYR Technical Consulting home">
-                <span class="nav-rune-badge" aria-hidden="true" title="TYR logo" aria-label="TYR logo">ᛏ</span>
+                <span class="nav-rune-badge" aria-hidden="true">ᛏ</span>
                 <span class="nav-brand-text">TYR <span>Technical Consulting</span></span>
             </a>
 
@@ -384,7 +379,7 @@
     <main class="container" id="top">
         <section class="hero" aria-label="Executive summary">
             <div class="hero-left">
-                <img class="logo-img" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=160&q=80" alt="TYR strategy and technology consulting" width="52" height="52" fetchpriority="high">
+                <img class="logo-img" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=160&q=80" alt="TYR strategy and technology consulting" width="52" height="52">
                 <div>
                     <div class="eyebrow">Nine Realms Storefront</div>
                     <h1>Build the <span class="accent">next realm</span> of your growth engine.</h1>
@@ -425,7 +420,9 @@
 
             function showBannerIfNeeded() {
                 try {
-                    var stored = window.localStorage && window.localStorage.getItem('tyr_gtag_consent');
+                    var stored = null;
+                    try { stored = window.localStorage && window.localStorage.getItem('tyr_gtag_consent'); } catch (e) { stored = null; }
+
                     if (stored === 'granted') {
                         // already granted - flush queued events
                         if (window._tyr_grantConsent) window._tyr_grantConsent();
@@ -509,43 +506,6 @@
                     showPage(button.dataset.page);
                 });
             });
-        })();
-
-        // Set intrinsic dimensions and loading/decoding attributes for images we can safely update at runtime.
-        (function () {
-            function setIntrinsicAttrs(img) {
-                try {
-                    // If an author already set fetchpriority="high", do not lazy-load
-                    if (!img.hasAttribute('width') || !img.hasAttribute('height')) {
-                        if (img.naturalWidth && img.naturalHeight) {
-                            img.setAttribute('width', img.naturalWidth);
-                            img.setAttribute('height', img.naturalHeight);
-                        }
-                    }
-
-                    // For non-high priority images below the fold: lazy-load & async decoding
-                    if (img.getAttribute('fetchpriority') !== 'high') {
-                        if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
-                        if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
-                    }
-                } catch (e) { /* silent */ }
-            }
-
-            function applyToAllImgs() {
-                var imgs = document.getElementsByTagName('img');
-                for (var i = 0; i < imgs.length; i++) {
-                    (function (img) {
-                        if (img.complete) {
-                            setIntrinsicAttrs(img);
-                        } else {
-                            img.addEventListener('load', function () { setIntrinsicAttrs(img); });
-                            img.addEventListener('error', function () { setIntrinsicAttrs(img); });
-                        }
-                    })(imgs[i]);
-                }
-            }
-
-            if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', applyToAllImgs); else applyToAllImgs();
         })();
 
         // Ensure icon-only buttons have accessible labels without changing visual size
