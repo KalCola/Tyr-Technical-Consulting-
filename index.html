@@ -4,6 +4,25 @@
     <meta charset="UTF-8">
     <meta id="viewport-meta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 
+    <!-- Google Consent Mode v2: default to denied until user grants consent -->
+    <script>
+      // Ensure dataLayer exists and a lightweight gtag stub is available before loading gtag.js
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ window.dataLayer.push(arguments); }
+
+      try {
+        gtag('consent', 'default', {
+          'ad_storage': 'denied',
+          'analytics_storage': 'denied',
+          'ad_user_data': 'denied',
+          'ad_personalization': 'denied',
+          'wait_for_update': 500
+        });
+      } catch (e) {
+        console.warn('gtag consent default failed', e);
+      }
+    </script>
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18518856067"></script>
     <script>
@@ -59,9 +78,19 @@
         try {
           window._tyr_gtag_consent = true;
           if (window.localStorage) window.localStorage.setItem('tyr_gtag_consent', 'granted');
-          if (typeof gtag === 'function') {
-            try { gtag('consent', 'update', { 'ad_storage': 'granted' }); } catch (e) { console.warn('consent update failed', e); }
-          }
+
+          // Update Google Consent Mode for all keys
+          try {
+            if (typeof gtag === 'function') {
+              gtag('consent', 'update', {
+                'ad_storage': 'granted',
+                'analytics_storage': 'granted',
+                'ad_user_data': 'granted',
+                'ad_personalization': 'granted'
+              });
+            }
+          } catch (e) { console.warn('consent update failed', e); }
+
           _tyr_flushPendingGtagEvents();
           var banner = document.getElementById('cookie-consent-banner');
           if (banner) banner.style.display = 'none';
@@ -72,6 +101,19 @@
         try {
           window._tyr_gtag_consent = false;
           if (window.localStorage) window.localStorage.setItem('tyr_gtag_consent', 'denied');
+
+          // Explicitly set consent denied for all keys
+          try {
+            if (typeof gtag === 'function') {
+              gtag('consent', 'update', {
+                'ad_storage': 'denied',
+                'analytics_storage': 'denied',
+                'ad_user_data': 'denied',
+                'ad_personalization': 'denied'
+              });
+            }
+          } catch (e) { console.warn('consent deny update failed', e); }
+
           var banner = document.getElementById('cookie-consent-banner');
           if (banner) banner.style.display = 'none';
           // keep queued events until/if user grants consent
@@ -277,7 +319,7 @@
 </head>
 <body>
     <!-- Cookie consent UI (keeps existing HTML intact and adds a safe, optional banner) -->
-    <div id="cookie-consent-banner" role="dialog" aria-live="polite" aria-label="Cookie consent">
+    <div id="cookie-consent-banner" role="region" aria-live="polite" aria-label="Cookie consent">
         <p>We use analytics to improve the site. Do you allow Google Ads conversion tracking on this site?</p>
         <div class="consent-actions">
             <button id="cookie-consent-decline" class="btn">Decline</button>
