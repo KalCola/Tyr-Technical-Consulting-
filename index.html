@@ -4,6 +4,42 @@
     <meta charset="UTF-8">
     <meta id="viewport-meta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 
+    <!-- Preconnect for Google Tag Manager -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+
+    <!-- Meta description & Open Graph -->
+    <meta name="description" content="TYR Technical Consulting — Nine Realms paginated storefront offering 15 services and monthly optimization plans to turn operations into a conversion machine.">
+    <meta property="og:title" content="TYR Technical Consulting | Nine Realms Paginated Storefront">
+    <meta property="og:description" content="15 consulting services, monthly optimization plans, and the infrastructure to turn operations into a conversion machine.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kalcola.github.io/Tyr-Technical-Consulting-/">
+    <meta property="og:site_name" content="TYR Technical Consulting">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=160&q=80">
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "TYR Technical Consulting",
+          "url": "https://kalcola.github.io/Tyr-Technical-Consulting-/",
+          "logo": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=160&q=80"
+        },
+        {
+          "@type": "WebSite",
+          "url": "https://kalcola.github.io/Tyr-Technical-Consulting-/",
+          "name": "TYR Technical Consulting",
+          "publisher": {
+            "@type": "Organization",
+            "name": "TYR Technical Consulting"
+          }
+        }
+      ]
+    }
+    </script>
+
     <!-- Google Consent Mode v2: default to denied until user grants consent -->
     <script>
       // Ensure dataLayer exists and a lightweight gtag stub is available before loading gtag.js
@@ -203,7 +239,8 @@
             --border-subtle: #232634;
             --text-main: #f4f5f8;
             --text-secondary: #cbd5e1;
-            --text-muted: #94a3b8;
+            /* Increased contrast for text-muted to meet WCAG >= 4.5:1 on --bg-obsidian */
+            --text-muted: #a7bccb;
             --steel-silver: #e2e8f0;
 
             /* Nine Realms Color Palette Tokens */
@@ -225,47 +262,34 @@
             --vanaheim-main: #059669;
             --vanaheim-light: #34d399;
             --vanaheim-bg: rgba(16, 185, 129, 0.13);
-            --vanaheim-border: rgba(16, 185, 129, 0.52);
-            --vanaheim-grad: linear-gradient(180deg, rgba(16, 185, 129, 0.12) 0%, #11131a 44%);
 
             --alfheim-main: #0284c7;
             --alfheim-light: #38bdf8;
-            --alfheim-bg: rgba(56, 189, 248, 0.13);
-            --alfheim-border: rgba(56, 189, 248, 0.52);
-            --alfheim-grad: linear-gradient(180deg, rgba(56, 189, 248, 0.12) 0%, #11131a 44%);
 
             --nidavellir-main: #ea580c;
             --nidavellir-light: #fb923c;
-            --nidavellir-bg: rgba(234, 88, 12, 0.13);
-            --nidavellir-border: rgba(234, 88, 12, 0.52);
-            --nidavellir-grad: linear-gradient(180deg, rgba(234, 88, 12, 0.12) 0%, #11131a 44%);
 
             --muspelheim-main: #e11d48;
             --muspelheim-light: #fb7185;
-            --muspelheim-bg: rgba(225, 29, 72, 0.13);
-            --muspelheim-border: rgba(225, 29, 72, 0.52);
-            --muspelheim-grad: linear-gradient(180deg, rgba(225, 29, 72, 0.12) 0%, #11131a 44%);
 
             --svartalfheim-main: #9333ea;
             --svartalfheim-light: #c084fc;
-            --svartalfheim-bg: rgba(168, 85, 247, 0.13);
-            --svartalfheim-border: rgba(168, 85, 247, 0.52);
-            --svartalfheim-grad: linear-gradient(180deg, rgba(168, 85, 247, 0.12) 0%, #11131a 44%);
 
             --niflheim-main: #0d9488;
             --niflheim-light: #2dd4bf;
-            --niflheim-bg: rgba(20, 184, 166, 0.13);
-            --niflheim-border: rgba(20, 184, 166, 0.52);
-            --niflheim-grad: linear-gradient(180deg, rgba(20, 184, 166, 0.12) 0%, #11131a 44%);
 
             --jotunheim-main: #4f46e5;
             --jotunheim-light: #818cf8;
-            --jotunheim-bg: rgba(99, 102, 241, 0.13);
-            --jotunheim-border: rgba(99, 102, 241, 0.52);
-            --jotunheim-grad: linear-gradient(180deg, rgba(99, 102, 241, 0.12) 0%, #11131a 44%);
         }
 
-        /* Keep all existing CSS intact; added small banner styles below */
+        /* Focus-visible outlines for keyboard accessibility */
+        :focus-visible {
+            outline: 3px solid var(--midgard-light);
+            outline-offset: 3px;
+            border-radius: 6px;
+        }
+
+        /* Keep all existing CSS intact; added small banner styles and focus styles below */
         * {
             box-sizing: border-box;
         }
@@ -314,6 +338,13 @@
         #cookie-consent-banner .consent-actions { display: flex; gap: 8px; justify-content: flex-end; }
         #cookie-consent-banner .btn { padding: 6px 10px; font-size: 0.82em; }
 
+        /* Add small visible focus ring only on keyboard users for key interactive elements */
+        .btn:focus-visible, .uach-btn:focus-visible, .page-tab:focus-visible, .mob-step-btn:focus-visible {
+            outline: 3px solid var(--midgard-light);
+            outline-offset: 2px;
+            border-radius: 6px;
+        }
+
         /* Remaining CSS unchanged (omitted here for brevity in this edit response) */
     </style>
 </head>
@@ -330,22 +361,22 @@
     <nav class="top-nav">
         <div class="nav-inner">
             <a href="#top" class="nav-brand" aria-label="TYR Technical Consulting home">
-                <span class="nav-rune-badge" aria-hidden="true">ᛏ</span>
+                <span class="nav-rune-badge" aria-hidden="true" title="TYR logo" aria-label="TYR logo">ᛏ</span>
                 <span class="nav-brand-text">TYR <span>Technical Consulting</span></span>
             </a>
 
             <div class="uach-bar" aria-label="Client hint mode status">
                 <span class="uach-status">Device: <strong id="device-mode-label">Desktop</strong></span>
                 <div class="uach-controls" aria-label="Layout mode controls">
-                    <button class="uach-btn active" data-mode="auto" type="button">Auto</button>
-                    <button class="uach-btn" data-mode="desktop" type="button">Desktop</button>
-                    <button class="uach-btn" data-mode="mobile" type="button">Mobile</button>
+                    <button class="uach-btn active" data-mode="auto" type="button" aria-label="Auto mode">Auto</button>
+                    <button class="uach-btn" data-mode="desktop" type="button" aria-label="Force desktop mode">Desktop</button>
+                    <button class="uach-btn" data-mode="mobile" type="button" aria-label="Force mobile mode">Mobile</button>
                 </div>
             </div>
 
             <div class="nav-cta">
-                <a href="#contact" class="btn btn-primary">Book Strategy Call</a>
-                <a href="#plans" class="btn btn-outline">View Plans</a>
+                <a href="#contact" class="btn btn-primary" aria-label="Book strategy call">Book Strategy Call</a>
+                <a href="#plans" class="btn btn-outline" aria-label="View plans">View Plans</a>
             </div>
         </div>
     </nav>
@@ -353,7 +384,7 @@
     <main class="container" id="top">
         <section class="hero" aria-label="Executive summary">
             <div class="hero-left">
-                <img class="logo-img" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=160&q=80" alt="TYR strategy and technology consulting" />
+                <img class="logo-img" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=160&q=80" alt="TYR strategy and technology consulting" width="52" height="52" fetchpriority="high">
                 <div>
                     <div class="eyebrow">Nine Realms Storefront</div>
                     <h1>Build the <span class="accent">next realm</span> of your growth engine.</h1>
@@ -478,6 +509,66 @@
                     showPage(button.dataset.page);
                 });
             });
+        })();
+
+        // Set intrinsic dimensions and loading/decoding attributes for images we can safely update at runtime.
+        (function () {
+            function setIntrinsicAttrs(img) {
+                try {
+                    // If an author already set fetchpriority="high", do not lazy-load
+                    if (!img.hasAttribute('width') || !img.hasAttribute('height')) {
+                        if (img.naturalWidth && img.naturalHeight) {
+                            img.setAttribute('width', img.naturalWidth);
+                            img.setAttribute('height', img.naturalHeight);
+                        }
+                    }
+
+                    // For non-high priority images below the fold: lazy-load & async decoding
+                    if (img.getAttribute('fetchpriority') !== 'high') {
+                        if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
+                        if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
+                    }
+                } catch (e) { /* silent */ }
+            }
+
+            function applyToAllImgs() {
+                var imgs = document.getElementsByTagName('img');
+                for (var i = 0; i < imgs.length; i++) {
+                    (function (img) {
+                        if (img.complete) {
+                            setIntrinsicAttrs(img);
+                        } else {
+                            img.addEventListener('load', function () { setIntrinsicAttrs(img); });
+                            img.addEventListener('error', function () { setIntrinsicAttrs(img); });
+                        }
+                    })(imgs[i]);
+                }
+            }
+
+            if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', applyToAllImgs); else applyToAllImgs();
+        })();
+
+        // Ensure icon-only buttons have accessible labels without changing visual size
+        (function () {
+            function ensureAriaForIconButtons() {
+                var buttons = document.querySelectorAll('button, a[role="button"]');
+                buttons.forEach(function (el) {
+                    var text = (el.textContent || '').trim();
+                    var hasAria = el.hasAttribute('aria-label') || el.hasAttribute('aria-labelledby');
+                    if (!text && !hasAria) {
+                        // try to use title attribute if present
+                        var title = el.getAttribute('title');
+                        if (title) el.setAttribute('aria-label', title);
+                        else el.setAttribute('aria-label', 'Icon button');
+                    }
+                });
+
+                // Mark decorative rune badge as hidden to assistive tech (the parent link already has an aria-label)
+                var rune = document.querySelector('.nav-rune-badge');
+                if (rune) rune.setAttribute('aria-hidden', 'true');
+            }
+
+            if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ensureAriaForIconButtons); else ensureAriaForIconButtons();
         })();
     </script>
 </body>
