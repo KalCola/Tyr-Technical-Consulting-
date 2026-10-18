@@ -236,21 +236,18 @@
             --steel-silver: #e2e8f0;
 
             /* Nine Realms Color Palette Tokens */
-            /* 1. Midgard (Websites & Public Presence) - Blood Crimson */
             --midgard-main: #dc2626;
             --midgard-light: #f87171;
             --midgard-bg: rgba(220, 38, 38, 0.13);
             --midgard-border: rgba(220, 38, 38, 0.52);
             --midgard-grad: linear-gradient(180deg, rgba(220, 38, 38, 0.12) 0%, #11131a 44%);
             
-            /* 2. Asgard (Domains, Email Shield & Watchtower) - Imperial Bifrost Gold */
             --asgard-main: #d97706;
             --asgard-light: #fbbf24;
             --asgard-bg: rgba(245, 158, 11, 0.13);
             --asgard-border: rgba(245, 158, 11, 0.52);
             --asgard-grad: linear-gradient(180deg, rgba(245, 158, 11, 0.12) 0%, #11131a 44%);
             
-            /* ... remaining variables unchanged ... */
             --vanaheim-main: #059669;
             --vanaheim-light: #34d399;
             --vanaheim-bg: rgba(16, 185, 129, 0.13);
@@ -281,7 +278,6 @@
             border-radius: 6px;
         }
 
-        /* Keep all existing CSS intact; added small banner styles and focus styles below */
         * {
             box-sizing: border-box;
         }
@@ -310,7 +306,230 @@
             padding: 0;
         }
 
-        /* Cookie consent banner (minimal, non-intrusive) */
+        /* Navbar Layout */
+        .top-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(12, 13, 19, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 12px 24px;
+        }
+
+        .nav-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .nav-rune-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: var(--midgard-bg);
+            border: 1px solid var(--midgard-border);
+            color: var(--midgard-light);
+            border-radius: 8px;
+            font-size: 1.1rem;
+        }
+
+        .nav-brand-text span {
+            color: var(--text-muted);
+            font-weight: 400;
+            font-size: 0.9em;
+        }
+
+        /* UACH Control Bar */
+        .uach-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .uach-controls {
+            display: flex;
+            gap: 4px;
+        }
+
+        .uach-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-muted);
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s ease;
+        }
+
+        .uach-btn:hover {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .uach-btn.active {
+            background: var(--bg-surface);
+            border-color: var(--border-subtle);
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        /* Nav CTA Buttons */
+        .nav-cta {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--midgard-main);
+            color: #fff;
+            border: 1px solid var(--midgard-border);
+        }
+
+        .btn-primary:hover {
+            background: var(--midgard-light);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--text-muted);
+        }
+
+        /* Main Container & Hero Section */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 40px 24px 80px 24px;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 32px;
+            align-items: center;
+            margin-bottom: 48px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .hero-left {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .eyebrow {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--midgard-light);
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.15;
+            margin: 0 0 12px 0;
+            color: var(--text-main);
+        }
+
+        .hero h1 .accent {
+            color: var(--midgard-light);
+        }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin: 0;
+        }
+
+        /* Hero Attributes Grid */
+        .hero-attributes {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .attr-box {
+            background: var(--bg-attr);
+            border: 1px solid var(--border-subtle);
+            padding: 12px 16px;
+            border-radius: 10px;
+            min-width: 140px;
+        }
+
+        .attr-box.r-midgard { border-color: var(--midgard-border); background: var(--midgard-bg); }
+        .attr-box.r-asgard { border-color: var(--asgard-border); background: var(--asgard-bg); }
+        .attr-box.r-niflheim { border-color: rgba(13, 148, 136, 0.3); background: rgba(13, 148, 136, 0.1); }
+        .attr-box.r-svartalfheim { border-color: rgba(147, 51, 234, 0.3); background: rgba(147, 51, 234, 0.1); }
+
+        .attr-label {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .attr-val {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        /* Deck Pages & Card System Structure */
+        .deck-page {
+            display: none;
+        }
+
+        .deck-page.active-page {
+            display: block;
+        }
+
+        /* Cookie consent banner */
         #cookie-consent-banner {
             position: fixed;
             right: 12px;
@@ -322,7 +541,7 @@
             border-radius: 8px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.6);
             z-index: 9999;
-            display: none; /* shown only when needed */
+            display: none;
             max-width: 360px;
             font-size: 0.9em;
         }
@@ -330,17 +549,31 @@
         #cookie-consent-banner .consent-actions { display: flex; gap: 8px; justify-content: flex-end; }
         #cookie-consent-banner .btn { padding: 6px 10px; font-size: 0.82em; }
 
-        /* Add small visible focus ring only on keyboard users for key interactive elements */
         .btn:focus-visible, .uach-btn:focus-visible, .page-tab:focus-visible, .mob-step-btn:focus-visible {
             outline: 3px solid var(--midgard-light);
             outline-offset: 2px;
             border-radius: 6px;
         }
 
-        /* Ensure logo has intrinsic dimensions to avoid layout shifts */
         .logo-img { width: 52px; height: 52px; aspect-ratio: 1 / 1; object-fit: cover; }
 
-        /* Remaining CSS unchanged (omitted here for brevity in this edit response) */
+        /* Responsive Breakdowns */
+        @media (max-width: 860px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+            .hero-left {
+                flex-direction: column;
+            }
+            .nav-inner {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .uach-bar, .nav-cta {
+                justify-content: space-between;
+            }
+        }
+        
     </style>
 </head>
 <body>
@@ -352,7 +585,7 @@
             <button id="cookie-consent-accept" class="btn btn-primary">Accept</button>
         </div>
     </div>
-
+    
     <nav class="top-nav">
         <div class="nav-inner">
             <a href="#top" class="nav-brand" aria-label="TYR Technical Consulting home">
