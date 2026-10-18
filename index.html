@@ -1,55 +1,112 @@
 <!DOCTYPE html>
-<html lang="en" data-device="desktop" data-uach="auto">
+<html lang="en" data-device="desktop" data-uach="auto" data-view="paged">
 <head>
     <meta charset="UTF-8">
-    <meta id="viewport-meta" name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta id="viewport-meta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 
-    <!-- Preconnect for Google Tag Manager -->
+    <!-- Standards-Compliant HTTP User-Agent Client Hints Negotiation -->
+    <meta http-equiv="Accept-CH" content="Sec-CH-UA, Sec-CH-UA-Mobile, Sec-CH-UA-Platform, Sec-CH-UA-Platform-Version, Sec-CH-UA-Model, Sec-CH-UA-Form-Factors, Viewport-Width, DPR">
+
+    <!-- Canonical & Resource Hints -->
+    <link rel="canonical" href="https://kalcola.github.io/Tyr-Technical-Consulting-/">
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
 
-    <!-- Meta description & Open Graph -->
-    <meta name="description" content="TYR Technical Consulting — Nine Realms paginated storefront offering 15 services and monthly optimization plans to turn operations into a conversion machine.">
+    <!-- Meta Description, Open Graph & Twitter Card (Oct 2026 Best Practices) -->
+    <meta name="description" content="TYR Technical Consulting — Nine Realms paginated storefront offering 15 flat-rate digital builds ($0/mo hosting) and monthly expense/tech optimization plans.">
+    <meta name="theme-color" content="#060609">
     <meta property="og:title" content="TYR Technical Consulting | Nine Realms Paginated Storefront">
-    <meta property="og:description" content="15 consulting services, monthly optimization plans, and the infrastructure to turn operations into a conversion machine.">
+    <meta property="og:description" content="15 flat-rate consulting services, $0/month web hosting builds, protected email shields, and Zero-Custody monthly expense optimization plans.">
     <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://kalcola.github.io/Tyr-Technical-Consulting-/">
     <meta property="og:site_name" content="TYR Technical Consulting">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=160&q=80">
+    <meta property="og:image" content="https://kalcola.github.io/Tyr-Technical-Consulting-/assets/logo.png">
+    <meta property="og:image:alt" content="TYR Technical Consulting Emblem">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="TYR Technical Consulting | Nine Realms Paginated Storefront">
+    <meta name="twitter:description" content="15 flat-rate digital & administrative services, $0/mo web builds, and Zero-Custody monthly optimization plans.">
 
-    <!-- JSON-LD structured data -->
+    <!-- Schema.org JSON-LD Structured Data (@graph Linked via @id, Zero-Address OPSEC Compliant) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "Organization",
+          "@type": ["Organization", "ProfessionalService"],
+          "@id": "https://kalcola.github.io/Tyr-Technical-Consulting-/#organization",
           "name": "TYR Technical Consulting",
+          "alternateName": ["Tyr Protocol", "Tyr's Technical Consultation"],
+          "legalName": "CALEB TR HOLCOMB",
+          "taxID": "42-4636843",
+          "naics": ["541512", "541611"],
           "url": "https://kalcola.github.io/Tyr-Technical-Consulting-/",
-          "logo": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=160&q=80"
+          "telephone": "+1-659-257-8043",
+          "email": "tyr@tyrprotocol.pro",
+          "priceRange": "$29 - $495",
+          "logo": {
+            "@type": "ImageObject",
+            "@id": "https://kalcola.github.io/Tyr-Technical-Consulting-/#logo",
+            "url": "https://kalcola.github.io/Tyr-Technical-Consulting-/assets/logo.png",
+            "contentUrl": "https://kalcola.github.io/Tyr-Technical-Consulting-/assets/logo.png",
+            "width": 512,
+            "height": 512,
+            "caption": "TYR Technical Consulting"
+          },
+          "image": {
+            "@id": "https://kalcola.github.io/Tyr-Technical-Consulting-/#logo"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Beaverton",
+            "addressRegion": "AL",
+            "addressCountry": "US"
+          },
+          "areaServed": [
+            "Lamar County, AL",
+            "Marion County, AL",
+            "Northwest Alabama",
+            "United States"
+          ],
+          "sameAs": [
+            "https://github.com/kalcola",
+            "https://tyrprotocol.pro"
+          ]
         },
         {
           "@type": "WebSite",
+          "@id": "https://kalcola.github.io/Tyr-Technical-Consulting-/#website",
           "url": "https://kalcola.github.io/Tyr-Technical-Consulting-/",
           "name": "TYR Technical Consulting",
+          "inLanguage": "en-US",
           "publisher": {
-            "@type": "Organization",
-            "name": "TYR Technical Consulting"
+            "@id": "https://kalcola.github.io/Tyr-Technical-Consulting-/#organization"
           }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://kalcola.github.io/Tyr-Technical-Consulting-/#webpage",
+          "url": "https://kalcola.github.io/Tyr-Technical-Consulting-/",
+          "name": "TYR Technical Consulting | Nine Realms Paginated Storefront (15 Services & Monthly Optimization Plans)",
+          "isPartOf": {
+            "@id": "https://kalcola.github.io/Tyr-Technical-Consulting-/#website"
+          },
+          "about": {
+            "@id": "https://kalcola.github.io/Tyr-Technical-Consulting-/#organization"
+          },
+          "inLanguage": "en-US"
         }
       ]
     }
     </script>
 
-    <!-- Consolidated dataLayer, gtag stub, and Consent Mode v2 defaults -->
+    <!-- Consolidated dataLayer, gtag stub, and Google Consent Mode v2 defaults -->
     <script>
-      // Lightweight, consolidated analytics consent bootstrapping.
       window.dataLayer = window.dataLayer || [];
       window.__pendingGtagEvents = window.__pendingGtagEvents || [];
 
       function gtag(){ window.dataLayer.push(arguments); }
       window.gtag = window.gtag || gtag;
 
-      // Safe access to localStorage (wrap to avoid SecurityError in restricted contexts)
       try {
         window._tyr_gtag_consent = (window.localStorage && window.localStorage.getItem('tyr_gtag_consent') === 'granted');
       } catch (e) {
@@ -58,10 +115,10 @@
 
       try {
         gtag('consent', 'default', {
-          'ad_storage': 'denied',
-          'analytics_storage': 'denied',
-          'ad_user_data': 'denied',
-          'ad_personalization': 'denied',
+          'ad_storage': window._tyr_gtag_consent ? 'granted' : 'denied',
+          'analytics_storage': window._tyr_gtag_consent ? 'granted' : 'denied',
+          'ad_user_data': window._tyr_gtag_consent ? 'granted' : 'denied',
+          'ad_personalization': window._tyr_gtag_consent ? 'granted' : 'denied',
           'wait_for_update': 500
         });
       } catch (e) {
@@ -73,17 +130,14 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18518856067"></script>
     <script>
       try {
-        // Init gtag safely; the stub above ensures calls queue even when gtag.js doesn't load
         gtag('js', new Date());
         gtag('config', 'AW-18518856067');
       } catch (e) {
         console.warn('gtag init error', e);
       }
 
-      // Helper: attempt to send an event now, or queue it for later
       function _tyr_sendOrQueueConversion(eventObj) {
         try {
-          // Only send if consent granted
           if (window._tyr_gtag_consent && typeof gtag === 'function') {
             gtag('event', 'conversion', eventObj);
             return true;
@@ -91,13 +145,10 @@
         } catch (e) {
           console.warn('gtag send failed, queuing', e);
         }
-
-        // Not sent; queue for later
         window.__pendingGtagEvents.push(eventObj);
         return false;
       }
 
-      // Flush queued events when possible
       function _tyr_flushPendingGtagEvents() {
         try {
           if (!window.__pendingGtagEvents || window.__pendingGtagEvents.length === 0) return;
@@ -105,22 +156,26 @@
 
           while (window.__pendingGtagEvents.length) {
             var evt = window.__pendingGtagEvents.shift();
-            try { gtag('event', 'conversion', evt); } catch (er) { console.warn('flush event failed', er); window.__pendingGtagEvents.unshift(evt); break; }
+            try {
+              gtag('event', 'conversion', evt);
+            } catch (er) {
+              console.warn('flush event failed', er);
+              window.__pendingGtagEvents.unshift(evt);
+              break;
+            }
           }
         } catch (e) {
           console.warn('flush pending events error', e);
         }
       }
 
-      // Consent helpers with safe localStorage writes
       function _tyr_grantConsent() {
         try {
           window._tyr_gtag_consent = true;
           try {
             if (window.localStorage) window.localStorage.setItem('tyr_gtag_consent', 'granted');
-          } catch (e) { /* localStorage write failed (e.g. blocked) */ }
+          } catch (e) {}
 
-          // Update Google Consent Mode for all keys
           try {
             if (typeof gtag === 'function') {
               gtag('consent', 'update', {
@@ -143,9 +198,8 @@
           window._tyr_gtag_consent = false;
           try {
             if (window.localStorage) window.localStorage.setItem('tyr_gtag_consent', 'denied');
-          } catch (e) { /* localStorage write failed (e.g. blocked) */ }
+          } catch (e) {}
 
-          // Explicitly set consent denied for all keys
           try {
             if (typeof gtag === 'function') {
               gtag('consent', 'update', {
@@ -159,17 +213,20 @@
 
           var banner = document.getElementById('cookie-consent-banner');
           if (banner) banner.style.display = 'none';
-          // keep queued events until/if user grants consent
         } catch (e) { console.warn('deny consent error', e); }
       }
 
-      // Expose for global access per workspace rules
+      function _tyr_openConsentBanner() {
+        var banner = document.getElementById('cookie-consent-banner');
+        if (banner) banner.style.display = 'block';
+      }
+
       window._tyr_sendOrQueueConversion = _tyr_sendOrQueueConversion;
       window._tyr_flushPendingGtagEvents = _tyr_flushPendingGtagEvents;
       window._tyr_grantConsent = _tyr_grantConsent;
       window._tyr_denyConsent = _tyr_denyConsent;
+      window._tyr_openConsentBanner = _tyr_openConsentBanner;
 
-      // Global helper for onclick handlers to use (keeps global function available)
       window.gtag_report_conversion = function(url) {
         var done = false;
         var timer = null;
@@ -182,7 +239,6 @@
           }
         };
 
-        // Always schedule fallback navigation to avoid stalling when analytics is blocked
         timer = setTimeout(callback, 400);
 
         var ev = {
@@ -196,25 +252,28 @@
           if (window._tyr_gtag_consent && typeof gtag === 'function') {
             gtag('event', 'conversion', ev);
           } else if (window.__pendingGtagEvents) {
-            // Queue minimal fields until consent or gtag loads
             window.__pendingGtagEvents.push({
               'send_to': ev.send_to,
               'value': ev.value,
               'currency': ev.currency
             });
+            callback();
           }
-        } catch (e) { /* silent */ }
+        } catch (e) {
+          callback();
+        }
 
         return false;
       };
     </script>
 
+    <!-- Synchronous pre-paint device classification (prevents Flash of Unstyled/Wrong Layout) -->
     <script>
-        // Synchronous pre-paint device classification (prevents Flash of Desktop Layout on Mobile)
         (function() {
             var ua = navigator.userAgent || '';
             var uadMob = navigator.userAgentData ? Boolean(navigator.userAgentData.mobile) : false;
-            var isMob = uadMob || /Android|iPhone|iPad|iPod|Mobile/i.test(ua) || window.innerWidth <= 860;
+            var coarse = window.matchMedia && window.matchMedia('(pointer: coarse) and (max-width: 920px)').matches;
+            var isMob = uadMob || /Android|iPhone|iPad|iPod|Mobile/i.test(ua) || window.innerWidth <= 860 || coarse;
             document.documentElement.setAttribute('data-device', isMob ? 'mobile' : 'desktop');
         })();
     </script>
@@ -231,50 +290,79 @@
             --border-subtle: #232634;
             --text-main: #f4f5f8;
             --text-secondary: #cbd5e1;
-            /* Increased contrast for text-muted to meet WCAG >= 4.5:1 on --bg-obsidian */
+            /* WCAG 2.2 AA contrast >= 4.5:1 against #060609 and #11131a */
             --text-muted: #a7bccb;
             --steel-silver: #e2e8f0;
 
             /* Nine Realms Color Palette Tokens */
+            /* 1. Midgard (Websites & Public Presence) — Sovereign Blood Crimson */
             --midgard-main: #dc2626;
             --midgard-light: #f87171;
             --midgard-bg: rgba(220, 38, 38, 0.13);
             --midgard-border: rgba(220, 38, 38, 0.52);
             --midgard-grad: linear-gradient(180deg, rgba(220, 38, 38, 0.12) 0%, #11131a 44%);
-            
+
+            /* 2. Asgard (Domains, Email Shield & Watchtower) — Imperial Bifrost Gold */
             --asgard-main: #d97706;
             --asgard-light: #fbbf24;
             --asgard-bg: rgba(245, 158, 11, 0.13);
             --asgard-border: rgba(245, 158, 11, 0.52);
             --asgard-grad: linear-gradient(180deg, rgba(245, 158, 11, 0.12) 0%, #11131a 44%);
-            
+
+            /* 3. Vanaheim (QR Menus, Forms & Local Commerce) — Verdant Harvest Emerald */
             --vanaheim-main: #059669;
             --vanaheim-light: #34d399;
             --vanaheim-bg: rgba(16, 185, 129, 0.13);
+            --vanaheim-border: rgba(16, 185, 129, 0.52);
+            --vanaheim-grad: linear-gradient(180deg, rgba(16, 185, 129, 0.12) 0%, #11131a 44%);
 
+            /* 4. Alfheim (Resumes, Bids & Admin Concierge) — Luminous Starlight Cyan */
             --alfheim-main: #0284c7;
             --alfheim-light: #38bdf8;
+            --alfheim-bg: rgba(56, 189, 248, 0.13);
+            --alfheim-border: rgba(56, 189, 248, 0.52);
+            --alfheim-grad: linear-gradient(180deg, rgba(56, 189, 248, 0.12) 0%, #11131a 44%);
 
+            /* 5. Nidavellir (3-Doc Fillable E-Sign Contracts) — Dwarven Forge Copper/Bronze */
             --nidavellir-main: #ea580c;
             --nidavellir-light: #fb923c;
+            --nidavellir-bg: rgba(234, 88, 12, 0.13);
+            --nidavellir-border: rgba(234, 88, 12, 0.52);
+            --nidavellir-grad: linear-gradient(180deg, rgba(234, 88, 12, 0.12) 0%, #11131a 44%);
 
+            /* 6. Muspelheim (Vehicle & Equipment Buyer's Guide) — Primordial Flame Rose-Red */
             --muspelheim-main: #e11d48;
             --muspelheim-light: #fb7185;
+            --muspelheim-bg: rgba(225, 29, 72, 0.13);
+            --muspelheim-border: rgba(225, 29, 72, 0.52);
+            --muspelheim-grad: linear-gradient(180deg, rgba(225, 29, 72, 0.12) 0%, #11131a 44%);
 
+            /* 7. Svartalfheim (Budget Trackers & Monthly Expense Optimization) — Deep Treasury Amethyst */
             --svartalfheim-main: #9333ea;
             --svartalfheim-light: #c084fc;
+            --svartalfheim-bg: rgba(168, 85, 247, 0.13);
+            --svartalfheim-border: rgba(168, 85, 247, 0.52);
+            --svartalfheim-grad: linear-gradient(180deg, rgba(168, 85, 247, 0.12) 0%, #11131a 44%);
 
+            /* 8. Niflheim / Helheim (Home Insurance & Legacy Vault) — Glacial Frost Teal */
             --niflheim-main: #0d9488;
             --niflheim-light: #2dd4bf;
+            --niflheim-bg: rgba(20, 184, 166, 0.13);
+            --niflheim-border: rgba(20, 184, 166, 0.52);
+            --niflheim-grad: linear-gradient(180deg, rgba(20, 184, 166, 0.12) 0%, #11131a 44%);
 
+            /* 9. Jotunheim (Billing Disputes & Monthly Bill Watchdog) — Frost-Giant Indigo Steel */
             --jotunheim-main: #4f46e5;
             --jotunheim-light: #818cf8;
+            --jotunheim-bg: rgba(99, 102, 241, 0.13);
+            --jotunheim-border: rgba(99, 102, 241, 0.52);
+            --jotunheim-grad: linear-gradient(180deg, rgba(99, 102, 241, 0.12) 0%, #11131a 44%);
         }
 
-        /* Focus-visible outlines for keyboard accessibility */
+        /* Focus-visible outlines for WCAG 2.2 AA keyboard accessibility */
         :focus-visible {
             outline: 3px solid var(--midgard-light);
-            outline-offset: 3px;
+            outline-offset: 2px;
             border-radius: 6px;
         }
 
@@ -287,11 +375,11 @@
             overflow-x: hidden;
         }
 
-        /* When user explicitly forces Desktop mode on a narrow screen */
+        /* Allow horizontal scroll if user explicitly forces Desktop 3-column mode on a small screen */
         html[data-forced-desktop="true"],
         html[data-forced-desktop="true"] body {
             max-width: none;
-            overflow-x: hidden;
+            overflow-x: auto;
         }
 
         body {
@@ -301,71 +389,106 @@
                 radial-gradient(circle at 12% 0%, rgba(220, 38, 38, 0.15) 0%, transparent 40%),
                 radial-gradient(circle at 88% 8%, rgba(217, 119, 6, 0.10) 0%, transparent 38%);
             color: var(--text-main);
-            line-height: 1.44;
+            line-height: 1.48;
             margin: 0;
             padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Navbar Layout */
+        /* Skip-to-content link for keyboard & screen-reader users */
+        .skip-link {
+            position: absolute;
+            left: -9999px;
+            top: 8px;
+            z-index: 2000;
+            background: var(--midgard-main);
+            color: #ffffff;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .skip-link:focus {
+            left: 12px;
+        }
+
+        /* Top Executive Bar with UA-CH Telemetry Pill */
         .top-nav {
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(12, 13, 19, 0.85);
+            background: rgba(6, 6, 9, 0.96);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-subtle);
-            padding: 12px 24px;
+            border-bottom: 1px solid var(--midgard-border);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.75);
         }
 
         .nav-inner {
-            max-width: 1280px;
+            max-width: 1240px;
             margin: 0 auto;
+            padding: 8px 18px;
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: 16px;
+            gap: 10px;
         }
 
         .nav-brand {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 9px;
             text-decoration: none;
             color: var(--text-main);
-            font-weight: 700;
-            font-size: 1.1rem;
+            flex-shrink: 0;
         }
 
         .nav-rune-badge {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            background: linear-gradient(135deg, var(--midgard-main), #7f1d1d);
+            border: 1px solid var(--asgard-light);
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 32px;
-            height: 32px;
-            background: var(--midgard-bg);
-            border: 1px solid var(--midgard-border);
-            color: var(--midgard-light);
-            border-radius: 8px;
-            font-size: 1.1rem;
+            font-size: 1.1em;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .nav-brand-text {
+            font-weight: 800;
+            font-size: 0.94em;
+            letter-spacing: 0.7px;
+            white-space: nowrap;
         }
 
         .nav-brand-text span {
-            color: var(--text-muted);
-            font-weight: 400;
-            font-size: 0.9em;
+            color: var(--midgard-light);
+            font-weight: 600;
         }
 
-        /* UACH Control Bar */
+        /* UA-CH Client Hints Telemetry & Mode Switcher */
         .uach-bar {
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
-            gap: 12px;
-            background: var(--bg-card);
+            gap: 6px;
+            background: var(--bg-attr);
             border: 1px solid var(--border-subtle);
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
+            border-radius: 6px;
+            padding: 4px 8px;
+            font-size: 0.74em;
+        }
+
+        .uach-status {
+            font-family: ui-monospace, SFMono-Regular, monospace;
+            color: var(--asgard-light);
+            font-weight: 700;
+            white-space: nowrap;
         }
 
         .uach-controls {
@@ -374,159 +497,784 @@
         }
 
         .uach-btn {
-            background: transparent;
-            border: 1px solid transparent;
-            color: var(--text-muted);
-            padding: 4px 8px;
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-subtle);
             border-radius: 4px;
+            padding: 3px 8px;
+            font-size: 0.95em;
+            font-weight: 700;
             cursor: pointer;
-            font-size: 0.8rem;
-            transition: all 0.2s ease;
+            transition: all 0.16s ease;
         }
 
         .uach-btn:hover {
-            color: var(--text-main);
-            background: rgba(255, 255, 255, 0.03);
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.06);
         }
 
         .uach-btn.active {
-            background: var(--bg-surface);
-            border-color: var(--border-subtle);
-            color: var(--text-main);
-            font-weight: 600;
+            background: var(--midgard-bg);
+            color: #ffffff;
+            border-color: var(--midgard-main);
         }
 
-        /* Nav CTA Buttons */
         .nav-cta {
             display: flex;
-            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            flex-shrink: 0;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
+            gap: 5px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.78em;
             text-decoration: none;
+            white-space: nowrap;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.16s ease;
         }
 
         .btn-primary {
-            background: var(--midgard-main);
-            color: #fff;
-            border: 1px solid var(--midgard-border);
+            background: linear-gradient(135deg, var(--midgard-main), #991b1b);
+            color: #ffffff;
+            border: 1px solid var(--midgard-light);
         }
 
         .btn-primary:hover {
-            background: var(--midgard-light);
+            filter: brightness(1.12);
         }
 
         .btn-outline {
-            background: transparent;
+            background: var(--bg-card);
             color: var(--text-main);
-            border: 1px solid var(--border-subtle);
+            border: 1px solid var(--asgard-border);
         }
 
         .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.06);
         }
 
-        /* Main Container & Hero Section */
         .container {
-            max-width: 1280px;
+            max-width: 1240px;
+            width: 100%;
             margin: 0 auto;
-            padding: 40px 24px 80px 24px;
+            padding: 12px 18px 18px 18px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
+        /* Compact Executive Hero (Engineered for Zero-Scroll Viewport Fit) */
         .hero {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 32px;
+            background: linear-gradient(140deg, #160a0d 0%, #0b0c12 55%, #171108 100%);
+            border: 1px solid var(--midgard-border);
+            border-left: 4px solid var(--midgard-main);
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            display: flex;
+            flex-wrap: wrap;
             align-items: center;
-            margin-bottom: 48px;
-            padding-bottom: 32px;
-            border-bottom: 1px solid var(--border-subtle);
+            justify-content: space-between;
+            gap: 12px;
         }
 
         .hero-left {
             display: flex;
-            gap: 20px;
-            align-items: flex-start;
+            align-items: center;
+            gap: 14px;
+            flex: 1 1 480px;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            aspect-ratio: 1 / 1;
+            border-radius: 10px;
+            border: 2px solid var(--midgard-main);
+            box-shadow: 0 0 14px rgba(220, 38, 38, 0.45);
+            object-fit: cover;
+            flex-shrink: 0;
         }
 
         .eyebrow {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--midgard-light);
+            font-size: 0.66em;
             font-weight: 700;
-            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.9px;
+            color: var(--asgard-light);
+            margin-bottom: 2px;
         }
 
-        .hero h1 {
-            font-size: clamp(2rem, 4vw, 3rem);
+        h1 {
+            color: #ffffff;
+            font-size: 1.42em;
+            margin: 0 0 2px 0;
+            letter-spacing: 0.3px;
             line-height: 1.15;
-            margin: 0 0 12px 0;
-            color: var(--text-main);
         }
 
-        .hero h1 .accent {
+        h1 .accent {
             color: var(--midgard-light);
         }
 
         .hero-sub {
-            font-size: 1.05rem;
             color: var(--text-secondary);
-            max-width: 650px;
+            font-size: 0.81em;
             margin: 0;
         }
 
-        /* Hero Attributes Grid */
         .hero-attributes {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 7px;
+            flex: 1 1 510px;
         }
 
         .attr-box {
             background: var(--bg-attr);
             border: 1px solid var(--border-subtle);
-            padding: 12px 16px;
-            border-radius: 10px;
-            min-width: 140px;
+            border-radius: 6px;
+            padding: 5px 8px;
         }
 
-        .attr-box.r-midgard { border-color: var(--midgard-border); background: var(--midgard-bg); }
-        .attr-box.r-asgard { border-color: var(--asgard-border); background: var(--asgard-bg); }
-        .attr-box.r-niflheim { border-color: rgba(13, 148, 136, 0.3); background: rgba(13, 148, 136, 0.1); }
-        .attr-box.r-svartalfheim { border-color: rgba(147, 51, 234, 0.3); background: rgba(147, 51, 234, 0.1); }
+        .attr-box.r-midgard { border-left: 3px solid var(--midgard-main); }
+        .attr-box.r-asgard { border-left: 3px solid var(--asgard-main); }
+        .attr-box.r-niflheim { border-left: 3px solid var(--niflheim-main); }
+        .attr-box.r-svartalfheim { border-left: 3px solid var(--svartalfheim-main); }
 
         .attr-label {
-            display: block;
-            font-size: 0.75rem;
+            font-size: 0.62em;
             text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 2px;
+            letter-spacing: 0.6px;
+            font-weight: 700;
+            display: block;
         }
 
         .attr-val {
-            font-size: 0.95rem;
-            font-weight: 600;
+            font-size: 0.75em;
+            font-weight: 700;
             color: var(--text-main);
+            white-space: nowrap;
         }
 
-        /* Deck Pages & Card System Structure */
+        /* Multi-Page Deck Navigation & 9-Realm Legend Bar */
+        .deck-nav-panel {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 9px;
+            padding: 8px 11px;
+            margin-bottom: 10px;
+        }
+
+        .page-tabs-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 5px;
+            padding-bottom: 7px;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 7px;
+        }
+
+        .page-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            flex: 1;
+        }
+
+        .page-tab {
+            flex: 1 1 auto;
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-subtle);
+            border-top: 2px solid transparent;
+            border-radius: 6px;
+            padding: 6px 8px;
+            font-size: 0.72em;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.16s ease;
+            white-space: nowrap;
+        }
+
+        .page-tab:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .page-tab.active[data-page="1"] {
+            background: var(--midgard-bg);
+            color: #ffffff;
+            border-color: var(--midgard-border);
+            border-top: 2px solid var(--midgard-main);
+        }
+        .page-tab.active[data-page="2"] {
+            background: var(--alfheim-bg);
+            color: #ffffff;
+            border-color: var(--alfheim-border);
+            border-top: 2px solid var(--alfheim-light);
+        }
+        .page-tab.active[data-page="3"] {
+            background: var(--niflheim-bg);
+            color: #ffffff;
+            border-color: var(--niflheim-border);
+            border-top: 2px solid var(--niflheim-light);
+        }
+        .page-tab.active[data-page="4"] {
+            background: var(--asgard-bg);
+            color: #ffffff;
+            border-color: var(--asgard-border);
+            border-top: 2px solid var(--asgard-light);
+        }
+        .page-tab.active[data-page="5"] {
+            background: var(--svartalfheim-bg);
+            color: #ffffff;
+            border-color: var(--svartalfheim-border);
+            border-top: 2px solid var(--svartalfheim-light);
+        }
+        .page-tab.active[data-page="6"] {
+            background: var(--vanaheim-bg);
+            color: #ffffff;
+            border-color: var(--vanaheim-border);
+            border-top: 2px solid var(--vanaheim-light);
+        }
+        .page-tab.active[data-page="all"] {
+            background: var(--midgard-bg);
+            color: #ffffff;
+            border-color: var(--midgard-main);
+        }
+
+        /* 9-Realm Compact Color Legend (Semantic Buttons) */
+        .realm-legend {
+            display: grid;
+            grid-template-columns: repeat(9, minmax(0, 1fr));
+            gap: 5px;
+        }
+
+        .legend-chip {
+            background: var(--bg-attr);
+            border: 1px solid var(--border-subtle);
+            border-radius: 4px;
+            padding: 4px 4px;
+            text-align: center;
+            font-family: inherit;
+            font-size: 0.62em;
+            line-height: 1.2;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: background 0.15s ease, transform 0.15s ease;
+        }
+
+        .legend-chip:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-1px);
+        }
+
+        .legend-chip strong {
+            display: block;
+            font-size: 1.02em;
+        }
+
+        .legend-chip span {
+            color: var(--text-muted);
+            font-size: 0.90em;
+        }
+
+        /* Paginated Views — Only Active Page Renders to Eliminate Vertical Scrolling */
         .deck-page {
             display: none;
+            animation: fadeIn 0.18s ease-out;
         }
 
         .deck-page.active-page {
             display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0.4; transform: translateY(3px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 8px;
+            padding-left: 12px;
+            margin: 2px 0 6px 0;
+        }
+
+        .section-header.sec-01 { border-left: 4px solid var(--midgard-main); }
+        .section-header.sec-02 { border-left: 4px solid var(--alfheim-light); }
+        .section-header.sec-03 { border-left: 4px solid var(--niflheim-light); }
+        .section-header.sec-04 { border-left: 4px solid var(--asgard-light); }
+        .section-header.sec-05 { border-left: 4px solid var(--svartalfheim-light); }
+
+        .section-header h2 {
+            color: #ffffff;
+            margin: 0;
+            font-size: 1.12em;
+        }
+
+        .section-header .rune-tag {
+            font-family: ui-monospace, SFMono-Regular, monospace;
+            font-size: 0.74em;
+            font-weight: 700;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 0.80em;
+            margin: -3px 0 9px 16px;
+        }
+
+        /* Mobile / Single-Card Sub-Stepper */
+        .mobile-card-stepper {
+            display: none;
+            gap: 6px;
+            margin-bottom: 9px;
+        }
+
+        .mob-step-btn {
+            flex: 1;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            padding: 6px 8px;
+            border-radius: 6px;
+            font-size: 0.75em;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .mob-step-btn.active {
+            background: var(--midgard-bg);
+            color: #ffffff;
+            border-color: var(--midgard-main);
+        }
+
+        /* 3-Column Card Grid on Desktop */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin-bottom: 10px;
+        }
+
+        /* Base Service Card + Per-Realm Color Theming */
+        .card {
+            min-width: 0;
+            background: var(--realm-grad, var(--bg-card));
+            border: 1px solid var(--realm-border, var(--border-subtle));
+            border-top: 3px solid var(--realm-main, var(--midgard-main));
+            border-radius: 9px;
+            padding: 13px 14px 11px 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+        }
+
+        /* Realm Theme Classes */
+        .theme-midgard {
+            --realm-main: var(--midgard-main);
+            --realm-light: var(--midgard-light);
+            --realm-bg: var(--midgard-bg);
+            --realm-border: var(--midgard-border);
+            --realm-grad: var(--midgard-grad);
+        }
+        .theme-asgard {
+            --realm-main: var(--asgard-main);
+            --realm-light: var(--asgard-light);
+            --realm-bg: var(--asgard-bg);
+            --realm-border: var(--asgard-border);
+            --realm-grad: var(--asgard-grad);
+        }
+        .theme-vanaheim {
+            --realm-main: var(--vanaheim-main);
+            --realm-light: var(--vanaheim-light);
+            --realm-bg: var(--vanaheim-bg);
+            --realm-border: var(--vanaheim-border);
+            --realm-grad: var(--vanaheim-grad);
+        }
+        .theme-alfheim {
+            --realm-main: var(--alfheim-main);
+            --realm-light: var(--alfheim-light);
+            --realm-bg: var(--alfheim-bg);
+            --realm-border: var(--alfheim-border);
+            --realm-grad: var(--alfheim-grad);
+        }
+        .theme-nidavellir {
+            --realm-main: var(--nidavellir-main);
+            --realm-light: var(--nidavellir-light);
+            --realm-bg: var(--nidavellir-bg);
+            --realm-border: var(--nidavellir-border);
+            --realm-grad: var(--nidavellir-grad);
+        }
+        .theme-muspelheim {
+            --realm-main: var(--muspelheim-main);
+            --realm-light: var(--muspelheim-light);
+            --realm-bg: var(--muspelheim-bg);
+            --realm-border: var(--muspelheim-border);
+            --realm-grad: var(--muspelheim-grad);
+        }
+        .theme-svartalfheim {
+            --realm-main: var(--svartalfheim-main);
+            --realm-light: var(--svartalfheim-light);
+            --realm-bg: var(--svartalfheim-bg);
+            --realm-border: var(--svartalfheim-border);
+            --realm-grad: var(--svartalfheim-grad);
+        }
+        .theme-niflheim {
+            --realm-main: var(--niflheim-main);
+            --realm-light: var(--niflheim-light);
+            --realm-bg: var(--niflheim-bg);
+            --realm-border: var(--niflheim-border);
+            --realm-grad: var(--niflheim-grad);
+        }
+        .theme-jotunheim {
+            --realm-main: var(--jotunheim-main);
+            --realm-light: var(--jotunheim-light);
+            --realm-bg: var(--jotunheim-bg);
+            --realm-border: var(--jotunheim-border);
+            --realm-grad: var(--jotunheim-grad);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 7px;
+        }
+
+        .sku-line {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 3px;
+        }
+
+        .rune-pill {
+            background: var(--realm-bg);
+            border: 1px solid var(--realm-border);
+            color: var(--realm-light);
+            font-weight: 800;
+            font-size: 0.67em;
+            padding: 2px 6px;
+            border-radius: 4px;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .code-tag {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.68em;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+
+        .realm-meaning {
+            font-size: 0.69em;
+            color: var(--realm-light);
+            font-weight: 600;
+            margin-bottom: 2px;
+            display: block;
+        }
+
+        .card h3 {
+            color: #ffffff;
+            margin: 0;
+            font-size: 1.01em;
+            line-height: 1.22;
+        }
+
+        .price-box {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .price {
+            color: var(--realm-light);
+            font-size: 1.20em;
+            font-weight: 800;
+            white-space: nowrap;
+            display: block;
+            line-height: 1.1;
+        }
+
+        .price-sub {
+            font-size: 0.61em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        /* Structured 3-Cell Attribute Strip */
+        .attr-strip {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 6px;
+            background: var(--bg-attr);
+            border: 1px solid var(--border-subtle);
+            border-left: 2px solid var(--realm-main);
+            border-radius: 6px;
+            padding: 5px 8px;
+            margin-bottom: 8px;
+        }
+
+        .attr-cell {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .attr-cell .k {
+            font-size: 0.58em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .attr-cell .v {
+            font-size: 0.71em;
+            color: var(--steel-silver);
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .attr-cell .v.realm-v {
+            color: var(--realm-light);
+        }
+
+        .card ul {
+            padding-left: 15px;
+            margin: 0 0 8px 0;
+            color: var(--text-secondary);
+            font-size: 0.80em;
+        }
+
+        .card li {
+            margin-bottom: 4px;
+        }
+
+        .card li strong {
+            color: #ffffff;
+        }
+
+        .card-footer {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
+            padding-top: 7px;
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .badge {
+            background-color: var(--bg-attr);
+            border: 1px solid var(--realm-border);
+            color: var(--text-secondary);
+            padding: 3px 7px;
+            border-radius: 4px;
+            font-size: 0.68em;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .spec-tag {
+            font-family: ui-monospace, SFMono-Regular, monospace;
+            font-size: 0.65em;
+            color: var(--realm-light);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        /* Flagship Bundle & Zero-Custody Banner */
+        .bundle-banner {
+            background: linear-gradient(135deg, #1b090d 0%, #10121b 48%, #191207 100%);
+            border: 1px solid var(--asgard-border);
+            border-left: 5px solid var(--midgard-main);
+            border-right: 5px solid var(--asgard-main);
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .bundle-banner h3 {
+            margin: 2px 0 4px 0;
+            color: #ffffff;
+            font-size: 1.08em;
+        }
+
+        .bundle-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .bundle-option {
+            background: rgba(6, 6, 9, 0.72);
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            padding: 7px 10px;
+            font-size: 0.77em;
+            color: var(--text-secondary);
+        }
+
+        .bundle-option.opt-steward { border-left: 3px solid var(--asgard-light); }
+        .bundle-option.opt-launch { border-left: 3px solid var(--svartalfheim-light); }
+
+        .bundle-option strong {
+            color: #ffffff;
+            display: block;
+            margin-bottom: 2px;
+            font-size: 0.95em;
+        }
+
+        .bundle-price-col {
+            text-align: right;
+            min-width: 195px;
+            background: var(--bg-attr);
+            border: 1px solid var(--asgard-border);
+            border-radius: 8px;
+            padding: 9px 14px;
+        }
+
+        .bundle-price {
+            font-size: 1.44em;
+            font-weight: 800;
+            color: var(--asgard-light);
+            line-height: 1.1;
+        }
+
+        /* 3-Step Client Onboarding Workflow */
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin-bottom: 12px;
+        }
+
+        .workflow-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 13px 15px;
+        }
+
+        .workflow-card.wf-1 { border-left: 3px solid var(--midgard-main); }
+        .workflow-card.wf-2 { border-left: 3px solid var(--asgard-main); }
+        .workflow-card.wf-3 { border-left: 3px solid var(--svartalfheim-main); }
+
+        .workflow-card .step-num {
+            font-family: ui-monospace, monospace;
+            font-size: 0.71em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .workflow-card h4 {
+            margin: 0 0 4px 0;
+            color: #ffffff;
+            font-size: 0.95em;
+        }
+
+        .workflow-card p {
+            margin: 0;
+            font-size: 0.80em;
+            color: var(--text-secondary);
+        }
+
+        /* Bottom Deck Pager Bar */
+        .bottom-pager {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 8px 14px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .pager-btn {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--midgard-border);
+            border-radius: 6px;
+            padding: 5px 13px;
+            font-size: 0.77em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        .pager-btn:hover {
+            background: var(--midgard-bg);
+        }
+
+        .pager-indicator {
+            font-size: 0.77em;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-align: center;
+        }
+
+        footer {
+            margin-top: 8px;
+            padding-top: 7px;
+            border-top: 1px solid var(--border-subtle);
+            font-size: 0.73em;
+            color: var(--text-muted);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .footer-link-btn {
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            border-radius: 4px;
+            padding: 2px 8px;
+            font-size: 0.95em;
+            cursor: pointer;
+        }
+        .footer-link-btn:hover {
+            color: #ffffff;
+            border-color: var(--midgard-border);
         }
 
         /* Cookie consent banner */
@@ -534,235 +1282,135 @@
             position: fixed;
             right: 12px;
             bottom: 12px;
-            background: rgba(6,6,9,0.95);
-            border: 1px solid rgba(255,255,255,0.04);
+            background: rgba(6, 6, 9, 0.96);
+            border: 1px solid var(--midgard-border);
             color: var(--text-secondary);
-            padding: 10px 12px;
+            padding: 12px 14px;
             border-radius: 8px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.75);
             z-index: 9999;
             display: none;
             max-width: 360px;
+            font-size: 0.88em;
+        }
+        #cookie-consent-banner p {
+            margin: 0 0 10px 0;
+            color: var(--text-secondary);
             font-size: 0.9em;
+            line-height: 1.4;
         }
-        #cookie-consent-banner p { margin: 0 0 8px 0; color: var(--text-secondary); font-size: 0.85em; }
-        #cookie-consent-banner .consent-actions { display: flex; gap: 8px; justify-content: flex-end; }
-        #cookie-consent-banner .btn { padding: 6px 10px; font-size: 0.82em; }
+        #cookie-consent-banner .consent-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+        }
 
-        .btn:focus-visible, .uach-btn:focus-visible, .page-tab:focus-visible, .mob-step-btn:focus-visible {
-            outline: 3px solid var(--midgard-light);
-            outline-offset: 2px;
+        /* ============================================================================
+           USER-AGENT CLIENT HINTS (UA-CH) HORIZONTAL SINGLE-CARD STEPPER DYNAMICS
+           Applies when data-device="mobile" (either via Auto UA-CH/viewport or Forced Mobile)
+           ============================================================================ */
+        html[data-device="mobile"] .realm-legend {
+            display: none;
+        }
+        html[data-device="mobile"] .page-tabs-row {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        html[data-device="mobile"][data-view="paged"] .mobile-card-stepper {
+            display: flex;
+        }
+        html[data-device="mobile"] .grid-3,
+        html[data-device="mobile"] .workflow-grid,
+        html[data-device="mobile"] .bundle-grid {
+            grid-template-columns: 1fr;
+        }
+        html[data-device="mobile"][data-view="paged"] .grid-3 .card {
+            display: none;
+        }
+        html[data-device="mobile"][data-view="paged"] .grid-3 .card.mob-active-card,
+        html[data-device="mobile"][data-view="all"] .grid-3 .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 15px 18px;
+        }
+        html[data-device="mobile"] .grid-3 .card ul {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            list-style: none;
+            padding-left: 0;
+            margin: 6px 0 10px 0;
+        }
+        html[data-device="mobile"] .grid-3 .card li {
+            background: var(--bg-attr);
+            border: 1px solid var(--border-subtle);
+            border-left: 3px solid var(--realm-main);
             border-radius: 6px;
+            padding: 9px 11px;
+            margin-bottom: 0;
         }
 
-        .logo-img { width: 52px; height: 52px; aspect-ratio: 1 / 1; object-fit: cover; }
-
-        /* Responsive Breakdowns */
-        @media (max-width: 860px) {
-            .hero {
+        @media (max-width: 720px) {
+            html[data-device="mobile"] .grid-3 .card ul {
                 grid-template-columns: 1fr;
             }
-            .hero-left {
-                flex-direction: column;
+            html[data-device="mobile"] .hero-attributes {
+                grid-template-columns: repeat(2, 1fr);
             }
-            .nav-inner {
+            html[data-device="mobile"] .nav-inner {
                 flex-direction: column;
                 align-items: stretch;
             }
-            .uach-bar, .nav-cta {
+            html[data-device="mobile"] .uach-bar,
+            html[data-device="mobile"] .nav-cta {
                 justify-content: space-between;
             }
         }
-        
     </style>
 </head>
 <body>
-    <!-- Cookie consent UI (keeps existing HTML intact and adds a safe, optional banner) -->
-    <div id="cookie-consent-banner" role="region" aria-live="polite" aria-label="Cookie consent">
-        <p>We use analytics to improve the site. Do you allow Google Ads conversion tracking on this site?</p>
+    <a href="#main-content" class="skip-link">Skip to Nine Realms Storefront</a>
+
+    <!-- Cookie Consent UI (Google Consent Mode v2) -->
+    <div id="cookie-consent-banner" role="region" aria-live="polite" aria-label="Cookie and analytics consent">
+        <p>We use privacy-safe analytics to measure storefront performance. Do you allow Google Ads conversion tracking on this site?</p>
         <div class="consent-actions">
-            <button id="cookie-consent-decline" class="btn">Decline</button>
-            <button id="cookie-consent-accept" class="btn btn-primary">Accept</button>
+            <button id="cookie-consent-decline" type="button" class="btn btn-outline">Decline</button>
+            <button id="cookie-consent-accept" type="button" class="btn btn-primary">Accept</button>
         </div>
     </div>
-    
-    <nav class="top-nav">
+
+    <!-- Top Executive Navigation + Live UA-CH Client Hints Telemetry -->
+    <nav class="top-nav" aria-label="Primary navigation">
         <div class="nav-inner">
-            <a href="#top" class="nav-brand" aria-label="TYR Technical Consulting home">
-                <span class="nav-rune-badge" aria-hidden="true">ᛏ</span>
-                <span class="nav-brand-text">TYR <span>Technical Consulting</span></span>
+            <a href="#top" class="nav-brand" aria-label="TYR Technical Consulting home" onclick="showPage(1); return false;">
+                <span class="nav-rune-badge" aria-hidden="true" title="Tiwaz — Tyr">ᛏ</span>
+                <span class="nav-brand-text">TYR <span>| TECHNICAL CONSULTING</span></span>
             </a>
 
-            <div class="uach-bar" aria-label="Client hint mode status">
-                <span class="uach-status">Device: <strong id="device-mode-label">Desktop</strong></span>
-                <div class="uach-controls" aria-label="Layout mode controls">
-                    <button class="uach-btn active" data-mode="auto" type="button" aria-label="Auto mode">Auto</button>
-                    <button class="uach-btn" data-mode="desktop" type="button" aria-label="Force desktop mode">Desktop</button>
-                    <button class="uach-btn" data-mode="mobile" type="button" aria-label="Force mobile mode">Mobile</button>
+            <!-- User-Agent Client Hints (UA-CH) Adaptive Screen Controller -->
+            <div class="uach-bar" role="group" aria-label="Client hint layout mode controls">
+                <span class="uach-status" id="uach-telemetry">Device: <strong id="device-mode-label">Desktop</strong> • 3-Col Deck</span>
+                <div class="uach-controls">
+                    <button class="uach-btn active" id="btn-uach-auto" data-mode="auto" type="button" aria-pressed="true" onclick="setDeviceMode('auto')">Auto (UA-CH)</button>
+                    <button class="uach-btn" id="btn-uach-desktop" data-mode="desktop" type="button" aria-pressed="false" onclick="setDeviceMode('desktop')">Desktop</button>
+                    <button class="uach-btn" id="btn-uach-mobile" data-mode="mobile" type="button" aria-pressed="false" onclick="setDeviceMode('mobile')">Mobile</button>
                 </div>
             </div>
 
             <div class="nav-cta">
-                <a href="#contact" class="btn btn-primary" aria-label="Book strategy call">Book Strategy Call</a>
-                <a href="#plans" class="btn btn-outline" aria-label="View plans">View Plans</a>
+                <a class="btn btn-outline" href="#plans" onclick="showPage(4); return false;">View Plans</a>
+                <a class="btn btn-outline" href="tel:+16592578043" onclick="return window.gtag_report_conversion ? window.gtag_report_conversion('tel:+16592578043') : true;">(659) 257-8043</a>
+                <a class="btn btn-primary" href="#contact" onclick="showPage(6); return false;">Book Strategy Call</a>
             </div>
         </div>
     </nav>
 
     <main class="container" id="top">
-        <section class="hero" aria-label="Executive summary">
-            <div class="hero-left">
-                <img class="logo-img" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=160&q=80" alt="TYR strategy and technology consulting" width="52" height="52">
-                <div>
-                    <div class="eyebrow">Nine Realms Storefront</div>
-                    <h1>Build the <span class="accent">next realm</span> of your growth engine.</h1>
-                    <p class="hero-sub">15 consulting services, monthly optimization plans, and the infrastructure needed to turn operations into a conversion machine.</p>
-                </div>
-            </div>
-
-            <div class="hero-attributes" aria-label="Key service attributes">
-                <div class="attr-box r-midgard">
-                    <span class="attr-label">Core</span>
-                    <span class="attr-val">Web Systems</span>
-                </div>
-                <div class="attr-box r-asgard">
-                    <span class="attr-label">Security</span>
-                    <span class="attr-val">Email Shield</span>
-                </div>
-                <div class="attr-box r-niflheim">
-                    <span class="attr-label">Ops</span>
-                    <span class="attr-val">Bill Watchdog</span>
-                </div>
-                <div class="attr-box r-svartalfheim">
-                    <span class="attr-label">ROI</span>
-                    <span class="attr-val">Monthly Plans</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Rest of the existing HTML remains unchanged (services, pages, etc.) -->
-
-    </main>
-
-    <script>
-        // Consent banner wiring: keep global functions and no inline handlers moved
-        (function () {
-            var banner = document.getElementById('cookie-consent-banner');
-            var accept = document.getElementById('cookie-consent-accept');
-            var decline = document.getElementById('cookie-consent-decline');
-
-            function showBannerIfNeeded() {
-                try {
-                    var stored = null;
-                    try { stored = window.localStorage && window.localStorage.getItem('tyr_gtag_consent'); } catch (e) { stored = null; }
-
-                    if (stored === 'granted') {
-                        // already granted - flush queued events
-                        if (window._tyr_grantConsent) window._tyr_grantConsent();
-                        return;
-                    }
-                    if (stored === 'denied') {
-                        if (window._tyr_denyConsent) window._tyr_denyConsent();
-                        return;
-                    }
-                    // No decision yet: show banner
-                    if (banner) banner.style.display = 'block';
-                } catch (e) { console.warn('consent banner show failed', e); }
-            }
-
-            if (accept) accept.addEventListener('click', function () { if (window._tyr_grantConsent) window._tyr_grantConsent(); });
-            if (decline) decline.addEventListener('click', function () { if (window._tyr_denyConsent) window._tyr_denyConsent(); });
-
-            // Wait until DOM ready
-            if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', showBannerIfNeeded); else showBannerIfNeeded();
-        })();
-
-        (function () {
-            var html = document.documentElement;
-            var label = document.getElementById('device-mode-label');
-            var modeButtons = document.querySelectorAll('.uach-btn');
-            var currentMode = 'auto';
-
-            function applyMode(mode) {
-                currentMode = mode;
-                html.removeAttribute('data-forced-desktop');
-                html.removeAttribute('data-forced-mobile');
-
-                if (mode === 'desktop') {
-                    html.setAttribute('data-forced-desktop', 'true');
-                }
-
-                if (mode === 'mobile') {
-                    html.setAttribute('data-forced-mobile', 'true');
-                    html.setAttribute('data-device', 'mobile');
-                } else {
-                    var ua = navigator.userAgent || '';
-                    var uadMob = navigator.userAgentData ? Boolean(navigator.userAgentData.mobile) : false;
-                    var isMob = uadMob || /Android|iPhone|iPad|iPod|Mobile/i.test(ua) || window.innerWidth <= 860;
-                    html.setAttribute('data-device', isMob ? 'mobile' : 'desktop');
-                }
-
-                label.textContent = mode === 'auto' ? (html.getAttribute('data-device') === 'mobile' ? 'Mobile' : 'Desktop') : mode.charAt(0).toUpperCase() + mode.slice(1);
-
-                modeButtons.forEach(function (button) {
-                    button.classList.toggle('active', button.dataset.mode === mode);
-                });
-            }
-
-            modeButtons.forEach(function (button) {
-                button.addEventListener('click', function () {
-                    applyMode(button.dataset.mode);
-                });
-            });
-
-            applyMode('auto');
-        })();
-
-        (function () {
-            var tabButtons = document.querySelectorAll('.page-tab');
-            var pages = document.querySelectorAll('.deck-page');
-
-            function showPage(pageId) {
-                pages.forEach(function (page) {
-                    page.classList.toggle('active-page', page.id === pageId || (pageId === 'all' && page.id === 'all-realms'));
-                });
-
-                tabButtons.forEach(function (button) {
-                    var isActive = button.dataset.page === pageId;
-                    button.classList.toggle('active', isActive);
-                    button.setAttribute('aria-selected', String(isActive));
-                });
-            }
-
-            tabButtons.forEach(function (button) {
-                button.addEventListener('click', function () {
-                    showPage(button.dataset.page);
-                });
-            });
-        })();
-
-        // Ensure icon-only buttons have accessible labels without changing visual size
-        (function () {
-            function ensureAriaForIconButtons() {
-                var buttons = document.querySelectorAll('button, a[role="button"]');
-                buttons.forEach(function (el) {
-                    var text = (el.textContent || '').trim();
-                    var hasAria = el.hasAttribute('aria-label') || el.hasAttribute('aria-labelledby');
-                    if (!text && !hasAria) {
-                        // try to use title attribute if present
-                        var title = el.getAttribute('title');
-                        if (title) el.setAttribute('aria-label', title);
-                        else el.setAttribute('aria-label', 'Icon button');
-                    }
-                });
-
-                // Mark decorative rune badge as hidden to assistive tech (the parent link already has an aria-label)
-                var rune = document.querySelector('.nav-rune-badge');
-                if (rune) rune.setAttribute('aria-hidden', 'true');
-            }
-
-            if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ensureAriaForIconButtons); else ensureAriaForIconButtons();
-        })();
-    </script>
-</body>
-</html>
+        <div id="main-content">
+            <!-- Compact Hero Header -->
+            <header class="hero" aria-label="Executive summary">
+                <div class="hero-left">
+                    <img class="logo-img" src="data:image/jpeg;base64,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
