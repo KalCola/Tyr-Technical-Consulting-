@@ -1,0 +1,908 @@
+/* components.css
+   Hero, deck tabs, realm legend, deck pages, cards, realm themes, bundle banner, workflow, pager, cookie banner. */
+
+/* Compact Executive Hero (Engineered for Zero-Scroll Viewport Fit) */
+.hero {
+    flex-shrink: 0;
+    background: linear-gradient(140deg, #160a0d 0%, #0b0c12 55%, #171108 100%);
+    border: 1px solid var(--active-border);
+    border-left: 4px solid var(--active-main);
+    border-radius: 8px;
+    padding: 5px 12px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    transition: border-color 0.18s ease;
+}
+
+.hero-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1 1 460px;
+    min-width: 0;
+}
+
+.logo-img {
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    border: 1.5px solid var(--active-main);
+    box-shadow: 0 0 10px rgba(220, 38, 38, 0.38);
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.eyebrow {
+    font-size: 0.56em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    color: var(--asgard-light);
+    margin-bottom: 1px;
+}
+
+h1 {
+    color: #ffffff;
+    font-size: clamp(1.02rem, 1.3vw, 1.24rem);
+    margin: 0;
+    letter-spacing: 0.3px;
+    line-height: 1.12;
+}
+
+h1 .accent {
+    color: var(--active-light);
+}
+
+.hero-sub {
+    color: var(--text-secondary);
+    font-size: 0.73em;
+    margin: 1px 0 0 0;
+    line-height: 1.25;
+}
+
+.hero-attributes {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 5px;
+    flex: 0 1 480px;
+    min-width: 0;
+}
+
+.attr-box {
+    background: var(--bg-attr);
+    border: 1px solid var(--border-subtle);
+    border-radius: 5px;
+    padding: 3px 7px;
+    min-width: 0;
+}
+
+.attr-box.r-midgard {
+    border-left: 3px solid var(--midgard-main);
+}
+.attr-box.r-asgard {
+    border-left: 3px solid var(--asgard-main);
+}
+.attr-box.r-niflheim {
+    border-left: 3px solid var(--niflheim-main);
+}
+.attr-box.r-svartalfheim {
+    border-left: 3px solid var(--svartalfheim-main);
+}
+
+.attr-label {
+    font-size: 0.55em;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    font-weight: 700;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.attr-val {
+    font-size: 0.69em;
+    font-weight: 700;
+    color: var(--text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+/* Multi-Page Deck Navigation & 9-Realm Legend Bar */
+.deck-nav-panel {
+    flex-shrink: 0;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 4px 8px;
+}
+
+.page-tabs-row {
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: 4px;
+}
+
+/* All 7 tabs fit on a single horizontal row on Desktop */
+.page-tabs {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 4px;
+    width: 100%;
+}
+
+.page-tab {
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    border-top: 2px solid transparent;
+    border-radius: 5px;
+    padding: 4px 5px;
+    font-size: clamp(0.6rem, 0.74vw, 0.7rem);
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    transition:
+        background-color 0.16s ease,
+        border-color 0.16s ease,
+        color 0.16s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+.page-tab:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.page-tab.active[data-page="1"] {
+    background: var(--midgard-bg);
+    color: #ffffff;
+    border-color: var(--midgard-border);
+    border-top: 2px solid var(--midgard-main);
+}
+.page-tab.active[data-page="2"] {
+    background: var(--alfheim-bg);
+    color: #ffffff;
+    border-color: var(--alfheim-border);
+    border-top: 2px solid var(--alfheim-light);
+}
+.page-tab.active[data-page="3"] {
+    background: var(--niflheim-bg);
+    color: #ffffff;
+    border-color: var(--niflheim-border);
+    border-top: 2px solid var(--niflheim-light);
+}
+.page-tab.active[data-page="4"] {
+    background: var(--asgard-bg);
+    color: #ffffff;
+    border-color: var(--asgard-border);
+    border-top: 2px solid var(--asgard-light);
+}
+.page-tab.active[data-page="5"] {
+    background: var(--svartalfheim-bg);
+    color: #ffffff;
+    border-color: var(--svartalfheim-border);
+    border-top: 2px solid var(--svartalfheim-light);
+}
+.page-tab.active[data-page="6"] {
+    background: var(--vanaheim-bg);
+    color: #ffffff;
+    border-color: var(--vanaheim-border);
+    border-top: 2px solid var(--vanaheim-light);
+}
+.page-tab.active[data-page="all"] {
+    background: var(--midgard-bg);
+    color: #ffffff;
+    border-color: var(--midgard-main);
+    border-top: 2px solid var(--asgard-light);
+}
+
+/* 9-Realm Compact Color Legend */
+.realm-legend {
+    display: grid;
+    grid-template-columns: repeat(9, minmax(0, 1fr));
+    gap: 4px;
+}
+
+.legend-chip {
+    background: var(--bg-attr);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    padding: 2px 4px;
+    text-align: center;
+    font-size: 0.58em;
+    line-height: 1.15;
+    cursor: pointer;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.legend-chip strong {
+    display: block;
+    font-size: 1em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.legend-chip span {
+    color: var(--text-muted);
+    font-size: 0.88em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+/* Paginated Views — Stretch Flexibly Inside 100dvh Viewport */
+.deck-page {
+    display: none;
+    animation: fadeIn 0.16s ease-out;
+}
+
+html[data-view="paged"] .deck-page.active-page {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    gap: 4px;
+}
+
+html[data-view="all"] .deck-page.active-page {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0.4;
+        transform: translateY(2px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section-header {
+    flex-shrink: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 6px;
+    padding-left: 9px;
+    margin: 0;
+}
+
+.section-header.sec-01 {
+    border-left: 4px solid var(--midgard-main);
+}
+.section-header.sec-02 {
+    border-left: 4px solid var(--alfheim-light);
+}
+.section-header.sec-03 {
+    border-left: 4px solid var(--niflheim-light);
+}
+.section-header.sec-04 {
+    border-left: 4px solid var(--asgard-light);
+}
+.section-header.sec-05 {
+    border-left: 4px solid var(--svartalfheim-light);
+}
+
+.section-header h2 {
+    color: #ffffff;
+    margin: 0;
+    font-size: clamp(0.88rem, 1.08vw, 1.02rem);
+}
+
+.section-header .rune-tag {
+    font-family: ui-monospace, SFMono-Regular, monospace;
+    font-size: 0.68em;
+    font-weight: 700;
+}
+
+.section-desc {
+    flex-shrink: 0;
+    color: var(--text-muted);
+    font-size: 0.72em;
+    margin: 0 0 2px 13px;
+    line-height: 1.25;
+}
+
+/* Mobile / Single-Card Sub-Stepper — Color-Coded Per Realm */
+.mobile-card-stepper {
+    display: none;
+    flex-shrink: 0;
+    gap: 5px;
+    margin-bottom: 2px;
+}
+
+.mob-step-btn {
+    flex: 1;
+    min-width: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    padding: 5px 5px;
+    border-radius: 5px;
+    font-size: 0.7em;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mob-step-btn[data-realm="midgard"] {
+    --step-main: var(--midgard-main);
+    --step-light: var(--midgard-light);
+    --step-bg: var(--midgard-bg);
+}
+.mob-step-btn[data-realm="asgard"] {
+    --step-main: var(--asgard-main);
+    --step-light: var(--asgard-light);
+    --step-bg: var(--asgard-bg);
+}
+.mob-step-btn[data-realm="vanaheim"] {
+    --step-main: var(--vanaheim-main);
+    --step-light: var(--vanaheim-light);
+    --step-bg: var(--vanaheim-bg);
+}
+.mob-step-btn[data-realm="alfheim"] {
+    --step-main: var(--alfheim-main);
+    --step-light: var(--alfheim-light);
+    --step-bg: var(--alfheim-bg);
+}
+.mob-step-btn[data-realm="nidavellir"] {
+    --step-main: var(--nidavellir-main);
+    --step-light: var(--nidavellir-light);
+    --step-bg: var(--nidavellir-bg);
+}
+.mob-step-btn[data-realm="muspelheim"] {
+    --step-main: var(--muspelheim-main);
+    --step-light: var(--muspelheim-light);
+    --step-bg: var(--muspelheim-bg);
+}
+.mob-step-btn[data-realm="svartalfheim"] {
+    --step-main: var(--svartalfheim-main);
+    --step-light: var(--svartalfheim-light);
+    --step-bg: var(--svartalfheim-bg);
+}
+.mob-step-btn[data-realm="niflheim"] {
+    --step-main: var(--niflheim-main);
+    --step-light: var(--niflheim-light);
+    --step-bg: var(--niflheim-bg);
+}
+.mob-step-btn[data-realm="jotunheim"] {
+    --step-main: var(--jotunheim-main);
+    --step-light: var(--jotunheim-light);
+    --step-bg: var(--jotunheim-bg);
+}
+.mob-step-btn[data-realm="yggdrasil"] {
+    --step-main: var(--yggdrasil-main);
+    --step-light: var(--yggdrasil-light);
+    --step-bg: var(--yggdrasil-bg);
+}
+
+.mob-step-btn.active {
+    background: var(--step-bg, var(--active-bg));
+    color: var(--step-light, #ffffff);
+    border-color: var(--step-main, var(--active-main));
+}
+
+/* 3-Column Card Grid on Desktop — Stretches Flexibly to Fit Viewport */
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    flex: 1;
+    min-height: 0;
+    align-items: stretch;
+}
+
+/* Base Service Card + Per-Realm Color Theming */
+.card {
+    min-width: 0;
+    min-height: 0;
+    background: var(--realm-grad, var(--bg-card));
+    border: 1px solid var(--realm-border, var(--border-subtle));
+    border-top: 3px solid var(--realm-main, var(--midgard-main));
+    border-radius: 8px;
+    padding: 9px 12px 8px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Realm Theme Classes */
+.theme-midgard {
+    --realm-main: var(--midgard-main);
+    --realm-light: var(--midgard-light);
+    --realm-bg: var(--midgard-bg);
+    --realm-border: var(--midgard-border);
+    --realm-grad: var(--midgard-grad);
+}
+.theme-asgard {
+    --realm-main: var(--asgard-main);
+    --realm-light: var(--asgard-light);
+    --realm-bg: var(--asgard-bg);
+    --realm-border: var(--asgard-border);
+    --realm-grad: var(--asgard-grad);
+}
+.theme-vanaheim {
+    --realm-main: var(--vanaheim-main);
+    --realm-light: var(--vanaheim-light);
+    --realm-bg: var(--vanaheim-bg);
+    --realm-border: var(--vanaheim-border);
+    --realm-grad: var(--vanaheim-grad);
+}
+.theme-alfheim {
+    --realm-main: var(--alfheim-main);
+    --realm-light: var(--alfheim-light);
+    --realm-bg: var(--alfheim-bg);
+    --realm-border: var(--alfheim-border);
+    --realm-grad: var(--alfheim-grad);
+}
+.theme-nidavellir {
+    --realm-main: var(--nidavellir-main);
+    --realm-light: var(--nidavellir-light);
+    --realm-bg: var(--nidavellir-bg);
+    --realm-border: var(--nidavellir-border);
+    --realm-grad: var(--nidavellir-grad);
+}
+.theme-muspelheim {
+    --realm-main: var(--muspelheim-main);
+    --realm-light: var(--muspelheim-light);
+    --realm-bg: var(--muspelheim-bg);
+    --realm-border: var(--muspelheim-border);
+    --realm-grad: var(--muspelheim-grad);
+}
+.theme-svartalfheim {
+    --realm-main: var(--svartalfheim-main);
+    --realm-light: var(--svartalfheim-light);
+    --realm-bg: var(--svartalfheim-bg);
+    --realm-border: var(--svartalfheim-border);
+    --realm-grad: var(--svartalfheim-grad);
+}
+.theme-niflheim {
+    --realm-main: var(--niflheim-main);
+    --realm-light: var(--niflheim-light);
+    --realm-bg: var(--niflheim-bg);
+    --realm-border: var(--niflheim-border);
+    --realm-grad: var(--niflheim-grad);
+}
+.theme-jotunheim {
+    --realm-main: var(--jotunheim-main);
+    --realm-light: var(--jotunheim-light);
+    --realm-bg: var(--jotunheim-bg);
+    --realm-border: var(--jotunheim-border);
+    --realm-grad: var(--jotunheim-grad);
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 5px;
+}
+
+.card-top > div:first-child {
+    min-width: 0;
+    flex: 1;
+}
+
+.sku-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 2px;
+    max-width: 100%;
+}
+
+.rune-pill {
+    background: var(--realm-bg);
+    border: 1px solid var(--realm-border);
+    color: var(--realm-light);
+    font-weight: 800;
+    font-size: 0.63em;
+    padding: 1px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    max-width: 100%;
+}
+
+.code-tag {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.65em;
+    font-weight: 700;
+    color: var(--text-muted);
+    word-break: break-word;
+}
+
+.realm-meaning {
+    font-size: 0.63em;
+    color: var(--realm-light);
+    font-weight: 600;
+    margin-bottom: 1px;
+    display: block;
+}
+
+.card h3 {
+    color: #ffffff;
+    margin: 0;
+    font-size: clamp(0.88rem, 1.05vw, 0.98rem);
+    line-height: 1.18;
+}
+
+.price-box {
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.price {
+    color: var(--realm-light);
+    font-size: clamp(1.04rem, 1.25vw, 1.18rem);
+    font-weight: 800;
+    white-space: nowrap;
+    display: block;
+    line-height: 1.08;
+}
+
+.price-sub {
+    font-size: 0.58em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+}
+
+/* Structured 3-Cell Attribute Strip */
+.attr-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5px;
+    background: var(--bg-attr);
+    border: 1px solid var(--border-subtle);
+    border-left: 2px solid var(--realm-main);
+    border-radius: 5px;
+    padding: 3px 7px;
+    margin-bottom: 5px;
+}
+
+.attr-cell {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.attr-cell .k {
+    font-size: 0.53em;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: var(--text-muted);
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.attr-cell .v {
+    font-size: 0.66em;
+    color: var(--steel-silver);
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.attr-cell .v.realm-v {
+    color: var(--realm-light);
+}
+
+.card ul {
+    padding-left: 14px;
+    margin: 0 0 5px 0;
+    color: var(--text-secondary);
+    font-size: clamp(0.7rem, 0.8vw, 0.77rem);
+    line-height: 1.32;
+}
+
+.card li {
+    margin-bottom: 3px;
+    overflow-wrap: break-word;
+}
+
+.card li strong {
+    color: #ffffff;
+}
+
+.card-footer {
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    padding-top: 5px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.badge {
+    background-color: var(--bg-attr);
+    border: 1px solid var(--realm-border);
+    color: var(--text-secondary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.64em;
+    font-weight: 600;
+    max-width: 100%;
+}
+
+.spec-tag {
+    font-family: ui-monospace, SFMono-Regular, monospace;
+    font-size: 0.62em;
+    color: var(--realm-light);
+    font-weight: 600;
+}
+
+/* Flagship Bundle & Zero-Custody Banner */
+.bundle-banner {
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #1b090d 0%, #10121b 48%, #191207 100%);
+    border: 1px solid var(--asgard-border);
+    border-left: 5px solid var(--midgard-main);
+    border-right: 5px solid var(--asgard-main);
+    border-radius: 8px;
+    padding: 6px 12px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.bundle-banner > div:first-child {
+    flex: 1 1 520px;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.bundle-banner h3 {
+    margin: 1px 0 2px 0;
+    color: #ffffff;
+    font-size: 0.9em;
+    line-height: 1.15;
+}
+
+.bundle-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    width: 100%;
+}
+
+.bundle-option {
+    background: rgba(6, 6, 9, 0.72);
+    border: 1px solid var(--border-subtle);
+    border-radius: 5px;
+    padding: 4px 7px;
+    font-size: 0.69em;
+    line-height: 1.24;
+    color: var(--text-secondary);
+    min-width: 0;
+    overflow-wrap: break-word;
+}
+
+.bundle-option.opt-steward {
+    border-left: 3px solid var(--asgard-light);
+}
+.bundle-option.opt-launch {
+    border-left: 3px solid var(--svartalfheim-light);
+}
+
+.bundle-option strong {
+    color: #ffffff;
+    display: block;
+    margin-bottom: 1px;
+    font-size: 0.94em;
+}
+
+.bundle-price-col {
+    text-align: right;
+    min-width: 170px;
+    background: var(--bg-attr);
+    border: 1px solid var(--asgard-border);
+    border-radius: 7px;
+    padding: 4px 10px;
+    flex-shrink: 0;
+}
+
+.bundle-price {
+    font-size: 1.14em;
+    font-weight: 800;
+    color: var(--asgard-light);
+    line-height: 1.08;
+}
+
+/* 3-Step Client Onboarding Workflow (Page 6) */
+.workflow-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    flex: 1;
+    min-height: 0;
+    align-items: stretch;
+}
+
+.workflow-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 10px 12px;
+    min-width: 0;
+    overflow-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.workflow-card.wf-1 {
+    border-left: 3px solid var(--midgard-main);
+    border-top: 2px solid var(--midgard-main);
+}
+.workflow-card.wf-2 {
+    border-left: 3px solid var(--asgard-main);
+    border-top: 2px solid var(--asgard-main);
+}
+.workflow-card.wf-3 {
+    border-left: 3px solid var(--svartalfheim-main);
+    border-top: 2px solid var(--svartalfheim-main);
+}
+
+.workflow-card .step-num {
+    font-family: ui-monospace, monospace;
+    font-size: 0.68em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 3px;
+}
+
+.workflow-card h4 {
+    margin: 0 0 4px 0;
+    color: #ffffff;
+    font-size: 0.92em;
+}
+
+.workflow-card p {
+    margin: 0;
+    font-size: 0.77em;
+    color: var(--text-secondary);
+    overflow-wrap: break-word;
+}
+
+/* Bottom Dock: Compact Pager + Footer */
+.bottom-dock-wrap {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.bottom-pager {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 7px;
+    padding: 4px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.pager-btn {
+    background: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid var(--active-border);
+    border-radius: 5px;
+    padding: 4px 10px;
+    font-size: 0.72em;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: all 0.15s ease;
+}
+
+.pager-btn:hover {
+    background: var(--active-bg);
+    color: var(--active-light);
+    border-color: var(--active-main);
+}
+
+.pager-indicator {
+    font-size: 0.72em;
+    color: var(--text-secondary);
+    font-weight: 600;
+    text-align: center;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+footer {
+    padding-top: 2px;
+    font-size: 0.66em;
+    color: var(--text-muted);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Cookie / analytics consent banner */
+#cookie-consent-banner {
+    position: fixed;
+    right: 12px;
+    bottom: 12px;
+    z-index: 9999;
+    max-width: 360px;
+    padding: 12px 14px;
+    font-size: 0.88em;
+    color: var(--text-secondary);
+    background: rgba(6, 6, 9, 0.96);
+    border: 1px solid var(--midgard-border);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.75);
+}
+#cookie-consent-banner[hidden] {
+    display: none;
+}
+#cookie-consent-banner p {
+    margin: 0 0 10px;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+#cookie-consent-banner .consent-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+.footer-link-btn {
+    background: none;
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    color: var(--text-secondary);
+    font: inherit;
+    font-size: 0.9em;
+    padding: 1px 7px;
+    cursor: pointer;
+}
+.footer-link-btn:hover {
+    color: #fff;
+    border-color: var(--active-border);
+}

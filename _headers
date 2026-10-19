@@ -1,0 +1,21 @@
+# Honored by Netlify and Cloudflare Pages.
+/*
+  Accept-CH: Sec-CH-UA, Sec-CH-UA-Mobile, Sec-CH-UA-Platform, Sec-CH-UA-Platform-Version, Sec-CH-UA-Model, Sec-CH-UA-Form-Factors, Viewport-Width, DPR
+  Vary: Sec-CH-UA-Mobile, Sec-CH-UA-Platform
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+    Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://www.googletagmanager.com; img-src 'self' data: https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; connect-src 'self' https://www.google-analytics.com;
+Cross-Origin-Opener-Policy: same-origin
+
+# Filenames are not fingerprinted, so keep CSS/JS/JSON cache short; images change rarely.
+/css/*
+  Cache-Control: public, max-age=3600
+/js/*
+  Cache-Control: public, max-age=3600
+/data/*
+  Cache-Control: public, max-age=1800
+/assets/*
+  Cache-Control: public, max-age=2592000
