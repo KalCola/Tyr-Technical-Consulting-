@@ -39,3 +39,10 @@ try {
 
 gtag("js", new Date());
 gtag("config", "AW-18518856067");
+
+// Explicitly send the Page view conversion action
+gtag("event", "conversion", {
+  send_to: "AW-18518856067/dUg4CNiWnKAdEIOjvf5E",
+  value: 2.0,
+  currency: "USD"
+});
