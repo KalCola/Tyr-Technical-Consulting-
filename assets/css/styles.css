@@ -1,0 +1,1359 @@
+:root {
+    /* Core Obsidian & Blood Red Foundation */
+    --bg-obsidian: #060609;
+    --bg-surface: #0c0d13;
+    --bg-card: #11131a;
+    --bg-attr: #090a0f;
+    --border-subtle: #232634;
+    --text-main: #f4f5f8;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --steel-silver: #e2e8f0;
+
+    /* Nine Realms Color Palette Tokens */
+    /* 1. Midgard (Websites & Public Presence) — Sovereign Blood Crimson */
+    --midgard-main: #dc2626;
+    --midgard-light: #f87171;
+    --midgard-bg: rgba(220, 38, 38, 0.13);
+    --midgard-border: rgba(220, 38, 38, 0.52);
+    --midgard-grad: linear-gradient(180deg, rgba(220, 38, 38, 0.12) 0%, #11131a 44%);
+
+    /* 2. Asgard (Domains, Email Shield & Watchtower) — Imperial Bifrost Gold */
+    --asgard-main: #d97706;
+    --asgard-light: #fbbf24;
+    --asgard-bg: rgba(245, 158, 11, 0.13);
+    --asgard-border: rgba(245, 158, 11, 0.52);
+    --asgard-grad: linear-gradient(180deg, rgba(245, 158, 11, 0.12) 0%, #11131a 44%);
+
+    /* 3. Vanaheim (QR Menus, Forms & Local Commerce) — Verdant Harvest Emerald */
+    --vanaheim-main: #059669;
+    --vanaheim-light: #34d399;
+    --vanaheim-bg: rgba(16, 185, 129, 0.13);
+    --vanaheim-border: rgba(16, 185, 129, 0.52);
+    --vanaheim-grad: linear-gradient(180deg, rgba(16, 185, 129, 0.12) 0%, #11131a 44%);
+
+    /* 4. Alfheim (Resumes, Bids & Admin Concierge) — Luminous Starlight Cyan */
+    --alfheim-main: #0284c7;
+    --alfheim-light: #38bdf8;
+    --alfheim-bg: rgba(56, 189, 248, 0.13);
+    --alfheim-border: rgba(56, 189, 248, 0.52);
+    --alfheim-grad: linear-gradient(180deg, rgba(56, 189, 248, 0.12) 0%, #11131a 44%);
+
+    /* 5. Nidavellir (3-Doc Fillable E-Sign Contracts) — Dwarven Forge Copper/Bronze */
+    --nidavellir-main: #ea580c;
+    --nidavellir-light: #fb923c;
+    --nidavellir-bg: rgba(234, 88, 12, 0.13);
+    --nidavellir-border: rgba(234, 88, 12, 0.52);
+    --nidavellir-grad: linear-gradient(180deg, rgba(234, 88, 12, 0.12) 0%, #11131a 44%);
+
+    /* 6. Muspelheim (Vehicle & Equipment Buyer's Guide) — Primordial Flame Rose-Red */
+    --muspelheim-main: #e11d48;
+    --muspelheim-light: #fb7185;
+    --muspelheim-bg: rgba(225, 29, 72, 0.13);
+    --muspelheim-border: rgba(225, 29, 72, 0.52);
+    --muspelheim-grad: linear-gradient(180deg, rgba(225, 29, 72, 0.12) 0%, #11131a 44%);
+
+    /* 7. Svartalfheim (Budget Trackers & Monthly Expense Optimization) — Deep Treasury Amethyst */
+    --svartalfheim-main: #9333ea;
+    --svartalfheim-light: #c084fc;
+    --svartalfheim-bg: rgba(168, 85, 247, 0.13);
+    --svartalfheim-border: rgba(168, 85, 247, 0.52);
+    --svartalfheim-grad: linear-gradient(180deg, rgba(168, 85, 247, 0.12) 0%, #11131a 44%);
+
+    /* 8. Niflheim / Helheim (Home Insurance & Legacy Vault) — Glacial Frost Teal */
+    --niflheim-main: #0d9488;
+    --niflheim-light: #2dd4bf;
+    --niflheim-bg: rgba(20, 184, 166, 0.13);
+    --niflheim-border: rgba(20, 184, 166, 0.52);
+    --niflheim-grad: linear-gradient(180deg, rgba(20, 184, 166, 0.12) 0%, #11131a 44%);
+
+    /* 9. Jotunheim (Billing Disputes & Monthly Bill Watchdog) — Frost-Giant Indigo Steel */
+    --jotunheim-main: #4f46e5;
+    --jotunheim-light: #818cf8;
+    --jotunheim-bg: rgba(99, 102, 241, 0.13);
+    --jotunheim-border: rgba(99, 102, 241, 0.52);
+    --jotunheim-grad: linear-gradient(180deg, rgba(99, 102, 241, 0.12) 0%, #11131a 44%);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* When user explicitly forces Desktop mode on a narrow screen */
+html[data-forced-desktop="true"],
+html[data-forced-desktop="true"] body {
+    max-width: none;
+    overflow-x: hidden;
+}
+
+body {
+    font-family:
+        "Inter",
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        sans-serif;
+    background-color: var(--bg-obsidian);
+    background-image: radial-gradient(circle at 12% 0%, rgba(220, 38, 38, 0.15) 0%, transparent 40%), radial-gradient(circle at 88% 8%, rgba(217, 119, 6, 0.1) 0%, transparent 38%);
+    color: var(--text-main);
+    line-height: 1.44;
+    margin: 0;
+    padding: 0;
+}
+
+/* Top Executive Bar with UA-CH Telemetry Pill */
+.top-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(6, 6, 9, 0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--midgard-border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.75);
+    width: 100%;
+}
+
+.nav-inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 6px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--text-main);
+    flex-shrink: 0;
+}
+
+.nav-rune-badge {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, var(--midgard-main), #7f1d1d);
+    border: 1px solid var(--asgard-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05em;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.nav-brand-text {
+    font-weight: 800;
+    font-size: 0.92em;
+    letter-spacing: 0.7px;
+    white-space: nowrap;
+}
+
+.nav-brand-text span {
+    color: var(--midgard-light);
+    font-weight: 600;
+}
+
+/* UA-CH Client Hints Telemetry & Mode Switcher */
+.uach-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    background: var(--bg-attr);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    padding: 3px 8px;
+    font-size: 0.71em;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.uach-status {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color: var(--asgard-light);
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.uach-controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.uach-btn {
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    padding: 2px 7px;
+    font-size: 0.94em;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.uach-btn.active {
+    background: var(--midgard-bg);
+    color: #ffffff;
+    border-color: var(--midgard-main);
+}
+
+.nav-cta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 5px 11px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.76em;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--midgard-main), #991b1b);
+    color: #ffffff;
+    border: 1px solid var(--midgard-light);
+}
+
+.btn-outline {
+    background: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid var(--asgard-border);
+}
+
+.container {
+    max-width: 1240px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 8px 16px 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Compact Executive Hero (Engineered for Zero-Scroll Viewport Fit) */
+.hero {
+    background: linear-gradient(140deg, #160a0d 0%, #0b0c12 55%, #171108 100%);
+    border: 1px solid var(--midgard-border);
+    border-left: 4px solid var(--midgard-main);
+    border-radius: 10px;
+    padding: 9px 14px;
+    margin-bottom: 7px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.hero-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1 1 480px;
+    min-width: 0;
+}
+
+.logo-img {
+    width: 52px;
+    height: 52px;
+    border-radius: 9px;
+    border: 2px solid var(--midgard-main);
+    box-shadow: 0 0 12px rgba(220, 38, 38, 0.45);
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.eyebrow {
+    font-size: 0.57em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    color: var(--asgard-light);
+    margin-bottom: 1px;
+}
+
+h1 {
+    color: #ffffff;
+    font-size: 1.32em;
+    margin: 0 0 2px 0;
+    letter-spacing: 0.3px;
+    line-height: 1.14;
+}
+
+h1 .accent {
+    color: var(--midgard-light);
+}
+
+.hero-sub {
+    color: var(--text-secondary);
+    font-size: 0.78em;
+    margin: 0;
+}
+
+.hero-attributes {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+    flex: 1 1 500px;
+    min-width: 0;
+}
+
+.attr-box {
+    background: var(--bg-attr);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    padding: 4px 8px;
+    min-width: 0;
+}
+
+.attr-box.r-midgard {
+    border-left: 3px solid var(--midgard-main);
+}
+.attr-box.r-asgard {
+    border-left: 3px solid var(--asgard-main);
+}
+.attr-box.r-niflheim {
+    border-left: 3px solid var(--niflheim-main);
+}
+.attr-box.r-svartalfheim {
+    border-left: 3px solid var(--svartalfheim-main);
+}
+
+.attr-label {
+    font-size: 0.58em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.attr-val {
+    font-size: 0.72em;
+    font-weight: 700;
+    color: var(--text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+/* Multi-Page Deck Navigation & 9-Realm Legend Bar */
+.deck-nav-panel {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 9px;
+    padding: 6px 10px;
+    margin-bottom: 7px;
+}
+
+.page-tabs-row {
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: 5px;
+}
+
+/* All 7 tabs fit on a single horizontal row on Desktop */
+.page-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 5px;
+    width: 100%;
+}
+
+.page-tab {
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    border-top: 2px solid transparent;
+    border-radius: 6px;
+    flex: 1 1 auto;
+    padding: 5px 6px;
+    font-size: 0.68em;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.16s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+.page-tab:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.page-tab.active[data-page="1"] {
+    background: var(--midgard-bg);
+    color: #ffffff;
+    border-color: var(--midgard-border);
+    border-top: 2px solid var(--midgard-main);
+}
+.page-tab.active[data-page="2"] {
+    background: var(--alfheim-bg);
+    color: #ffffff;
+    border-color: var(--alfheim-border);
+    border-top: 2px solid var(--alfheim-light);
+}
+.page-tab.active[data-page="3"] {
+    background: var(--niflheim-bg);
+    color: #ffffff;
+    border-color: var(--niflheim-border);
+    border-top: 2px solid var(--niflheim-light);
+}
+.page-tab.active[data-page="4"] {
+    background: var(--asgard-bg);
+    color: #ffffff;
+    border-color: var(--asgard-border);
+    border-top: 2px solid var(--asgard-light);
+}
+.page-tab.active[data-page="5"] {
+    background: var(--svartalfheim-bg);
+    color: #ffffff;
+    border-color: var(--svartalfheim-border);
+    border-top: 2px solid var(--svartalfheim-light);
+}
+.page-tab.active[data-page="6"] {
+    background: var(--vanaheim-bg);
+    color: #ffffff;
+    border-color: var(--vanaheim-border);
+    border-top: 2px solid var(--vanaheim-light);
+}
+.page-tab.active[data-page="all"] {
+    background: var(--midgard-bg);
+    color: #ffffff;
+    border-color: var(--midgard-main);
+    border-top: 2px solid var(--asgard-light);
+}
+
+/* 9-Realm Compact Color Legend */
+.realm-legend {
+    display: grid;
+    grid-template-columns: repeat(9, minmax(0, 1fr));
+    gap: 4px;
+}
+
+.legend-chip {
+    background: var(--bg-attr);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    padding: 3px 4px;
+    text-align: center;
+    font-size: 0.6em;
+    line-height: 1.18;
+    cursor: pointer;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.legend-chip strong {
+    display: block;
+    font-size: 1.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.legend-chip span {
+    color: var(--text-muted);
+    font-size: 0.88em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+/* Paginated Views — Only Active Page Renders to Eliminate Vertical Scrolling */
+.deck-page {
+    display: none;
+    animation: fadeIn 0.18s ease-out;
+}
+
+.deck-page.active-page {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0.4;
+        transform: translateY(3px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 6px;
+    padding-left: 10px;
+    margin: 1px 0 4px 0;
+}
+
+.section-header.sec-01 {
+    border-left: 4px solid var(--midgard-main);
+}
+.section-header.sec-02 {
+    border-left: 4px solid var(--alfheim-light);
+}
+.section-header.sec-03 {
+    border-left: 4px solid var(--niflheim-light);
+}
+.section-header.sec-04 {
+    border-left: 4px solid var(--asgard-light);
+}
+.section-header.sec-05 {
+    border-left: 4px solid var(--svartalfheim-light);
+}
+
+.section-header h2 {
+    color: #ffffff;
+    margin: 0;
+    font-size: 1.06em;
+}
+
+.section-header .rune-tag {
+    font-family: ui-monospace, SFMono-Regular, monospace;
+    font-size: 0.72em;
+    font-weight: 700;
+}
+
+.section-desc {
+    color: var(--text-muted);
+    font-size: 0.77em;
+    margin: -2px 0 7px 14px;
+}
+
+/* Mobile / Single-Card Sub-Stepper */
+.mobile-card-stepper {
+    display: none;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.mob-step-btn {
+    flex: 1;
+    min-width: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    padding: 6px 6px;
+    border-radius: 6px;
+    font-size: 0.74em;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+}
+
+.mob-step-btn.active {
+    background: var(--midgard-bg);
+    color: #ffffff;
+    border-color: var(--midgard-main);
+}
+
+/* 3-Column Card Grid on Desktop */
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 6px;
+}
+
+/* Base Service Card + Per-Realm Color Theming */
+.card {
+    min-width: 0;
+    background: var(--realm-grad, var(--bg-card));
+    border: 1px solid var(--realm-border, var(--border-subtle));
+    border-top: 3px solid var(--realm-main, var(--midgard-main));
+    border-radius: 9px;
+    padding: 11px 13px 10px 13px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+}
+
+/* Compact vertical rhythm on Page 5 so 3 Cards + Flagship Bundle Banner fit zero-scroll on Desktop */
+html[data-device="desktop"] #page-5 .section-header {
+    margin: 0 0 2px 0;
+}
+html[data-device="desktop"] #page-5 .section-desc {
+    font-size: 0.72em;
+    line-height: 1.25;
+    margin: 0 0 4px 14px;
+}
+html[data-device="desktop"] #page-5 .grid-3 {
+    margin-bottom: 5px;
+    gap: 10px;
+}
+html[data-device="desktop"] #page-5 .card {
+    padding: 6px 11px 5px 11px;
+}
+html[data-device="desktop"] #page-5 .card-top {
+    margin-bottom: 3px;
+}
+html[data-device="desktop"] #page-5 .sku-line {
+    margin-bottom: 1px;
+}
+html[data-device="desktop"] #page-5 .realm-meaning {
+    font-size: 0.63em;
+    margin-bottom: 1px;
+}
+html[data-device="desktop"] #page-5 .card h3 {
+    font-size: 0.91em;
+    line-height: 1.15;
+}
+html[data-device="desktop"] #page-5 .price {
+    font-size: 1.08em;
+}
+html[data-device="desktop"] #page-5 .attr-strip {
+    padding: 2px 6px;
+    margin-bottom: 4px;
+}
+html[data-device="desktop"] #page-5 .card ul {
+    font-size: 0.7em;
+    margin-bottom: 3px;
+    line-height: 1.24;
+}
+html[data-device="desktop"] #page-5 .card li {
+    margin-bottom: 1px;
+}
+html[data-device="desktop"] #page-5 .card-footer {
+    padding-top: 3px;
+}
+html[data-device="desktop"] #page-5 .bundle-banner {
+    padding: 5px 12px;
+    margin-bottom: 2px;
+    gap: 8px;
+}
+html[data-device="desktop"] #page-5 .bundle-banner h3 {
+    font-size: 0.88em;
+    margin: 0 0 2px 0;
+    line-height: 1.15;
+}
+html[data-device="desktop"] #page-5 .bundle-option {
+    padding: 3px 7px;
+    font-size: 0.68em;
+    line-height: 1.2;
+}
+html[data-device="desktop"] #page-5 .bundle-price-col {
+    padding: 4px 10px;
+    min-width: 170px;
+}
+html[data-device="desktop"] #page-5 .bundle-price {
+    font-size: 1.12em;
+}
+
+/* Realm Theme Classes */
+.theme-midgard {
+    --realm-main: var(--midgard-main);
+    --realm-light: var(--midgard-light);
+    --realm-bg: var(--midgard-bg);
+    --realm-border: var(--midgard-border);
+    --realm-grad: var(--midgard-grad);
+}
+.theme-asgard {
+    --realm-main: var(--asgard-main);
+    --realm-light: var(--asgard-light);
+    --realm-bg: var(--asgard-bg);
+    --realm-border: var(--asgard-border);
+    --realm-grad: var(--asgard-grad);
+}
+.theme-vanaheim {
+    --realm-main: var(--vanaheim-main);
+    --realm-light: var(--vanaheim-light);
+    --realm-bg: var(--vanaheim-bg);
+    --realm-border: var(--vanaheim-border);
+    --realm-grad: var(--vanaheim-grad);
+}
+.theme-alfheim {
+    --realm-main: var(--alfheim-main);
+    --realm-light: var(--alfheim-light);
+    --realm-bg: var(--alfheim-bg);
+    --realm-border: var(--alfheim-border);
+    --realm-grad: var(--alfheim-grad);
+}
+.theme-nidavellir {
+    --realm-main: var(--nidavellir-main);
+    --realm-light: var(--nidavellir-light);
+    --realm-bg: var(--nidavellir-bg);
+    --realm-border: var(--nidavellir-border);
+    --realm-grad: var(--nidavellir-grad);
+}
+.theme-muspelheim {
+    --realm-main: var(--muspelheim-main);
+    --realm-light: var(--muspelheim-light);
+    --realm-bg: var(--muspelheim-bg);
+    --realm-border: var(--muspelheim-border);
+    --realm-grad: var(--muspelheim-grad);
+}
+.theme-svartalfheim {
+    --realm-main: var(--svartalfheim-main);
+    --realm-light: var(--svartalfheim-light);
+    --realm-bg: var(--svartalfheim-bg);
+    --realm-border: var(--svartalfheim-border);
+    --realm-grad: var(--svartalfheim-grad);
+}
+.theme-niflheim {
+    --realm-main: var(--niflheim-main);
+    --realm-light: var(--niflheim-light);
+    --realm-bg: var(--niflheim-bg);
+    --realm-border: var(--niflheim-border);
+    --realm-grad: var(--niflheim-grad);
+}
+.theme-jotunheim {
+    --realm-main: var(--jotunheim-main);
+    --realm-light: var(--jotunheim-light);
+    --realm-bg: var(--jotunheim-bg);
+    --realm-border: var(--jotunheim-border);
+    --realm-grad: var(--jotunheim-grad);
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.card-top > div:first-child {
+    min-width: 0;
+    flex: 1;
+}
+
+.sku-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 3px;
+    max-width: 100%;
+}
+
+.rune-pill {
+    background: var(--realm-bg);
+    border: 1px solid var(--realm-border);
+    color: var(--realm-light);
+    font-weight: 800;
+    font-size: 0.66em;
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    max-width: 100%;
+}
+
+.code-tag {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.67em;
+    font-weight: 700;
+    color: var(--text-muted);
+    word-break: break-word;
+}
+
+.realm-meaning {
+    font-size: 0.65em;
+    color: var(--realm-light);
+    font-weight: 600;
+    margin-bottom: 2px;
+    display: block;
+}
+
+.card h3 {
+    color: #ffffff;
+    margin: 0;
+    font-size: 0.94em;
+    line-height: 1.2;
+}
+
+.price-box {
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.price {
+    color: var(--realm-light);
+    font-size: 1.18em;
+    font-weight: 800;
+    white-space: nowrap;
+    display: block;
+    line-height: 1.1;
+}
+
+.price-sub {
+    font-size: 0.6em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+}
+
+/* Structured 3-Cell Attribute Strip */
+.attr-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    background: var(--bg-attr);
+    border: 1px solid var(--border-subtle);
+    border-left: 2px solid var(--realm-main);
+    border-radius: 6px;
+    padding: 4px 8px;
+    margin-bottom: 7px;
+}
+
+.attr-cell {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.attr-cell .k {
+    font-size: 0.54em;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: var(--text-muted);
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.attr-cell .v {
+    font-size: 0.68em;
+    color: var(--steel-silver);
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.attr-cell .v.realm-v {
+    color: var(--realm-light);
+}
+
+.card ul {
+    padding-left: 15px;
+    margin: 0 0 7px 0;
+    color: var(--text-secondary);
+    font-size: 0.78em;
+}
+
+.card li {
+    margin-bottom: 3px;
+    overflow-wrap: break-word;
+}
+
+.card li strong {
+    color: #ffffff;
+}
+
+.card-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    padding-top: 6px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.badge {
+    background-color: var(--bg-attr);
+    border: 1px solid var(--realm-border);
+    color: var(--text-secondary);
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 0.67em;
+    font-weight: 600;
+    max-width: 100%;
+}
+
+.spec-tag {
+    font-family: ui-monospace, SFMono-Regular, monospace;
+    font-size: 0.64em;
+    color: var(--realm-light);
+    font-weight: 600;
+}
+
+/* Flagship Bundle & Zero-Custody Banner */
+.bundle-banner {
+    background: linear-gradient(135deg, #1b090d 0%, #10121b 48%, #191207 100%);
+    border: 1px solid var(--asgard-border);
+    border-left: 5px solid var(--midgard-main);
+    border-right: 5px solid var(--asgard-main);
+    border-radius: 10px;
+    padding: 8px 13px;
+    margin-bottom: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.bundle-banner > div:first-child {
+    flex: 1 1 520px;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.bundle-banner h3 {
+    margin: 1px 0 3px 0;
+    color: #ffffff;
+    font-size: 0.98em;
+}
+
+.bundle-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+}
+
+.bundle-option {
+    background: rgba(6, 6, 9, 0.72);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    padding: 5px 8px;
+    font-size: 0.73em;
+    color: var(--text-secondary);
+    min-width: 0;
+    overflow-wrap: break-word;
+}
+
+.bundle-option.opt-steward {
+    border-left: 3px solid var(--asgard-light);
+}
+.bundle-option.opt-launch {
+    border-left: 3px solid var(--svartalfheim-light);
+}
+
+.bundle-option strong {
+    color: #ffffff;
+    display: block;
+    margin-bottom: 2px;
+    font-size: 0.94em;
+}
+
+.bundle-price-col {
+    text-align: right;
+    min-width: 185px;
+    background: var(--bg-attr);
+    border: 1px solid var(--asgard-border);
+    border-radius: 8px;
+    padding: 6px 12px;
+    flex-shrink: 0;
+}
+
+.bundle-price {
+    font-size: 1.3em;
+    font-weight: 800;
+    color: var(--asgard-light);
+    line-height: 1.1;
+}
+
+/* 3-Step Client Onboarding Workflow */
+.workflow-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.workflow-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 12px 14px;
+    min-width: 0;
+    overflow-wrap: break-word;
+}
+
+.workflow-card.wf-1 {
+    border-left: 3px solid var(--midgard-main);
+}
+.workflow-card.wf-2 {
+    border-left: 3px solid var(--asgard-main);
+}
+.workflow-card.wf-3 {
+    border-left: 3px solid var(--svartalfheim-main);
+}
+
+.workflow-card .step-num {
+    font-family: ui-monospace, monospace;
+    font-size: 0.7em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    display: block;
+    margin-bottom: 3px;
+}
+
+.workflow-card h4 {
+    margin: 0 0 4px 0;
+    color: #ffffff;
+    font-size: 0.94em;
+}
+
+.workflow-card p {
+    margin: 0;
+    font-size: 0.79em;
+    color: var(--text-secondary);
+    overflow-wrap: break-word;
+}
+
+/* Bottom Deck Pager Bar */
+.bottom-pager {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 2px;
+}
+
+.pager-btn {
+    background: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid var(--midgard-border);
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-size: 0.75em;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.pager-btn:hover {
+    background: var(--midgard-bg);
+}
+
+.pager-indicator {
+    font-size: 0.75em;
+    color: var(--text-secondary);
+    font-weight: 600;
+    text-align: center;
+    min-width: 0;
+}
+
+footer {
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid var(--border-subtle);
+    font-size: 0.71em;
+    color: var(--text-muted);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 6px;
+}
+
+/* Intermediate Desktop / Tablet / Chrome 'Request Desktop Site' (861px–1180px) */
+@media (min-width: 861px) and (max-width: 1180px) {
+    html:not([data-forced-desktop="true"]) .page-tabs {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 5px;
+    }
+    html:not([data-forced-desktop="true"]) .page-tab[data-page="all"] {
+        grid-column: span 3;
+    }
+    html:not([data-forced-desktop="true"]) .page-tab {
+        white-space: normal;
+        line-height: 1.2;
+        padding: 5px 6px;
+    }
+    html:not([data-forced-desktop="true"]) .realm-legend {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    html:not([data-forced-desktop="true"]) .attr-cell .v {
+        font-size: 0.63em;
+    }
+}
+
+/* When user clicks 'Mobile' mode on a wide Desktop viewport (>860px), render true Mobile Ergonomic Frame */
+@media (min-width: 861px) {
+    html[data-device="mobile"] .nav-inner,
+    html[data-device="mobile"] .container {
+        max-width: 520px;
+    }
+    html[data-device="mobile"] .nav-brand {
+        order: 1;
+    }
+    html[data-device="mobile"] .nav-cta {
+        order: 2;
+        margin-left: auto;
+    }
+    html[data-device="mobile"] .uach-bar {
+        order: 3;
+        flex: 1 1 100%;
+        width: 100%;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+    html[data-device="mobile"] .uach-status {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+    html[data-device="mobile"] .hero-left {
+        flex: 1 1 100%;
+    }
+    html[data-device="mobile"] .hero-attributes {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        flex: 1 1 100%;
+    }
+    html[data-device="mobile"] .page-tabs {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 5px;
+    }
+    html[data-device="mobile"] .page-tab[data-page="all"] {
+        grid-column: span 2;
+    }
+    html[data-device="mobile"] .page-tab {
+        white-space: normal;
+        line-height: 1.2;
+        padding: 6px;
+    }
+    html[data-device="mobile"] .grid-3 .card ul {
+        grid-template-columns: 1fr !important;
+        gap: 6px !important;
+    }
+    html[data-device="mobile"] .bundle-grid,
+    html[data-device="mobile"] .workflow-grid {
+        grid-template-columns: 1fr;
+    }
+    html[data-device="mobile"] .bundle-price-col {
+        width: 100%;
+        text-align: left;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+/* ============================================================================
+           USER-AGENT CLIENT HINTS (UA-CH) HORIZONTAL SINGLE-CARD STEPPER DYNAMICS
+           Keeps uniform card geometry while stepping 1 card at a time on Mobile Mode
+           ============================================================================ */
+html[data-device="mobile"] .realm-legend {
+    display: none;
+}
+html[data-device="mobile"] .page-tabs-row {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+html[data-device="mobile"]:not([data-view="all"]) .mobile-card-stepper {
+    display: flex;
+}
+html[data-device="mobile"] .grid-3 {
+    grid-template-columns: 1fr;
+}
+html[data-device="mobile"]:not([data-view="all"]) .grid-3 .card {
+    display: none;
+}
+html[data-device="mobile"]:not([data-view="all"]) .grid-3 .card.mob-active-card,
+html[data-device="mobile"][data-view="all"] .grid-3 .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 14px 16px;
+}
+html[data-device="mobile"] .grid-3 .card ul {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    list-style: none;
+    padding-left: 0;
+    margin: 5px 0 8px 0;
+}
+html[data-device="mobile"] .grid-3 .card li {
+    background: var(--bg-attr);
+    border: 1px solid var(--border-subtle);
+    border-left: 3px solid var(--realm-main);
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin-bottom: 0;
+}
+
+/* ============================================================================
+           MOBILE & TABLET VIEWPORT ADAPTATION (Pixel 10 Pro XL 412px & Small Screens)
+           Eliminates all horizontal overflow and optimizes vertical touch ergonomics
+           ============================================================================ */
+@media (max-width: 860px) {
+    html:not([data-forced-desktop="true"]) .nav-inner {
+        padding: 5px 10px;
+        gap: 5px;
+    }
+    html:not([data-forced-desktop="true"]) .nav-brand {
+        order: 1;
+        gap: 6px;
+    }
+    html:not([data-forced-desktop="true"]) .nav-rune-badge {
+        width: 24px;
+        height: 24px;
+        font-size: 0.95em;
+    }
+    html:not([data-forced-desktop="true"]) .nav-brand-text {
+        font-size: 0.82em;
+        letter-spacing: 0.4px;
+    }
+    html:not([data-forced-desktop="true"]) .nav-cta {
+        order: 2;
+        margin-left: auto;
+        gap: 5px;
+    }
+    html:not([data-forced-desktop="true"]) .nav-cta .btn {
+        padding: 4px 8px;
+        font-size: 0.7em;
+    }
+    html:not([data-forced-desktop="true"]) .uach-bar {
+        order: 3;
+        flex: 1 1 100%;
+        width: 100%;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        padding: 3px 7px;
+        font-size: 0.66em;
+    }
+    html:not([data-forced-desktop="true"]) .uach-status {
+        font-size: 0.88em;
+        flex: 1 1 auto;
+        min-width: 0;
+        max-width: none;
+    }
+    html:not([data-forced-desktop="true"]) .uach-btn {
+        padding: 2px 5px;
+        font-size: 0.9em;
+    }
+    html:not([data-forced-desktop="true"]) .container {
+        padding: 8px 12px 14px 12px;
+    }
+    html:not([data-forced-desktop="true"]) .hero {
+        padding: 10px 12px;
+        gap: 8px;
+    }
+    html:not([data-forced-desktop="true"]) .hero-left {
+        flex: 1 1 100%;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    html:not([data-forced-desktop="true"]) .logo-img {
+        width: 46px;
+        height: 46px;
+    }
+    html:not([data-forced-desktop="true"]) h1 {
+        font-size: 1.15em;
+    }
+    html:not([data-forced-desktop="true"]) .hero-sub {
+        font-size: 0.75em;
+    }
+    html:not([data-forced-desktop="true"]) .hero-attributes {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        flex: 1 1 100%;
+        gap: 5px;
+    }
+    html:not([data-forced-desktop="true"]) .page-tabs {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 5px;
+    }
+    html:not([data-forced-desktop="true"]) .page-tab[data-page="all"] {
+        grid-column: span 2;
+    }
+    html:not([data-forced-desktop="true"]) .page-tab {
+        white-space: normal;
+        line-height: 1.2;
+        padding: 6px 6px;
+        font-size: 0.71em;
+    }
+    html:not([data-forced-desktop="true"]) .section-header h2 {
+        font-size: 0.98em;
+    }
+    html:not([data-forced-desktop="true"]) .section-desc {
+        margin-left: 0;
+        font-size: 0.75em;
+    }
+    html:not([data-forced-desktop="true"]) .grid-3 .card ul {
+        grid-template-columns: 1fr !important;
+        gap: 6px !important;
+    }
+    html:not([data-forced-desktop="true"]) .bundle-grid {
+        grid-template-columns: 1fr;
+    }
+    html:not([data-forced-desktop="true"]) .bundle-price-col {
+        width: 100%;
+        text-align: left;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
+    }
+    html:not([data-forced-desktop="true"]) .workflow-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    html:not([data-forced-desktop="true"]) .bottom-pager {
+        flex-wrap: wrap;
+        padding: 8px 10px;
+    }
+    html:not([data-forced-desktop="true"]) .pager-indicator {
+        order: -1;
+        flex: 1 1 100%;
+        margin-bottom: 4px;
+    }
+    html:not([data-forced-desktop="true"]) .pager-btn {
+        flex: 1;
+        text-align: center;
+    }
+}
