@@ -2,6 +2,8 @@
 
 Static, build-free site for **https://tyrprotocol.pro**, hosted on GitHub Pages (`main` branch, repository root).
 Open `index.html` through any static server to preview (`python3 -m http.server 8000`, then visit `http://localhost:8000`).
+[![GitHub Pages Verification](https://github.com/KalCola/Tyr-Technical-Consulting-/actions/workflows/pages-verify.yml/badge.svg)](https://github.com/KalCola/Tyr-Technical-Consulting-/actions/workflows/pages-verify.yml)
+[![Live Storefront](https://img.shields.io/badge/site-tyrprotocol.pro-blue.svg)](https://tyrprotocol.pro)
 
 ## File map
 
