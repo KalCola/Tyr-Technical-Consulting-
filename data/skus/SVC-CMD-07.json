@@ -1,0 +1,28 @@
+{
+  "page": 3,
+  "cardIndex": 0,
+  "realm": "svartalfheim",
+  "runePill": "ᚠ SVARTALFHEIM",
+  "meaning": "Hidden Treasury • Private Offline Wealth Hub",
+  "title": "Home Budget & Business Tracker",
+  "price": "$195",
+  "priceSub": "Custom Workbook",
+  "attrs": [
+    [
+      "Norse Realm",
+      "ᚠ Svartalfheim"
+    ],
+    [
+      "Privacy",
+      "100% Offline"
+    ],
+    [
+      "Turnaround",
+      "24–48 Hours"
+    ]
+  ],
+  "badge": "Deliverable: Custom Excel + Sheets Hub",
+  "specTag": ".XLSX • Schedule C Ready",
+  "sku": "SVC-CMD-07",
+  "themeClass": "theme-svartalfheim"
+}

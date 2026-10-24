@@ -1,0 +1,28 @@
+{
+  "page": 4,
+  "cardIndex": 0,
+  "realm": "midgard",
+  "runePill": "ᛗ MIDGARD + ᚱ VANAHEIM",
+  "meaning": "Storefront Guardian • Active Website Upkeep",
+  "title": "Website & QR Menu Care Plan",
+  "price": "$55–$75",
+  "priceSub": "Per Month",
+  "attrs": [
+    [
+      "Personal Tier",
+      "$55 / Month"
+    ],
+    [
+      "Business Tier",
+      "$75 / Month"
+    ],
+    [
+      "Edits Included",
+      "Up to 2 / Mo"
+    ]
+  ],
+  "badge": "2 Updates/Mo + Form Check",
+  "specTag": "NAICS 541512 • Web Care",
+  "sku": "SUB-WEB-01",
+  "themeClass": "theme-midgard"
+}

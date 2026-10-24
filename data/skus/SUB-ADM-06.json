@@ -1,0 +1,28 @@
+{
+  "page": 5,
+  "cardIndex": 2,
+  "realm": "alfheim",
+  "runePill": "ᚨ ALFHEIM + ᚷ FORGE",
+  "meaning": "Back-Office Steward • On-Demand Quotes & Forms",
+  "title": "Back-Office Admin & Quote Concierge",
+  "price": "$80–$110",
+  "priceSub": "Per Month",
+  "attrs": [
+    [
+      "Personal / Biz",
+      "$80 / $110 Mo"
+    ],
+    [
+      "Tasks Included",
+      "Up to 3 / Mo"
+    ],
+    [
+      "Retained File",
+      "Ledger + Report"
+    ]
+  ],
+  "badge": "Deliverable: 3 Admin Builds/Mo + Report",
+  "specTag": "NAICS 541611 • 0 Client PII Kept",
+  "sku": "SUB-ADM-06",
+  "themeClass": "theme-alfheim"
+}

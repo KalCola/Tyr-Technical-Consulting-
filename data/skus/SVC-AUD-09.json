@@ -1,0 +1,28 @@
+{
+  "page": 3,
+  "cardIndex": 2,
+  "realm": "jotunheim",
+  "runePill": "ᚦ JOTUNHEIM",
+  "meaning": "Giant-Slaying • Defeat Unfair Corporate Bills",
+  "title": "Billing, Warranty & ISP Dispute Kit",
+  "price": "$175",
+  "priceSub": "Dispute Dossier",
+  "attrs": [
+    [
+      "Norse Realm",
+      "ᚦ Jotunheim"
+    ],
+    [
+      "Goal",
+      "Bill Credits"
+    ],
+    [
+      "Turnaround",
+      "24–48 Hours"
+    ]
+  ],
+  "badge": "Deliverable: Formal Evidence Dossier PDF",
+  "specTag": "FCC • UCC • FCRA • Exhibits",
+  "sku": "SVC-AUD-09",
+  "themeClass": "theme-jotunheim"
+}

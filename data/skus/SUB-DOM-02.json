@@ -1,0 +1,28 @@
+{
+  "page": 4,
+  "cardIndex": 1,
+  "realm": "asgard",
+  "runePill": "ᛉ ASGARD WATCHTOWER",
+  "meaning": "Bifröst Shield • Continuous Domain & Inbox Watch",
+  "title": "Domain & Email Shield Plan",
+  "price": "$65–$85",
+  "priceSub": "Per Month",
+  "attrs": [
+    [
+      "Personal Tier",
+      "$65 / Month"
+    ],
+    [
+      "Business Tier",
+      "$85 / Month"
+    ],
+    [
+      "Protection",
+      "Monthly Scan"
+    ]
+  ],
+  "badge": "Deliverability & Breach Scan",
+  "specTag": "NAICS 541512 • DNS Shield",
+  "sku": "SUB-DOM-02",
+  "themeClass": "theme-asgard"
+}
