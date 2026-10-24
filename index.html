@@ -94,43 +94,33 @@
         <script src="js/consent-init.js"></script>
         <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
         <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18518856067"></script>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
 
-        <link rel="stylesheet" href="css/base.css" />
-        <link rel="stylesheet" href="css/components.css" />
-        <link rel="stylesheet" href="css/responsive.css" />
-
+        <script defer src="js/fallback-snapshot.js"></script>
         <script defer src="js/component-loader.js"></script>
         <script defer src="js/deck.js"></script>
         <script defer src="js/client-hints.js"></script>
         <script defer src="js/analytics.js"></script>
         <script defer src="js/catalog-loader.js"></script>
     </head>
-<body class="theme-obsidian">
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-  <div id="slot-cookie-banner" data-component="components/cookie-banner.html"></div>
-  <div id="slot-top-nav" data-component="components/top-nav.html"></div>
-  <div id="slot-hero" data-component="components/hero.html"></div>
-  <div id="slot-deck-nav" data-component="components/deck-nav.html"></div>
-
-  <main class="deck-viewport" id="main-content">
-    <div class="deck-container" id="deckContainer">
-      <div class="deck-page active" id="page-1" role="region" aria-label="Page 1: Foundations &amp; Digital Presence" data-component="components/page-1.html"></div>
-      <div class="deck-page" id="page-2" role="region" aria-label="Page 2: Cloud, Security &amp; Fleet Operations" data-component="components/page-2.html"></div>
-      <div class="deck-page" id="page-3" role="region" aria-label="Page 3: Deep Hardware, Custom OS &amp; Architect" data-component="components/page-3.html"></div>
-      <div class="deck-page" id="page-4" role="region" aria-label="Page 4: The Shield Wall: Monthly Subscriptions" data-component="components/page-4.html"></div>
-      <div class="deck-page" id="page-5" role="region" aria-label="Page 5: Policies, Financing &amp; Verification" data-component="components/page-5.html"></div>
-      <div class="deck-page" id="page-6" role="region" aria-label="Page 6: Client Support &amp; Discovery Portal" data-component="components/page-6.html"></div>
-    </div>
-  </main>
-
-  <div id="slot-bottom-dock" data-component="components/bottom-dock.html"></div>
-
-  <script src="js/fallback-snapshot.js"></script>
-  <script src="js/component-loader.js" defer></script>
-  <script src="js/deck.js" defer></script>
-  <script src="js/catalog-loader.js" defer></script>
-  <script src="js/analytics.js" defer></script>
-  <script src="js/client-hints.js" defer></script>
-</body>
-</html> 
-   
+    <body>
+        <a href="#main-content" class="skip-link">Skip to main content</a>
+        <div id="cookie-consent-banner" data-component="components/cookie-banner.html" role="region" aria-label="Cookie and analytics consent" hidden></div>
+        <nav class="top-nav" data-component="components/top-nav.html" aria-label="Primary"></nav>
+        <main class="container" id="main-content" tabindex="-1">
+            <div class="deck-stage">
+                <header class="hero" data-component="components/hero.html"></header>
+                <div class="deck-nav-panel" data-component="components/deck-nav.html"></div>
+                <div class="deck-page active-page" id="page-1" data-component="components/page-1.html" role="tabpanel" aria-labelledby="tab-1" data-page-num="1"></div>
+                <div class="deck-page" id="page-2" data-component="components/page-2.html" role="tabpanel" aria-labelledby="tab-2" data-page-num="2"></div>
+                <div class="deck-page" id="page-3" data-component="components/page-3.html" role="tabpanel" aria-labelledby="tab-3" data-page-num="3"></div>
+                <div class="deck-page" id="page-4" data-component="components/page-4.html" role="tabpanel" aria-labelledby="tab-4" data-page-num="4"></div>
+                <div class="deck-page" id="page-5" data-component="components/page-5.html" role="tabpanel" aria-labelledby="tab-5" data-page-num="5"></div>
+                <div class="deck-page" id="page-6" data-component="components/page-6.html" role="tabpanel" aria-labelledby="tab-6" data-page-num="6"></div>
+            </div>
+            <div class="bottom-dock-wrap" data-component="components/bottom-dock.html"></div>
+        </main>
+    </body>
+</html>
