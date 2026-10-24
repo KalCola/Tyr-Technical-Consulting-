@@ -1,0 +1,28 @@
+{
+  "page": 5,
+  "cardIndex": 0,
+  "realm": "svartalfheim",
+  "runePill": "ᚠ SVARTALFHEIM • FEHU",
+  "meaning": "Treasury Audit • Done-For-You Statement Review",
+  "title": "Expense & Subscription Optimizer",
+  "price": "$85–$115",
+  "priceSub": "Per Month",
+  "attrs": [
+    [
+      "Personal / Biz",
+      "$85 / $115 Mo"
+    ],
+    [
+      "Raw Statements",
+      "Purged (0-Day)"
+    ],
+    [
+      "Retained File",
+      "Ledger + Report"
+    ]
+  ],
+  "badge": "Deliverable: Monthly Savings & Cut Report",
+  "specTag": "NAICS 541611 • 0 Raw Data Kept",
+  "sku": "SUB-FIN-04",
+  "themeClass": "theme-svartalfheim"
+}

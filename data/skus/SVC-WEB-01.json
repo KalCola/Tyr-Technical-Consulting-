@@ -1,0 +1,28 @@
+{
+  "page": 1,
+  "cardIndex": 0,
+  "realm": "midgard",
+  "runePill": "ᛗ MIDGARD",
+  "meaning": "Realm of Visible Presence • Your Public Front Door",
+  "title": "Custom Websites & Portfolios",
+  "price": "$245",
+  "priceSub": "One-Time Build",
+  "attrs": [
+    [
+      "Norse Realm",
+      "ᛗ Midgard"
+    ],
+    [
+      "Hosting Fee",
+      "$0 / Month"
+    ],
+    [
+      "Turnaround",
+      "24–48 Hours"
+    ]
+  ],
+  "badge": "Deliverable: Live Site + Master Code",
+  "specTag": "HTML5 • QR • Lead Sheet",
+  "sku": "SVC-WEB-01",
+  "themeClass": "theme-midgard"
+}

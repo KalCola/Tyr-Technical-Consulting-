@@ -1,0 +1,28 @@
+{
+  "page": 5,
+  "cardIndex": 1,
+  "realm": "jotunheim",
+  "runePill": "ᚦ JOTUNHEIM • THURISAZ",
+  "meaning": "Giant-Slayer Watch • Stop Creeping Vendor Rates",
+  "title": "Utility & Vendor Bill Watchdog",
+  "price": "$75–$105",
+  "priceSub": "Per Month",
+  "attrs": [
+    [
+      "Personal / Biz",
+      "$75 / $105 Mo"
+    ],
+    [
+      "Source Bills",
+      "Purged (0-Day)"
+    ],
+    [
+      "Retained File",
+      "Ledger + Report"
+    ]
+  ],
+  "badge": "Deliverable: Rate-Defense Report + Scripts",
+  "specTag": "NAICS 541611 • Ephemeral Audit",
+  "sku": "SUB-BIL-05",
+  "themeClass": "theme-jotunheim"
+}
