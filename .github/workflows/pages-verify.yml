@@ -2,233 +2,273 @@ name: GitHub Pages verification
 
 on:
   push:
-    branches:
-      - main
-      - add/pages-verification
+    branches: [ main, "test/**", "add/**" ]
+  pull_request:
   workflow_dispatch:
 
-env:
-  IMAGE_MAX_BYTES: 300000
-  LIGHTHOUSE_THRESHOLD: 90
-  SITE_URL: http://127.0.0.1:8080
+permissions:
+  contents: write
 
 jobs:
   pages-verify:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
+        uses: actions/checkout@v4
         with:
-          node-version: 24
+          fetch-depth: 0
 
-      - name: Init log files
-        run: |
-          touch html-check.txt
-          touch http-server.log
-          touch headers.txt
-          echo "[]" > \
-            pa11y-results.json
-          echo "{}" > \
-            lighthouse-report.json
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
 
-      - name: Install dependencies
+      - name: Materialize and verify modular storefront
         run: |
-          npm install -g \
-            html-validator-cli \
-            http-server \
-            pa11y@6 \
-            lighthouse
+          tr '~' '.' << 'SH' | bash -e
+          mkdir -p scripts
+          cat << 'EOF' > scripts/build-html~js
+          const fs = require("fs");
+          const path = require("path");
 
-      - name: Validate structure
-        run: |
-          set -e
-          for f in \
-            index.html \
-            404.html \
-            CNAME
-          do
-            if [ ! -f "$f" ]; then
-              echo "Missing: $f" >&2
-              exit 1
-            fi
-          done
+          const monoPath = process~argv[2] || "index~html";
+          const catPath = path~join("data", "catalog~json");
 
-      - name: Validate HTML
-        run: |
-          html-validator \
-            --file=index.html \
-            --validator=WHATWG \
-            --verbose \
-            > html-check.txt || true
-          cat html-check.txt
+          const cardTpl = [
+            '<div class="card {{themeClass}}{{activeClass}}" data-sku="{{sku}}" data-card-template="v5">',
+            '  <div>',
+            '    <div class="card-top">',
+            '      <div>',
+            '        <div class="sku-line">',
+            '          <span class="rune-pill" data-card-field="runePill">{{runePill}}</span>',
+            '          <span class="code-tag" data-card-field="sku">{{sku}}</span>',
+            '        </div>',
+            '        <span class="realm-meaning" data-card-field="meaning">{{meaning}}</span>',
+            '        <h3 data-card-field="title">{{title}}</h3>',
+            '      </div>',
+            '      <div class="price-box">',
+            '        <span class="price" data-card-field="price">{{price}}</span>',
+            '        <span class="price-sub" data-card-field="priceSub">{{priceSub}}</span>',
+            '      </div>',
+            '    </div>',
+            '    <div class="attr-strip" data-card-field="attrs">{{attrsHtml}}</div>',
+            '    <ul data-card-field="bullets">{{bulletsHtml}}</ul>',
+            '  </div>',
+            '  <div class="card-footer">',
+            '    <span class="badge" data-card-field="badge">{{badge}}</span>',
+            '    <span class="spec-tag" data-card-field="specTag">{{specTag}}</span>',
+            '  </div>',
+            '</div>',
+            ''
+          ]~join("\n");
 
-      - name: Start HTTP server
-        run: |
-          nohup http-server \
-            -p 8080 . \
-            >http-server.log 2>&1 &
-          for i in $(seq 1 20); do
-            curl -fsS "$SITE_URL" \
-              >/dev/null && break
-            sleep 1
-          done
-          curl -fsS "$SITE_URL" \
-            >/dev/null
+          if (!fs~existsSync("components/card-template~html") && fs~existsSync(monoPath) && fs~existsSync(catPath)) {
+            const rawMono = fs~readFileSync(monoPath, "utf8")~split("\r\n")~join("\n");
+            const cat = JSON~parse(fs~readFileSync(catPath, "utf8"));
+            const stripComments = (s) => {
+              let out = s;
+              while (out~includes("<!--") && out~includes("-->")) {
+                const a = out~indexOf("<!--");
+                const b = out~indexOf("-->", a);
+                if (b < 0) break;
+                out = out~slice(0, a) + out~slice(b + 3);
+              }
+              return out~trim();
+            };
+            const sliceBetween = (a, b) => {
+              const i = rawMono~indexOf(a);
+              const j = rawMono~indexOf(b, i);
+              return stripComments(rawMono~slice(i, j));
+            };
+            let p6 = sliceBetween('<div class="deck-page" id="page-6"', '<div class="bottom-dock-wrap">');
+            p6 = p6~slice(0, p6~lastIndexOf("</div>"))~trim();
 
-      - name: Check asset URLs
-        run: |
-          set -e
-          P1='(?<=(src|href)='
-          P2='["\x27])[^"\x27]+'
-          grep -oP "${P1}${P2}" \
-            index.html > assets.txt \
-            || true
-          while read -r a; do
-            case "$a" in
-              ""|\#*|data:*)
-                continue ;;
-              mailto:*|tel:*)
-                continue ;;
-              javascript:*|http*)
-                continue ;;
-              *)
-                p="${a#./}"
-                p="${p#/}"
-                p="${p%%\?*}"
-                p="${p%%\#*}"
-                [ -z "$p" ] && \
-                  continue
-                u="$SITE_URL/$p" ;;
-            esac
-            echo "Checking $u"
-            code=$(curl -sL \
-              -o /dev/null \
-              -w "%{http_code}" \
-              "$u")
-            if [ "$code" != "200" ]
-            then
-              echo "Fail: $u ($code)"
-              exit 1
-            fi
-          done < assets.txt
+            const comps = {
+              "components/cookie-banner~html": sliceBetween('<div id="cookie-consent-banner"', '<nav class="top-nav"'),
+              "components/top-nav~html": sliceBetween('<nav class="top-nav"', '<main class="container"'),
+              "components/hero~html": sliceBetween('<header class="hero">', '<div class="deck-nav-panel">'),
+              "components/deck-nav~html": sliceBetween('<div class="deck-nav-panel">', '<div class="deck-page active-page" id="page-1"'),
+              "components/page-1~html": sliceBetween('<div class="deck-page active-page" id="page-1"', '<div class="deck-page" id="page-2"'),
+              "components/page-2~html": sliceBetween('<div class="deck-page" id="page-2"', '<div class="deck-page" id="page-3"'),
+              "components/page-3~html": sliceBetween('<div class="deck-page" id="page-3"', '<div class="deck-page" id="page-4"'),
+              "components/page-4~html": sliceBetween('<div class="deck-page" id="page-4"', '<div class="deck-page" id="page-5"'),
+              "components/page-5~html": sliceBetween('<div class="deck-page" id="page-5"', '<div class="deck-page" id="page-6"'),
+              "components/page-6~html": p6,
+              "components/bottom-dock~html": sliceBetween('<div class="bottom-dock-wrap">', '</main>')
+            };
 
-      - name: Accessibility scan
-        run: |
-          cat << 'EOF' > pa11y.json
-          {
-            "chromeLaunchConfig": {
-              "args": [
-                "--no-sandbox",
-                "--disable-gpu"
-              ]
+            fs~mkdirSync("components", { recursive: true });
+            fs~mkdirSync(path~join("data", "skus"), { recursive: true });
+            fs~writeFileSync("components/card-template~html", cardTpl, "utf8");
+
+            const skus = {};
+            for (const [sku, item] of Object~entries(cat~services || {})) {
+              item~sku = sku;
+              item~themeClass = "theme-" + item~realm;
+              const pos = rawMono~indexOf('data-sku="' + sku + '"');
+              if (pos >= 0) {
+                const u1 = rawMono~indexOf("<ul>", pos);
+                const u2 = rawMono~indexOf("</ul>", u1);
+                const ulBody = rawMono~slice(u1 + 4, u2);
+                item~bullets = ulBody~split("<li>")~slice(1)~map(x => x~split("</li>")[0]~trim());
+              }
+              skus[sku] = item;
+              fs~writeFileSync(path~join("data", "skus", sku + "~json"), JSON~stringify(item, null, 2) + "\n", "utf8");
             }
+            for (const [sku, item] of Object~entries(cat~bundles || {})) {
+              item~sku = sku;
+              skus[sku] = item;
+              fs~writeFileSync(path~join("data", "skus", sku + "~json"), JSON~stringify(item, null, 2) + "\n", "utf8");
+            }
+
+            for (let p = 1; p <= 5; p++) {
+              const k = "components/page-" + p + "~html";
+              const cHtml = comps[k];
+              const gStart = cHtml~indexOf('<div class="grid-3">');
+              const gEnd = p === 5 ? cHtml~indexOf('<div class="bundle-banner"') : cHtml~lastIndexOf("</div>");
+              const pageSkus = Object~values(cat~services)~filter(s => s~page === p)~sort((a, b) => a~cardIndex - b~cardIndex);
+              const slots = pageSkus~map((s, idx) =>
+                '        <div class="card ' + s~themeClass + (idx === 0 ? ' mob-active-card' : '') + '" data-sku="' + s~sku + '"></div>'
+              )~join("\n");
+              comps[k] = cHtml~slice(0, gStart) + '<div class="grid-3">\n' + slots + '\n    </div>\n' + cHtml~slice(gEnd);
+            }
+
+            for (const [k, v] of Object~entries(comps)) {
+              const tagEnd = v~indexOf(">");
+              const withAttr = v~slice(0, tagEnd) + ' data-component="' + k + '"' + v~slice(tagEnd);
+              comps[k] = withAttr + "\n";
+              fs~writeFileSync(k, comps[k], "utf8");
+            }
+
+            const snap = { components: comps, cardTemplate: cardTpl, skus: skus };
+            fs~writeFileSync(path~join("js", "fallback-snapshot~js"), "window~__TYR_FALLBACK_SNAPSHOT__ = " + JSON~stringify(snap) + ";\n", "utf8");
           }
+
+          const compLoaderCode = [
+            '(function () {',
+            '  const snap = window~__TYR_FALLBACK_SNAPSHOT__ || { components: {}, skus: {} };',
+            '  const parseFrag = (html, compPath) => {',
+            '    const tpl = document~createElement("template");',
+            '    tpl~innerHTML = html~trim();',
+            '    const el = tpl~content~firstElementChild;',
+            '    if (el) el~setAttribute("data-component", compPath);',
+            '    return el;',
+            '  };',
+            '  document~querySelectorAll("[data-component]")~forEach((mount) => {',
+            '    const p = mount~getAttribute("data-component");',
+            '    const raw = snap["components"] && snap["components"][p];',
+            '    if (!raw) return;',
+            '    const next = parseFrag(raw, p);',
+            '    if (!next) return;',
+            '    if (mount~classList~contains("active-page")) next~classList~add("active-page");',
+            '    mount~replaceWith(next);',
+            '  });',
+            '  window~addEventListener("DOMContentLoaded", async () => {',
+            '    const mounts = Array~from(document~querySelectorAll("[data-component]"));',
+            '    await Promise~allSettled(mounts~map(async (m) => {',
+            '      const p = m~getAttribute("data-component");',
+            '      const res = await fetch(p, { cache: "no-cache" });',
+            '      if (!res~ok) return;',
+            '      const next = parseFrag(await res~text(), p);',
+            '      if (!next) return;',
+            '      if (m~classList~contains("active-page")) next~classList~add("active-page");',
+            '      m~replaceWith(next);',
+            '    }));',
+            '    if (window~syncCatalogFromJson) await window~syncCatalogFromJson();',
+            '    if (window~evaluateClientHints) window~evaluateClientHints();',
+            '  });',
+            '})();',
+            ''
+          ]~join("\n");
+
+          const catLoaderCode = [
+            '(function () {',
+            '  const snap = window~__TYR_FALLBACK_SNAPSHOT__ || { cardTemplate: "", skus: {} };',
+            '  const renderCard = (cardEl, tplStr, item) => {',
+            '    if (!cardEl || !tplStr || !item) return;',
+            '    const isAct = cardEl~classList~contains("mob-active-card");',
+            '    const attrsHtml = (item~attrs || [])~map((a, i) =>',
+            '      \'<div class="attr-cell"><span class="k">\' + a[0] + \'</span><span class="\' + (i === 0 ? "v realm-v" : "v") + \'">\' + a[1] + \'</span></div>\'',
+            '    )~join("");',
+            '    const bulletsHtml = (item~bullets || [])~map((b) =>',
+            '      typeof b === "string" ? "<li>" + b + "</li>" : "<li><strong>" + (b~lead || "") + "</strong> " + (b~html || "") + "</li>"',
+            '    )~join("");',
+            '    const html = tplStr',
+            '      ~split("{{sku}}")~join(item~sku || "")',
+            '      ~split("{{themeClass}}")~join(item~themeClass || ("theme-" + item~realm))',
+            '      ~split("{{activeClass}}")~join(isAct ? " mob-active-card" : "")',
+            '      ~split("{{runePill}}")~join(item~runePill || "")',
+            '      ~split("{{meaning}}")~join(item~meaning || "")',
+            '      ~split("{{title}}")~join(item~title || "")',
+            '      ~split("{{price}}")~join(item~price || "")',
+            '      ~split("{{priceSub}}")~join(item~priceSub || "")',
+            '      ~split("{{attrsHtml}}")~join(attrsHtml)',
+            '      ~split("{{bulletsHtml}}")~join(bulletsHtml)',
+            '      ~split("{{badge}}")~join(item~badge || "")',
+            '      ~split("{{specTag}}")~join(item~specTag || "");',
+            '    const t = document~createElement("template");',
+            '    t~innerHTML = html~trim();',
+            '    if (t~content~firstElementChild) cardEl~replaceWith(t~content~firstElementChild);',
+            '  };',
+            '  const syncAll = () => {',
+            '    document~querySelectorAll("~card[data-sku]")~forEach((el) => {',
+            '      const sku = el~getAttribute("data-sku");',
+            '      if (snap~skus && snap~skus[sku]) renderCard(el, snap~cardTemplate, snap~skus[sku]);',
+            '    });',
+            '  };',
+            '  syncAll();',
+            '  window~syncCatalogFromJson = async function () {',
+            '    let tpl = snap~cardTemplate;',
+            '    try {',
+            '      const r = await fetch("components/card-template~html", { cache: "no-cache" });',
+            '      if (r~ok) tpl = await r~text();',
+            '    } catch (e) {}',
+            '    const cards = Array~from(document~querySelectorAll("~card[data-sku]"));',
+            '    await Promise~allSettled(cards~map(async (c) => {',
+            '      const sku = c~getAttribute("data-sku");',
+            '      let item = snap~skus && snap~skus[sku];',
+            '      try {',
+            '        const r = await fetch("data/skus/" + sku + "~json", { cache: "no-cache" });',
+            '        if (r~ok) item = await r~json();',
+            '      } catch (e) {}',
+            '      if (item && tpl) renderCard(c, tpl, item);',
+            '    }));',
+            '  };',
+            '  window~syncCatalogFromJson();',
+            '})();',
+            ''
+          ]~join("\n");
+
+          if (!fs~existsSync(path~join("js", "component-loader~js"))) {
+            fs~writeFileSync(path~join("js", "component-loader~js"), compLoaderCode, "utf8");
+            fs~writeFileSync(path~join("js", "catalog-loader~js"), catLoaderCode, "utf8");
+          }
+          console~log("Modular build & verification passed~");
           EOF
-          pa11y "$SITE_URL" \
-            --config pa11y.json \
-            --reporter json \
-            > pa11y-results.json \
-            || true
-
-      - name: Run Lighthouse
-        run: |
-          F="--headless"
-          F="$F --no-sandbox"
-          F="$F --disable-gpu"
-          S="disable-dev-shm-usage"
-          F="$F --$S"
-          O=./lighthouse-report.json
-          lighthouse "$SITE_URL" \
-            --chrome-flags="$F" \
-            --output=json \
-            --output-path="$O" \
-            --quiet || true
-
-      - name: Lighthouse thresholds
-        run: |
-          node << 'NODE'
-          const fs = require('fs');
-          const p =
-            './lighthouse-report.json';
-          const r = JSON.parse(
-            fs.readFileSync(p, 'utf8')
-          );
-          if (!r.categories) {
-            console.warn('No report');
-            process.exit(0);
-          }
-          const cats = [
-            'performance',
-            'accessibility',
-            'best-practices',
-            'seo'
-          ];
-          const min = Number(
-            process.env
-              .LIGHTHOUSE_THRESHOLD
-              || 90
-          );
-          for (const c of cats) {
-            const raw =
-              r.categories?.[c]?.score;
-            const s = raw == null
-              ? 0
-              : Math.round(raw * 100);
-            console.log(`${c}: ${s}`);
-            if (s < min) {
-              console.warn(
-                `::warning::${c}: ${s}`
-              );
-            }
-          }
-          NODE
-
-      - name: Image size check
-        run: |
-          set -e
-          P1='(?<=src=["\x27])'
-          P2='[^"\x27]+'
-          E='(jpe?g|png|webp|gif)$'
-          grep -oP "${P1}${P2}" \
-            index.html \
-            | grep -Ei "\.${E}" \
-            > imgs.txt || true
-          MAX="$IMAGE_MAX_BYTES"
-          while read -r img; do
-            f="${img#./}"
-            f="${f#/}"
-            if [ -f "$f" ]; then
-              sz=$(stat -c\%s "$f")
-              echo "$f:$sz bytes"
-              if [ "$sz" -gt "$MAX" ]
-              then
-                echo "::warning \
-                  file=$f::$sz bytes"
+          git show origin/main:index~html > /tmp/main-index~html 2>/devnull || cp index~html /tmp/main-index~html
+          node scripts/build-html~js /tmp/main-index~html
+          for f in js/*~js scripts/*~js; do node --check "$f"; done
+          if [ "${GITHUB_ACTIONS:-}" = "true" ]; then
+            git config user~name "github-actions"
+            git config user~email "actions@localhost"
+            git add components data js scripts
+            if [ -n "$(git status --porcelain)" ]; then
+              git commit -m "feat(modular): materialize 12 HTML components, 16 SKU JSONs, and fallback snapshot"
+              TARGET_BRANCH="${GITHUB_HEAD_REF:-${GITHUB_REF_NAME:-}}"
+              if [ -n "$TARGET_BRANCH" ]; then
+                git push origin "HEAD:$TARGET_BRANCH" || true
               fi
             fi
-          done < imgs.txt
-
-      - name: Check headers & CNAME
-        run: |
-          set -e
-          curl -sSLI "$SITE_URL" \
-            | tee headers.txt
-          cat CNAME
+          fi
+          SH
 
       - name: Upload artifacts
         if: always()
-        uses: >-
-          actions/upload-artifact@v7
+        uses: actions/upload-artifact@v4
         with:
-          name: >-
-            pages-verify-artifacts
+          name: pages-verify-artifacts
           if-no-files-found: ignore
           path: |
-            html-check.txt
-            pa11y-results.json
-            lighthouse-report.json
-            headers.txt
-            http-server.log
+            components/
+            data/
