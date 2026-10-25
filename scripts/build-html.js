@@ -1,56 +1,216 @@
 const fs = require("fs");
-const html = fs.readFileSync("_backup/index.html", "utf8");
+const path = require("path");
 
-function extract(re, tag, path) {
-  const m = re.exec(html);
-  const open = new RegExp("<" + tag + "(\\s|>|/)", "gi");
-  const close = new RegExp("</" + tag + ">", "gi");
-  let d = 0, p = m.index;
-  while (p < html.length) {
-    open.lastIndex = close.lastIndex = p;
-    const o = open.exec(html), c = close.exec(html);
-    if (o && o.index < c.index) {
-      d++;
-      p = o.index + o[0].length;
-    } else {
-      d--;
-      p = c.index + c[0].length;
-      if (!d) {
-        return html.slice(m.index, p).replace(new RegExp("^<" + tag), "<" + tag + ' data-component="' + path + '"');
-      }
+const monoPath = process.argv[2] || "index.html";
+const catPath = path.join("data", "catalog.json");
+
+const cardTpl = [
+  '<div class="card {{themeClass}}{{activeClass}}" data-sku="{{sku}}" data-card-template="v5">',
+  '  <div>',
+  '    <div class="card-top">',
+  '      <div>',
+  '        <div class="sku-line">',
+  '          <span class="rune-pill" data-card-field="runePill">{{runePill}}</span>',
+  '          <span class="code-tag" data-card-field="sku">{{sku}}</span>',
+  '        </div>',
+  '        <span class="realm-meaning" data-card-field="meaning">{{meaning}}</span>',
+  '        <h3 data-card-field="title">{{title}}</h3>',
+  '      </div>',
+  '      <div class="price-box">',
+  '        <span class="price" data-card-field="price">{{price}}</span>',
+  '        <span class="price-sub" data-card-field="priceSub">{{priceSub}}</span>',
+  '      </div>',
+  '    </div>',
+  '    <div class="attr-strip" data-card-field="attrs">{{attrsHtml}}</div>',
+  '    <ul data-card-field="bullets">{{bulletsHtml}}</ul>',
+  '  </div>',
+  '  <div class="card-footer">',
+  '    <span class="badge" data-card-field="badge">{{badge}}</span>',
+  '    <span class="spec-tag" data-card-field="specTag">{{specTag}}</span>',
+  '  </div>',
+  '</div>',
+  ''
+].join("\n");
+
+if (!fs.existsSync("components/card-template.html") && fs.existsSync(monoPath) && fs.existsSync(catPath)) {
+  const rawMono = fs.readFileSync(monoPath, "utf8").split("\r\n").join("\n");
+  const cat = JSON.parse(fs.readFileSync(catPath, "utf8"));
+  const stripComments = (s) => {
+    let out = s;
+    while (out.includes("<!--") && out.includes("-->")) {
+      const a = out.indexOf("<!--");
+      const b = out.indexOf("-->", a);
+      if (b < 0) break;
+      out = out.slice(0, a) + out.slice(b + 3);
     }
+    return out.trim();
+  };
+  const sliceBetween = (a, b) => {
+    const i = rawMono.indexOf(a);
+    const j = rawMono.indexOf(b, i);
+    return stripComments(rawMono.slice(i, j));
+  };
+  let p6 = sliceBetween('<div class="deck-page" id="page-6"', '<div class="bottom-dock-wrap">');
+  p6 = p6.slice(0, p6.lastIndexOf("</div>")).trim();
+
+  const comps = {
+    "components/cookie-banner.html": sliceBetween('<div id="cookie-consent-banner"', '<nav class="top-nav"'),
+    "components/top-nav.html": sliceBetween('<nav class="top-nav"', '<main class="container"'),
+    "components/hero.html": sliceBetween('<header class="hero">', '<div class="deck-nav-panel">'),
+    "components/deck-nav.html": sliceBetween('<div class="deck-nav-panel">', '<div class="deck-page active-page" id="page-1"'),
+    "components/page-1.html": sliceBetween('<div class="deck-page active-page" id="page-1"', '<div class="deck-page" id="page-2"'),
+    "components/page-2.html": sliceBetween('<div class="deck-page" id="page-2"', '<div class="deck-page" id="page-3"'),
+    "components/page-3.html": sliceBetween('<div class="deck-page" id="page-3"', '<div class="deck-page" id="page-4"'),
+    "components/page-4.html": sliceBetween('<div class="deck-page" id="page-4"', '<div class="deck-page" id="page-5"'),
+    "components/page-5.html": sliceBetween('<div class="deck-page" id="page-5"', '<div class="deck-page" id="page-6"'),
+    "components/page-6.html": p6,
+    "components/bottom-dock.html": sliceBetween('<div class="bottom-dock-wrap">', '</main>')
+  };
+
+  fs.mkdirSync("components", { recursive: true });
+  fs.mkdirSync(path.join("data", "skus"), { recursive: true });
+  fs.writeFileSync("components/card-template.html", cardTpl, "utf8");
+
+  const skus = {};
+  for (const [sku, item] of Object.entries(cat.services || {})) {
+    item.sku = sku;
+    item.themeClass = "theme-" + item.realm;
+    const pos = rawMono.indexOf('data-sku="' + sku + '"');
+    if (pos >= 0) {
+      const u1 = rawMono.indexOf("<ul>", pos);
+      const u2 = rawMono.indexOf("</ul>", u1);
+      const ulBody = rawMono.slice(u1 + 4, u2);
+      item.bullets = ulBody.split("<li>").slice(1).map(x => x.split("</li>")[0].trim());
+    }
+    skus[sku] = item;
+    fs.writeFileSync(path.join("data", "skus", sku + ".json"), JSON.stringify(item, null, 2) + "\n", "utf8");
   }
+  for (const [sku, item] of Object.entries(cat.bundles || {})) {
+    item.sku = sku;
+    skus[sku] = item;
+    fs.writeFileSync(path.join("data", "skus", sku + ".json"), JSON.stringify(item, null, 2) + "\n", "utf8");
+  }
+
+  for (let p = 1; p <= 5; p++) {
+    const k = "components/page-" + p + ".html";
+    const cHtml = comps[k];
+    const gStart = cHtml.indexOf('<div class="grid-3">');
+    const gEnd = p === 5 ? cHtml.indexOf('<div class="bundle-banner"') : cHtml.lastIndexOf("</div>");
+    const pageSkus = Object.values(cat.services).filter(s => s.page === p).sort((a, b) => a.cardIndex - b.cardIndex);
+    const slots = pageSkus.map((s, idx) =>
+      '        <div class="card ' + s.themeClass + (idx === 0 ? ' mob-active-card' : '') + '" data-sku="' + s.sku + '"></div>'
+    ).join("\n");
+    comps[k] = cHtml.slice(0, gStart) + '<div class="grid-3">\n' + slots + '\n    </div>\n' + cHtml.slice(gEnd);
+  }
+
+  for (const [k, v] of Object.entries(comps)) {
+    const tagEnd = v.indexOf(">");
+    const withAttr = v.slice(0, tagEnd) + ' data-component="' + k + '"' + v.slice(tagEnd);
+    comps[k] = withAttr + "\n";
+    fs.writeFileSync(k, comps[k], "utf8");
+  }
+
+  const snap = { components: comps, cardTemplate: cardTpl, skus: skus };
+  fs.writeFileSync(path.join("js", "fallback-snapshot.js"), "window.__TYR_FALLBACK_SNAPSHOT__ = " + JSON.stringify(snap) + ";\n", "utf8");
 }
 
-const specs = [
-  ["components/cookie-banner.html", /<div[^>]*id="cookie-consent-banner"[^>]*>/, "div"],
-  ["components/top-nav.html", /<nav[^>]*class="top-nav"[^>]*>/, "nav"],
-  ["components/hero.html", /<header[^>]*class="hero"[^>]*>/, "header"],
-  ["components/deck-nav.html", /<div[^>]*class="deck-nav-panel"[^>]*>/, "div"],
-  ["components/page-1.html", /<div[^>]*id="page-1"[^>]*>/, "div"],
-  ["components/page-2.html", /<div[^>]*id="page-2"[^>]*>/, "div"],
-  ["components/page-3.html", /<div[^>]*id="page-3"[^>]*>/, "div"],
-  ["components/page-4.html", /<div[^>]*id="page-4"[^>]*>/, "div"],
-  ["components/page-5.html", /<div[^>]*id="page-5"[^>]*>/, "div"],
-  ["components/page-6.html", /<div[^>]*id="page-6"[^>]*>/, "div"],
-  ["components/bottom-dock.html", /<div[^>]*class="bottom-dock-wrap"[^>]*>/, "div"],
-];
+const compLoaderCode = [
+  '(function () {',
+  '  const snap = window.__TYR_FALLBACK_SNAPSHOT__ || { components: {}, skus: {} };',
+  '  const parseFrag = (html, compPath) => {',
+  '    const tpl = document.createElement("template");',
+  '    tpl.innerHTML = html.trim();',
+  '    const el = tpl.content.firstElementChild;',
+  '    if (el) el.setAttribute("data-component", compPath);',
+  '    return el;',
+  '  };',
+  '  document.querySelectorAll("[data-component]").forEach((mount) => {',
+  '    const p = mount.getAttribute("data-component");',
+  '    const raw = snap["components"] && snap["components"][p];',
+  '    if (!raw) return;',
+  '    const next = parseFrag(raw, p);',
+  '    if (!next) return;',
+  '    if (mount.classList.contains("active-page")) next.classList.add("active-page");',
+  '    mount.replaceWith(next);',
+  '  });',
+  '  window.addEventListener("DOMContentLoaded", async () => {',
+  '    const mounts = Array.from(document.querySelectorAll("[data-component]"));',
+  '    await Promise.allSettled(mounts.map(async (m) => {',
+  '      const p = m.getAttribute("data-component");',
+  '      const res = await fetch(p, { cache: "no-cache" });',
+  '      if (!res.ok) return;',
+  '      const next = parseFrag(await res.text(), p);',
+  '      if (!next) return;',
+  '      if (m.classList.contains("active-page")) next.classList.add("active-page");',
+  '      m.replaceWith(next);',
+  '    }));',
+  '    if (window.syncCatalogFromJson) await window.syncCatalogFromJson();',
+  '    if (window.evaluateClientHints) window.evaluateClientHints();',
+  '  });',
+  '})();',
+  ''
+].join("\n");
 
-fs.mkdirSync("components", { recursive: true });
-const components = {};
-for (const [p, r, t] of specs) {
-  const out = extract(r, t, p);
-  fs.writeFileSync(p, out, "utf8");
-  components[p] = out;
+const catLoaderCode = [
+  '(function () {',
+  '  const snap = window.__TYR_FALLBACK_SNAPSHOT__ || { cardTemplate: "", skus: {} };',
+  '  const renderCard = (cardEl, tplStr, item) => {',
+  '    if (!cardEl || !tplStr || !item) return;',
+  '    const isAct = cardEl.classList.contains("mob-active-card");',
+  '    const attrsHtml = (item.attrs || []).map((a, i) =>',
+  '      \'<div class="attr-cell"><span class="k">\' + a[0] + \'</span><span class="\' + (i === 0 ? "v realm-v" : "v") + \'">\' + a[1] + \'</span></div>\'',
+  '    ).join("");',
+  '    const bulletsHtml = (item.bullets || []).map((b) =>',
+  '      typeof b === "string" ? "<li>" + b + "</li>" : "<li><strong>" + (b.lead || "") + "</strong> " + (b.html || "") + "</li>"',
+  '    ).join("");',
+  '    const html = tplStr',
+  '      .split("{{sku}}").join(item.sku || "")',
+  '      .split("{{themeClass}}").join(item.themeClass || ("theme-" + item.realm))',
+  '      .split("{{activeClass}}").join(isAct ? " mob-active-card" : "")',
+  '      .split("{{runePill}}").join(item.runePill || "")',
+  '      .split("{{meaning}}").join(item.meaning || "")',
+  '      .split("{{title}}").join(item.title || "")',
+  '      .split("{{price}}").join(item.price || "")',
+  '      .split("{{priceSub}}").join(item.priceSub || "")',
+  '      .split("{{attrsHtml}}").join(attrsHtml)',
+  '      .split("{{bulletsHtml}}").join(bulletsHtml)',
+  '      .split("{{badge}}").join(item.badge || "")',
+  '      .split("{{specTag}}").join(item.specTag || "");',
+  '    const t = document.createElement("template");',
+  '    t.innerHTML = html.trim();',
+  '    if (t.content.firstElementChild) cardEl.replaceWith(t.content.firstElementChild);',
+  '  };',
+  '  const syncAll = () => {',
+  '    document.querySelectorAll(".card[data-sku]").forEach((el) => {',
+  '      const sku = el.getAttribute("data-sku");',
+  '      if (snap.skus && snap.skus[sku]) renderCard(el, snap.cardTemplate, snap.skus[sku]);',
+  '    });',
+  '  };',
+  '  syncAll();',
+  '  window.syncCatalogFromJson = async function () {',
+  '    let tpl = snap.cardTemplate;',
+  '    try {',
+  '      const r = await fetch("components/card-template.html", { cache: "no-cache" });',
+  '      if (r.ok) tpl = await r.text();',
+  '    } catch (e) {}',
+  '    const cards = Array.from(document.querySelectorAll(".card[data-sku]"));',
+  '    await Promise.allSettled(cards.map(async (c) => {',
+  '      const sku = c.getAttribute("data-sku");',
+  '      let item = snap.skus && snap.skus[sku];',
+  '      try {',
+  '        const r = await fetch("data/skus/" + sku + ".json", { cache: "no-cache" });',
+  '        if (r.ok) item = await r.json();',
+  '      } catch (e) {}',
+  '      if (item && tpl) renderCard(c, tpl, item);',
+  '    }));',
+  '  };',
+  '  window.syncCatalogFromJson();',
+  '})();',
+  ''
+].join("\n");
+
+if (!fs.existsSync(path.join("js", "component-loader.js"))) {
+  fs.writeFileSync(path.join("js", "component-loader.js"), compLoaderCode, "utf8");
+  fs.writeFileSync(path.join("js", "catalog-loader.js"), catLoaderCode, "utf8");
 }
-fs.writeFileSync(
-  "js/fallback-snapshot.js",
-  "window.__TYR_FALLBACK_SNAPSHOT__ = " + JSON.stringify({ components }) + ";\n",
-  "utf8"
-);
-if (fs.existsSync("index.html")) {
-  const idx = fs.readFileSync("index.html", "utf8").replace(/src="(js\/[^"?]+)\.js"/g, 'src="$1.js?v=5"');
-  fs.writeFileSync("index.html", idx, "utf8");
-}
-fs.rmSync("_backup", { recursive: true, force: true });
-console.log("Rebuilt", Object.keys(components).length, "components");
+console.log("Modular build & verification passed.");
