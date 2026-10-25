@@ -1,6 +1,183 @@
 # Sample workflow for building and deploying a Jekyll site to GitHub Pages
 name: Deploy Jekyll with GitHub Pages dependencies preinstalled
+name: Deploy Jekyll with GitHub Pages dependencies preinstalled
 
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Synchronize Modular Components, Loaders & Snapshot
+        run: |
+          git fetch origin backup/pre-modularization:refs/remotes/origin/backup/pre-modularization || true
+          node << 'NODE'
+          const fs = require("fs");
+          const { execSync } = require("child_process");
+
+          const monolith = execSync("git show origin/backup/pre-modularization:index.html", { encoding: "utf8" });
+
+          function extractBlock(html, startRegex, tagName, compPath) {
+            const m = startRegex.exec(html);
+            if (!m) throw new Error("Not found: " + compPath);
+            const startIdx = m.index;
+            const openRe = new RegExp(`<${tagName}(\\s|>|/)`, "gi");
+            const closeRe = new RegExp(`</${tagName}>`, "gi");
+            let depth = 0, pos = startIdx;
+            while (pos < html.length) {
+              openRe.lastIndex = pos;
+              closeRe.lastIndex = pos;
+              const om = openRe.exec(html);
+              const cm = closeRe.exec(html);
+              if (!cm) throw new Error("Unclosed: " + compPath);
+              if (om && om.index < cm.index) {
+                depth++;
+                pos = om.index + om[0].length;
+              } else {
+                depth--;
+                pos = cm.index + cm[0].length;
+                if (depth === 0) {
+                  let raw = html.slice(startIdx, pos);
+                  if (!raw.includes(`data-component="${compPath}"`)) {
+                    raw = raw.replace(new RegExp(`^<${tagName}`), `<${tagName} data-component="${compPath}"`);
+                  }
+                  return `<!-- ${compPath} | Isolated HTML Component -->\n` + raw + "\n";
+                }
+              }
+            }
+          }
+
+          const specs = [
+            ["components/cookie-banner.html", /<div[^>]*id="cookie-consent-banner"[^>]*>/, "div"],
+            ["components/top-nav.html", /<nav[^>]*class="top-nav"[^>]*>/, "nav"],
+            ["components/hero.html", /<header[^>]*class="hero"[^>]*>/, "header"],
+            ["components/deck-nav.html", /<div[^>]*class="deck-nav-panel"[^>]*>/, "div"],
+            ["components/page-1.html", /<div[^>]*id="page-1"[^>]*>/, "div"],
+            ["components/page-2.html", /<div[^>]*id="page-2"[^>]*>/, "div"],
+            ["components/page-3.html", /<div[^>]*id="page-3"[^>]*>/, "div"],
+            ["components/page-4.html", /<div[^>]*id="page-4"[^>]*>/, "div"],
+            ["components/page-5.html", /<div[^>]*id="page-5"[^>]*>/, "div"],
+            ["components/page-6.html", /<div[^>]*id="page-6"[^>]*>/, "div"],
+            ["components/bottom-dock.html", /<div[^>]*class="bottom-dock-wrap"[^>]*>/, "div"],
+          ];
+
+          fs.mkdirSync("components", { recursive: true });
+          fs.mkdirSync("data/skus", { recursive: true });
+          fs.mkdirSync("js", { recursive: true });
+
+          const compMap = {};
+          for (const [compPath, re, tag] of specs) {
+            const html = extractBlock(monolith, re, tag, compPath);
+            fs.writeFileSync(compPath, html, "utf8");
+            compMap[compPath] = html;
+          }
+
+          const cardTpl = `<div class="card {{themeClass}}{{activeClass}}" data-sku="{{sku}}" data-card-template="v5">
+            <div>
+              <div class="card-top">
+                <div>
+                  <div class="sku-line">
+                    <span class="rune-pill" data-card-field="runePill">{{runePill}}</span>
+                    <span class="code-tag" data-card-field="sku">{{sku}}</span>
+                  </div>
+                  <span class="realm-meaning" data-card-field="meaning">{{meaning}}</span>
+                  <h3 data-card-field="title">{{title}}</h3>
+                </div>
+                <div class="price-box">
+                  <span class="price" data-card-field="price">{{price}}</span>
+                  <span class="price-sub" data-card-field="priceSub">{{priceSub}}</span>
+                </div>
+              </div>
+              <div class="attr-strip" data-card-field="attrs">{{attrsHtml}}</div>
+              <ul data-card-field="bullets">{{bulletsHtml}}</ul>
+            </div>
+            <div class="card-footer">
+              <span class="badge" data-card-field="badge">{{badge}}</span>
+              <span class="spec-tag" data-card-field="specTag">{{specTag}}</span>
+            </div>
+          </div>\n`;
+          fs.writeFileSync("components/card-template.html", cardTpl, "utf8");
+
+          const skus = {};
+          for (let p = 1; p <= 5; p++) {
+            const html = compMap[`components/page-${p}.html`];
+            const stepBtns = [...html.matchAll(/<button[^>]*class="mob-step-btn[^"]*"[^>]*>([\s\S]*?)<\/button>/g)].map(m => m[1].trim());
+            const cardBlocks = html.split(/(?=<div class="card\s)/).filter(s => s.startsWith('<div class="card '));
+            cardBlocks.forEach((cb, idx) => {
+              const sku = (cb.match(/data-sku="([^"]+)"/) || [])[1];
+              if (!sku) return;
+              const themeClass = (cb.match(/class="card\s+(theme-[a-z]+)/) || [])[1] || "theme-midgard";
+              const realm = themeClass.replace("theme-", "");
+              const runePill = ((cb.match(/class="rune-pill"[^>]*>([\s\S]*?)<\/span>/) || [])[1] || "").trim();
+              const meaning = ((cb.match(/class="realm-meaning"[^>]*>([\s\S]*?)<\/span>/) || [])[1] || "").trim();
+              const title = ((cb.match(/<h3[^>]*>([\s\S]*?)<\/h3>/) || [])[1] || "").trim();
+              const price = ((cb.match(/class="price"[^>]*>([\s\S]*?)<\/span>/) || [])[1] || "").trim();
+              const priceSub = ((cb.match(/class="price-sub"[^>]*>([\s\S]*?)<\/span>/) || [])[1] || "").trim();
+              const badge = ((cb.match(/class="badge"[^>]*>([\s\S]*?)<\/span>/) || [])[1] || "").trim();
+              const specTag = ((cb.match(/class="spec-tag"[^>]*>([\s\S]*?)<\/span>/) || [])[1] || "").trim();
+              const attrs = [...cb.matchAll(/<div class="attr-cell">\s*<span class="k">([\s\S]*?)<\/span>\s*<span class="v[^"]*">([\s\S]*?)<\/span>\s*<\/div>/g)].map(m => [m[1].trim(), m[2].trim()]);
+              const bullets = [...cb.matchAll(/<li>\s*(?:<strong>([\s\S]*?)<\/strong>\s*)?([\s\S]*?)\s*<\/li>/g)].map(m => ({ lead: (m[1] || "").trim(), html: (m[2] || "").trim() }));
+              const obj = { sku, page: p, cardIndex: idx, realm, themeClass, stepperLabel: stepBtns[idx] || "", runePill, meaning, title, price, priceSub, attrs, bullets, badge, specTag };
+              skus[sku] = obj;
+              fs.writeFileSync(`data/skus/${sku}.json`, JSON.stringify(obj, null, 2) + "\n", "utf8");
+            });
+          }
+          const ret07 = {
+            sku: "RET-ALL-07", page: 5, cardIndex: 3, realm: "yggdrasil",
+            runePill: "ᛇ YGGDRASIL NINE-REALMS CONVERGENCE",
+            codeTag: "RET-ALL-07 • ALL-ACCESS STEWARD & OPTIMIZER BUNDLES",
+            title: "Complete Monthly Steward + Expense Optimizer Pass & 3-Realm Launch",
+            stewardPrice: "$165–$215", techOnlyPass: "$135–$165/mo", threeRealmLaunch: "$495 Flat"
+          };
+          skus["RET-ALL-07"] = ret07;
+          fs.writeFileSync("data/skus/RET-ALL-07.json", JSON.stringify(ret07, null, 2) + "\n", "utf8");
+
+          const snapStr = "window.__TYR_FALLBACK_SNAPSHOT__ = " + JSON.stringify({ components: compMap, cardTemplate: cardTpl, skus }, null, 2) + ";\n";
+          fs.writeFileSync("js/fallback-snapshot.js", snapStr, "utf8");
+          NODE
+          git config user.name "KalCola"
+          git config user.email "tyr@tyrprotocol.pro"
+          git add components/ data/skus/ js/fallback-snapshot.js
+          if ! git diff --cached --quiet; then
+            git commit -m "fix: populate full modular HTML components, SKU JSONs, and fallback-snapshot"
+            git push origin HEAD:main
+          fi
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 on:
   # Runs on pushes targeting the default branch
   push:
