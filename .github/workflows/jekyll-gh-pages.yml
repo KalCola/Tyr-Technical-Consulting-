@@ -19,7 +19,7 @@ jobs:
         with:
           ref: backup/pre-modularization
           path: _backup
-      - run: node scripts/build-html.js
+      - run: node scripts/sync.js
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
