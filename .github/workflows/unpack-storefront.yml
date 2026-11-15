@@ -32,7 +32,7 @@ jobs:
           fi
           mkdir -p /tmp/stage
           unzip -oq "$ZIP_FILE" -d /tmp/stage
-          rm -rf /tmp/stage/.aistudio
+          rm -rf /tmp/stage/.aistudio /tmp/stage/.github
           if [ -f /tmp/stage/docs/POLICY_COMPLIANCE_AUDIT.md ]; then
             sed -i 's/91-1144442/91-XXX-X442/g' /tmp/stage/docs/POLICY_COMPLIANCE_AUDIT.md
           fi
