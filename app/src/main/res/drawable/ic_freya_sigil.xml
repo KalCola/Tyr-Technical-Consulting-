@@ -1,0 +1,69 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Deep emerald / amber backdrop -->
+    <path
+        android:fillColor="#0D1512"
+        android:pathData="M50,4 A46,46 0 1,0 50,96 A46,46 0 1,0 50,4 Z" />
+
+    <!-- Outer emerald runic ring -->
+    <path
+        android:strokeColor="#10B981"
+        android:strokeWidth="2.5"
+        android:fillColor="#00000000"
+        android:pathData="M50,8 A42,42 0 1,0 50,92 A42,42 0 1,0 50,8 Z" />
+
+    <!-- Inner amber ring -->
+    <path
+        android:strokeColor="#F59E0B"
+        android:strokeWidth="1"
+        android:fillColor="#00000000"
+        android:pathData="M50,14 A36,36 0 1,0 50,86 A36,36 0 1,0 50,14 Z" />
+
+    <!-- Falcon Wings Arc (Valshamr Cloak) -->
+    <path
+        android:strokeColor="#34D399"
+        android:strokeWidth="1.8"
+        android:fillColor="#00000000"
+        android:pathData="M22,36 C34,22 46,30 50,42 C54,30 66,22 78,36" />
+    <path
+        android:strokeColor="#059669"
+        android:strokeWidth="1.2"
+        android:fillColor="#00000000"
+        android:pathData="M26,44 C36,32 46,38 50,48 C54,38 64,32 74,44" />
+
+    <!-- Brísingamen Golden Fiery Torc -->
+    <path
+        android:strokeColor="#F59E0B"
+        android:strokeWidth="3.2"
+        android:fillColor="#00000000"
+        android:pathData="M30,62 C34,78 66,78 70,62" />
+    <path
+        android:fillColor="#EF4444"
+        android:pathData="M50,73 A3,3 0 1,0 50,79 A3,3 0 1,0 50,73 Z" />
+
+    <!-- Central Fehu Rune (ᚠ) -->
+    <!-- Vertical stem -->
+    <path
+        android:fillColor="#FCD34D"
+        android:pathData="M44,24 L48,24 L48,74 L44,74 Z" />
+    <!-- Upper slanted branch -->
+    <path
+        android:fillColor="#FCD34D"
+        android:pathData="M48,28 L64,18 L66,22 L48,34 Z" />
+    <!-- Lower slanted branch -->
+    <path
+        android:fillColor="#FCD34D"
+        android:pathData="M48,42 L62,33 L64,37 L48,48 Z" />
+
+    <!-- Amber Tears (Golden Drops) -->
+    <path
+        android:fillColor="#F59E0B"
+        android:pathData="M34,70 C34,68 36,66 36,64 C36,66 38,68 38,70 C38,72 36,73 35,73 C34,73 34,72 34,70 Z" />
+    <path
+        android:fillColor="#F59E0B"
+        android:pathData="M62,70 C62,68 64,66 64,64 C64,66 66,68 66,70 C66,72 64,73 63,73 C62,73 62,72 62,70 Z" />
+</vector>

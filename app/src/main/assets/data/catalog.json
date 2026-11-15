@@ -1,0 +1,669 @@
+{
+  "entity": {
+    "legalName": "CALEB TR HOLCOMB d/b/a TYR",
+    "tradeName": "TYR Technical Consulting",
+    "applicationId": "pro.tyrprotocol.storefront",
+    "naics": ["541512", "541611"],
+    "naicsDescriptions": [
+      "541512 — Computer Systems Design Services",
+      "541611 — Administrative & General Management Consulting"
+    ],
+    "einDisplay": "EIN: 42-XXX-X843 (CP 575 G — Full W-9 Issued Upon Executed Engagement)",
+    "geography": "100% Remote Digital Delivery & Northwest Alabama (Lamar County, AL | Marion County, AL | United States)",
+    "phone": "+1-659-257-8043",
+    "phoneDisplay": "(659) 257-8043",
+    "email": "tyr@tyrprotocol.pro",
+    "webUrl": "https://tyrprotocol.pro/",
+    "githubUrl": "https://github.com/kalcola/tyrs-technical-consultation-",
+    "zeroCustodyPolicy": "0 Raw Financial Data Stored — Raw bank/utility statements are purged immediately (0-Day) upon audit completion; only the sanitized flat-grid ledger and savings report are retained.",
+    "statutoryDisclaimer": "Tyr Technical Consulting is an independent technical & administrative consulting practice (NAICS 541512 & 541611), not a law firm, CPA firm, or licensed insurance adjuster, and does not provide legal representation or formal tax/attestation opinions."
+  },
+  "deities": {
+    "tyr": {
+      "name": "Týr (The Law-Giver & Oath-Keeper)",
+      "rune": "ᛏ",
+      "runeName": "Tiwaz",
+      "realm": "Asgard / Midgard",
+      "color": "#dc2626",
+      "symbol": "Sword of Justice & Runic Shield",
+      "domain": "Defensive Cybersecurity, Immutable Records & Covenant SLAs",
+      "lore": "Norse god of cosmic law, justice, honor, and courage. Tyr sacrificed his hand to bind the wolf Fenrir, establishing that sacred oaths and sovereign duty outweigh individual sacrifice. In our practice, Tyr guarantees zero-custody data handling, strict defensive posture, and unwavering client covenants."
+    },
+    "freyja": {
+      "name": "Freyja (The Seidr Sovereign & Gold-Weaver)",
+      "rune": "ᚠ",
+      "runeName": "Fehu",
+      "realm": "Vanaheim / Fólkvangr",
+      "color": "#fbbf24",
+      "symbol": "Brísingamen Necklace & Falcon Cloak",
+      "domain": "Wealth Preservation, Expense Optimization & Sovereign Stewardship",
+      "lore": "Norse goddess of Seiðr craft, golden abundance, life-protection, and high counsel. Freyja governs sovereign wealth preservation, finding hidden leaks in expense streams, recovering lost funds, and weaving clean, resilient digital foundations."
+    }
+  },
+  "realms": [
+    { "index": "01", "name": "Midgard", "rune": "ᛗ", "meaning": "Mortal Realm / Web Foundations", "primary": "#dc2626", "secondary": "#f87171" },
+    { "index": "02", "name": "Asgard", "rune": "ᛉ", "meaning": "Godly Citadel / Email & Domain Shield", "primary": "#d97706", "secondary": "#fbbf24" },
+    { "index": "03", "name": "Vanaheim", "rune": "ᚱ", "meaning": "Nature & Flow / Intake & QR Systems", "primary": "#059669", "secondary": "#34d399" },
+    { "index": "04", "name": "Alfheim", "rune": "ᚨ", "meaning": "Light & Intellect / Career & Bids", "primary": "#0284c7", "secondary": "#38bdf8" },
+    { "index": "05", "name": "Nidavellir", "rune": "ᚷ", "meaning": "Dwarven Forge / Ironclad Contracts", "primary": "#ea580c", "secondary": "#fb923c" },
+    { "index": "06", "name": "Muspelheim", "rune": "ᚲ", "meaning": "Fire & Energy / Buyer Dossiers & Ads", "primary": "#e11d48", "secondary": "#fb7185" },
+    { "index": "07", "name": "Svartalfheim", "rune": "ᚠ", "meaning": "Subterranean Wealth / Ledgers & Audits", "primary": "#9333ea", "secondary": "#c084fc" },
+    { "index": "08", "name": "Niflheim", "rune": "ᛟ", "meaning": "Primordial Mists / Vaults & Privacy Freeze", "primary": "#0d9488", "secondary": "#2dd4bf" },
+    { "index": "09", "name": "Jotunheim", "rune": "ᚦ", "meaning": "Giants & Titans / Dispute Kit & FOSS Freedom", "primary": "#4f46e5", "secondary": "#818cf8" },
+    { "index": "10", "name": "Yggdrasil", "rune": "ᛇ", "meaning": "Cosmic Ash / Total Ecosystem Retainer", "primary": "#d97706", "secondary": "#fde047" }
+  ],
+  "pages": [
+    {
+      "page": 1,
+      "title": "Web, Email & QR Foundations",
+      "subtitle": "Hardened static web presence, cryptographic email security, and instant digital intake.",
+      "services": [
+        {
+          "sku": "SVC-WEB-01",
+          "title": "Midgard Website Launch",
+          "realm": "01. Midgard",
+          "rune": "ᛗ",
+          "realmMeaning": "Static Web Core",
+          "price": "$245",
+          "hosting": "Static GitHub / Cloudflare Pages",
+          "turnaround": "48–72h Delivery",
+          "bullets": [
+            "Hand-coded responsive static storefront with zero bloated CMS databases or vulnerable plugins.",
+            "Sub-second First Contentful Paint (<0.6s) with full accessibility (WCAG AA) & SEO metadata.",
+            "Turnkey deployment to GitHub Pages or Cloudflare with custom domain linkage and automatic TLS."
+          ],
+          "badge": "Fixed-Scope Core",
+          "spec": "HTML5 / Vanilla CSS / JS"
+        },
+        {
+          "sku": "SVC-DOM-02",
+          "title": "Asgard Domain & Email Shield",
+          "realm": "02. Asgard",
+          "rune": "ᛉ",
+          "realmMeaning": "DNS & Email Armor",
+          "price": "$165",
+          "hosting": "Cloudflare / Registrar DNS",
+          "turnaround": "24–48h Delivery",
+          "bullets": [
+            "Complete cryptographic authentication configuration: strict SPF, 2048-bit DKIM, and DMARC reject policy.",
+            "Eliminates spoofing, spam inbox rejection, and domain hijacking with hardened DNSSEC records.",
+            "Zero monthly mailbox fees using Cloudflare Email Routing forwarded to your private inbox."
+          ],
+          "badge": "Defensive Security",
+          "spec": "SPF / DKIM / DMARC / DNSSEC"
+        },
+        {
+          "sku": "SVC-KIT-03",
+          "title": "Vanaheim QR & Form Kit",
+          "realm": "03. Vanaheim",
+          "rune": "ᚱ",
+          "realmMeaning": "Intake & Telemetry",
+          "price": "$150",
+          "hosting": "Self-Hosted / Cloud-Form",
+          "turnaround": "24–48h Delivery",
+          "bullets": [
+            "High-resolution vector QR code assets tailored for physical print, vehicle decals, and digital cards.",
+            "Secure serverless form intake directing client leads directly into your encrypted email inbox.",
+            "Real-time lead validation with CAPTCHA protection and zero client tracking cookies."
+          ],
+          "badge": "Digital Intake",
+          "spec": "SVG QR / Formspree / Webhook"
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "title": "Resumes, Contracts & Buying Dossiers",
+      "subtitle": "Professional bid positioning, ironclad binding agreements, and thorough purchasing analyses.",
+      "services": [
+        {
+          "sku": "SVC-CAR-04",
+          "title": "Alfheim Resume & Bid Overhaul",
+          "realm": "04. Alfheim",
+          "rune": "ᚨ",
+          "realmMeaning": "Executive Intellect",
+          "price": "$145",
+          "hosting": "PDF & Markdown Deliverable",
+          "turnaround": "48h Delivery",
+          "bullets": [
+            "ATS-optimized professional resume or RFP commercial proposal structured to pass automated HR filters.",
+            "Keyword density matched to target technical, defense, or executive positions with quantified impact metrics.",
+            "Supplied in version-controlled Markdown and print-ready PDF formats."
+          ],
+          "badge": "Executive Asset",
+          "spec": "ATS Compliant / Clean Typography"
+        },
+        {
+          "sku": "SVC-OPS-05",
+          "title": "Nidavellir 3-Doc E-Sign Kit",
+          "realm": "05. Nidavellir",
+          "rune": "ᚷ",
+          "realmMeaning": "Binding Agreements",
+          "price": "$185",
+          "hosting": "Template Deliverable",
+          "turnaround": "48h Delivery",
+          "bullets": [
+            "Three standardized operational agreements: Master Services Agreement, Statement of Work, and Non-Disclosure Agreement.",
+            "Configured for click-to-sign e-signature platforms (DocuSign, PandaDoc, or Adobe Acrobat).",
+            "Defensive scope guardrails, payment milestones, and intellectual property assignment protections."
+          ],
+          "badge": "Contract Vault",
+          "spec": "MSA / SOW / Mutual NDA"
+        },
+        {
+          "sku": "SVC-BUY-06",
+          "title": "Muspelheim Buyer's Dossier",
+          "realm": "06. Muspelheim",
+          "rune": "ᚲ",
+          "realmMeaning": "Purchase Intelligence",
+          "price": "$150",
+          "hosting": "Audit Report Deliverable",
+          "turnaround": "48h Delivery",
+          "bullets": [
+            "Deep-dive technical, mechanical, or commercial due diligence report prior to major equipment/vehicle purchases.",
+            "Historical recall scan, market price comp analysis, and hidden maintenance liability schedule.",
+            "Executive decision matrix highlighting negotiation leverage points to slash acquisition cost."
+          ],
+          "badge": "Expense Defense",
+          "spec": "Due Diligence Dossier"
+        }
+      ]
+    },
+    {
+      "page": 3,
+      "title": "Budgets, Vaults & Billing Disputes",
+      "subtitle": "Sanitized expense ledgers, encrypted emergency vaults, and aggressive dispute recovery.",
+      "services": [
+        {
+          "sku": "SVC-CMD-07",
+          "title": "Svartalfheim Budget & Schedule C Hub",
+          "realm": "07. Svartalfheim",
+          "rune": "ᚠ",
+          "realmMeaning": "Ledger Sovereign",
+          "price": "$195",
+          "hosting": "Offline Ledger Hub",
+          "turnaround": "72h Delivery",
+          "bullets": [
+            "Structured flat-grid Excel/Sheets accounting template aligned to IRS Schedule C expense categories.",
+            "Zero-custody processing: input data sanitized locally; no raw statements stored on cloud databases.",
+            "Automated quarterly tax estimation formulas, profit/loss tracking, and expense categorization macros."
+          ],
+          "badge": "Zero-Custody Ledger",
+          "spec": "Excel / Sheets / Schedule C"
+        },
+        {
+          "sku": "SVC-VLT-08",
+          "title": "Niflheim Insurance & Legacy Vault",
+          "realm": "08. Niflheim",
+          "rune": "ᛟ",
+          "realmMeaning": "Encrypted Sanctuary",
+          "price": "$155",
+          "hosting": "Client Offline Archive",
+          "turnaround": "48h Delivery",
+          "bullets": [
+            "Air-gapped, encrypted digital inventory of key insurance policies, deeds, titles, and emergency instructions.",
+            "Structured KeePassXC or Bitwarden emergency handover kit for designated next-of-kin.",
+            "Step-by-step master claim playbook in case of severe property loss, medical crisis, or estate probate."
+          ],
+          "badge": "Encrypted Vault",
+          "spec": "AES-256 / KeePassXC / Air-Gap"
+        },
+        {
+          "sku": "SVC-AUD-09",
+          "title": "Jotunheim Billing & ISP Dispute Kit",
+          "realm": "09. Jotunheim",
+          "rune": "ᚦ",
+          "realmMeaning": "Titan Challenger",
+          "price": "$175",
+          "hosting": "Dispute Dossier",
+          "turnaround": "48h Delivery",
+          "bullets": [
+            "Forensic review of predatory telecom, medical billing, or utility charges and unauthorized add-on fees.",
+            "Formally cited demand letter packets citing federal FCBA, FDCPA, and state consumer protection statutes.",
+            "Escalation playbook directing notices to CFPB, FCC, and state Attorney General consumer divisions."
+          ],
+          "badge": "Consumer Defense",
+          "spec": "Statutory Dispute Package"
+        }
+      ]
+    },
+    {
+      "page": 4,
+      "title": "Loki, Garm & Fenrir Tactical Kits",
+      "subtitle": "Targeted rapid defense: promotional assets, personal privacy scrubbing, and open-source migration.",
+      "services": [
+        {
+          "sku": "SVC-LOK-10",
+          "title": "Loki Digital Flyer & Ad Pack",
+          "realm": "06. Muspelheim",
+          "rune": "ᚲ",
+          "realmMeaning": "Cunning Promotion",
+          "price": "$85 / $115",
+          "hosting": "High-Res Asset Kit",
+          "turnaround": "24–48h Delivery",
+          "bullets": [
+            "High-contrast vector and raster promotional flyers optimized for social media feeds, local print, or window displays.",
+            "Engineered with magnetic call-to-action typography and integrated custom Norse QR tracking.",
+            "Includes dual-tier sizing for Instagram/Facebook posts, stories, and print-ready 300 DPI CMYK."
+          ],
+          "badge": "Visual Arsenal",
+          "spec": "SVG / PNG / 300 DPI CMYK"
+        },
+        {
+          "sku": "SVC-GRM-11",
+          "title": "Garm Privacy Scrub & Freeze Shield",
+          "realm": "08. Niflheim",
+          "rune": "ᛟ",
+          "realmMeaning": "Hound of the Gate",
+          "price": "$95 / $125",
+          "hosting": "Opt-Out Dossier",
+          "turnaround": "24–48h Delivery",
+          "bullets": [
+            "Comprehensive removal demand packet across top 25 consumer data brokers (LexisNexis, Whitepages, Spokeo, Radaris).",
+            "Step-by-step credit freeze guides across Experian, Equifax, TransUnion, Innovis, and ChexSystems.",
+            "Permanently stops identity theft vectors, prescreened debt offers, and public phone/address scraping."
+          ],
+          "badge": "Privacy Hardening",
+          "spec": "25+ Data Broker Removal Guides"
+        },
+        {
+          "sku": "SVC-FEN-12",
+          "title": "Fenrir Free-Software Switch Kit",
+          "realm": "09. Jotunheim",
+          "rune": "ᚦ",
+          "realmMeaning": "Unbound Sovereign",
+          "price": "$115 / $145",
+          "hosting": "Migration Playbook",
+          "turnaround": "48h Delivery",
+          "bullets": [
+            "Full migration roadmap from proprietary SaaS tax traps (Microsoft 365, Adobe, QuickBooks) to free open-source equivalents.",
+            "Configures LibreOffice, Thunderbird, GIMP/Inkscape, and local accounting with zero telemetry.",
+            "Saves $1,200–$3,500/year in perpetual licensing fees while reclaiming 100% data ownership."
+          ],
+          "badge": "FOSS Liberation",
+          "spec": "Zero-Subscription Migration"
+        }
+      ]
+    },
+    {
+      "page": 5,
+      "title": "Monthly Tech & Vault Caretaking",
+      "subtitle": "Continuous proactive stewardship ensuring websites, domains, and operational vaults stay flawless.",
+      "services": [
+        {
+          "sku": "SUB-WEB-01",
+          "title": "Web & QR Care Retainer",
+          "realm": "01. Midgard",
+          "rune": "ᛗ",
+          "realmMeaning": "Active Web Steward",
+          "price": "$55–$75 / mo",
+          "hosting": "Continuous Uptime",
+          "turnaround": "24h Response SLA",
+          "bullets": [
+            "Monthly content updates, SKU price adjustments, and announcement banner deployments.",
+            "Continuous 24/7 uptime monitoring with instant outage notification and auto-healing.",
+            "Annual domain renewal coordination and performance audits to maintain sub-second load times."
+          ],
+          "badge": "Monthly Retainer",
+          "spec": "Uptime SLA / Monthly Updates"
+        },
+        {
+          "sku": "SUB-DOM-02",
+          "title": "Domain & Email Shield Retainer",
+          "realm": "02. Asgard",
+          "rune": "ᛉ",
+          "realmMeaning": "Citadel Watchman",
+          "price": "$65–$85 / mo",
+          "hosting": "Security Sentinel",
+          "turnaround": "Same-Day SLA",
+          "bullets": [
+            "Continuous DMARC aggregate report forensic parsing to detect spoofing attempts against your brand.",
+            "Quarterly DNS audit ensuring SPF, DKIM, MX, and DNSSEC keys remain in pristine cryptographic alignment.",
+            "Immediate threat response if IP reputation dips or malicious MX records appear."
+          ],
+          "badge": "Security Retainer",
+          "spec": "DMARC Analysis / DNS Sentinel"
+        },
+        {
+          "sku": "SUB-OPS-03",
+          "title": "Document & Vault Caretaker",
+          "realm": "05. Nidavellir",
+          "rune": "ᚷ",
+          "realmMeaning": "Vault Keeper",
+          "price": "$75–$95 / mo",
+          "hosting": "Archive Caretaker",
+          "turnaround": "48h SLA",
+          "bullets": [
+            "Routine quarterly updates to your contracts, SOW rates, client NDAs, and price sheets.",
+            "Encrypted backup verifications and versioning of all operational agreements.",
+            "On-demand PDF re-exporting and digital signature template configuration."
+          ],
+          "badge": "Ops Retainer",
+          "spec": "Contract Revisions / Backups"
+        }
+      ]
+    },
+    {
+      "page": 6,
+      "title": "Expense Optimization, Bill Watchdog & Retainers",
+      "subtitle": "Ongoing financial leak detection, bill renegotiation, back-office triage, and the sovereign Yggdrasil bundle.",
+      "services": [
+        {
+          "sku": "SUB-FIN-04",
+          "title": "Expense Optimizer Retainer",
+          "realm": "07. Svartalfheim",
+          "rune": "ᚠ",
+          "realmMeaning": "Ledger Sentinel",
+          "price": "$85–$115 / mo",
+          "hosting": "Monthly Audit",
+          "turnaround": "Monthly Reconciliation",
+          "bullets": [
+            "Monthly forensic review of credit card and bank statements to flag creeping subscription rate hikes.",
+            "Automated Schedule C expense categorization keeping your accounting clean all 12 months.",
+            "Identification of redundant SaaS tools and operational overhead with immediate cancellation instructions."
+          ],
+          "badge": "Finance Retainer",
+          "spec": "Monthly Expense Audit"
+        },
+        {
+          "sku": "SUB-BIL-05",
+          "title": "Bill Watchdog Retainer",
+          "realm": "09. Jotunheim",
+          "rune": "ᚦ",
+          "realmMeaning": "Rate Enforcer",
+          "price": "$75–$105 / mo",
+          "hosting": "Quarterly Renegotiation",
+          "turnaround": "Active Defense",
+          "bullets": [
+            "Quarterly renegotiation filings with internet, phone, insurance, and merchant payment processors.",
+            "Enforcement of grandfathered promotional rates and automatic clawback of bogus late/administrative fees.",
+            "Maintains your lowest possible recurring utility costs with zero effort required on your part."
+          ],
+          "badge": "Watchdog Retainer",
+          "spec": "Utility & Telecom Defense"
+        },
+        {
+          "sku": "SUB-ADM-06",
+          "title": "Back-Office Admin Concierge",
+          "realm": "04. Alfheim",
+          "rune": "ᚨ",
+          "realmMeaning": "Digital Chancellor",
+          "price": "$80–$110 / mo",
+          "hosting": "Admin Desk",
+          "turnaround": "24h Response",
+          "bullets": [
+            "Routine administrative document drafting, vendor follow-ups, and municipal filing packet prep.",
+            "Digital filing system maintenance, inbox filtering rules, and customer contact management triage.",
+            "Offloads repetitive digital clerical friction so you can focus entirely on high-value client work."
+          ],
+          "badge": "Admin Retainer",
+          "spec": "Administrative Automation"
+        },
+        {
+          "sku": "RET-ALL-07",
+          "title": "Yggdrasil Complete Retainer",
+          "realm": "10. Yggdrasil",
+          "rune": "ᛇ",
+          "realmMeaning": "All-Realm Steward",
+          "price": "$495 Launch | $165–$215 / mo",
+          "hosting": "Full Spectrum",
+          "turnaround": "Priority 12h SLA",
+          "bullets": [
+            "Complete multi-realm coverage: Website + Domain Security + Expense Audit + Document Caretaker in one unified retainer.",
+            "Includes initial 3-Realm turnkey launch deployment with waived setup fees.",
+            "Direct phone & signal dispatch with senior consulting architect for emergent technical or contract disputes."
+          ],
+          "badge": "Sovereign Crown",
+          "spec": "Universal Covenant Retainer"
+        }
+      ]
+    },
+    {
+      "page": 7,
+      "title": "Pure Remote Deliverables (No License or Certification Requirements)",
+      "subtitle": "100% asynchronous digital deliverables with zero regulatory hurdles, zero vendor certifications, and complete client master ownership.",
+      "services": [
+        {
+          "sku": "SVC-SOP-11",
+          "title": "SOP & Knowledge Base Blueprint",
+          "realm": "05. Nidavellir",
+          "rune": "ᛏ",
+          "realmMeaning": "Operational Playbook",
+          "price": "$175",
+          "hosting": "One-Time Build",
+          "turnaround": "24–48h Delivery",
+          "bullets": [
+            "Turnkey Markdown, Obsidian, and Notion knowledge base for solopreneurs, remote teams, and trade contractors.",
+            "Standardized core runbooks: client onboarding, emergency escalation tree, and service delivery checklists.",
+            "Delivered in open Markdown (.md) and PDF formats with $0 subscription lock-in or recurring SaaS fees."
+          ],
+          "badge": "Markdown Vault + PDF Runbook",
+          "spec": "Obsidian/Notion • SOP • 0 License"
+        },
+        {
+          "sku": "SVC-SEC-12",
+          "title": "Remote Workstation Hardening & DNS Profile",
+          "realm": "02. Asgard",
+          "rune": "ᛉ",
+          "realmMeaning": "Workstation Fortress",
+          "price": "$135",
+          "hosting": "One-Time Kit",
+          "turnaround": "24–48h Delivery",
+          "bullets": [
+            "Ready-to-install DNS-over-HTTPS (DoH) / DNSSEC configuration profiles routing through encrypted Quad9 9.9.9.9.",
+            "Browser compartmentalization, anti-telemetry guides, and passwordless FIDO2 passkey onboarding walkthrough.",
+            "Shields home office workstations against phishing, drive-by malware, and credential stuffing without costly enterprise MDMs."
+          ],
+          "badge": "DoH MobileConfig + Hardening Guide",
+          "spec": "Quad9 • DoH • Passkeys • 0 Cert"
+        },
+        {
+          "sku": "SVC-TAX-13",
+          "title": "1099 Contractor Schedule C Ledger",
+          "realm": "07. Svartalfheim",
+          "rune": "ᚠ",
+          "realmMeaning": "Schedule C Shield",
+          "price": "$165",
+          "hosting": "Custom Workbook",
+          "turnaround": "24–48h Delivery",
+          "bullets": [
+            "Pre-built automated Excel & Google Sheets workbook tailored for independent 1099 contractors and sole proprietors.",
+            "Auto-calculating Schedule C business expense deductions, mileage log, and quarterly estimated tax reserve formulas.",
+            "Includes fillable W-9 pass-through billing templates with complete privacy — zero bank account linking."
+          ],
+          "badge": "Custom Workbook + W-9 Master",
+          "spec": ".XLSX • Schedule C • Tax Reserve"
+        },
+        {
+          "sku": "SVC-BCK-14",
+          "title": "Cold-Storage 3-2-1 Backup Runbook",
+          "realm": "08. Niflheim",
+          "rune": "ᛟ",
+          "realmMeaning": "3-2-1 Preservation",
+          "price": "$160",
+          "hosting": "Automation Kit",
+          "turnaround": "24–48h Delivery",
+          "bullets": [
+            "Turnkey 3-2-1 backup architecture: 3 copies of business data, on 2 distinct media types, with 1 offsite encrypted archive.",
+            "Automated copy-on-write sync scripts (PowerShell & Bash) for external drives and zero-knowledge encrypted cloud remotes (rclone).",
+            "Includes periodic restore verification drill checklist to guarantee uncorrupted asset recovery after hardware crashes."
+          ],
+          "badge": "Automation Scripts + DR Manual",
+          "spec": "3-2-1 Backup • Rclone • Zero-SaaS"
+        },
+        {
+          "sku": "SVC-DCK-15",
+          "title": "Executive Proposal & Pitch Deck Kit",
+          "realm": "06. Muspelheim",
+          "rune": "ᚲ",
+          "realmMeaning": "High-Impact Proposal",
+          "price": "$140",
+          "hosting": "Turnkey Templates",
+          "turnaround": "24–48h Delivery",
+          "bullets": [
+            "10-slide high-impact typographic master pitch deck formatted for PowerPoint (.pptx), Google Slides, and vector PDF.",
+            "Formal client proposal and quotation document template with embedded ROI calculators and clear scope boundaries.",
+            "Engineered for trade contractors and consultants to quote projects with corporate prestige and eliminate scope creep."
+          ],
+          "badge": "PPTX Deck + Proposal PDF",
+          "spec": "PowerPoint • Google Slides • PDF"
+        }
+      ]
+    },
+    {
+      "page": 8,
+      "title": "B2B Procurement & Corporate Governance Suite",
+      "subtitle": "Enterprise-grade vendor documentation and cyber defense protocols with editable source documents.",
+      "services": [
+        {
+          "sku": "SVC-B2B-16",
+          "title": "B2B Vendor Onboarding & Master MSA Suite",
+          "realm": "05. Nidavellir",
+          "rune": "ᚷ",
+          "realmMeaning": "Master Forge / Procurement",
+          "price": "$295",
+          "hosting": "Turnkey Suite",
+          "turnaround": "24–48h Delivery",
+          "bullets": [
+            "Complete corporate vendor onboarding suite: Master Services Agreement (MSA), SOW template, Mutual NDA, and W-9 pass-through billing ledger.",
+            "Interactive fillable AcroForm PDFs with legally binding e-signature fields and audit trail certificate blocks.",
+            "Eliminates $2,000+ attorney drafting retainers while establishing ironclad scope boundaries, payment terms, and liability limits."
+          ],
+          "badge": "4-Doc MSA & Procurement Suite",
+          "spec": "MSA • SOW • NDA • Fillable PDF"
+        },
+        {
+          "sku": "SVC-B2B-17",
+          "title": "Corporate Anti-Phishing & Wire Protocol",
+          "realm": "02. Asgard",
+          "rune": "ᛉ",
+          "realmMeaning": "Anti-Fraud Citadel",
+          "price": "$245",
+          "hosting": "Turnkey Governance",
+          "turnaround": "24–48h Delivery",
+          "bullets": [
+            "Battle-tested employee anti-fraud protocol: verbal out-of-band verification SOP for wire transfers and vendor ACH changes.",
+            "Executive mailbox anti-spoofing filter rules, shared inbox access standards, and staff security response runbook.",
+            "Stops Business Email Compromise (BEC) and invoice diversion schemes that siphon millions from commercial firms."
+          ],
+          "badge": "Anti-Fraud Runbook + Staff SOP",
+          "spec": "BEC Defense • Wire Security • Staff SOP"
+        }
+      ]
+    },
+    {
+      "page": 9,
+      "title": "Monthly Low-Effort B2B Retainers",
+      "subtitle": "Automated surveillance, synthetic uptime monitoring, and proactive contract defense contracts.",
+      "services": [
+        {
+          "sku": "B2B-SEC-01",
+          "title": "B2B Monthly Cyber Hygiene Retainer",
+          "realm": "02. Asgard",
+          "rune": "ᛉ",
+          "realmMeaning": "Perimeter Sentinel",
+          "price": "$125–$175 / Mo",
+          "hosting": "Monthly Automated Scan",
+          "turnaround": "Monthly Executive Scorecard",
+          "bullets": [
+            "Monthly external perimeter scan detecting open exposed ports (RDP, SSH, DB), insecure services, and certificate expirations.",
+            "Dark web credential exposure scan across corporate domains and key executive email addresses.",
+            "Delivered as a crisp 1-page executive scorecard with pass/fail grades and prioritized remediation steps."
+          ],
+          "badge": "Monthly 1-Page Risk Scorecard",
+          "spec": "External Recon • SSL • Dark Web Check"
+        },
+        {
+          "sku": "B2B-SLA-02",
+          "title": "Cloud & SaaS Spend Drift Watchdog",
+          "realm": "07. Svartalfheim",
+          "rune": "ᚠ",
+          "realmMeaning": "Treasury Sentry",
+          "price": "$145–$195 / Mo",
+          "hosting": "Monthly 30-Min Audit",
+          "turnaround": "Monthly Savings Report",
+          "bullets": [
+            "Monthly forensic review of AWS, GCP, Azure, or SaaS billing (Google Workspace, Slack, Zoom, HubSpot, Adobe).",
+            "Automatically flags orphaned cloud storage volumes, unassigned licenses, abandoned elastic IPs, and rate creeps.",
+            "Provides turnkey cancellation and rightsizing scripts that consistently yield 3x–10x ROI on the retainer cost."
+          ],
+          "badge": "Monthly Cloud Savings Report",
+          "spec": "AWS/GCP • SaaS Seats • Drift Audit"
+        },
+        {
+          "sku": "B2B-LGL-03",
+          "title": "Vendor Contract Renewal Sentinel",
+          "realm": "09. Jotunheim",
+          "rune": "ᚦ",
+          "realmMeaning": "Giant-Slaying Defense",
+          "price": "$95–$135 / Mo",
+          "hosting": "Automated Tracker",
+          "turnaround": "30/60/90 Day Alerts",
+          "bullets": [
+            "Proactive centralized calendar monitoring for commercial vendor agreements, equipment leases, and enterprise software.",
+            "Issues automated 90, 60, and 30-day alerts prior to evergreen auto-renewal deadlines to stop unwanted contractual traps.",
+            "Includes pre-formatted formal non-renewal notices and pricing renegotiation counter-letters."
+          ],
+          "badge": "Expiration Calendar + Notices",
+          "spec": "Auto-Renewal Defense • SOW Tracker"
+        },
+        {
+          "sku": "B2B-SEO-04",
+          "title": "B2B Synthetic Uptime & Link Health",
+          "realm": "01. Midgard",
+          "rune": "ᛗ",
+          "realmMeaning": "Bifröst Pulse",
+          "price": "$85–$120 / Mo",
+          "hosting": "24/7 Synthetic Ping",
+          "turnaround": "Continuous Alerts + Monthly Pulse",
+          "bullets": [
+            "Continuous 24/7 synthetic 60-second ping monitoring across commercial web applications and API endpoints with instant SMS escalation.",
+            "Monthly automated deep crawl identifying 404 errors, broken partner links, SSL chain anomalies, and sitemap issues.",
+            "Automated monthly executive reliability scorecard detailing uptime percentage, TTFB latency, and DNS resolution speed."
+          ],
+          "badge": "24/7 Monitoring + Monthly Pulse",
+          "spec": "Synthetic Uptime • 404 Crawl • SLA"
+        },
+        {
+          "sku": "B2B-SOP-05",
+          "title": "Quarterly SOP Maintenance & Onboarding Desk",
+          "realm": "04. Alfheim",
+          "rune": "ᚨ",
+          "realmMeaning": "Living Runbook Desk",
+          "price": "$165–$225 / Mo",
+          "hosting": "Living Runbook Desk",
+          "turnaround": "24h SLA per Doc",
+          "bullets": [
+            "Ongoing maintenance and version control of operational SOP runbooks, contractor intake forms, and client handoff guides.",
+            "Includes up to 2 custom administrative document updates or new fillable PDF forms per billing period with 24h turnaround.",
+            "Ensures vital corporate workflows and operational institutional memory remain documented as personnel transition."
+          ],
+          "badge": "Living SOP Vault + Admin Desk",
+          "spec": "SOP Maintenance • Contractor Intake"
+        }
+      ]
+    },
+    {
+      "page": 10,
+      "title": "Bifröst 3-Step Workflow & Zero-Custody Covenant",
+      "subtitle": "How to engage Tyr Technical Consulting with zero friction, zero financial risk, and absolute privacy.",
+      "workflow": [
+        {
+          "step": "Step 01",
+          "title": "Select SKU & Dispatch Brief",
+          "desc": "Tap any service card or call (659) 257-8043. Transmit your project requirements via encrypted email or phone consultation. We verify exact scope and timeline within 2 business hours."
+        },
+        {
+          "step": "Step 02",
+          "title": "Execute Binding SLA & Zero-Custody Pledge",
+          "desc": "We execute a simplified Statement of Work with clear fixed pricing. We do not require long-term lock-ins. All raw financial records are handled under strict zero-custody air-gapping."
+        },
+        {
+          "step": "Step 03",
+          "title": "Turnkey Delivery & Immediate Data Purge",
+          "desc": "Receive your hardened website, authenticated DNS keys, ATS resume, or audited ledger within the agreed SLA. Raw intake files are immediately purged (0-Day) leaving zero digital footprint."
+        }
+      ]
+    }
+  ]
+}

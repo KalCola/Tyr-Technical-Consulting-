@@ -1,0 +1,25 @@
+{
+  "name": "TYR Technical Consulting",
+  "short_name": "TYR Protocol",
+  "description": "Defensive cybersecurity, administrative automation, and consumer expense auditing under the Norse covenant.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#060609",
+  "theme_color": "#dc2626",
+  "icons": [
+    {
+      "src": "assets/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/logo-512.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "page": 4,
+  "cardIndex": 2,
+  "realm": "niflheim",
+  "runePill": "ᛟ NIFLHEIM VAULT",
+  "meaning": "Deep Vault Keeper • Monthly Edits & Recovery",
+  "title": "Document & Vault Caretaker Plan",
+  "price": "$75–$95",
+  "priceSub": "Per Month",
+  "attrs": [
+    [
+      "Personal Tier",
+      "$75 / Month"
+    ],
+    [
+      "Business Tier",
+      "$95 / Month"
+    ],
+    [
+      "Data Retained",
+      "Blank Masters"
+    ]
+  ],
+  "badge": "1 Doc Update/Mo + Recovery",
+  "specTag": "7-Yr Blank Master Vault",
+  "sku": "SUB-OPS-03",
+  "themeClass": "theme-niflheim"
+}

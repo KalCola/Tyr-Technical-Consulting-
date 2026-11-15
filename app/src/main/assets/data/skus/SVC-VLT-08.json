@@ -1,0 +1,28 @@
+{
+  "page": 3,
+  "cardIndex": 1,
+  "realm": "niflheim",
+  "runePill": "ᛟ NIFLHEIM",
+  "meaning": "Deep Preservation • Cold-Storage Asset Vault",
+  "title": "Home Insurance & Legacy Vault",
+  "price": "$155",
+  "priceSub": "Vault & Binder Kit",
+  "attrs": [
+    [
+      "Norse Realm",
+      "ᛟ Niflheim"
+    ],
+    [
+      "Purpose",
+      "Storm & Theft"
+    ],
+    [
+      "Turnaround",
+      "24–48 Hours"
+    ]
+  ],
+  "badge": "Deliverable: Claim Ledger + Emergency PDF",
+  "specTag": "Proof-of-Loss • Offline",
+  "sku": "SVC-VLT-08",
+  "themeClass": "theme-niflheim"
+}

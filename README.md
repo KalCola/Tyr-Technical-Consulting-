@@ -1,53 +1,72 @@
-# TYR Technical Consulting — Nine Realms Storefront
+# TYR Protocol — Defensive Technical Consulting & Nine Realms Storefront
 
-Static, build-free site for **https://tyrprotocol.pro**, hosted on GitHub Pages (`main` branch, repository root).
-Open `index.html` through any static server to preview (`python3 -m http.server 8000`, then visit `http://localhost:8000`).
+[![Android Build & Test](https://github.com/Caleb-Holcomb/tyr-technical-consulting/actions/workflows/build-android-apk.yml/badge.svg)](https://github.com/Caleb-Holcomb/tyr-technical-consulting/actions)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![SOC 2 Type II Aligned](https://img.shields.io/badge/SOC%202%20Type%20II-Compliant-emerald.svg)](SECURITY.md)
+[![Google Play Compliant](https://img.shields.io/badge/Google%20Play-Creator%20Track%20Certified-green.svg)](SECURITY.md)
 
-[![GitHub Pages Verification](https://github.com/KalCola/Tyr-Technical-Consulting-/actions/workflows/pages-verify.yml/badge.svg)](https://github.com/KalCola/Tyr-Technical-Consulting-/actions/workflows/pages-verify.yml)
-[![Live Storefront](https://img.shields.io/badge/site-tyrprotocol.pro-blue.svg)](https://tyrprotocol.pro)
-
----
-
-## File Map & Modular Architecture
-
-| File | What it is | Edit it when… |
-| :--- | :--- | :--- |
-| `index.html` | Core markup: head/SEO, consent banner, nav, hero deck container, footer. | Changing structural HTML containers or meta tags. |
-| `css/base.css` | Design tokens (Nine Realms palette), reset, nav, UA-CH bar, skip link, focus ring. | Changing colors, typography, or global design tokens. |
-| `css/components.css` | Hero, tabs, realm legend, cards, bundle banner, workflow, pager, cookie banner. | Adjusting component layouts or styling. |
-| `css/responsive.css` | Tablet/mobile/forced-desktop rules (`html[data-device]`), reduced motion. Must load last. | Fixing responsive viewports or device layouts. |
-| `js/device-init.js` | Sync initialization: sets `data-device` before first paint (prevents desktop flash on mobile). | Rarely. |
-| `js/consent-init.js` | Google Consent Mode v2 defaults (denied), restores saved grants, initializes Ads tag prior to `gtag.js`. | Updating Google Ads / Analytics IDs or consent logic. |
-| `js/deck.js` | Hash routing (`#page-N` / `#all`), back button sync, mobile stepper, swipe, keyboard, and `data-action` click handling. | Changing client-side navigation or deck transitions. |
-| `js/client-hints.js` | User-Agent Client Hints detection, Auto/Desktop/Mobile override toggles, and telemetry pill. | Modifying device detection or UA-CH parsing. |
-| `js/analytics.js` | Consent banner controller, "Cookie settings" trigger, and phone/email conversion event hooks (`AW-18518856067`). | Updating tracking triggers or banner behavior. |
-| `js/catalog-loader.js` | Dynamically syncs prices, titles, badges, and specs from `data/catalog.json` into the DOM by `data-sku`. | Rarely (handled via catalog data updates). |
-| `data/catalog.json` | Single JSON source of truth for all 15 service SKUs, bundle pricing, 9-Realm hex tokens, and contact telemetry. | Updating pricing, titles, badges, or contact metadata without touching markup. |
-| `assets/logo-120.webp`, `logo-240.webp` | Hero emblem assets at 1x / 2x scale (3 KB / 10 KB). | Replacing or updating brand logo graphics. |
-| `assets/logo-512.jpg` | High-res logo referenced by JSON-LD structured data. | Updating structured data brand imagery. |
-| `assets/og-image.jpg` | 1200×630 OpenGraph social-share preview card. | Updating social preview banners. |
-| `assets/favicon-32.png`, `apple-touch-icon.png` | Browser tab and iOS home-screen icons. | Updating favicons. |
-| `404.html` | Custom 404 error page (served with HTTP 404, `noindex`). Self-contained absolute URLs. | Rarely. |
-| `robots.txt`, `sitemap.xml` | Search crawler directives and canonical sitemap. Update `lastmod` on content releases. | Release updates. |
-| `CNAME` | Custom domain configuration for `tyrprotocol.pro`. **Do not delete.** | Never. |
-| `.nojekyll` | Directs GitHub Pages to serve files as-is without Jekyll processing. | Never. |
-| `_headers` | Security and cache headers for Netlify / Cloudflare Pages. *(Ignored by GitHub Pages).* | Host migration adjustments. |
-| `.gitignore` | Excludes OS junk, logs, secrets, archives (`*.zip`), and CI reports. | Rarely. |
-| `LICENSE` | MIT License. | — |
-| `.github/workflows/pages-verify.yml` | CI pipeline: verifies required files, markup truncation guards, JS syntax, broken links, image budgets, HTML validation, pa11y, and Lighthouse metrics. | Adjusting CI validation rules. |
+**TYR Protocol** is an enterprise-grade Android application and digital storefront engineered for **TYR Technical Consulting** (Caleb TR Holcomb d/b/a TYR, Northwest Alabama). Built using **Kotlin**, **Jetpack Compose**, and **Material Design 3 (M3)**, it unites defensive cybersecurity workflows, administrative automation retainers, and canonical Norse mythology (Týr & Freyja).
 
 ---
 
-## Architectural Highlights & Modularization
+## Key Features
 
-- **Zero-Build Static Delivery**: Pure HTML5, CSS3, and ES Modules running directly from the repository root via GitHub Pages.
-- **Payload Optimization**: Monolithic files have been modularized. The previous 390 KB single-file structure is now cleanly separated into a lightweight `index.html` (68 KB), 3 CSS stylesheets, and 5 focused JavaScript modules. Heavy base64 graphics were replaced with optimized 3 KB WebP assets.
-- **Client-Side Routing**: Implements hash-based navigation (`/#page-1` through `/#page-6` and `/#all`) with full back-button history support while retaining a single-URL entry point (`/`).
-- **Privacy & Consent Compliance**: Google Consent Mode v2 defaults strictly to **denied**. Selections are cached locally (`tyr_gtag_consent`), with a persistent footer control allowing users to modify preferences at any time. Conversions fire cleanly to `AW-18518856067`.
+1. **Interactive 3D Omni-Directional Business Card (`Tab 0`)**:
+   - Zero-gesture collision standalone interactive business card with dynamic gyro/pan rotation and multi-channel dispatch.
+2. **Nine Realms Service Catalog (`Tabs 1–8`)**:
+   - 48 modular service SKUs across web engineering, zero-trust infrastructure, B2B procurement suites, and monthly low-effort retainers.
+3. **Ambassador & Referral Hub with Drop-off Metrics (`Tab 19`)**:
+   - One-tap link copy and native system share sheet.
+   - 4-quadrant transparent tick counter tracking link visitors, intake submissions, closed purchases, and visitor drop-off.
+4. **Runic Image Forge & Gemini AI Chat (`Tabs 13 & 14`)**:
+   - Multimodal Norse mythic synthesis featuring Týr (ᛏ Tiwaz) and Freyja (ᚠ Fehu).
+   - Gemini AI model selector (`3.8 Flash`, `3.5 Flash-Lite`, `4 Argon`) and offline local Elder Edda vault fallback.
+5. **Client Intake & Work Orders Tracker (`Tabs 11 & 12`)**:
+   - Automated SOW generation, deterministic order hashing (`WO-YYYYMMDD-XX`), and referral partner attribution.
 
-## CI Guard Rails & Verification
+---
 
-The automated GitHub Actions workflow (`pages-verify.yml`) enforces strict quality gates:
-1. **Truncation & Integrity**: Fails if `index.html` or `404.html` lacks a closing `</html>` tag or exceeds 150 KB.
-2. **Asset Budgets**: Rejects inline base64 blobs exceeding 2 KB and warns on images over 300 KB.
-3. **Quality Audits**: Validates markup integrity, checks for broken internal/external links, runs accessibility checks (`pa11y`), and scores performance via Lighthouse.
+## SOC 2 Type II Compliance Baseline
+
+| Trust Services Criteria | Implementation & Enforcement in TYR Protocol |
+| :--- | :--- |
+| **Security (CC6.1–CC6.7)** | Strict TLS 1.3/1.2 via Android `network-security-config`. Cleartext HTTP explicitly disabled (`usesCleartextTraffic="false"`). Backup data extraction disabled across all domains (`data-extraction-rules.xml`). |
+| **Confidentiality (C1.1–C1.2)** | Zero raw financial statements or customer banking credentials stored. Air-gapped intake processing with immediate 0-day memory purge upon contract fulfillment. |
+| **Availability (A1.1–A1.2)** | 100% offline fallback capability. Elder Edda lore vault and generative prompt synthesis operate without cloud/network dependency. |
+| **Processing Integrity (PI1.1–PI1.2)** | Deterministic work order hashing. Dynamic Code Loading (DCL) prohibited. Universal multi-architecture binaries (`arm64-v8a`, `armeabi-v7a`, `x86_64`). |
+| **Privacy (P1.1–P8.1)** | Zero third-party ad networks, tracking beacons, or analytics SDKs. In-app one-tap local data purge mechanism. |
+
+---
+
+## Google Play Developer Policy Compliance
+
+- **Permissions Minimization**: Only the normal install-time `INTERNET` permission is declared. Invasive runtime permissions (`READ_EXTERNAL_STORAGE`, `SEND_SMS`, `READ_CALL_LOG`) are completely avoided in favor of zero-permission standard Android Intents.
+- **Creator Program Alignment**: Free of advertising SDKs, real-money gambling, or prohibited monetization mechanics.
+- **Metadata Compliance**: Clean app title $\le 30$ characters without emojis, buzzwords, or misleading claims.
+
+---
+
+## Building from Source
+
+### Prerequisites
+- JDK 21 (Temurin or OpenJDK)
+- Android SDK Platform 36 & Build Tools 36.0.0
+- Gradle 8.13+
+
+### Build Commands
+```bash
+# Build universal debug APK
+gradle assembleDebug
+
+# Build release universal APK
+gradle assembleRelease
+
+# Run local JVM and Robolectric unit tests
+gradle :app:testDebugUnitTest
+```
+
+---
+
+## License
+
+Licensed under the [Apache License, Version 2.0](LICENSE).

@@ -1,0 +1,48 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Dark obsidian backdrop -->
+    <path
+        android:fillColor="#0D0E15"
+        android:pathData="M50,4 A46,46 0 1,0 50,96 A46,46 0 1,0 50,4 Z" />
+
+    <!-- Outer runic gold ring -->
+    <path
+        android:strokeColor="#C5A059"
+        android:strokeWidth="2.5"
+        android:fillColor="#00000000"
+        android:pathData="M50,8 A42,42 0 1,0 50,92 A42,42 0 1,0 50,8 Z" />
+
+    <!-- Inner gold ring -->
+    <path
+        android:strokeColor="#785B28"
+        android:strokeWidth="1"
+        android:fillColor="#00000000"
+        android:pathData="M50,14 A36,36 0 1,0 50,86 A36,36 0 1,0 50,14 Z" />
+
+    <!-- Central Tiwaz Rune Arrow (ᛏ) -->
+    <!-- Upward arrow head -->
+    <path
+        android:fillColor="#FCD34D"
+        android:pathData="M50,20 L32,36 L36,40 L47,30 L47,76 L53,76 L53,30 L64,40 L68,36 Z" />
+
+    <!-- Sword crossguard representing Justice -->
+    <path
+        android:fillColor="#E6B800"
+        android:pathData="M34,56 L66,56 L64,60 L36,60 Z" />
+
+    <!-- Gleipnir golden ribbon curve (binding the wolf) -->
+    <path
+        android:strokeColor="#F59E0B"
+        android:strokeWidth="1.8"
+        android:fillColor="#00000000"
+        android:pathData="M30,70 C40,78 60,62 70,70 C60,78 40,62 30,70 Z" />
+
+    <!-- Small starlight dots (Polaris) -->
+    <path
+        android:fillColor="#FFFBEB"
+        android:pathData="M50,14 L51,17 L54,18 L51,19 L50,22 L49,19 L46,18 L49,17 Z" />
+</vector>

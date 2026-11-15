@@ -1,0 +1,7 @@
+{
+  "name": "TYR Protocol",
+  "description": "TYR Technical Consulting — Defensive cybersecurity, administrative automation, and Norse-themed service catalog",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

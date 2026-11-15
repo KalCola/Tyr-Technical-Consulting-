@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "599768456595",
+    "project_id": "gen-lang-client-0344864968",
+    "storage_bucket": "gen-lang-client-0344864968.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599768456595:android:876da427ad40f1bfa01c66",
+        "android_client_info": {
+          "package_name": "pro.tyrprotocol.storefront"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7FXxCbEipcxeExzp0cyPUIeH7M8_4rEc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

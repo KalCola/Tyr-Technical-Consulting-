@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+:root {
+  --bg-obsidian: #060609;
+  --bg-surface: #0c0d13;
+  --bg-card: #11131a;
+  --bg-attr: #090a0f;
+  --border-subtle: #232634;
+  --text-main: #f4f5f8;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --steel-silver: #e2e8f0;
+
+  /* Nine Realms */
+  --midgard-main: #dc2626;
+  --midgard-light: #f87171;
+  --asgard-main: #d97706;
+  --asgard-light: #fbbf24;
+  --vanaheim-main: #059669;
+  --vanaheim-light: #34d399;
+  --alfheim-main: #0284c7;
+  --alfheim-light: #38bdf8;
+  --nidavellir-main: #ea580c;
+  --nidavellir-light: #fb923c;
+  --muspelheim-main: #e11d48;
+  --muspelheim-light: #fb7185;
+  --svartalfheim-main: #9333ea;
+  --svartalfheim-light: #c084fc;
+  --niflheim-main: #0d9488;
+  --niflheim-light: #2dd4bf;
+  --jotunheim-main: #4f46e5;
+  --jotunheim-light: #818cf8;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-obsidian);
+  color: var(--text-main);
+  background-image: 
+    radial-gradient(circle at 12% 0%, rgba(220, 38, 38, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 88% 8%, rgba(217, 119, 6, 0.08) 0%, transparent 38%);
+  min-height: 100vh;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-obsidian);
+}
+::-webkit-scrollbar-thumb {
+  background: #232634;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3b4252;
+}

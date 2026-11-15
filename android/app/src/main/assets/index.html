@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>TYR Technical Consulting | Defensive Tech & Expense Audit</title>
+  <meta name="description" content="CALEB TR HOLCOMB d/b/a TYR — Defensive cybersecurity, administrative automation, and consumer expense auditing under the Norse covenant.">
+  <meta name="theme-color" content="#dc2626">
+  <meta name="color-scheme" content="dark">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="./assets/apple-touch-icon.png">
+  
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/deck.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+
+  <style>
+    /* Modal styles */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(4, 4, 7, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-highlight);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.9);
+      position: relative;
+    }
+    .modal-card h3 {
+      font-size: 18px;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+    .modal-price-tag {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      color: var(--text-gold);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .modal-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: var(--bg-attr);
+      border: 1px solid var(--border-subtle);
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      color: var(--text-muted);
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-wrapper">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-inner">
+        <div class="brand-block">
+          <div class="brand-icon">ᛏ</div>
+          <div class="brand-text">
+            <h1>TYR TECHNICAL CONSULTING</h1>
+            <p>NAICS 541512 &amp; 541611 • Defensive Systems</p>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <a href="tel:+16592578043" class="icon-cta call-direct" title="Call (659) 257-8043">
+            <span>📞</span> <span>(659) 257-8043</span>
+          </a>
+          <button class="icon-cta" onclick="toggleLegalModal(true)" title="Statutory &amp; Entity Info">
+            <span>⚖️ OPSEC</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Stepper Navigation -->
+    <nav class="stepper-nav" aria-label="Catalog Pages">
+      <div class="stepper-inner">
+        <button class="step-tab active" data-page="1"><span class="tab-num">P1</span> Web &amp; Shield</button>
+        <button class="step-tab" data-page="2"><span class="tab-num">P2</span> Contracts &amp; Dossiers</button>
+        <button class="step-tab" data-page="3"><span class="tab-num">P3</span> Budgets &amp; Disputes</button>
+        <button class="step-tab" data-page="4"><span class="tab-num">P4</span> Tactical Kits</button>
+        <button class="step-tab" data-page="5"><span class="tab-num">P5</span> Tech Retainers</button>
+        <button class="step-tab" data-page="6"><span class="tab-num">P6</span> Expense &amp; Yggdrasil</button>
+        <button class="step-tab" data-page="7"><span class="tab-num">P7</span> Bifröst Workflow</button>
+      </div>
+    </nav>
+
+    <!-- Deity Lore Strip (Desktop / Tablet) -->
+    <section class="deity-strip" aria-label="Norse Deities &amp; Domains">
+      <div class="deity-card tyr">
+        <div class="deity-avatar">ᛏ</div>
+        <div class="deity-content">
+          <h4>Týr — Law, Oaths &amp; Defensive Armor</h4>
+          <div class="deity-role">Tiwaz Rune • Asgard / Midgard</div>
+          <p class="deity-desc">God of justice who bound Fenrir. Oversees strict zero-custody data handling, hardened DNSSEC armor, and immutable service level agreements.</p>
+        </div>
+      </div>
+
+      <div class="deity-card freyja">
+        <div class="deity-avatar">ᚠ</div>
+        <div class="deity-content">
+          <h4>Freyja — Wealth &amp; Expense Optimization</h4>
+          <div class="deity-role">Fehu Rune • Vanaheim / Fólkvangr</div>
+          <p class="deity-desc">Sovereign of gold and Seiðr craft. Governs forensic financial audits, clawing back predatory vendor fees, and sovereign asset preservation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Catalog View -->
+    <main class="catalog-container">
+      <div class="page-header">
+        <h2 id="page-title">Web, Email &amp; QR Foundations</h2>
+        <p id="page-subtitle">Hardened static web presence, cryptographic email security, and instant digital intake.</p>
+      </div>
+
+      <!-- Mobile Stepper Bar (Active on Smartphone/APK) -->
+      <div class="step-controls">
+        <button class="step-btn" onclick="stepCard(-1)">◀ Prev</button>
+        <span class="step-counter" id="mobile-card-counter">Card 1 of 3</span>
+        <button class="step-btn" onclick="stepCard(1)">Next ▶</button>
+      </div>
+
+      <!-- Service Card Deck Grid -->
+      <section class="deck-grid" id="deck-grid">
+        <!-- Rendered dynamically by js/deck.js -->
+      </section>
+    </main>
+
+    <!-- Sticky Mobile Quick Dial Bar -->
+    <div class="mobile-action-bar">
+      <div class="mobile-action-inner">
+        <a href="tel:+16592578043" class="btn-primary btn-call">
+          📞 Call (659) 257-8043
+        </a>
+        <button class="btn-primary btn-order" id="mobile-order-sku">
+          Order SKU
+        </button>
+      </div>
+    </div>
+
+    <!-- Desktop Footer & Statutory Compliance -->
+    <footer class="app-footer">
+      <div class="footer-inner">
+        <div class="footer-meta">
+          <div><strong>Entity:</strong> CALEB TR HOLCOMB d/b/a TYR</div>
+          <div><strong>Trade Name:</strong> TYR Technical Consulting</div>
+          <div><strong>Application ID:</strong> pro.tyrprotocol.storefront</div>
+          <div><strong>NAICS:</strong> 541512 (Computer Systems Design) &amp; 541611 (Admin Consulting)</div>
+          <div><strong>Tax Registration:</strong> EIN: 42-XXX-X843 (CP 575 G — Full W-9 Issued Upon Engagement)</div>
+          <div><strong>Delivery:</strong> 100% Remote Digital Delivery &amp; Northwest Alabama (Lamar &amp; Marion County, AL)</div>
+          <div><strong>Channels:</strong> tyr@tyrprotocol.pro • +1-659-257-8043</div>
+        </div>
+        <div class="footer-disclaimer">
+          <p><strong>Zero-Custody Privacy Rule:</strong> 0 Raw Financial Data Stored — Raw bank/utility statements are purged immediately (0-Day) upon audit completion; only the sanitized flat-grid ledger and savings report are retained.</p>
+          <p style="margin-top: 6px;"><strong>Statutory Disclaimer:</strong> Tyr Technical Consulting is an independent technical &amp; administrative consulting practice (NAICS 541512 &amp; 541611), not a law firm, CPA firm, or licensed insurance adjuster, and does not provide legal representation or formal tax/attestation opinions.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Order Dispatch Modal -->
+  <div class="modal-overlay" id="order-modal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button class="close-btn" onclick="closeOrderModal()" aria-label="Close">✕</button>
+      <h3 id="modal-sku">SKU Order</h3>
+      <p id="modal-title" style="color: var(--text-secondary); font-size: 13px;"></p>
+      <div class="modal-price-tag" id="modal-price"></div>
+      
+      <p style="font-size: 13px; color: var(--text-muted); line-height: 1.4;">
+        Direct engagement via encrypted channel. No long-term lock-in. Zero raw intake data stored.
+      </p>
+
+      <div class="modal-actions">
+        <a id="modal-email-btn" href="#" class="btn-primary">
+          ✉️ Dispatch Order Brief via Email
+        </a>
+        <a id="modal-sms-btn" href="#" class="btn-secondary">
+          💬 Send Text / SMS Brief
+        </a>
+        <a href="tel:+16592578043" class="btn-primary btn-call">
+          📞 Direct Phone Consultation: (659) 257-8043
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legal OPSEC Modal -->
+  <div class="modal-overlay" id="legal-modal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button class="close-btn" onclick="toggleLegalModal(false)" aria-label="Close">✕</button>
+      <h3>⚖️ OPSEC &amp; Entity Governance</h3>
+      <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-top: 12px; display: flex; flex-direction: column; gap: 8px;">
+        <p><strong>Legal Entity:</strong> CALEB TR HOLCOMB d/b/a TYR</p>
+        <p><strong>NAICS Codes:</strong> 541512 (Systems Design) &amp; 541611 (Management Consulting)</p>
+        <p><strong>Tax ID Display:</strong> EIN: 42-XXX-X843 (CP 575 G — Full W-9 Issued Upon Executed Engagement)</p>
+        <p><strong>Zero-Address Policy:</strong> 100% Remote Digital Delivery &amp; Northwest Alabama (Lamar County, AL | Marion County, AL | United States).</p>
+        <p><strong>Zero-Custody Covenant:</strong> 0 Raw Financial Data Stored. Bank/utility statements purged immediately (0-Day) upon audit completion.</p>
+        <p style="font-size: 11px; color: var(--text-muted); border-top: 1px solid var(--border-subtle); padding-top: 8px;">
+          Tyr Technical Consulting is an independent consulting practice (NAICS 541512 &amp; 541611), not a law firm, CPA firm, or licensed insurance adjuster, and does not provide legal representation or formal tax/attestation opinions.
+        </p>
+      </div>
+      <div style="margin-top: 16px;">
+        <button class="btn-secondary" style="width: 100%;" onclick="toggleLegalModal(false)">Close OPSEC Dossier</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/deck.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

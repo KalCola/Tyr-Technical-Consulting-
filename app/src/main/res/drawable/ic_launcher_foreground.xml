@@ -1,0 +1,57 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Outer Runic Ring / Shield Border -->
+    <path
+        android:strokeColor="#DC2626"
+        android:strokeWidth="2.5"
+        android:fillColor="#00000000"
+        android:pathData="M54,14 A40,40 0 1,1 53.9,14 Z" />
+    <path
+        android:strokeColor="#D97706"
+        android:strokeWidth="1"
+        android:fillColor="#00000000"
+        android:pathData="M54,19 A35,35 0 1,1 53.9,19 Z" />
+
+    <!-- Tyr's Tiwaz Rune (ᛏ) Spearhead / Arrow -->
+    <!-- Center Shaft / Sword Blade -->
+    <path
+        android:fillColor="#FBBF24"
+        android:pathData="M51,24 L57,24 L57,78 L51,78 Z" />
+    <path
+        android:fillColor="#F59E0B"
+        android:pathData="M54,24 L57,24 L57,78 L54,78 Z" />
+
+    <!-- Tiwaz Wings -->
+    <path
+        android:fillColor="#FBBF24"
+        android:pathData="M54,21 L35,40 L40,44 L54,30 L68,44 L73,40 Z" />
+
+    <!-- Sword Crossguard -->
+    <path
+        android:fillColor="#DC2626"
+        android:pathData="M42,67 L66,67 L66,70 L42,70 Z" />
+
+    <!-- Sword Pommel & Grip -->
+    <path
+        android:fillColor="#D97706"
+        android:pathData="M52,70 L56,70 L56,82 L52,82 Z" />
+    <path
+        android:fillColor="#FBBF24"
+        android:pathData="M54,82 A3,3 0 1,1 53.9,82 Z" />
+
+    <!-- Runes on Shield flanks: Freyja's Fehu (ᚠ) and Algiz (ᛉ) -->
+    <path
+        android:strokeColor="#34D399"
+        android:strokeWidth="1.5"
+        android:fillColor="#00000000"
+        android:pathData="M27,50 L27,62 M27,53 L32,49 M27,57 L32,53" />
+    <path
+        android:strokeColor="#FBBF24"
+        android:strokeWidth="1.5"
+        android:fillColor="#00000000"
+        android:pathData="M81,50 L81,62 M81,56 L76,51 M81,56 L86,51" />
+</vector>
+

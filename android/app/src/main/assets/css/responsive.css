@@ -1,0 +1,198 @@
+/* TYR Protocol — Mobile Zero-Scroll 1-Card Stepper */
+
+/* Sticky Quick Action Mobile Dial Bar */
+.mobile-action-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(6, 6, 9, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border-subtle);
+  padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.8);
+}
+
+.mobile-action-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.mobile-action-inner .btn-call {
+  flex: 1;
+}
+
+.mobile-action-inner .btn-order {
+  flex: 1;
+}
+
+.step-controls {
+  display: none;
+}
+
+/* Mobile & Hardened APK 100dvh Zero-Scroll Mode */
+@media (max-width: 768px), (pointer: coarse) {
+  html[data-device="mobile"],
+  body[data-device="mobile"] {
+    height: 100%;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  html[data-device="mobile"] .app-wrapper {
+    height: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+  }
+
+  html[data-device="mobile"] .app-header {
+    padding: 6px 12px;
+    flex-shrink: 0;
+  }
+
+  html[data-device="mobile"] .brand-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+
+  html[data-device="mobile"] .brand-text h1 {
+    font-size: 14px;
+  }
+
+  html[data-device="mobile"] .brand-text p {
+    display: none;
+  }
+
+  html[data-device="mobile"] .deity-strip {
+    display: none; /* Collapsed on zero-scroll single card view to preserve >74% card height */
+  }
+
+  html[data-device="mobile"] .catalog-container {
+    margin: 8px auto 0;
+    padding: 0 12px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: calc(100% - 110px);
+  }
+
+  html[data-device="mobile"] .page-header {
+    margin-bottom: 8px;
+    flex-shrink: 0;
+  }
+
+  html[data-device="mobile"] .page-header h2 {
+    font-size: 16px;
+  }
+
+  html[data-device="mobile"] .page-header p {
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Single Active Card fills >74% of available space */
+  html[data-device="mobile"] .deck-grid {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+  }
+
+  html[data-device="mobile"] .card {
+    display: none;
+    height: 100%;
+    min-height: 74%;
+    padding: 14px;
+    gap: 10px;
+    animation: fadeInCard 0.2s ease forwards;
+  }
+
+  html[data-device="mobile"] .card.mobile-active {
+    display: flex;
+  }
+
+  html[data-device="mobile"] .card h3 {
+    font-size: 15px;
+  }
+
+  html[data-device="mobile"] .card-bullets {
+    gap: 6px;
+    overflow-y: auto;
+  }
+
+  html[data-device="mobile"] .card-bullets li {
+    font-size: 12px;
+  }
+
+  html[data-device="mobile"] .card-footer {
+    padding-top: 8px;
+  }
+
+  html[data-device="mobile"] .app-footer {
+    display: none; /* Access via footer info modal on mobile */
+  }
+
+  /* Mobile Stepper Controls Bar */
+  html[data-device="mobile"] .step-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 12px;
+    background: var(--bg-surface);
+    border-radius: var(--radius-md);
+    margin-bottom: 8px;
+    border: 1px solid var(--border-subtle);
+    flex-shrink: 0;
+  }
+
+  html[data-device="mobile"] .step-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    color: var(--text-main);
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  html[data-device="mobile"] .step-counter {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-gold);
+    font-weight: 700;
+  }
+
+  .mobile-action-bar {
+    display: block;
+  }
+}
+
+@keyframes fadeInCard {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

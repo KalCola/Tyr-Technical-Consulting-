@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>TYR Technical Consulting | Zero-Lock-In Websites, Security &amp; Audits</title>
+  <meta name="description" content="CALEB TR HOLCOMB d/b/a TYR — Defensive cybersecurity, $0/mo static websites, B2B contracts, and expense auditing in Northwest Alabama &amp; Remote.">
+  <link rel="canonical" href="https://tyrprotocol.pro/">
+  <meta name="theme-color" content="#dc2626">
+  <meta name="color-scheme" content="dark">
+
+  <!-- OpenGraph & Social Rich Previews ($0 Organic Sharing) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="TYR Technical Consulting">
+  <meta property="og:title" content="TYR Technical Consulting | $0/mo Websites, Domain Shield &amp; Expense Audits">
+  <meta property="og:description" content="Zero-custody defensive IT, DMARC email shields, E-Sign SOW kits, and ISP/Schedule C audits for Northwest Alabama &amp; remote operators. No SaaS hostage fees.">
+  <meta property="og:url" content="https://tyrprotocol.pro/">
+  <meta property="og:image" content="https://tyrprotocol.pro/assets/logo-512.jpg">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter / X Rich Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TYR Technical Consulting | Zero-Lock-In Tech &amp; Expense Audits">
+  <meta name="twitter:description" content="One-time builds ($135–$295), 100% client master ownership, SHA-384 receipts, and free 60s security/savings audit.">
+  <meta name="twitter:image" content="https://tyrprotocol.pro/assets/logo-512.jpg">
+
+  <!-- Local Service-Area SEO Schema (OPSEC Clean: Coarse Region Only) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "TYR Technical Consulting",
+    "legalName": "CALEB TR HOLCOMB d/b/a TYR",
+    "url": "https://tyrprotocol.pro/",
+    "logo": "https://tyrprotocol.pro/assets/logo-512.jpg",
+    "image": "https://tyrprotocol.pro/assets/logo-512.jpg",
+    "telephone": "+1-659-257-8043",
+    "email": "tyr@tyrprotocol.pro",
+    "naics": "541512",
+    "priceRange": "$55 - $495",
+    "areaServed": [
+      { "@type": "Place", "name": "Northwest Alabama" },
+      { "@type": "Country", "name": "United States" }
+    ],
+    "sameAs": [
+      "https://github.com/kalcola/tyrs-technical-consultation-",
+      "https://www.linkedin.com/company/tyrs-technical-consulting"
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "TYR Zero-Lock-In Service Catalog",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "name": "Midgard Custom Website Launch (SVC-WEB-01)",
+          "price": "245",
+          "priceCurrency": "USD",
+          "url": "https://tyrprotocol.pro/?sku=SVC-WEB-01"
+        },
+        {
+          "@type": "Offer",
+          "name": "Asgard Domain & DMARC Email Shield (SVC-DOM-02)",
+          "price": "165",
+          "priceCurrency": "USD",
+          "url": "https://tyrprotocol.pro/?sku=SVC-DOM-02"
+        },
+        {
+          "@type": "Offer",
+          "name": "Jotunheim Billing & ISP Dispute Kit (SVC-AUD-09)",
+          "price": "175",
+          "priceCurrency": "USD",
+          "url": "https://tyrprotocol.pro/?sku=SVC-AUD-09"
+        }
+      ]
+    }
+  }
+  </script>
+
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="./assets/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/deck.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+
+  <style>
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(4, 4, 7, 0.86);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-highlight);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      max-width: 520px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.9);
+      position: relative;
+    }
+    .modal-card h3 {
+      font-size: 18px;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+    .modal-price-tag {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      color: var(--text-gold);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .modal-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: var(--bg-attr);
+      border: 1px solid var(--border-subtle);
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      color: var(--text-muted);
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .catalog-source-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-attr);
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .catalog-source-badge:hover {
+      border-color: #3b82f6;
+    }
+    .catalog-source-badge.badge-remote {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: #34d399;
+    }
+    .catalog-source-badge.badge-dynamic {
+      background: rgba(59, 130, 246, 0.15);
+      border-color: rgba(59, 130, 246, 0.4);
+      color: #60a5fa;
+    }
+    .catalog-source-badge.badge-cached {
+      background: rgba(245, 158, 11, 0.15);
+      border-color: rgba(245, 158, 11, 0.4);
+      color: #fbbf24;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-wrapper">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-inner">
+        <div class="brand-block">
+          <div class="brand-icon">ᛏ</div>
+          <div class="brand-text">
+            <h1>TYR TECHNICAL CONSULTING</h1>
+            <p>NAICS 541512 &amp; 541611 • Defensive Systems &amp; Storefront</p>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <div class="mode-switcher" id="storefront-mode-toggle" role="group" aria-label="Personal or Business Storefront Mode">
+            <button type="button" id="mode-btn-personal" class="mode-switch-pill active-personal" onclick="window.setStorefrontMode && window.setStorefrontMode('personal')">👤 Personal</button>
+            <button type="button" id="mode-btn-business" class="mode-switch-pill" onclick="window.setStorefrontMode && window.setStorefrontMode('business')">🏢 Business</button>
+          </div>
+          <button id="catalog-source-badge" class="catalog-source-badge badge-remote" onclick="openCatalogSyncModal()" title="Dynamic Catalog JSON Source Status">
+            🟢 Remote JSON
+          </button>
+          <button class="icon-cta" onclick="navigateToPage(0)" title="Personal &amp; Business 3D Interactive Card">
+            <span>🪪 3D Card</span>
+          </button>
+          <button class="icon-cta" onclick="navigateToPage(22)" title="Zero-Cost Growth, 60s Quick Audit &amp; QR Flyer Studio">
+            <span>🚀 Growth</span>
+          </button>
+          <button class="icon-cta" onclick="window.TyrGrowth && window.TyrGrowth.downloadVCard()" title="Save Contact (.vcf) Directly">
+            <span>⬇ .vcf</span>
+          </button>
+          <button class="icon-cta" onclick="openCategoryDrawer()" title="Open Grouped Category Drawer &amp; Recent Tabs">
+            <span>🧭 Drawer</span>
+          </button>
+          <button class="icon-cta" onclick="navigateToPage(20)" title="Stripe Hosted Checkout &amp; SHA-384 Receipts">
+            <span>💳 Stripe</span>
+          </button>
+          <button class="icon-cta" onclick="navigateToPage(21)" title="SHA-384 Field Forensics &amp; EXIF Scrubber">
+            <span>🔬 Forensics</span>
+          </button>
+          <a href="tel:+16592578043" class="icon-cta call-direct" title="Call (659) 257-8043">
+            <span>📞</span> <span>(659) 257-8043</span>
+          </a>
+          <button class="icon-cta" onclick="toggleLegalModal(true)" title="Statutory &amp; Entity Info">
+            <span>⚖️ OPSEC</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Stepper Navigation -->
+    <nav class="stepper-nav" aria-label="Catalog &amp; Workflow Pages">
+      <div class="stepper-inner">
+        <button class="step-tab" onclick="openCategoryDrawer()" title="Category Navigation Drawer">🧭 Categories</button>
+        <button id="compact-mode-toggle" class="compact-toggle-pill" onclick="toggleCompactMode()" title="Toggle Dense Compact Service Cards">▤ Compact: OFF</button>
+        <button class="step-tab" data-page="0"><span class="tab-num">P0</span> 🪪 3D Card</button>
+        <button class="step-tab active" data-page="1"><span class="tab-num">P1</span> Web &amp; Shield</button>
+        <button class="step-tab" data-page="2"><span class="tab-num">P2</span> Contracts &amp; Dossiers</button>
+        <button class="step-tab" data-page="3"><span class="tab-num">P3</span> Budgets &amp; Disputes</button>
+        <button class="step-tab" data-page="4"><span class="tab-num">P4</span> Tactical Kits</button>
+        <button class="step-tab" data-page="5"><span class="tab-num">P5</span> Tech Retainers</button>
+        <button class="step-tab" data-page="6"><span class="tab-num">P6</span> Expense &amp; Yggdrasil</button>
+        <button class="step-tab" data-page="7"><span class="tab-num">P7</span> ⚡ Remote SKUs</button>
+        <button class="step-tab" data-page="8"><span class="tab-num">P8</span> 🏢 B2B Suite</button>
+        <button class="step-tab" data-page="9"><span class="tab-num">P9</span> 🔄 B2B Retainers</button>
+        <button class="step-tab" data-page="10"><span class="tab-num">P10</span> Bifröst Workflow</button>
+        <button class="step-tab" data-page="11"><span class="tab-num">P11</span> 🌐 All Realms</button>
+        <button class="step-tab" data-page="12"><span class="tab-num">P12</span> 🧮 Estimate Cart</button>
+        <button class="step-tab" data-page="13"><span class="tab-num">P13</span> 📝 Intake</button>
+        <button class="step-tab" data-page="14"><span class="tab-num">P14</span> 📋 Tracker</button>
+        <button class="step-tab" data-page="15"><span class="tab-num">P15</span> 🎨 Image Forge</button>
+        <button class="step-tab" data-page="16"><span class="tab-num">P16</span> 📡 Chat Relay</button>
+        <button class="step-tab" data-page="17"><span class="tab-num">P17</span> ✍️ E-Sign</button>
+        <button class="step-tab" data-page="18"><span class="tab-num">P18</span> 🛡️ Vault</button>
+        <button class="step-tab" data-page="19"><span class="tab-num">P19</span> 📅 Booking</button>
+        <button class="step-tab" data-page="20"><span class="tab-num">P20</span> 💳 Stripe &amp; Receipts</button>
+        <button class="step-tab" data-page="21"><span class="tab-num">P21</span> 🔬 Field Forensics</button>
+        <button class="step-tab" data-page="22"><span class="tab-num">P22</span> 🚀 Growth &amp; Audit</button>
+      </div>
+    </nav>
+
+    <!-- Return / Referral Attribution Toast -->
+    <div id="return-reconcile-banner" class="banner-toast" style="display: none;">
+      <span id="return-reconcile-text"></span>
+      <button class="btn-secondary" style="padding: 4px 8px; font-size: 10px;" onclick="document.getElementById('return-reconcile-banner').style.display='none'">Dismiss</button>
+    </div>
+
+    <!-- Deity Lore Strip (Desktop / Tablet) -->
+    <section class="deity-strip" aria-label="Norse Deities &amp; Domains">
+      <div class="deity-card tyr">
+        <div class="deity-avatar">ᛏ</div>
+        <div class="deity-content">
+          <h4>Týr — Law, Oaths &amp; Defensive Armor</h4>
+          <div class="deity-role">Tiwaz Rune • Asgard / Midgard</div>
+          <p class="deity-desc">Oversees strict zero-custody data handling, SHA-384 verifiable receipts, hardened DNSSEC armor, and binding agreements.</p>
+        </div>
+      </div>
+
+      <div class="deity-card freyja">
+        <div class="deity-avatar">ᚠ</div>
+        <div class="deity-content">
+          <h4>Freyja — Wealth &amp; Expense Optimization</h4>
+          <div class="deity-role">Fehu Rune • Vanaheim / Fólkvangr</div>
+          <p class="deity-desc">Governs forensic Schedule C audits, clawing back predatory vendor fees, milestone split clarity, and sovereign stewardship.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Catalog View -->
+    <main class="catalog-container">
+      <div class="page-header">
+        <h2 id="page-title">Web, Email &amp; QR Foundations</h2>
+        <p id="page-subtitle">Hardened static web presence, cryptographic email security, and instant digital intake.</p>
+      </div>
+
+      <!-- Mobile Stepper Bar (Active on Smartphone Catalog Pages 1-9) -->
+      <div class="step-controls" id="mobile-step-controls">
+        <button class="step-btn" onclick="stepCard(-1)">◀ Prev</button>
+        <span class="step-counter" id="mobile-card-counter">Card 1 of 3</span>
+        <button class="step-btn" onclick="stepCard(1)">Next ▶</button>
+      </div>
+
+      <!-- Service Card Deck / Workspace Grid -->
+      <section class="deck-grid" id="deck-grid">
+        <!-- Rendered dynamically by js/deck.js -->
+      </section>
+    </main>
+
+    <!-- Desktop Footer & Statutory Compliance -->
+    <footer class="app-footer">
+      <div class="footer-inner">
+        <div class="footer-meta">
+          <div><strong>Entity:</strong> CALEB TR HOLCOMB d/b/a TYR</div>
+          <div><strong>Trade Name:</strong> TYR Technical Consulting</div>
+          <div><strong>Application ID:</strong> pro.tyrprotocol.storefront</div>
+          <div><strong>NAICS:</strong> 541512 (Computer Systems Design) &amp; 541611 (Admin Consulting)</div>
+          <div><strong>Tax Registration:</strong> EIN: 42-XXX-X843 (CP 575 G — Full W-9 Issued Upon Engagement)</div>
+          <div><strong>Delivery:</strong> 100% Remote Digital Delivery &amp; Northwest Alabama (United States)</div>
+          <div><strong>Channels:</strong> tyr@tyrprotocol.pro • +1-659-257-8043</div>
+        </div>
+        <div class="footer-disclaimer">
+          <p><strong>Zero-Custody &amp; PCI-DSS SAQ-A Rule:</strong> 0 Raw Financial Data Stored — Raw bank/utility statements are purged immediately (0-Day). All Stripe Checkout flows tokenize externally under PCI-DSS v4.0 SAQ-A with WebCrypto SHA-384 receipts.</p>
+          <p style="margin-top: 6px;"><strong>Statutory Disclaimer:</strong> Tyr Technical Consulting is an independent technical &amp; administrative consulting practice (NAICS 541512 &amp; 541611), not a law firm, CPA firm, or licensed insurance adjuster, and does not provide legal representation or formal tax/attestation opinions.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Pinned 6-Action Quick Dock -->
+    <nav class="pinned-bottom-dock" aria-label="Pinned Quick Workflows">
+      <div class="pinned-dock-inner">
+        <button class="dock-btn" id="dock-btn-card" onclick="navigateToPage(0)">
+          <span class="dock-icon">🪪</span>
+          <span>Card</span>
+        </button>
+        <button class="dock-btn active" id="dock-btn-catalog" onclick="navigateToPage(11)">
+          <span class="dock-icon">🏪</span>
+          <span>Catalog</span>
+        </button>
+        <button class="dock-btn" id="dock-btn-quotes" onclick="navigateToPage(12)">
+          <span class="dock-icon">🧮</span>
+          <span>Quotes</span>
+          <span class="dock-badge" id="dock-cart-badge" style="display: none;">0</span>
+        </button>
+        <button class="dock-btn" id="dock-btn-stripe" onclick="navigateToPage(20)">
+          <span class="dock-icon">💳</span>
+          <span>Stripe</span>
+        </button>
+        <button class="dock-btn" id="dock-btn-forensics" onclick="navigateToPage(21)">
+          <span class="dock-icon">🔬</span>
+          <span>Forensics</span>
+        </button>
+        <button class="dock-btn" id="dock-btn-drawer" onclick="openCategoryDrawer()">
+          <span class="dock-icon">🧭</span>
+          <span>Drawer</span>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Order Dispatch Modal -->
+  <div class="modal-overlay" id="order-modal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button class="close-btn" onclick="closeOrderModal()" aria-label="Close">✕</button>
+      <h3 id="modal-sku">SKU Order</h3>
+      <p id="modal-title" style="color: var(--text-secondary); font-size: 13px;"></p>
+      <div class="modal-price-tag" id="modal-price"></div>
+      <p style="font-size: 13px; color: var(--text-muted); line-height: 1.4;">
+        Direct engagement via encrypted channel. No long-term lock-in. Zero raw intake data stored.
+      </p>
+      <div class="modal-actions">
+        <a id="modal-email-btn" href="#" class="btn-primary">✉️ Dispatch Order Brief via Email</a>
+        <a id="modal-sms-btn" href="#" class="btn-secondary">💬 Send Text / SMS Brief</a>
+        <a href="tel:+16592578043" class="btn-primary btn-call">📞 Direct Phone Consultation: (659) 257-8043</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legal OPSEC Modal -->
+  <div class="modal-overlay" id="legal-modal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button class="close-btn" onclick="toggleLegalModal(false)" aria-label="Close">✕</button>
+      <h3>⚖️ OPSEC &amp; Entity Governance</h3>
+      <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-top: 12px; display: flex; flex-direction: column; gap: 8px;">
+        <p><strong>Legal Entity:</strong> CALEB TR HOLCOMB d/b/a TYR</p>
+        <p><strong>NAICS Codes:</strong> 541512 (Systems Design) &amp; 541611 (Management Consulting)</p>
+        <p><strong>Tax ID Display:</strong> EIN: 42-XXX-X843 (CP 575 G — Full W-9 Issued Upon Executed Engagement)</p>
+        <p><strong>Zero-Address Policy:</strong> 100% Remote Digital Delivery &amp; Northwest Alabama (United States).</p>
+        <p><strong>Zero-Custody Covenant:</strong> 0 Raw Financial Data Stored. Bank/utility statements purged immediately (0-Day).</p>
+        <p><strong>Crypto Baseline:</strong> WebCrypto SHA-384 + Argon2id (m=512MB, t=3, p=4). Non-lockout AES-256 only (VeraCrypt / 7-Zip).</p>
+        <p style="font-size: 11px; color: var(--text-muted); border-top: 1px solid var(--border-subtle); padding-top: 8px;">
+          Tyr Technical Consulting is an independent consulting practice (NAICS 541512 &amp; 541611), not a law firm, CPA firm, or licensed insurance adjuster, and does not provide legal representation or formal tax/attestation opinions.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Client Intake & Work Order Modal -->
+  <div class="modal-overlay" id="intake-modal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button class="close-btn" onclick="closeClientIntakeModal()" aria-label="Close">✕</button>
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+        <span class="rune-pill">ᛏ</span>
+        <h3 style="margin: 0;">Client Intake &amp; Work Order</h3>
+      </div>
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
+        Direct client intake under binding SLA covenants. Generates an official Work Order (WO).
+      </p>
+
+      <form onsubmit="handleModalIntakeSubmit(event)" style="display: flex; flex-direction: column; gap: 10px;">
+        <div>
+          <label style="font-size: 10px; text-transform: uppercase; color: var(--text-gold); font-weight: 700;">Client Full Name *</label>
+          <input type="text" id="modal-intake-name" required placeholder="e.g. Jane Doe" style="width: 100%; padding: 8px 10px; margin-top: 3px; border-radius: var(--radius-sm); background: var(--bg-attr); border: 1px solid var(--border-subtle); color: var(--text-main); font-size: 13px;">
+        </div>
+        <div>
+          <label style="font-size: 10px; text-transform: uppercase; color: var(--text-gold); font-weight: 700;">Business / Entity Name</label>
+          <input type="text" id="modal-intake-business" placeholder="Company / Practice" style="width: 100%; padding: 8px 10px; margin-top: 3px; border-radius: var(--radius-sm); background: var(--bg-attr); border: 1px solid var(--border-subtle); color: var(--text-main); font-size: 13px;">
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div>
+            <label style="font-size: 10px; text-transform: uppercase; color: var(--text-gold); font-weight: 700;">Email *</label>
+            <input type="email" id="modal-intake-email" required placeholder="name@domain.com" style="width: 100%; padding: 8px 10px; margin-top: 3px; border-radius: var(--radius-sm); background: var(--bg-attr); border: 1px solid var(--border-subtle); color: var(--text-main); font-size: 13px;">
+          </div>
+          <div>
+            <label style="font-size: 10px; text-transform: uppercase; color: var(--text-gold); font-weight: 700;">Phone</label>
+            <input type="tel" id="modal-intake-phone" placeholder="(555) 000-0000" style="width: 100%; padding: 8px 10px; margin-top: 3px; border-radius: var(--radius-sm); background: var(--bg-attr); border: 1px solid var(--border-subtle); color: var(--text-main); font-size: 13px;">
+          </div>
+        </div>
+        <div>
+          <label style="font-size: 10px; text-transform: uppercase; color: var(--text-gold); font-weight: 700;">Selected Service SKU</label>
+          <select id="modal-intake-service" style="width: 100%; padding: 8px 10px; margin-top: 3px; border-radius: var(--radius-sm); background: var(--bg-attr); border: 1px solid var(--border-subtle); color: var(--text-main); font-size: 12px;">
+            <option value="SVC-WEB-01">SVC-WEB-01: Midgard Website Launch ($245)</option>
+            <option value="SVC-DOM-02">SVC-DOM-02: Asgard Domain &amp; Email Shield ($165)</option>
+            <option value="SVC-KIT-03">SVC-KIT-03: Vanaheim QR &amp; Form Kit ($150)</option>
+            <option value="SVC-CAR-04">SVC-CAR-04: Alfheim Resume &amp; Bid Overhaul ($145)</option>
+            <option value="SVC-OPS-05">SVC-OPS-05: Nidavellir 3-Doc E-Sign Kit ($185)</option>
+            <option value="SVC-BUY-06">SVC-BUY-06: Muspelheim Buyer's Dossier ($150)</option>
+            <option value="SVC-CMD-07">SVC-CMD-07: Svartalfheim Budget &amp; Schedule C Hub ($195)</option>
+            <option value="SVC-VLT-08">SVC-VLT-08: Niflheim Insurance &amp; Legacy Vault ($155)</option>
+            <option value="SVC-AUD-09">SVC-AUD-09: Jotunheim Billing &amp; ISP Dispute Kit ($175)</option>
+            <option value="SVC-SOP-11">SVC-SOP-11: SOP &amp; Knowledge Base Blueprint ($175)</option>
+            <option value="SVC-SEC-12">SVC-SEC-12: Remote Workstation Hardening ($135)</option>
+            <option value="SVC-TAX-13">SVC-TAX-13: 1099 Schedule C Ledger ($165)</option>
+            <option value="SVC-B2B-16">SVC-B2B-16: B2B Vendor Onboarding &amp; MSA Suite ($295)</option>
+            <option value="SVC-B2B-17">SVC-B2B-17: Corporate Anti-Phishing &amp; Wire Protocol ($245)</option>
+            <option value="RET-ALL-07">RET-ALL-07: Yggdrasil Complete Retainer ($495 / $165–$215 mo)</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size: 10px; text-transform: uppercase; color: var(--text-gold); font-weight: 700;">Timeline</label>
+          <select id="modal-intake-timeline" style="width: 100%; padding: 8px 10px; margin-top: 3px; border-radius: var(--radius-sm); background: var(--bg-attr); border: 1px solid var(--border-subtle); color: var(--text-main); font-size: 12px;">
+            <option value="Standard (7-14 Days)">Standard Turnaround (7–14 Days)</option>
+            <option value="Rush (48-72h)">Rush SLA (48–72h Delivery)</option>
+            <option value="Flexible">Flexible Schedule</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size: 10px; text-transform: uppercase; color: var(--text-gold); font-weight: 700;">Project Scope Notes</label>
+          <textarea id="modal-intake-desc" rows="2" placeholder="Describe key requirements, priorities, or target deliverables..." style="width: 100%; padding: 8px 10px; margin-top: 3px; border-radius: var(--radius-sm); background: var(--bg-attr); border: 1px solid var(--border-subtle); color: var(--text-main); font-size: 12px;"></textarea>
+        </div>
+        <div style="background: rgba(220, 38, 38, 0.1); border: 1px solid rgba(220, 38, 38, 0.25); padding: 8px; border-radius: var(--radius-sm);">
+          <label style="display: flex; align-items: flex-start; gap: 6px; font-size: 10px; color: var(--text-secondary); cursor: pointer;">
+            <input type="checkbox" checked required style="margin-top: 2px;">
+            <span>Zero-Custody Covenant: 0 Raw Financial Data Stored; raw statements purged (0-Day) upon completion.</span>
+          </label>
+        </div>
+        <div style="display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap;">
+          <button type="submit" class="btn-primary" style="flex: 1; padding: 10px;">Submit Work Order</button>
+          <button type="button" onclick="handleModalIntakeChain()" class="btn-stripe" style="flex: 1; justify-content: center;">⚡ Submit &amp; Chain SOW + Stripe</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Catalog Source & Sync Modal -->
+  <div id="catalog-sync-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button class="close-btn" onclick="closeCatalogSyncModal()" aria-label="Close">&times;</button>
+      <h3>🔄 Catalog JSON Data Source</h3>
+      <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 14px; line-height: 1.5;">
+        Configure whether the service catalog is fetched live from the GitHub Pages repository or dynamic local JSON.
+      </p>
+      <form onsubmit="applyCatalogEndpoint(event)">
+        <div style="margin-bottom: 12px;">
+          <label style="font-size: 10px; text-transform: uppercase; color: var(--text-gold); font-weight: 700; display: block; margin-bottom: 4px;">
+            Active JSON Endpoint URL
+          </label>
+          <input type="url" id="custom-endpoint-input" placeholder="https://.../catalog.json" required
+            style="width: 100%; padding: 8px 10px; border-radius: var(--radius-sm); background: var(--bg-attr); border: 1px solid var(--border-subtle); color: var(--text-main); font-size: 12px; font-family: monospace;">
+        </div>
+        <div style="margin-bottom: 14px;">
+          <label style="font-size: 10px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 6px;">
+            Quick Presets
+          </label>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button type="button" class="btn-secondary" style="font-size: 11px; padding: 5px 8px;"
+              onclick="document.getElementById('custom-endpoint-input').value='https://raw.githubusercontent.com/kalcola/tyrs-technical-consultation-/main/data/catalog.json'">
+              🌐 GitHub Raw (kalcola)
+            </button>
+            <button type="button" class="btn-secondary" style="font-size: 11px; padding: 5px 8px;"
+              onclick="document.getElementById('custom-endpoint-input').value='./data/catalog.json'">
+              ⚡ Dynamic Local
+            </button>
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px; margin-top: 16px;">
+          <button type="submit" class="btn-primary" style="flex: 1; padding: 9px;">Apply &amp; Sync Catalog</button>
+          <button type="button" class="btn-secondary" onclick="resetCatalogEndpoint()" style="font-size: 12px;">Reset Default</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Grouped Category Navigation Drawer Modal -->
+  <div id="category-drawer-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-card drawer-card">
+      <button class="close-btn" onclick="closeCategoryDrawer()" aria-label="Close">✕</button>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span class="rune-pill">🧭</span>
+        <div>
+          <h3 style="margin: 0;">Category Navigation &amp; Quick Switcher</h3>
+          <p style="font-size: 11px; color: var(--text-secondary); margin: 0;">All 23 storefront views grouped by realm &amp; operational function</p>
+        </div>
+      </div>
+
+      <div id="drawer-recent-container" class="drawer-recent-strip"></div>
+      <div id="drawer-groups-container"></div>
+    </div>
+  </div>
+
+  <!-- Stripe Checkout & Split-Payment Modal -->
+  <div id="stripe-checkout-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button class="close-btn" onclick="closeStripeCheckoutModal()" aria-label="Close">✕</button>
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+        <span class="rune-pill" style="background: #635bff; color: #fff;">💳</span>
+        <div>
+          <h3 style="margin: 0;">Stripe Hosted Checkout</h3>
+          <p style="font-size: 11px; color: #a5b4fc; margin: 0;">PCI-DSS v4.0 SAQ-A • Plan chkplan_61VkmY...</p>
+        </div>
+      </div>
+
+      <div id="stripe-modal-items-summary" style="background: var(--bg-attr); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 10px; margin: 10px 0; font-size: 12px;"></div>
+
+      <div style="margin-bottom: 12px;">
+        <label style="font-size: 10px; text-transform: uppercase; color: var(--text-gold); font-weight: 700; display: block; margin-bottom: 6px;">
+          Deposit &amp; Milestone Split Calculator
+        </label>
+        <div id="stripe-split-buttons" style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;"></div>
+        <div id="stripe-custom-split-wrap" style="display: none; margin-top: 8px;">
+          <label style="font-size: 10px; color: var(--text-secondary);">Custom Split % (10%–100%): <strong id="stripe-custom-split-val">25%</strong></label>
+          <input type="range" id="stripe-custom-split-slider" min="10" max="100" value="25" oninput="updateStripeSplitPreview()" style="width: 100%; margin-top: 4px;">
+        </div>
+        <div id="stripe-split-due-banner" style="margin-top: 8px; padding: 8px 10px; border-radius: var(--radius-sm); background: rgba(99, 91, 255, 0.15); border: 1px solid #635bff; font-size: 12px; font-weight: 700; color: #fff;"></div>
+      </div>
+
+      <form onsubmit="submitStripeModalCheckout(event)" style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div>
+            <label style="font-size: 10px; text-transform: uppercase; color: var(--text-gold); font-weight: 700;">Client Name *</label>
+            <input type="text" id="stripe-modal-name" required placeholder="Jane Doe" style="width: 100%; padding: 8px; border-radius: var(--radius-sm); background: var(--bg-attr); border: 1px solid var(--border-subtle); color: #fff; font-size: 12px;">
+          </div>
+          <div>
+            <label style="font-size: 10px; text-transform: uppercase; color: var(--text-gold); font-weight: 700;">Receipt Email *</label>
+            <input type="email" id="stripe-modal-email" required placeholder="client@domain.com" style="width: 100%; padding: 8px; border-radius: var(--radius-sm); background: var(--bg-attr); border: 1px solid var(--border-subtle); color: #fff; font-size: 12px;">
+          </div>
+        </div>
+        <div>
+          <label style="font-size: 10px; text-transform: uppercase; color: var(--text-gold); font-weight: 700;">Business / Organization</label>
+          <input type="text" id="stripe-modal-business" placeholder="Optional" style="width: 100%; padding: 8px; border-radius: var(--radius-sm); background: var(--bg-attr); border: 1px solid var(--border-subtle); color: #fff; font-size: 12px;">
+        </div>
+        <button type="submit" class="btn-stripe" style="width: 100%; justify-content: center; padding: 11px; font-size: 13px;">
+          🔒 Authorize &amp; Issue SHA-384 Receipt
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="./js/stripe-checkout.js"></script>
+  <script src="./js/forensics.js"></script>
+  <script src="./js/growth-kit.js"></script>
+  <script src="./js/deck.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

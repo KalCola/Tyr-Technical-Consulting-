@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' data:; connect-src 'self' blob:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:;">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#060609">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Caleb Holcomb — TYR">
+  <title>Caleb Holcomb — TYR Technical Consulting (3D Card)</title>
+  <style>
+    :root {
+      --bg-obsidian: #060609;
+      --bg-surface: #0c0d13;
+      --bg-card: #11131a;
+      --bg-attr: #090a0f;
+      --border-subtle: #232634;
+      --border-steel: #3b4252;
+      --text-main: #f4f5f8;
+      --text-silver: #cbd5e1;
+      --text-muted: #94a3b8;
+      --tyr-crimson: #dc2626;
+      --tyr-crimson-light: #f87171;
+      --freyja-gold: #d97706;
+      --freyja-gold-light: #fbbf24;
+      --loki-emerald: #059669;
+      --loki-emerald-light: #34d399;
+      --loki-flame: #e11d48;
+      --glint-x: 50%;
+      --glint-y: 42%;
+      --active-glow-primary: #dc2626;
+      --active-glow-secondary: #fbbf24;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      height: 100dvh;
+      background: radial-gradient(circle at 50% 0%, #151824 0%, var(--bg-obsidian) 72%);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.45;
+      overflow: hidden;
+      overscroll-behavior: none;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.45rem;
+      margin: 0;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--freyja-gold-light);
+      outline-offset: 2px;
+    }
+
+    .omni-viewport {
+      width: 100%;
+      max-width: 720px;
+      height: 100%;
+      max-height: 100dvh;
+      perspective: 1450px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.35rem;
+      cursor: grab;
+      touch-action: none;
+      position: relative;
+    }
+
+    .omni-viewport.dragging {
+      cursor: grabbing;
+    }
+
+    .omni-card-3d {
+      width: 100%;
+      max-width: 680px;
+      min-height: 395px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
+    }
+
+    .omni-card-3d.no-transition {
+      transition: none;
+    }
+
+    .omni-face {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      min-height: 395px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 16px;
+      padding: 1.15rem 1.3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.65rem;
+      overflow: hidden;
+      isolation: isolate;
+      background: linear-gradient(155deg, #131622 0%, var(--bg-card) 52%, var(--bg-obsidian) 100%);
+    }
+
+    /* Nine Realms Obsidian Glowing Border Highlights */
+    .omni-face-front {
+      border: 1.5px solid rgba(220, 38, 38, 0.78);
+      box-shadow:
+        0 0 0 1px rgba(251, 191, 36, 0.2),
+        0 0 28px rgba(220, 38, 38, 0.28),
+        0 18px 46px rgba(0, 0, 0, 0.88),
+        inset 0 1px 0 rgba(248, 113, 113, 0.22);
+      transform: rotateY(0deg) translateZ(2px);
+    }
+
+    .omni-face-back {
+      border: 1.5px solid rgba(251, 191, 36, 0.78);
+      box-shadow:
+        0 0 0 1px rgba(52, 211, 153, 0.22),
+        0 0 28px rgba(251, 191, 36, 0.26),
+        0 18px 46px rgba(0, 0, 0, 0.9),
+        inset 0 1px 0 rgba(251, 191, 36, 0.22);
+      transform: rotateY(180deg) translateZ(2px);
+    }
+
+    .omni-face.glow-tyr {
+      border-color: rgba(220, 38, 38, 0.85);
+      box-shadow:
+        0 0 0 1px rgba(248, 113, 113, 0.28),
+        0 0 32px rgba(220, 38, 38, 0.34),
+        0 18px 46px rgba(0, 0, 0, 0.9);
+    }
+
+    .omni-face.glow-freyja {
+      border-color: rgba(251, 191, 36, 0.85);
+      box-shadow:
+        0 0 0 1px rgba(251, 191, 36, 0.3),
+        0 0 32px rgba(217, 119, 6, 0.34),
+        0 18px 46px rgba(0, 0, 0, 0.9);
+    }
+
+    .omni-face.glow-loki {
+      border-color: rgba(52, 211, 153, 0.82);
+      box-shadow:
+        0 0 0 1px rgba(225, 29, 72, 0.25),
+        0 0 32px rgba(5, 150, 105, 0.34),
+        0 18px 46px rgba(0, 0, 0, 0.9);
+    }
+
+    .omni-face::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: radial-gradient(
+        circle 240px at var(--glint-x) var(--glint-y),
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(251, 191, 36, 0.06) 35%,
+        rgba(220, 38, 38, 0.05) 65%,
+        transparent 95%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .runic-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding-bottom: 0.48rem;
+      border-bottom: 1px solid var(--border-subtle);
+      font-family: var(--font-mono);
+      font-size: 0.63rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 4;
+      flex-wrap: wrap;
+    }
+
+    .front-bar span:first-child { color: var(--tyr-crimson-light); font-weight: 700; }
+    .back-bar span:first-child { color: var(--freyja-gold-light); font-weight: 700; }
+
+    .mode-pill-group {
+      display: inline-flex;
+      background: var(--bg-attr);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 2px;
+      gap: 2px;
+    }
+
+    .mode-pill-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .mode-pill-btn.active-personal {
+      background: rgba(220, 38, 38, 0.22);
+      color: #fca5a5;
+      border: 1px solid rgba(220, 38, 38, 0.7);
+    }
+
+    .mode-pill-btn.active-business {
+      background: rgba(217, 119, 6, 0.22);
+      color: #fde68a;
+      border: 1px solid rgba(251, 191, 36, 0.7);
+    }
+
+    .plaque-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.95rem;
+      align-items: center;
+      position: relative;
+      z-index: 4;
+    }
+
+    .identity-row {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .emblem-frame {
+      width: 4.1rem;
+      height: 4.1rem;
+      border-radius: 10px;
+      background: var(--bg-attr);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .emblem-frame.personal-frame {
+      border: 1.5px solid var(--tyr-crimson);
+      box-shadow: 0 0 18px rgba(220, 38, 38, 0.35);
+    }
+
+    .emblem-frame.business-frame {
+      border: 1.5px solid var(--freyja-gold-light);
+      box-shadow: 0 0 18px rgba(251, 191, 36, 0.32);
+    }
+
+    .emblem-img,
+    .emblem-svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .identity-titles h1,
+    .identity-titles h2 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 0.02em;
+      line-height: 1.18;
+    }
+
+    .role-line {
+      font-size: 0.76rem;
+      font-weight: 700;
+      margin-top: 0.14rem;
+    }
+
+    .omni-face-front .role-line { color: var(--freyja-gold-light); }
+    .omni-face-back .role-line { color: var(--loki-emerald-light); }
+
+    .alignment-line {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      margin-top: 0.12rem;
+    }
+
+    /* Canonical Storefront 3-Column Attribute Strip */
+    .attr-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      background: var(--bg-attr);
+      border: 1px solid var(--border-subtle);
+      border-left: 3px solid var(--tyr-crimson);
+      border-radius: 8px;
+      padding: 8px 10px;
+      margin-top: 0.55rem;
+      transition: border-color 0.18s ease;
+    }
+
+    .attr-strip.border-tyr { border-left-color: var(--tyr-crimson); }
+    .attr-strip.border-freyja { border-left-color: var(--freyja-gold-light); }
+    .attr-strip.border-loki { border-left-color: var(--loki-emerald-light); }
+
+    .attr-item {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .attr-label {
+      font-size: 0.56rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .attr-value {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Interactive Deity Tabs */
+    .deity-tabs-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.38rem;
+      margin-top: 0.48rem;
+    }
+
+    .deity-tab {
+      background: var(--bg-attr);
+      border: 1px solid var(--border-subtle);
+      border-radius: 7px;
+      padding: 0.34rem 0.42rem;
+      color: var(--text-silver);
+      font-size: 0.7rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
+    }
+
+    .deity-tab:hover {
+      border-color: var(--border-steel);
+      color: #ffffff;
+    }
+
+    .deity-tab.active-tyr {
+      background: rgba(220, 38, 38, 0.18);
+      border-color: var(--tyr-crimson);
+      color: #fca5a5;
+      box-shadow: 0 0 12px rgba(220, 38, 38, 0.25);
+    }
+
+    .deity-tab.active-freyja {
+      background: rgba(217, 119, 6, 0.18);
+      border-color: var(--freyja-gold-light);
+      color: #fde68a;
+      box-shadow: 0 0 12px rgba(251, 191, 36, 0.24);
+    }
+
+    .deity-tab.active-loki {
+      background: rgba(5, 150, 105, 0.18);
+      border-color: var(--loki-emerald-light);
+      color: #6ee7b7;
+      box-shadow: 0 0 12px rgba(52, 211, 153, 0.24);
+    }
+
+    .deity-insight-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-left: 3px solid var(--tyr-crimson);
+      border-radius: 8px;
+      padding: 0.5rem 0.7rem;
+      margin-top: 0.42rem;
+      font-size: 0.71rem;
+      color: var(--text-silver);
+      min-height: 54px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .deity-insight-box.border-tyr { border-left-color: var(--tyr-crimson); }
+    .deity-insight-box.border-freyja { border-left-color: var(--freyja-gold-light); }
+    .deity-insight-box.border-loki { border-left-color: var(--loki-emerald-light); }
+
+    .insight-heading {
+      font-weight: 700;
+      color: var(--freyja-gold-light);
+      font-size: 0.72rem;
+      margin-bottom: 0.12rem;
+    }
+
+    /* Interactive QR Dock */
+    .qr-dock {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-attr);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 0.52rem;
+      cursor: pointer;
+      transition: border-color 0.15s ease, transform 0.12s ease;
+    }
+
+    .qr-dock:hover {
+      border-color: var(--freyja-gold-light);
+      transform: scale(1.02);
+    }
+
+    .qr-svg-wrap {
+      background: #ffffff;
+      padding: 0.3rem;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 106px;
+      height: 106px;
+      flex-shrink: 0;
+    }
+
+    .qr-svg-wrap svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .qr-caption {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      font-weight: 700;
+      color: var(--freyja-gold-light);
+      text-align: center;
+      margin-top: 0.26rem;
+    }
+
+    .qr-sub {
+      font-size: 0.54rem;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    /* Card Footer */
+    .plaque-footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.4rem;
+      padding-top: 0.48rem;
+      border-top: 1px solid var(--border-subtle);
+      position: relative;
+      z-index: 4;
+    }
+
+    .action-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.32rem;
+    }
+
+    .card-btn {
+      text-decoration: none;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.32rem 0.54rem;
+      border-radius: 6px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.24rem;
+      transition: border-color 0.15s ease, transform 0.1s ease;
+    }
+
+    .card-btn:hover {
+      border-color: var(--freyja-gold-light);
+      transform: translateY(-1px);
+    }
+
+    .card-btn.primary-red {
+      background: var(--tyr-crimson);
+      border-color: var(--tyr-crimson-light);
+      color: #ffffff;
+    }
+
+    .card-btn.primary-emerald {
+      background: rgba(5, 150, 105, 0.2);
+      border-color: var(--loki-emerald);
+      color: var(--loki-emerald-light);
+    }
+
+    .card-btn.primary-gold {
+      background: rgba(217, 119, 6, 0.2);
+      border-color: var(--freyja-gold-light);
+      color: #fde68a;
+    }
+
+    .flip-face-btn {
+      background: var(--bg-attr);
+      border: 1px solid var(--freyja-gold-light);
+      border-radius: 6px;
+      padding: 0.3rem 0.58rem;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: var(--freyja-gold-light);
+      cursor: pointer;
+    }
+
+    .omni-guide-overlay {
+      position: absolute;
+      top: 0.85rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      pointer-events: none;
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      opacity: 1;
+      width: calc(100% - 2rem);
+      max-width: 460px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .omni-guide-overlay.faded-out {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-10px);
+    }
+
+    .guide-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.38rem 0.85rem;
+      border-radius: 9999px;
+      background: rgba(6, 6, 9, 0.92);
+      border: 1px solid rgba(251, 191, 36, 0.75);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.85);
+      color: #fde68a;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .omni-card-3d { min-height: 445px; max-height: 94dvh; }
+      .omni-face { min-height: 445px; padding: 0.85rem 0.95rem; }
+      .plaque-grid { grid-template-columns: 1fr; gap: 0.55rem; }
+      .emblem-frame { width: 3.4rem; height: 3.4rem; }
+      .identity-titles h1, .identity-titles h2 { font-size: 1rem; }
+      .qr-dock { flex-direction: row; gap: 0.75rem; justify-content: flex-start; padding: 0.45rem 0.65rem; }
+      .qr-svg-wrap { width: 74px; height: 74px; }
+      .deity-insight-box { min-height: 48px; padding: 0.38rem 0.55rem; font-size: 0.67rem; }
+      .card-btn { font-size: 0.63rem; padding: 0.26rem 0.44rem; }
+    }
+
+    @media print {
+      body {
+        background: #060609 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .omni-viewport { perspective: none !important; }
+      .omni-card-3d {
+        max-width: 100% !important;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0.3in !important;
+        transform: none !important;
+      }
+      .omni-face {
+        position: relative !important;
+        transform: none !important;
+        backface-visibility: visible !important;
+        -webkit-backface-visibility: visible !important;
+        page-break-inside: avoid;
+      }
+      .omni-guide-overlay { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="omni-viewport" id="omni-viewport" aria-label="Nine Realms 3D Personal and Business Card">
+    <div class="omni-guide-overlay" id="omni-guide-overlay" aria-hidden="true">
+      <div class="guide-badge">
+        <span>⇄</span>
+        <span>Drag to tilt 3D &bull; Double-tap or toggle Personal / Business</span>
+      </div>
+    </div>
+
+    <div class="omni-card-3d" id="omni-card-3d">
+      <!-- FRONT FACE: PERSONAL -->
+      <article class="omni-face omni-face-front glow-tyr" id="face-front" aria-label="Personal Side: Caleb Holcomb">
+        <div class="runic-top-bar front-bar">
+          <span>ᛏ TEIWAZ &bull; ᚠ FEHU &bull; ᚲ KENAZ</span>
+          <div class="mode-pill-group">
+            <button type="button" class="mode-pill-btn active-personal face-switch-btn" data-target-face="personal">👤 Personal</button>
+            <button type="button" class="mode-pill-btn face-switch-btn" data-target-face="business">🏢 Business</button>
+          </div>
+        </div>
+
+        <div class="plaque-grid">
+          <div>
+            <div class="identity-row">
+              <div class="emblem-frame personal-frame">
+                <svg class="emblem-svg" viewBox="0 0 120 120" role="img" aria-label="Nine Realms Tiwaz Rune Shield">
+                  <defs>
+                    <radialGradient id="obsidianGlow" cx="50%" cy="48%" r="50%">
+                      <stop offset="0%" stop-color="#dc2626" stop-opacity="0.45"/>
+                      <stop offset="60%" stop-color="#d97706" stop-opacity="0.16"/>
+                      <stop offset="100%" stop-color="#090a0f" stop-opacity="0"/>
+                    </radialGradient>
+                  </defs>
+                  <rect width="120" height="120" fill="#090a0f"/>
+                  <circle cx="60" cy="58" r="50" fill="url(#obsidianGlow)"/>
+                  <path d="M60,8 L104,24 L102,66 C100,88 83,104 60,113 C37,104 20,88 18,66 L16,24 Z" fill="none" stroke="#dc2626" stroke-width="2.6"/>
+                  <path d="M60,13 L99,28 L97,65 C95,84 80,99 60,107 C40,99 25,84 23,65 L21,28 Z" fill="none" stroke="#fbbf24" stroke-width="1.6"/>
+                  <path d="M60,21 L60,97 M37,43 L60,21 L83,43 M60,55 L86,38 M60,69 L86,52 M60,62 L35,49 L60,77" fill="none" stroke="#dc2626" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M60,22 L60,96 M38,43 L60,22 L82,43 M60,55 L85,39 M60,69 L85,53 M60,62 L36,50 L60,76" fill="none" stroke="#fbbf24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="identity-titles">
+                <h1>CALEB TR HOLCOMB</h1>
+                <div class="role-line">Principal Systems Engineer &amp; Developer</div>
+                <div class="alignment-line">Teiwaz (ᛏ) Anchored • Patron Triad • NW Alabama</div>
+              </div>
+            </div>
+
+            <div class="attr-strip border-tyr" id="front-attr-strip">
+              <div class="attr-item">
+                <span class="attr-label" id="front-attr-k1">Pillar</span>
+                <span class="attr-value" id="front-attr-v1">ᛏ Tiwaz Spine</span>
+              </div>
+              <div class="attr-item">
+                <span class="attr-label" id="front-attr-k2">Alignment</span>
+                <span class="attr-value" id="front-attr-v2">Pisces • 1997</span>
+              </div>
+              <div class="attr-item">
+                <span class="attr-label" id="front-attr-k3">Region</span>
+                <span class="attr-value" id="front-attr-v3">NW Alabama</span>
+              </div>
+            </div>
+
+            <div class="deity-tabs-bar" role="tablist" aria-label="Personal Patron Triad Tabs">
+              <button type="button" class="deity-tab active-tyr" data-deity="tyr" role="tab" aria-selected="true">ᛏ Týr (Truth)</button>
+              <button type="button" class="deity-tab" data-deity="freyja" role="tab" aria-selected="false">ᚠ Freyja (Sovereign)</button>
+              <button type="button" class="deity-tab" data-deity="loki" role="tab" aria-selected="false">ᚲ Loki (Adaptable)</button>
+            </div>
+
+            <div class="deity-insight-box border-tyr" id="front-deity-box" aria-live="polite">
+              <div class="insight-heading" id="front-deity-heading">ᛏ TÝR — UNYIELDING INTEGRITY &amp; KEPT OATHS</div>
+              <div id="front-deity-body">Direct, plainspoken candor and technical accountability—standing firmly behind every architecture and word without pretense.</div>
+            </div>
+          </div>
+
+          <button type="button" class="qr-dock qr-toggle-trigger" title="Tap QR to toggle Website URL vs Contact vCard">
+            <div class="qr-svg-wrap qr-render-target" aria-label="Scannable QR Code"></div>
+            <span class="qr-caption qr-caption-target">SCAN: tyrprotocol.pro</span>
+            <span class="qr-sub">Tap QR to switch mode</span>
+          </button>
+        </div>
+
+        <div class="plaque-footer">
+          <div class="action-links">
+            <a class="card-btn primary-red" href="https://tyrprotocol.pro/?mode=personal" target="_blank" rel="noopener noreferrer">🌐 Storefront</a>
+            <button type="button" class="card-btn primary-emerald download-vcf-trigger">⬇ Save .vcf</button>
+            <button type="button" class="card-btn share-card-trigger">🔗 Share</button>
+            <a class="card-btn" href="https://github.com/kalcola" target="_blank" rel="noopener noreferrer">⌘ GitHub</a>
+            <a class="card-btn" href="tel:+16592578043">📞 (659) 257-8043</a>
+            <a class="card-btn" href="mailto:colacal43@gmail.com">✉ Personal</a>
+            <a class="card-btn" href="mailto:tyr@tyrprotocol.pro">✉ Work</a>
+          </div>
+          <button type="button" class="flip-face-btn flip-card-trigger">⇄ Flip to Business</button>
+        </div>
+      </article>
+
+      <!-- BACK FACE: BUSINESS -->
+      <article class="omni-face omni-face-back glow-freyja" id="face-back" aria-label="Business Side: TYR Technical Consulting">
+        <div class="runic-top-bar back-bar">
+          <span>NAICS 541512 &amp; 541611 &bull; ZERO-CUSTODY SLA</span>
+          <div class="mode-pill-group">
+            <button type="button" class="mode-pill-btn face-switch-btn" data-target-face="personal">👤 Personal</button>
+            <button type="button" class="mode-pill-btn active-business face-switch-btn" data-target-face="business">🏢 Business</button>
+          </div>
+        </div>
+
+        <div class="plaque-grid">
+          <div>
+            <div class="identity-row">
+              <div class="emblem-frame business-frame">
+                <img class="emblem-img" src="data:image/jpeg;base64,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" alt="TYR's Technical Consultation Official Shield Logo">
+              </div>
+              <div class="identity-titles">
+                <h2>TYR TECHNICAL CONSULTING</h2>
+                <div class="role-line">CALEB TR HOLCOMB d/b/a TYR • Verified Practice</div>
+                <div class="alignment-line">EIN: 42-XXX-X843 (CP 575 G) • NAICS 541512 &amp; 541611</div>
+              </div>
+            </div>
+
+            <div class="attr-strip border-freyja" id="back-attr-strip">
+              <div class="attr-item">
+                <span class="attr-label" id="back-attr-k1">NAICS</span>
+                <span class="attr-value" id="back-attr-v1">541512 • 541611</span>
+              </div>
+              <div class="attr-item">
+                <span class="attr-label" id="back-attr-k2">Custody</span>
+                <span class="attr-value" id="back-attr-v2">0-Day Data Purge</span>
+              </div>
+              <div class="attr-item">
+                <span class="attr-label" id="back-attr-k3">Rates</span>
+                <span class="attr-value" id="back-attr-v3">$65–$495 Flat</span>
+              </div>
+            </div>
+
+            <div class="deity-tabs-bar" role="tablist" aria-label="Business Quality Patron Triad Tabs">
+              <button type="button" class="deity-tab active-tyr" data-deity="tyr" role="tab" aria-selected="true">ᛏ Týr (Precision)</button>
+              <button type="button" class="deity-tab" data-deity="freyja" role="tab" aria-selected="false">ᚠ Freyja (Custody)</button>
+              <button type="button" class="deity-tab" data-deity="loki" role="tab" aria-selected="false">ᚲ Loki (Ingenuity)</button>
+            </div>
+
+            <div class="deity-insight-box border-tyr" id="back-deity-box" aria-live="polite">
+              <div class="insight-heading" id="back-deity-heading">ᛏ TÝR QUALITY — ROOT-CAUSE PRECISION &amp; VERIFIABLE RIGOR</div>
+              <div id="back-deity-body">Telemetry-first diagnostics and SHA-384 verifiable engineering. Every deliverable is backed by statutory compliance and clean documentation.</div>
+            </div>
+          </div>
+
+          <button type="button" class="qr-dock qr-toggle-trigger" title="Tap QR to toggle Website URL vs Contact vCard">
+            <div class="qr-svg-wrap qr-render-target" aria-label="Scannable QR Code"></div>
+            <span class="qr-caption qr-caption-target">SCAN: tyrprotocol.pro</span>
+            <span class="qr-sub">Tap QR to switch mode</span>
+          </button>
+        </div>
+
+        <div class="plaque-footer">
+          <div class="action-links">
+            <button type="button" class="card-btn primary-emerald download-vcf-trigger">⬇ Save .vcf</button>
+            <button type="button" class="card-btn share-card-trigger">🔗 Share</button>
+            <a class="card-btn primary-gold" href="sms:+16592578043?body=Hi%20Caleb%20(TYR%20Technical%20Consulting)%2C%20here%20is%20my%20contact%20info%3A%20">📲 Send Me Info</a>
+            <a class="card-btn primary-red" href="https://tyrprotocol.pro/?mode=business" target="_blank" rel="noopener noreferrer">🌐 Service Deck</a>
+            <a class="card-btn" href="https://www.linkedin.com/company/tyrs-technical-consulting" target="_blank" rel="noopener noreferrer">in LinkedIn</a>
+            <a class="card-btn" href="sms:+16592578043">💬 SMS</a>
+            <a class="card-btn" href="mailto:tyr@tyrprotocol.pro">✉ Work</a>
+          </div>
+          <button type="button" class="flip-face-btn flip-card-trigger">⇄ Flip to Personal</button>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <script>
+    (function() {
+      "use strict";
+
+      var QR_URL_SVG = '<svg viewBox="0 0 29 29" shape-rendering="crispEdges" role="img" aria-label="QR Code for https://tyrprotocol.pro"><rect width="29" height="29" fill="#ffffff"/><path fill="#090a0f" d="M2,2h1v1h-1zM3,2h1v1h-1zM4,2h1v1h-1zM5,2h1v1h-1zM6,2h1v1h-1zM7,2h1v1h-1zM8,2h1v1h-1zM11,2h1v1h-1zM12,2h1v1h-1zM15,2h1v1h-1zM16,2h1v1h-1zM17,2h1v1h-1zM20,2h1v1h-1zM21,2h1v1h-1zM22,2h1v1h-1zM23,2h1v1h-1zM24,2h1v1h-1zM25,2h1v1h-1zM26,2h1v1h-1zM2,3h1v1h-1zM8,3h1v1h-1zM10,3h1v1h-1zM12,3h1v1h-1zM13,3h1v1h-1zM16,3h1v1h-1zM17,3h1v1h-1zM18,3h1v1h-1zM20,3h1v1h-1zM26,3h1v1h-1zM2,4h1v1h-1zM4,4h1v1h-1zM5,4h1v1h-1zM6,4h1v1h-1zM8,4h1v1h-1zM11,4h1v1h-1zM12,4h1v1h-1zM13,4h1v1h-1zM17,4h1v1h-1zM18,4h1v1h-1zM20,4h1v1h-1zM22,4h1v1h-1zM23,4h1v1h-1zM24,4h1v1h-1zM26,4h1v1h-1zM2,5h1v1h-1zM4,5h1v1h-1zM5,5h1v1h-1zM6,5h1v1h-1zM8,5h1v1h-1zM13,5h1v1h-1zM16,5h1v1h-1zM17,5h1v1h-1zM20,5h1v1h-1zM22,5h1v1h-1zM23,5h1v1h-1zM24,5h1v1h-1zM26,5h1v1h-1zM2,6h1v1h-1zM4,6h1v1h-1zM5,6h1v1h-1zM6,6h1v1h-1zM8,6h1v1h-1zM10,6h1v1h-1zM12,6h1v1h-1zM13,6h1v1h-1zM15,6h1v1h-1zM16,6h1v1h-1zM17,6h1v1h-1zM20,6h1v1h-1zM22,6h1v1h-1zM23,6h1v1h-1zM24,6h1v1h-1zM26,6h1v1h-1zM2,7h1v1h-1zM8,7h1v1h-1zM14,7h1v1h-1zM15,7h1v1h-1zM16,7h1v1h-1zM17,7h1v1h-1zM18,7h1v1h-1zM20,7h1v1h-1zM26,7h1v1h-1zM2,8h1v1h-1zM3,8h1v1h-1zM4,8h1v1h-1zM5,8h1v1h-1zM6,8h1v1h-1zM7,8h1v1h-1zM8,8h1v1h-1zM10,8h1v1h-1zM12,8h1v1h-1zM14,8h1v1h-1zM16,8h1v1h-1zM18,8h1v1h-1zM20,8h1v1h-1zM21,8h1v1h-1zM22,8h1v1h-1zM23,8h1v1h-1zM24,8h1v1h-1zM25,8h1v1h-1zM26,8h1v1h-1zM11,9h1v1h-1zM12,9h1v1h-1zM13,9h1v1h-1zM14,9h1v1h-1zM15,9h1v1h-1zM18,9h1v1h-1zM2,10h1v1h-1zM4,10h1v1h-1zM6,10h1v1h-1zM8,10h1v1h-1zM14,10h1v1h-1zM15,10h1v1h-1zM16,10h1v1h-1zM17,10h1v1h-1zM18,10h1v1h-1zM22,10h1v1h-1zM25,10h1v1h-1zM5,11h1v1h-1zM7,11h1v1h-1zM18,11h1v1h-1zM20,11h1v1h-1zM26,11h1v1h-1zM3,12h1v1h-1zM4,12h1v1h-1zM5,12h1v1h-1zM8,12h1v1h-1zM15,12h1v1h-1zM18,12h1v1h-1zM22,12h1v1h-1zM24,12h1v1h-1zM25,12h1v1h-1zM26,12h1v1h-1zM3,13h1v1h-1zM5,13h1v1h-1zM6,13h1v1h-1zM10,13h1v1h-1zM12,13h1v1h-1zM13,13h1v1h-1zM14,13h1v1h-1zM15,13h1v1h-1zM17,13h1v1h-1zM18,13h1v1h-1zM25,13h1v1h-1zM3,14h1v1h-1zM4,14h1v1h-1zM5,14h1v1h-1zM7,14h1v1h-1zM8,14h1v1h-1zM11,14h1v1h-1zM12,14h1v1h-1zM14,14h1v1h-1zM15,14h1v1h-1zM19,14h1v1h-1zM20,14h1v1h-1zM21,14h1v1h-1zM23,14h1v1h-1zM25,14h1v1h-1zM26,14h1v1h-1zM5,15h1v1h-1zM7,15h1v1h-1zM10,15h1v1h-1zM13,15h1v1h-1zM14,15h1v1h-1zM15,15h1v1h-1zM16,15h1v1h-1zM18,15h1v1h-1zM20,15h1v1h-1zM23,15h1v1h-1zM26,15h1v1h-1zM2,16h1v1h-1zM4,16h1v1h-1zM5,16h1v1h-1zM6,16h1v1h-1zM8,16h1v1h-1zM11,16h1v1h-1zM13,16h1v1h-1zM14,16h1v1h-1zM16,16h1v1h-1zM20,16h1v1h-1zM21,16h1v1h-1zM24,16h1v1h-1zM25,16h1v1h-1zM26,16h1v1h-1zM3,17h1v1h-1zM4,17h1v1h-1zM7,17h1v1h-1zM12,17h1v1h-1zM14,17h1v1h-1zM15,17h1v1h-1zM18,17h1v1h-1zM19,17h1v1h-1zM20,17h1v1h-1zM22,17h1v1h-1zM25,17h1v1h-1zM2,18h1v1h-1zM4,18h1v1h-1zM6,18h1v1h-1zM7,18h1v1h-1zM8,18h1v1h-1zM11,18h1v1h-1zM13,18h1v1h-1zM15,18h1v1h-1zM17,18h1v1h-1zM18,18h1v1h-1zM19,18h1v1h-1zM20,18h1v1h-1zM21,18h1v1h-1zM22,18h1v1h-1zM23,18h1v1h-1zM10,19h1v1h-1zM11,19h1v1h-1zM12,19h1v1h-1zM13,19h1v1h-1zM15,19h1v1h-1zM16,19h1v1h-1zM17,19h1v1h-1zM18,19h1v1h-1zM22,19h1v1h-1zM23,19h1v1h-1zM25,19h1v1h-1zM26,19h1v1h-1zM2,20h1v1h-1zM3,20h1v1h-1zM4,20h1v1h-1zM5,20h1v1h-1zM6,20h1v1h-1zM7,20h1v1h-1zM8,20h1v1h-1zM15,20h1v1h-1zM16,20h1v1h-1zM17,20h1v1h-1zM18,20h1v1h-1zM20,20h1v1h-1zM22,20h1v1h-1zM23,20h1v1h-1zM25,20h1v1h-1zM26,20h1v1h-1zM2,21h1v1h-1zM8,21h1v1h-1zM11,21h1v1h-1zM13,21h1v1h-1zM15,21h1v1h-1zM18,21h1v1h-1zM22,21h1v1h-1zM23,21h1v1h-1zM26,21h1v1h-1zM2,22h1v1h-1zM4,22h1v1h-1zM5,22h1v1h-1zM6,22h1v1h-1zM8,22h1v1h-1zM10,22h1v1h-1zM14,22h1v1h-1zM15,22h1v1h-1zM18,22h1v1h-1zM19,22h1v1h-1zM20,22h1v1h-1zM21,22h1v1h-1zM22,22h1v1h-1zM23,22h1v1h-1zM25,22h1v1h-1zM26,22h1v1h-1zM2,23h1v1h-1zM4,23h1v1h-1zM5,23h1v1h-1zM6,23h1v1h-1zM8,23h1v1h-1zM11,23h1v1h-1zM12,23h1v1h-1zM13,23h1v1h-1zM14,23h1v1h-1zM17,23h1v1h-1zM18,23h1v1h-1zM21,23h1v1h-1zM22,23h1v1h-1zM23,23h1v1h-1zM24,23h1v1h-1zM2,24h1v1h-1zM4,24h1v1h-1zM5,24h1v1h-1zM6,24h1v1h-1zM8,24h1v1h-1zM10,24h1v1h-1zM11,24h1v1h-1zM12,24h1v1h-1zM13,24h1v1h-1zM14,24h1v1h-1zM15,24h1v1h-1zM18,24h1v1h-1zM19,24h1v1h-1zM22,24h1v1h-1zM26,24h1v1h-1zM2,25h1v1h-1zM8,25h1v1h-1zM12,25h1v1h-1zM14,25h1v1h-1zM15,25h1v1h-1zM16,25h1v1h-1zM18,25h1v1h-1zM19,25h1v1h-1zM22,25h1v1h-1zM23,25h1v1h-1zM25,25h1v1h-1zM2,26h1v1h-1zM3,26h1v1h-1zM4,26h1v1h-1zM5,26h1v1h-1zM6,26h1v1h-1zM7,26h1v1h-1zM8,26h1v1h-1zM10,26h1v1h-1zM12,26h1v1h-1zM13,26h1v1h-1zM14,26h1v1h-1zM16,26h1v1h-1zM17,26h1v1h-1zM18,26h1v1h-1zM20,26h1v1h-1zM21,26h1v1h-1zM25,26h1v1h-1zM26,26h1v1h-1z"/></svg>';
+      var QR_VCARD_SVG = '<svg viewBox="0 0 53 53" shape-rendering="crispEdges" role="img" aria-label="QR Code for Dual-Email vCard Contact"><rect width="53" height="53" fill="#ffffff"/><path fill="#090a0f" d="M2,2h1v1h-1zM3,2h1v1h-1zM4,2h1v1h-1zM5,2h1v1h-1zM6,2h1v1h-1zM7,2h1v1h-1zM8,2h1v1h-1zM11,2h1v1h-1zM13,2h1v1h-1zM17,2h1v1h-1zM18,2h1v1h-1zM19,2h1v1h-1zM21,2h1v1h-1zM22,2h1v1h-1zM23,2h1v1h-1zM24,2h1v1h-1zM27,2h1v1h-1zM28,2h1v1h-1zM31,2h1v1h-1zM32,2h1v1h-1zM33,2h1v1h-1zM34,2h1v1h-1zM35,2h1v1h-1zM36,2h1v1h-1zM39,2h1v1h-1zM42,2h1v1h-1zM44,2h1v1h-1zM45,2h1v1h-1zM46,2h1v1h-1zM47,2h1v1h-1zM48,2h1v1h-1zM49,2h1v1h-1zM50,2h1v1h-1zM2,3h1v1h-1zM8,3h1v1h-1zM11,3h1v1h-1zM13,3h1v1h-1zM14,3h1v1h-1zM16,3h1v1h-1zM18,3h1v1h-1zM20,3h1v1h-1zM21,3h1v1h-1zM22,3h1v1h-1zM23,3h1v1h-1zM25,3h1v1h-1zM26,3h1v1h-1zM27,3h1v1h-1zM28,3h1v1h-1zM29,3h1v1h-1zM32,3h1v1h-1zM33,3h1v1h-1zM34,3h1v1h-1zM35,3h1v1h-1zM37,3h1v1h-1zM40,3h1v1h-1zM41,3h1v1h-1zM42,3h1v1h-1zM44,3h1v1h-1zM50,3h1v1h-1zM2,4h1v1h-1zM4,4h1v1h-1zM5,4h1v1h-1zM6,4h1v1h-1zM8,4h1v1h-1zM10,4h1v1h-1zM11,4h1v1h-1zM12,4h1v1h-1zM17,4h1v1h-1zM24,4h1v1h-1zM26,4h1v1h-1zM29,4h1v1h-1zM31,4h1v1h-1zM32,4h1v1h-1zM33,4h1v1h-1zM34,4h1v1h-1zM36,4h1v1h-1zM41,4h1v1h-1zM42,4h1v1h-1zM44,4h1v1h-1zM46,4h1v1h-1zM47,4h1v1h-1zM48,4h1v1h-1zM50,4h1v1h-1zM2,5h1v1h-1zM4,5h1v1h-1zM5,5h1v1h-1zM6,5h1v1h-1zM8,5h1v1h-1zM12,5h1v1h-1zM13,5h1v1h-1zM14,5h1v1h-1zM16,5h1v1h-1zM20,5h1v1h-1zM29,5h1v1h-1zM31,5h1v1h-1zM35,5h1v1h-1zM36,5h1v1h-1zM39,5h1v1h-1zM41,5h1v1h-1zM44,5h1v1h-1zM46,5h1v1h-1zM47,5h1v1h-1zM48,5h1v1h-1zM50,5h1v1h-1zM2,6h1v1h-1zM4,6h1v1h-1zM5,6h1v1h-1zM6,6h1v1h-1zM8,6h1v1h-1zM12,6h1v1h-1zM16,6h1v1h-1zM18,6h1v1h-1zM20,6h1v1h-1zM22,6h1v1h-1zM24,6h1v1h-1zM25,6h1v1h-1zM26,6h1v1h-1zM27,6h1v1h-1zM28,6h1v1h-1zM29,6h1v1h-1zM30,6h1v1h-1zM31,6h1v1h-1zM32,6h1v1h-1zM36,6h1v1h-1zM37,6h1v1h-1zM38,6h1v1h-1zM39,6h1v1h-1zM44,6h1v1h-1zM46,6h1v1h-1zM47,6h1v1h-1zM48,6h1v1h-1zM50,6h1v1h-1zM2,7h1v1h-1zM8,7h1v1h-1zM11,7h1v1h-1zM14,7h1v1h-1zM15,7h1v1h-1zM24,7h1v1h-1zM28,7h1v1h-1zM33,7h1v1h-1zM34,7h1v1h-1zM36,7h1v1h-1zM38,7h1v1h-1zM39,7h1v1h-1zM40,7h1v1h-1zM44,7h1v1h-1zM50,7h1v1h-1zM2,8h1v1h-1zM3,8h1v1h-1zM4,8h1v1h-1zM5,8h1v1h-1zM6,8h1v1h-1zM7,8h1v1h-1zM8,8h1v1h-1zM10,8h1v1h-1zM12,8h1v1h-1zM14,8h1v1h-1zM16,8h1v1h-1zM18,8h1v1h-1zM20,8h1v1h-1zM22,8h1v1h-1zM24,8h1v1h-1zM26,8h1v1h-1zM28,8h1v1h-1zM30,8h1v1h-1zM32,8h1v1h-1zM34,8h1v1h-1zM36,8h1v1h-1zM38,8h1v1h-1zM40,8h1v1h-1zM42,8h1v1h-1zM44,8h1v1h-1zM45,8h1v1h-1zM46,8h1v1h-1zM47,8h1v1h-1zM48,8h1v1h-1zM49,8h1v1h-1zM50,8h1v1h-1zM10,9h1v1h-1zM11,9h1v1h-1zM13,9h1v1h-1zM14,9h1v1h-1zM16,9h1v1h-1zM17,9h1v1h-1zM19,9h1v1h-1zM21,9h1v1h-1zM23,9h1v1h-1zM24,9h1v1h-1zM28,9h1v1h-1zM30,9h1v1h-1zM31,9h1v1h-1zM34,9h1v1h-1zM36,9h1v1h-1zM41,9h1v1h-1zM2,10h1v1h-1zM3,10h1v1h-1zM4,10h1v1h-1zM6,10h1v1h-1zM7,10h1v1h-1zM8,10h1v1h-1zM9,10h1v1h-1zM10,10h1v1h-1zM11,10h1v1h-1zM12,10h1v1h-1zM14,10h1v1h-1zM15,10h1v1h-1zM16,10h1v1h-1zM19,10h1v1h-1zM20,10h1v1h-1zM21,10h1v1h-1zM23,10h1v1h-1zM24,10h1v1h-1zM25,10h1v1h-1zM26,10h1v1h-1zM27,10h1v1h-1zM28,10h1v1h-1zM29,10h1v1h-1zM30,10h1v1h-1zM33,10h1v1h-1zM34,10h1v1h-1zM36,10h1v1h-1zM37,10h1v1h-1zM38,10h1v1h-1zM39,10h1v1h-1zM43,10h1v1h-1zM44,10h1v1h-1zM48,10h1v1h-1zM2,11h1v1h-1zM3,11h1v1h-1zM4,11h1v1h-1zM5,11h1v1h-1zM7,11h1v1h-1zM10,11h1v1h-1zM12,11h1v1h-1zM13,11h1v1h-1zM14,11h1v1h-1zM15,11h1v1h-1zM16,11h1v1h-1zM20,11h1v1h-1zM21,11h1v1h-1zM26,11h1v1h-1zM27,11h1v1h-1zM29,11h1v1h-1zM33,11h1v1h-1zM35,11h1v1h-1zM46,11h1v1h-1zM47,11h1v1h-1zM48,11h1v1h-1zM49,11h1v1h-1zM2,12h1v1h-1zM3,12h1v1h-1zM5,12h1v1h-1zM7,12h1v1h-1zM8,12h1v1h-1zM9,12h1v1h-1zM10,12h1v1h-1zM13,12h1v1h-1zM14,12h1v1h-1zM16,12h1v1h-1zM18,12h1v1h-1zM20,12h1v1h-1zM21,12h1v1h-1zM23,12h1v1h-1zM24,12h1v1h-1zM26,12h1v1h-1zM27,12h1v1h-1zM30,12h1v1h-1zM31,12h1v1h-1zM33,12h1v1h-1zM34,12h1v1h-1zM35,12h1v1h-1zM37,12h1v1h-1zM38,12h1v1h-1zM42,12h1v1h-1zM45,12h1v1h-1zM47,12h1v1h-1zM48,12h1v1h-1zM49,12h1v1h-1zM50,12h1v1h-1zM2,13h1v1h-1zM3,13h1v1h-1zM4,13h1v1h-1zM6,13h1v1h-1zM12,13h1v1h-1zM14,13h1v1h-1zM21,13h1v1h-1zM22,13h1v1h-1zM25,13h1v1h-1zM28,13h1v1h-1zM30,13h1v1h-1zM31,13h1v1h-1zM32,13h1v1h-1zM34,13h1v1h-1zM35,13h1v1h-1zM36,13h1v1h-1zM37,13h1v1h-1zM38,13h1v1h-1zM40,13h1v1h-1zM41,13h1v1h-1zM3,14h1v1h-1zM4,14h1v1h-1zM5,14h1v1h-1zM8,14h1v1h-1zM9,14h1v1h-1zM10,14h1v1h-1zM12,14h1v1h-1zM16,14h1v1h-1zM18,14h1v1h-1zM20,14h1v1h-1zM22,14h1v1h-1zM24,14h1v1h-1zM26,14h1v1h-1zM27,14h1v1h-1zM30,14h1v1h-1zM31,14h1v1h-1zM32,14h1v1h-1zM34,14h1v1h-1zM35,14h1v1h-1zM37,14h1v1h-1zM38,14h1v1h-1zM41,14h1v1h-1zM45,14h1v1h-1zM46,14h1v1h-1zM48,14h1v1h-1zM2,15h1v1h-1zM3,15h1v1h-1zM9,15h1v1h-1zM11,15h1v1h-1zM13,15h1v1h-1zM18,15h1v1h-1zM22,15h1v1h-1zM23,15h1v1h-1zM26,15h1v1h-1zM27,15h1v1h-1zM29,15h1v1h-1zM30,15h1v1h-1zM34,15h1v1h-1zM38,15h1v1h-1zM39,15h1v1h-1zM41,15h1v1h-1zM45,15h1v1h-1zM46,15h1v1h-1zM48,15h1v1h-1zM49,15h1v1h-1zM2,16h1v1h-1zM3,16h1v1h-1zM6,16h1v1h-1zM8,16h1v1h-1zM9,16h1v1h-1zM11,16h1v1h-1zM15,16h1v1h-1zM26,16h1v1h-1zM28,16h1v1h-1zM29,16h1v1h-1zM30,16h1v1h-1zM31,16h1v1h-1zM32,16h1v1h-1zM33,16h1v1h-1zM34,16h1v1h-1zM36,16h1v1h-1zM37,16h1v1h-1zM39,16h1v1h-1zM44,16h1v1h-1zM48,16h1v1h-1zM49,16h1v1h-1zM50,16h1v1h-1zM3,17h1v1h-1zM5,17h1v1h-1zM6,17h1v1h-1zM10,17h1v1h-1zM11,17h1v1h-1zM12,17h1v1h-1zM14,17h1v1h-1zM16,17h1v1h-1zM18,17h1v1h-1zM22,17h1v1h-1zM25,17h1v1h-1zM27,17h1v1h-1zM30,17h1v1h-1zM31,17h1v1h-1zM34,17h1v1h-1zM35,17h1v1h-1zM36,17h1v1h-1zM40,17h1v1h-1zM41,17h1v1h-1zM42,17h1v1h-1zM44,17h1v1h-1zM45,17h1v1h-1zM46,17h1v1h-1zM47,17h1v1h-1zM50,17h1v1h-1zM2,18h1v1h-1zM3,18h1v1h-1zM4,18h1v1h-1zM5,18h1v1h-1zM6,18h1v1h-1zM7,18h1v1h-1zM8,18h1v1h-1zM9,18h1v1h-1zM10,18h1v1h-1zM14,18h1v1h-1zM15,18h1v1h-1zM16,18h1v1h-1zM17,18h1v1h-1zM19,18h1v1h-1zM20,18h1v1h-1zM22,18h1v1h-1zM24,18h1v1h-1zM25,18h1v1h-1zM26,18h1v1h-1zM29,18h1v1h-1zM30,18h1v1h-1zM32,18h1v1h-1zM33,18h1v1h-1zM34,18h1v1h-1zM37,18h1v1h-1zM38,18h1v1h-1zM39,18h1v1h-1zM40,18h1v1h-1zM42,18h1v1h-1zM44,18h1v1h-1zM45,18h1v1h-1zM46,18h1v1h-1zM47,18h1v1h-1zM49,18h1v1h-1zM50,18h1v1h-1zM3,19h1v1h-1zM4,19h1v1h-1zM5,19h1v1h-1zM6,19h1v1h-1zM7,19h1v1h-1zM11,19h1v1h-1zM12,19h1v1h-1zM13,19h1v1h-1zM15,19h1v1h-1zM16,19h1v1h-1zM20,19h1v1h-1zM24,19h1v1h-1zM25,19h1v1h-1zM26,19h1v1h-1zM27,19h1v1h-1zM29,19h1v1h-1zM30,19h1v1h-1zM34,19h1v1h-1zM37,19h1v1h-1zM38,19h1v1h-1zM46,19h1v1h-1zM48,19h1v1h-1zM49,19h1v1h-1zM2,20h1v1h-1zM3,20h1v1h-1zM8,20h1v1h-1zM11,20h1v1h-1zM12,20h1v1h-1zM14,20h1v1h-1zM15,20h1v1h-1zM17,20h1v1h-1zM19,20h1v1h-1zM23,20h1v1h-1zM24,20h1v1h-1zM25,20h1v1h-1zM26,20h1v1h-1zM27,20h1v1h-1zM29,20h1v1h-1zM31,20h1v1h-1zM33,20h1v1h-1zM41,20h1v1h-1zM46,20h1v1h-1zM49,20h1v1h-1zM50,20h1v1h-1zM2,21h1v1h-1zM3,21h1v1h-1zM4,21h1v1h-1zM10,21h1v1h-1zM11,21h1v1h-1zM12,21h1v1h-1zM13,21h1v1h-1zM14,21h1v1h-1zM15,21h1v1h-1zM16,21h1v1h-1zM18,21h1v1h-1zM19,21h1v1h-1zM20,21h1v1h-1zM21,21h1v1h-1zM26,21h1v1h-1zM27,21h1v1h-1zM28,21h1v1h-1zM30,21h1v1h-1zM31,21h1v1h-1zM33,21h1v1h-1zM35,21h1v1h-1zM37,21h1v1h-1zM38,21h1v1h-1zM39,21h1v1h-1zM41,21h1v1h-1zM45,21h1v1h-1zM47,21h1v1h-1zM2,22h1v1h-1zM6,22h1v1h-1zM7,22h1v1h-1zM8,22h1v1h-1zM9,22h1v1h-1zM10,22h1v1h-1zM12,22h1v1h-1zM13,22h1v1h-1zM15,22h1v1h-1zM17,22h1v1h-1zM18,22h1v1h-1zM19,22h1v1h-1zM21,22h1v1h-1zM22,22h1v1h-1zM24,22h1v1h-1zM26,22h1v1h-1zM30,22h1v1h-1zM33,22h1v1h-1zM34,22h1v1h-1zM35,22h1v1h-1zM37,22h1v1h-1zM38,22h1v1h-1zM40,22h1v1h-1zM41,22h1v1h-1zM43,22h1v1h-1zM44,22h1v1h-1zM46,22h1v1h-1zM47,22h1v1h-1zM50,22h1v1h-1zM2,23h1v1h-1zM6,23h1v1h-1zM7,23h1v1h-1zM9,23h1v1h-1zM11,23h1v1h-1zM13,23h1v1h-1zM15,23h1v1h-1zM17,23h1v1h-1zM19,23h1v1h-1zM21,23h1v1h-1zM25,23h1v1h-1zM31,23h1v1h-1zM33,23h1v1h-1zM34,23h1v1h-1zM38,23h1v1h-1zM39,23h1v1h-1zM41,23h1v1h-1zM45,23h1v1h-1zM47,23h1v1h-1zM48,23h1v1h-1zM49,23h1v1h-1zM2,24h1v1h-1zM4,24h1v1h-1zM5,24h1v1h-1zM6,24h1v1h-1zM7,24h1v1h-1zM8,24h1v1h-1zM9,24h1v1h-1zM10,24h1v1h-1zM12,24h1v1h-1zM13,24h1v1h-1zM14,24h1v1h-1zM15,24h1v1h-1zM17,24h1v1h-1zM18,24h1v1h-1zM20,24h1v1h-1zM21,24h1v1h-1zM22,24h1v1h-1zM24,24h1v1h-1zM25,24h1v1h-1zM26,24h1v1h-1zM27,24h1v1h-1zM28,24h1v1h-1zM30,24h1v1h-1zM32,24h1v1h-1zM34,24h1v1h-1zM38,24h1v1h-1zM40,24h1v1h-1zM42,24h1v1h-1zM43,24h1v1h-1zM44,24h1v1h-1zM45,24h1v1h-1zM46,24h1v1h-1zM47,24h1v1h-1zM49,24h1v1h-1zM50,24h1v1h-1zM2,25h1v1h-1zM5,25h1v1h-1zM6,25h1v1h-1zM10,25h1v1h-1zM11,25h1v1h-1zM14,25h1v1h-1zM15,25h1v1h-1zM17,25h1v1h-1zM19,25h1v1h-1zM20,25h1v1h-1zM21,25h1v1h-1zM23,25h1v1h-1zM24,25h1v1h-1zM28,25h1v1h-1zM29,25h1v1h-1zM30,25h1v1h-1zM31,25h1v1h-1zM33,25h1v1h-1zM34,25h1v1h-1zM35,25h1v1h-1zM36,25h1v1h-1zM37,25h1v1h-1zM39,25h1v1h-1zM42,25h1v1h-1zM46,25h1v1h-1zM5,26h1v1h-1zM6,26h1v1h-1zM8,26h1v1h-1zM10,26h1v1h-1zM12,26h1v1h-1zM13,26h1v1h-1zM16,26h1v1h-1zM19,26h1v1h-1zM20,26h1v1h-1zM21,26h1v1h-1zM22,26h1v1h-1zM24,26h1v1h-1zM26,26h1v1h-1zM28,26h1v1h-1zM30,26h1v1h-1zM34,26h1v1h-1zM36,26h1v1h-1zM38,26h1v1h-1zM39,26h1v1h-1zM40,26h1v1h-1zM41,26h1v1h-1zM42,26h1v1h-1zM44,26h1v1h-1zM46,26h1v1h-1zM48,26h1v1h-1zM49,26h1v1h-1zM50,26h1v1h-1zM3,27h1v1h-1zM4,27h1v1h-1zM5,27h1v1h-1zM6,27h1v1h-1zM10,27h1v1h-1zM12,27h1v1h-1zM13,27h1v1h-1zM15,27h1v1h-1zM16,27h1v1h-1zM19,27h1v1h-1zM23,27h1v1h-1zM24,27h1v1h-1zM28,27h1v1h-1zM29,27h1v1h-1zM34,27h1v1h-1zM42,27h1v1h-1zM46,27h1v1h-1zM47,27h1v1h-1zM48,27h1v1h-1zM49,27h1v1h-1zM4,28h1v1h-1zM5,28h1v1h-1zM6,28h1v1h-1zM7,28h1v1h-1zM8,28h1v1h-1zM9,28h1v1h-1zM10,28h1v1h-1zM11,28h1v1h-1zM13,28h1v1h-1zM16,28h1v1h-1zM20,28h1v1h-1zM21,28h1v1h-1zM24,28h1v1h-1zM25,28h1v1h-1zM26,28h1v1h-1zM27,28h1v1h-1zM28,28h1v1h-1zM29,28h1v1h-1zM33,28h1v1h-1zM35,28h1v1h-1zM37,28h1v1h-1zM41,28h1v1h-1zM42,28h1v1h-1zM43,28h1v1h-1zM44,28h1v1h-1zM45,28h1v1h-1zM46,28h1v1h-1zM49,28h1v1h-1zM50,28h1v1h-1zM3,29h1v1h-1zM4,29h1v1h-1zM6,29h1v1h-1zM7,29h1v1h-1zM9,29h1v1h-1zM10,29h1v1h-1zM11,29h1v1h-1zM13,29h1v1h-1zM14,29h1v1h-1zM17,29h1v1h-1zM22,29h1v1h-1zM23,29h1v1h-1zM27,29h1v1h-1zM30,29h1v1h-1zM31,29h1v1h-1zM32,29h1v1h-1zM35,29h1v1h-1zM37,29h1v1h-1zM38,29h1v1h-1zM39,29h1v1h-1zM40,29h1v1h-1zM4,30h1v1h-1zM5,30h1v1h-1zM7,30h1v1h-1zM8,30h1v1h-1zM9,30h1v1h-1zM10,30h1v1h-1zM13,30h1v1h-1zM16,30h1v1h-1zM18,30h1v1h-1zM20,30h1v1h-1zM22,30h1v1h-1zM24,30h1v1h-1zM25,30h1v1h-1zM26,30h1v1h-1zM27,30h1v1h-1zM28,30h1v1h-1zM30,30h1v1h-1zM33,30h1v1h-1zM34,30h1v1h-1zM35,30h1v1h-1zM36,30h1v1h-1zM37,30h1v1h-1zM38,30h1v1h-1zM42,30h1v1h-1zM44,30h1v1h-1zM47,30h1v1h-1zM48,30h1v1h-1zM49,30h1v1h-1zM3,31h1v1h-1zM7,31h1v1h-1zM9,31h1v1h-1zM13,31h1v1h-1zM18,31h1v1h-1zM22,31h1v1h-1zM23,31h1v1h-1zM24,31h1v1h-1zM30,31h1v1h-1zM34,31h1v1h-1zM37,31h1v1h-1zM41,31h1v1h-1zM42,31h1v1h-1zM47,31h1v1h-1zM48,31h1v1h-1zM49,31h1v1h-1zM2,32h1v1h-1zM3,32h1v1h-1zM4,32h1v1h-1zM5,32h1v1h-1zM7,32h1v1h-1zM8,32h1v1h-1zM10,32h1v1h-1zM11,32h1v1h-1zM13,32h1v1h-1zM15,32h1v1h-1zM20,32h1v1h-1zM28,32h1v1h-1zM31,32h1v1h-1zM32,32h1v1h-1zM33,32h1v1h-1zM37,32h1v1h-1zM40,32h1v1h-1zM42,32h1v1h-1zM43,32h1v1h-1zM44,32h1v1h-1zM48,32h1v1h-1zM49,32h1v1h-1zM50,32h1v1h-1zM2,33h1v1h-1zM4,33h1v1h-1zM5,33h1v1h-1zM7,33h1v1h-1zM10,33h1v1h-1zM11,33h1v1h-1zM12,33h1v1h-1zM13,33h1v1h-1zM15,33h1v1h-1zM16,33h1v1h-1zM18,33h1v1h-1zM19,33h1v1h-1zM22,33h1v1h-1zM25,33h1v1h-1zM26,33h1v1h-1zM28,33h1v1h-1zM29,33h1v1h-1zM30,33h1v1h-1zM32,33h1v1h-1zM33,33h1v1h-1zM34,33h1v1h-1zM37,33h1v1h-1zM38,33h1v1h-1zM39,33h1v1h-1zM40,33h1v1h-1zM41,33h1v1h-1zM42,33h1v1h-1zM43,33h1v1h-1zM44,33h1v1h-1zM45,33h1v1h-1zM46,33h1v1h-1zM49,33h1v1h-1zM50,33h1v1h-1zM4,34h1v1h-1zM6,34h1v1h-1zM8,34h1v1h-1zM9,34h1v1h-1zM10,34h1v1h-1zM11,34h1v1h-1zM14,34h1v1h-1zM15,34h1v1h-1zM16,34h1v1h-1zM17,34h1v1h-1zM19,34h1v1h-1zM20,34h1v1h-1zM22,34h1v1h-1zM23,34h1v1h-1zM25,34h1v1h-1zM27,34h1v1h-1zM28,34h1v1h-1zM29,34h1v1h-1zM30,34h1v1h-1zM31,34h1v1h-1zM34,34h1v1h-1zM36,34h1v1h-1zM37,34h1v1h-1zM38,34h1v1h-1zM39,34h1v1h-1zM40,34h1v1h-1zM44,34h1v1h-1zM46,34h1v1h-1zM48,34h1v1h-1zM50,34h1v1h-1zM2,35h1v1h-1zM4,35h1v1h-1zM10,35h1v1h-1zM11,35h1v1h-1zM12,35h1v1h-1zM16,35h1v1h-1zM20,35h1v1h-1zM25,35h1v1h-1zM30,35h1v1h-1zM33,35h1v1h-1zM34,35h1v1h-1zM38,35h1v1h-1zM42,35h1v1h-1zM43,35h1v1h-1zM44,35h1v1h-1zM49,35h1v1h-1zM3,36h1v1h-1zM4,36h1v1h-1zM5,36h1v1h-1zM8,36h1v1h-1zM9,36h1v1h-1zM14,36h1v1h-1zM15,36h1v1h-1zM18,36h1v1h-1zM19,36h1v1h-1zM21,36h1v1h-1zM26,36h1v1h-1zM27,36h1v1h-1zM28,36h1v1h-1zM29,36h1v1h-1zM31,36h1v1h-1zM35,36h1v1h-1zM37,36h1v1h-1zM41,36h1v1h-1zM43,36h1v1h-1zM44,36h1v1h-1zM49,36h1v1h-1zM50,36h1v1h-1zM2,37h1v1h-1zM5,37h1v1h-1zM6,37h1v1h-1zM7,37h1v1h-1zM9,37h1v1h-1zM11,37h1v1h-1zM15,37h1v1h-1zM16,37h1v1h-1zM17,37h1v1h-1zM19,37h1v1h-1zM20,37h1v1h-1zM25,37h1v1h-1zM27,37h1v1h-1zM29,37h1v1h-1zM30,37h1v1h-1zM33,37h1v1h-1zM36,37h1v1h-1zM37,37h1v1h-1zM38,37h1v1h-1zM40,37h1v1h-1zM45,37h1v1h-1zM3,38h1v1h-1zM7,38h1v1h-1zM8,38h1v1h-1zM11,38h1v1h-1zM12,38h1v1h-1zM13,38h1v1h-1zM14,38h1v1h-1zM15,38h1v1h-1zM17,38h1v1h-1zM18,38h1v1h-1zM19,38h1v1h-1zM21,38h1v1h-1zM22,38h1v1h-1zM24,38h1v1h-1zM25,38h1v1h-1zM27,38h1v1h-1zM28,38h1v1h-1zM30,38h1v1h-1zM32,38h1v1h-1zM33,38h1v1h-1zM34,38h1v1h-1zM36,38h1v1h-1zM37,38h1v1h-1zM38,38h1v1h-1zM42,38h1v1h-1zM44,38h1v1h-1zM45,38h1v1h-1zM48,38h1v1h-1zM49,38h1v1h-1zM50,38h1v1h-1zM2,39h1v1h-1zM4,39h1v1h-1zM10,39h1v1h-1zM11,39h1v1h-1zM13,39h1v1h-1zM15,39h1v1h-1zM17,39h1v1h-1zM19,39h1v1h-1zM21,39h1v1h-1zM23,39h1v1h-1zM24,39h1v1h-1zM25,39h1v1h-1zM28,39h1v1h-1zM29,39h1v1h-1zM30,39h1v1h-1zM33,39h1v1h-1zM34,39h1v1h-1zM38,39h1v1h-1zM39,39h1v1h-1zM41,39h1v1h-1zM42,39h1v1h-1zM44,39h1v1h-1zM45,39h1v1h-1zM48,39h1v1h-1zM49,39h1v1h-1zM3,40h1v1h-1zM7,40h1v1h-1zM8,40h1v1h-1zM11,40h1v1h-1zM13,40h1v1h-1zM14,40h1v1h-1zM16,40h1v1h-1zM17,40h1v1h-1zM18,40h1v1h-1zM19,40h1v1h-1zM20,40h1v1h-1zM21,40h1v1h-1zM22,40h1v1h-1zM26,40h1v1h-1zM28,40h1v1h-1zM32,40h1v1h-1zM37,40h1v1h-1zM39,40h1v1h-1zM41,40h1v1h-1zM42,40h1v1h-1zM43,40h1v1h-1zM44,40h1v1h-1zM45,40h1v1h-1zM46,40h1v1h-1zM47,40h1v1h-1zM49,40h1v1h-1zM50,40h1v1h-1zM3,41h1v1h-1zM4,41h1v1h-1zM5,41h1v1h-1zM9,41h1v1h-1zM10,41h1v1h-1zM13,41h1v1h-1zM15,41h1v1h-1zM17,41h1v1h-1zM19,41h1v1h-1zM21,41h1v1h-1zM23,41h1v1h-1zM28,41h1v1h-1zM29,41h1v1h-1zM30,41h1v1h-1zM34,41h1v1h-1zM37,41h1v1h-1zM38,41h1v1h-1zM40,41h1v1h-1zM41,41h1v1h-1zM42,41h1v1h-1zM43,41h1v1h-1zM44,41h1v1h-1zM49,41h1v1h-1zM2,42h1v1h-1zM3,42h1v1h-1zM4,42h1v1h-1zM8,42h1v1h-1zM9,42h1v1h-1zM11,42h1v1h-1zM14,42h1v1h-1zM15,42h1v1h-1zM16,42h1v1h-1zM17,42h1v1h-1zM19,42h1v1h-1zM20,42h1v1h-1zM21,42h1v1h-1zM22,42h1v1h-1zM24,42h1v1h-1zM25,42h1v1h-1zM26,42h1v1h-1zM27,42h1v1h-1zM28,42h1v1h-1zM29,42h1v1h-1zM30,42h1v1h-1zM32,42h1v1h-1zM34,42h1v1h-1zM36,42h1v1h-1zM37,42h1v1h-1zM38,42h1v1h-1zM40,42h1v1h-1zM42,42h1v1h-1zM43,42h1v1h-1zM44,42h1v1h-1zM45,42h1v1h-1zM46,42h1v1h-1zM48,42h1v1h-1zM49,42h1v1h-1zM50,42h1v1h-1zM10,43h1v1h-1zM12,43h1v1h-1zM13,43h1v1h-1zM16,43h1v1h-1zM20,43h1v1h-1zM23,43h1v1h-1zM24,43h1v1h-1zM28,43h1v1h-1zM30,43h1v1h-1zM34,43h1v1h-1zM38,43h1v1h-1zM39,43h1v1h-1zM42,43h1v1h-1zM46,43h1v1h-1zM47,43h1v1h-1zM49,43h1v1h-1zM2,44h1v1h-1zM3,44h1v1h-1zM4,44h1v1h-1zM5,44h1v1h-1zM6,44h1v1h-1zM7,44h1v1h-1zM8,44h1v1h-1zM10,44h1v1h-1zM11,44h1v1h-1zM12,44h1v1h-1zM13,44h1v1h-1zM16,44h1v1h-1zM20,44h1v1h-1zM21,44h1v1h-1zM23,44h1v1h-1zM24,44h1v1h-1zM26,44h1v1h-1zM28,44h1v1h-1zM30,44h1v1h-1zM34,44h1v1h-1zM35,44h1v1h-1zM38,44h1v1h-1zM42,44h1v1h-1zM44,44h1v1h-1zM46,44h1v1h-1zM47,44h1v1h-1zM49,44h1v1h-1zM50,44h1v1h-1zM2,45h1v1h-1zM8,45h1v1h-1zM10,45h1v1h-1zM14,45h1v1h-1zM17,45h1v1h-1zM21,45h1v1h-1zM22,45h1v1h-1zM23,45h1v1h-1zM24,45h1v1h-1zM28,45h1v1h-1zM30,45h1v1h-1zM33,45h1v1h-1zM37,45h1v1h-1zM38,45h1v1h-1zM39,45h1v1h-1zM40,45h1v1h-1zM41,45h1v1h-1zM42,45h1v1h-1zM46,45h1v1h-1zM49,45h1v1h-1zM50,45h1v1h-1zM2,46h1v1h-1zM4,46h1v1h-1zM5,46h1v1h-1zM6,46h1v1h-1zM8,46h1v1h-1zM10,46h1v1h-1zM11,46h1v1h-1zM14,46h1v1h-1zM16,46h1v1h-1zM18,46h1v1h-1zM20,46h1v1h-1zM22,46h1v1h-1zM24,46h1v1h-1zM25,46h1v1h-1zM26,46h1v1h-1zM27,46h1v1h-1zM28,46h1v1h-1zM30,46h1v1h-1zM31,46h1v1h-1zM32,46h1v1h-1zM34,46h1v1h-1zM35,46h1v1h-1zM36,46h1v1h-1zM37,46h1v1h-1zM38,46h1v1h-1zM41,46h1v1h-1zM42,46h1v1h-1zM43,46h1v1h-1zM44,46h1v1h-1zM45,46h1v1h-1zM46,46h1v1h-1zM48,46h1v1h-1zM2,47h1v1h-1zM4,47h1v1h-1zM5,47h1v1h-1zM6,47h1v1h-1zM8,47h1v1h-1zM14,47h1v1h-1zM18,47h1v1h-1zM22,47h1v1h-1zM26,47h1v1h-1zM28,47h1v1h-1zM29,47h1v1h-1zM33,47h1v1h-1zM34,47h1v1h-1zM37,47h1v1h-1zM41,47h1v1h-1zM42,47h1v1h-1zM43,47h1v1h-1zM48,47h1v1h-1zM49,47h1v1h-1zM50,47h1v1h-1zM2,48h1v1h-1zM4,48h1v1h-1zM5,48h1v1h-1zM6,48h1v1h-1zM8,48h1v1h-1zM10,48h1v1h-1zM16,48h1v1h-1zM23,48h1v1h-1zM26,48h1v1h-1zM29,48h1v1h-1zM32,48h1v1h-1zM34,48h1v1h-1zM40,48h1v1h-1zM41,48h1v1h-1zM42,48h1v1h-1zM43,48h1v1h-1zM45,48h1v1h-1zM46,48h1v1h-1zM47,48h1v1h-1zM48,48h1v1h-1zM2,49h1v1h-1zM8,49h1v1h-1zM10,49h1v1h-1zM14,49h1v1h-1zM15,49h1v1h-1zM16,49h1v1h-1zM18,49h1v1h-1zM22,49h1v1h-1zM23,49h1v1h-1zM25,49h1v1h-1zM29,49h1v1h-1zM30,49h1v1h-1zM32,49h1v1h-1zM34,49h1v1h-1zM35,49h1v1h-1zM37,49h1v1h-1zM38,49h1v1h-1zM40,49h1v1h-1zM49,49h1v1h-1zM2,50h1v1h-1zM3,50h1v1h-1zM4,50h1v1h-1zM5,50h1v1h-1zM6,50h1v1h-1zM7,50h1v1h-1zM8,50h1v1h-1zM10,50h1v1h-1zM12,50h1v1h-1zM15,50h1v1h-1zM16,50h1v1h-1zM17,50h1v1h-1zM19,50h1v1h-1zM20,50h1v1h-1zM21,50h1v1h-1zM24,50h1v1h-1zM28,50h1v1h-1zM29,50h1v1h-1zM30,50h1v1h-1zM31,50h1v1h-1zM33,50h1v1h-1zM34,50h1v1h-1zM36,50h1v1h-1zM37,50h1v1h-1zM38,50h1v1h-1zM42,50h1v1h-1zM44,50h1v1h-1zM46,50h1v1h-1zM48,50h1v1h-1zM49,50h1v1h-1zM50,50h1v1h-1z"/></svg>';
+
+      var VCARD_PAYLOAD = [
+        "BEGIN:VCARD",
+        "VERSION:3.0",
+        "N:Holcomb;Caleb;TR;;",
+        "FN:Caleb Holcomb — TYR Technical Consulting",
+        "ORG:TYR Technical Consulting (CALEB TR HOLCOMB d/b/a TYR)",
+        "TITLE:Principal Systems Engineer & Expense Auditor",
+        "TEL;TYPE=WORK,VOICE,CELL,MSG:+16592578043",
+        "EMAIL;TYPE=WORK,PREF,INTERNET:tyr@tyrprotocol.pro",
+        "EMAIL;TYPE=HOME,INTERNET:colacal43@gmail.com",
+        "URL;TYPE=WORK:https://tyrprotocol.pro",
+        "URL;TYPE=GitHub:https://github.com/kalcola",
+        "X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/company/tyrs-technical-consulting",
+        "ADR;TYPE=WORK:;;;Northwest Alabama;AL;;United States",
+        "NOTE:Patron Triad Alignment — Tyr (Integrity & Precision) | Freyja (Sovereignty & Custody) | Loki (Adaptability & Zero-Bloat). NAICS 541512 & 541611.",
+        "END:VCARD"
+      ].join("\r\n");
+
+      var qrMode = "url";
+
+      function renderAllQrCodes() {
+        var targets = document.querySelectorAll(".qr-render-target");
+        var captions = document.querySelectorAll(".qr-caption-target");
+        var svgHtml = qrMode === "url" ? QR_URL_SVG : QR_VCARD_SVG;
+        var capText = qrMode === "url" ? "SCAN: tyrprotocol.pro" : "SCAN: Dual-Email .vcf";
+        for (var i = 0; i < targets.length; i++) targets[i].innerHTML = svgHtml;
+        for (var j = 0; j < captions.length; j++) captions[j].textContent = capText;
+      }
+
+      renderAllQrCodes();
+
+      var qrToggles = document.querySelectorAll(".qr-toggle-trigger");
+      for (var q = 0; q < qrToggles.length; q++) {
+        qrToggles[q].addEventListener("click", function(e) {
+          e.stopPropagation();
+          qrMode = qrMode === "url" ? "vcard" : "url";
+          renderAllQrCodes();
+        });
+      }
+
+      var triadContent = {
+        front: {
+          tyr: {
+            cls: "active-tyr", border: "border-tyr", glow: "glow-tyr",
+            attrs: [["Pillar", "ᛏ Tiwaz Spine"], ["Alignment", "Pisces • 1997"], ["Region", "NW Alabama"]],
+            heading: "ᛏ TÝR — UNYIELDING INTEGRITY & KEPT OATHS",
+            body: "Direct, plainspoken candor and technical accountability—standing firmly behind every architecture and word without pretense."
+          },
+          freyja: {
+            cls: "active-freyja", border: "border-freyja", glow: "glow-freyja",
+            attrs: [["Pillar", "ᚠ Fehu Flame"], ["Boundary", "Sovereign Agency"], ["Custody", "Zero-Coercion"]],
+            heading: "ᚠ FREYJA — SOVEREIGN BOUNDARIES & SELF-WORTH",
+            body: "Fierce independence and personal privacy—every relationship and collaboration remains voluntary, transparent, and uncoerced."
+          },
+          loki: {
+            cls: "active-loki", border: "border-loki", glow: "glow-loki",
+            attrs: [["Pillar", "ᚲ Kenaz Wit"], ["Craft", "Bare-Metal Linux"], ["Ethos", "Zero Dogma"]],
+            heading: "ᚲ LOKI — TACTICAL ADAPTABILITY WITHOUT DOGMA",
+            body: "Relentless curiosity across hardware, Windows/Linux internals, and code—solving hard bottlenecks through lateral ingenuity."
+          }
+        },
+        back: {
+          tyr: {
+            cls: "active-tyr", border: "border-tyr", glow: "glow-tyr",
+            attrs: [["NAICS", "541512 • 541611"], ["Custody", "0-Day Data Purge"], ["Rates", "$65–$495 Flat"]],
+            heading: "ᛏ TÝR QUALITY — ROOT-CAUSE PRECISION & VERIFIABLE RIGOR",
+            body: "Telemetry-first diagnostics and SHA-384 verifiable engineering. Every deliverable is backed by statutory compliance and clean documentation."
+          },
+          freyja: {
+            cls: "active-freyja", border: "border-freyja", glow: "glow-freyja",
+            attrs: [["Ownership", "100% Client"], ["Billing", "PCI-DSS SAQ-A"], ["Defense", "Schedule C / ISP"]],
+            heading: "ᚠ FREYJA QUALITY — 100% CLIENT CUSTODY & ZERO LOCK-IN",
+            body: "Complete administrative sovereignty. Clients hold full domain, repo, and asset custody outright—never held hostage by SaaS fees."
+          },
+          loki: {
+            cls: "active-loki", border: "border-loki", glow: "glow-loki",
+            attrs: [["Lock-In", "$0/Mo Hosting"], ["Turnaround", "24–72h Turnkey"], ["Delivery", "US Remote + NW AL"]],
+            heading: "ᚲ LOKI QUALITY — LEAN, LOCAL-FIRST & RESILIENT EXECUTION",
+            body: "Eliminating bloated agency retainers to ship fast, low-overhead, durable systems engineered for everyday Main Street & B2B operators."
+          }
+        }
+      };
+
+      function applyFaceAttrs(prefix, attrs, borderCls) {
+        var strip = document.getElementById(prefix + "-attr-strip");
+        if (strip) strip.className = "attr-strip " + borderCls;
+        for (var i = 0; i < 3; i++) {
+          var kEl = document.getElementById(prefix + "-attr-k" + (i + 1));
+          var vEl = document.getElementById(prefix + "-attr-v" + (i + 1));
+          if (kEl && vEl && attrs[i]) {
+            kEl.textContent = attrs[i][0];
+            vEl.textContent = attrs[i][1];
+          }
+        }
+      }
+
+      function selectDeity(deityKey) {
+        var frontInfo = triadContent.front[deityKey];
+        var backInfo = triadContent.back[deityKey];
+        if (!frontInfo || !backInfo) return;
+
+        var allTabs = document.querySelectorAll(".deity-tab");
+        for (var i = 0; i < allTabs.length; i++) {
+          var d = allTabs[i].getAttribute("data-deity");
+          allTabs[i].className = "deity-tab";
+          if (d === deityKey) {
+            allTabs[i].classList.add(frontInfo.cls);
+            allTabs[i].setAttribute("aria-selected", "true");
+          } else {
+            allTabs[i].setAttribute("aria-selected", "false");
+          }
+        }
+
+        var fFace = document.getElementById("face-front");
+        var bFace = document.getElementById("face-back");
+        if (fFace) fFace.className = "omni-face omni-face-front " + frontInfo.glow;
+        if (bFace) bFace.className = "omni-face omni-face-back " + backInfo.glow;
+
+        applyFaceAttrs("front", frontInfo.attrs, frontInfo.border);
+        applyFaceAttrs("back", backInfo.attrs, backInfo.border);
+
+        var fBox = document.getElementById("front-deity-box");
+        var fHead = document.getElementById("front-deity-heading");
+        var fBody = document.getElementById("front-deity-body");
+        if (fBox && fHead && fBody) {
+          fBox.className = "deity-insight-box " + frontInfo.border;
+          fHead.textContent = frontInfo.heading;
+          fBody.textContent = frontInfo.body;
+        }
+
+        var bBox = document.getElementById("back-deity-box");
+        var bHead = document.getElementById("back-deity-heading");
+        var bBody = document.getElementById("back-deity-body");
+        if (bBox && bHead && bBody) {
+          bBox.className = "deity-insight-box " + backInfo.border;
+          bHead.textContent = backInfo.heading;
+          bBody.textContent = backInfo.body;
+        }
+      }
+
+      var deityTabs = document.querySelectorAll(".deity-tab");
+      for (var t = 0; t < deityTabs.length; t++) {
+        deityTabs[t].addEventListener("click", function(e) {
+          e.stopPropagation();
+          selectDeity(this.getAttribute("data-deity"));
+        });
+      }
+
+      var viewport = document.getElementById("omni-viewport");
+      var card3d = document.getElementById("omni-card-3d");
+
+      var urlParams = new URLSearchParams(window.location.search);
+      var initialMode = (urlParams.get("mode") || urlParams.get("face") || "personal").toLowerCase();
+      var rotX = 3;
+      var rotY = initialMode === "business" ? 180 : -4;
+      var isDragging = false;
+      var startX = 0, startY = 0, startRotX = 0, startRotY = 0;
+
+      function applyCardTransform() {
+        if (!card3d) return;
+        card3d.style.transform = "rotateX(" + rotX.toFixed(1) + "deg) rotateY(" + rotY.toFixed(1) + "deg)";
+        var gx = 50 + Math.sin((rotY * Math.PI) / 180) * 35;
+        var gy = 45 - Math.sin((rotX * Math.PI) / 180) * 35;
+        card3d.style.setProperty("--glint-x", Math.round(gx) + "%");
+        card3d.style.setProperty("--glint-y", Math.round(gy) + "%");
+      }
+
+      applyCardTransform();
+
+      function flipToSide(targetSide) {
+        rotX = 3;
+        rotY = targetSide === "business" ? 180 : 0;
+        applyCardTransform();
+      }
+
+      function toggleFace() {
+        var normY = ((rotY % 360) + 360) % 360;
+        var isBack = (normY > 90 && normY < 270);
+        flipToSide(isBack ? "personal" : "business");
+      }
+
+      function isInteractiveTarget(el) {
+        return Boolean(el && el.closest && el.closest("a, button"));
+      }
+
+      if (viewport && card3d) {
+        viewport.addEventListener("mousedown", function(e) {
+          if (isInteractiveTarget(e.target)) return;
+          isDragging = true;
+          startX = e.clientX;
+          startY = e.clientY;
+          startRotX = rotX;
+          startRotY = rotY;
+          viewport.classList.add("dragging");
+          card3d.classList.add("no-transition");
+        });
+
+        window.addEventListener("mousemove", function(e) {
+          if (!isDragging) return;
+          rotY = startRotY + (e.clientX - startX) * 0.55;
+          rotX = Math.max(-65, Math.min(65, startRotX - (e.clientY - startY) * 0.45));
+          applyCardTransform();
+        });
+
+        window.addEventListener("mouseup", function() {
+          if (!isDragging) return;
+          isDragging = false;
+          viewport.classList.remove("dragging");
+          card3d.classList.remove("no-transition");
+        });
+
+        viewport.addEventListener("touchstart", function(e) {
+          if (isInteractiveTarget(e.target) || !e.touches || e.touches.length !== 1) return;
+          isDragging = true;
+          startX = e.touches[0].clientX;
+          startY = e.touches[0].clientY;
+          startRotX = rotX;
+          startRotY = rotY;
+          card3d.classList.add("no-transition");
+          if (e.cancelable) e.preventDefault();
+        }, { passive: false });
+
+        window.addEventListener("touchmove", function(e) {
+          if (!isDragging || !e.touches || e.touches.length !== 1) return;
+          if (e.cancelable) e.preventDefault();
+          rotY = startRotY + (e.touches[0].clientX - startX) * 0.65;
+          rotX = Math.max(-65, Math.min(65, startRotX - (e.touches[0].clientY - startY) * 0.5));
+          applyCardTransform();
+        }, { passive: false });
+
+        window.addEventListener("touchend", function() {
+          if (!isDragging) return;
+          isDragging = false;
+          card3d.classList.remove("no-transition");
+        });
+
+        viewport.addEventListener("dblclick", function(e) {
+          if (!isInteractiveTarget(e.target)) toggleFace();
+        });
+      }
+
+      var faceBtns = document.querySelectorAll(".face-switch-btn");
+      for (var fb = 0; fb < faceBtns.length; fb++) {
+        faceBtns[fb].addEventListener("click", function(e) {
+          e.stopPropagation();
+          flipToSide(this.getAttribute("data-target-face"));
+        });
+      }
+
+      var flipBtns = document.querySelectorAll(".flip-card-trigger");
+      for (var f = 0; f < flipBtns.length; f++) {
+        flipBtns[f].addEventListener("click", function(e) {
+          e.stopPropagation();
+          toggleFace();
+        });
+      }
+
+      var vcfTriggers = document.querySelectorAll(".download-vcf-trigger");
+      for (var v = 0; v < vcfTriggers.length; v++) {
+        vcfTriggers[v].addEventListener("click", function(e) {
+          e.stopPropagation();
+          var blob = new Blob([VCARD_PAYLOAD], { type: "text/vcard;charset=utf-8" });
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement("a");
+          a.href = url;
+          a.download = "TYR_Caleb_Holcomb.vcf";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          setTimeout(function() { URL.revokeObjectURL(url); }, 1500);
+        });
+      }
+
+      var shareTriggers = document.querySelectorAll(".share-card-trigger");
+      for (var s = 0; s < shareTriggers.length; s++) {
+        shareTriggers[s].addEventListener("click", function(e) {
+          e.stopPropagation();
+          var btn = e.currentTarget;
+          var orig = btn.innerHTML;
+          function showCopied() {
+            btn.innerHTML = "✓ Copied";
+            setTimeout(function() { btn.innerHTML = orig; }, 2000);
+          }
+          var shareUrl = window.location.href;
+          if (navigator.share) {
+            navigator.share({
+              title: "Caleb Holcomb — TYR Personal & Business 3D Card",
+              text: "Nine Realms Personal & Business 3D Card: TYR Technical Consulting",
+              url: shareUrl
+            }).catch(function() {});
+          } else if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(shareUrl).then(showCopied).catch(showCopied);
+          } else {
+            showCopied();
+          }
+        });
+      }
+
+      var guideOverlay = document.getElementById("omni-guide-overlay");
+      if (guideOverlay) {
+        var dismissGuide = function() { guideOverlay.classList.add("faded-out"); };
+        setTimeout(dismissGuide, 3000);
+        if (viewport) {
+          viewport.addEventListener("mousedown", dismissGuide, { once: true });
+          viewport.addEventListener("touchstart", dismissGuide, { once: true });
+        }
+      }
+    })();
+  </script>
+</body>
+</html>

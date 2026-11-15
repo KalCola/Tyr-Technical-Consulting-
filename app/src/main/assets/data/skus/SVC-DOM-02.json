@@ -1,0 +1,28 @@
+{
+  "page": 1,
+  "cardIndex": 1,
+  "realm": "asgard",
+  "runePill": "ᛉ ASGARD",
+  "meaning": "Fortified Citadel • Domain & Email Identity Shield",
+  "title": "Custom Domain & Protected Email",
+  "price": "$165",
+  "priceSub": "One-Time Setup",
+  "attrs": [
+    [
+      "Norse Realm",
+      "ᛉ Asgard"
+    ],
+    [
+      "Protection",
+      "Anti-Spoof Lock"
+    ],
+    [
+      "Turnaround",
+      "24–48 Hours"
+    ]
+  ],
+  "badge": "Deliverable: Domain + Locked Email",
+  "specTag": "SPF • DKIM • DMARC • DNSSEC",
+  "sku": "SVC-DOM-02",
+  "themeClass": "theme-asgard"
+}

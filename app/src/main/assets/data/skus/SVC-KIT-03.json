@@ -1,0 +1,28 @@
+{
+  "page": 1,
+  "cardIndex": 2,
+  "realm": "vanaheim",
+  "runePill": "ᚱ VANAHEIM",
+  "meaning": "Realm of Trade & Harvest • Fast Customer Intake",
+  "title": "QR Menus & Online Form Kits",
+  "price": "$150",
+  "priceSub": "One-Time Kit",
+  "attrs": [
+    [
+      "Norse Realm",
+      "ᚱ Vanaheim"
+    ],
+    [
+      "Monthly Fee",
+      "$0 / Month"
+    ],
+    [
+      "Turnaround",
+      "24–48 Hours"
+    ]
+  ],
+  "badge": "Deliverable: QR Standee + Form + Sheet",
+  "specTag": "Print PDF • Auto-Sheet",
+  "sku": "SVC-KIT-03",
+  "themeClass": "theme-vanaheim"
+}
