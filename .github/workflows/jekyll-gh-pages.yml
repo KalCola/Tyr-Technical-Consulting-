@@ -15,14 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/checkout@v4
-        with:
-          ref: backup/pre-modularization
-          path: _backup
-      - run: node scripts/sync.js
+      - run: mkdir -p _site && for f in CNAME .nojekyll robots.txt sitemap.xml index.html 404.html manifest.webmanifest sw.js css js data assets public; do [ -e "$f" ] && cp -r "$f" _site/; done
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
       - id: dep
         uses: actions/deploy-pages@v4
