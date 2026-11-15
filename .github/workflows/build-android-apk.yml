@@ -26,7 +26,7 @@ jobs:
           java-version: '21'
 
       - name: Set up Android SDK
-        uses: android-actions/setup-android@96ef2fb4baa4fa2fb8da00ff2efcf6f9fa22f2cf # v3.2.2
+        uses: android-actions/setup-android@v3
 
       - name: Bundle Storefront Web Assets into APK
         run: |
