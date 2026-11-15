@@ -5,6 +5,22 @@
 (function () {
   'use strict';
 
+  // Touch support is common on laptops and monitors, so it must not by itself
+  // force a desktop browser into the mobile, single-card layout.
+  function syncDeviceMode() {
+    const userAgent = navigator.userAgent || '';
+    const isMobileUserAgent = /Android|iPhone|iPad|iPod|Mobile|TyrProtocolAndroidAPK/i.test(userAgent);
+    const isMobileViewport = window.matchMedia('(max-width: 768px)').matches;
+    const device = isMobileUserAgent || isMobileViewport ? 'mobile' : 'desktop';
+
+    document.documentElement.setAttribute('data-device', device);
+    if (document.body) document.body.setAttribute('data-device', device);
+  }
+
+  syncDeviceMode();
+  window.addEventListener('resize', syncDeviceMode, { passive: true });
+  window.addEventListener('orientationchange', syncDeviceMode, { passive: true });
+
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('./sw.js').catch((err) => {
