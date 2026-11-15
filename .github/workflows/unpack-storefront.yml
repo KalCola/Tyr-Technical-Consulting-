@@ -1,0 +1,54 @@
+name: Unpack & Test Storefront
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  unpack-and-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Unpack and Test in Staging before Applying
+        run: |
+          ZIP_FILE="tyr-protocol-storefront-nov-15-2026-12-09-42-pm.zip"
+          if [ ! -f "$ZIP_FILE" ]; then
+            echo "Zip file already unpacked and removed."
+            exit 0
+          fi
+          mkdir -p /tmp/stage
+          unzip -oq "$ZIP_FILE" -d /tmp/stage
+          rm -rf /tmp/stage/.aistudio
+          if [ -f /tmp/stage/docs/POLICY_COMPLIANCE_AUDIT.md ]; then
+            sed -i 's/91-1144442/91-XXX-X442/g' /tmp/stage/docs/POLICY_COMPLIANCE_AUDIT.md
+          fi
+          if ! grep -q '.aistudio/' /tmp/stage/.gitignore; then
+            printf '\n.aistudio/\n' >> /tmp/stage/.gitignore
+          fi
+          cd /tmp/stage
+          test -f CNAME && test -f .nojekyll && test -f index.html && test -f 404.html
+          test -f assets/3d_card.html && test -f data/catalog.json
+          node --check js/stripe-checkout.js js/forensics.js js/growth-kit.js js/deck.js js/app.js
+          node -e "const c = require('./data/catalog.json'); const count = c.pages.reduce((a, p) => a + (p.services ? p.services.length : 0), 0); console.log('Verified SKU count:', count); if (count < 31) process.exit(1);"
+          cp -a /tmp/stage/. "$GITHUB_WORKSPACE/"
+          cd "$GITHUB_WORKSPACE"
+          rm -rf "$ZIP_FILE" .aistudio
+          git config user.name "KalCola"
+          git config user.email "tyr@tyrprotocol.pro"
+          git add -A
+          git commit -m "feat: unpack and verify v3.1.0 storefront & Android architecture"
+          git push origin HEAD:main
