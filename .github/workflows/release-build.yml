@@ -1,0 +1,19 @@
+name: Release Build
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  package-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Package storefront release
+        run: mkdir -p dist && tar -czf dist/tyr-storefront.tar.gz CNAME .nojekyll robots.txt sitemap.xml index.html 404.html manifest.webmanifest sw.js css js data assets public
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tyr-storefront-release
+          path: dist/tyr-storefront.tar.gz
