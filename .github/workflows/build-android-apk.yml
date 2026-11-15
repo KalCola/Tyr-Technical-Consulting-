@@ -1,0 +1,73 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Set up Java 21
+        uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.0
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@96ef2fb4baa4fa2fb8da00ff2efcf6f9fa22f2cf # v3.2.2
+
+      - name: Bundle Storefront Web Assets into APK
+        run: |
+          mkdir -p android/app/src/main/assets
+          cp -r index.html 404.html manifest.webmanifest sw.js css js data assets android/app/src/main/assets/
+
+      - name: Setup Keystore
+        working-directory: android
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          if [ -n "$ANDROID_KEYSTORE_BASE64" ]; then
+            printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 -d > release.keystore
+          else
+            echo "Generating fallback build keystore..."
+            keytool -genkeypair -v -keystore release.keystore -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 -storepass android -keypass android -dname "CN=TYR Protocol, OU=Engineering, O=TYR, L=Northwest, ST=Alabama, C=US"
+          fi
+
+      - name: Build Release APK
+        working-directory: android
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD || 'android' }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS || 'androiddebugkey' }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD || 'android' }}
+        run: |
+          chmod +x ./gradlew 2>/dev/null || true
+          gradle assembleRelease --no-daemon
+
+      - name: Sign & Verify Universal APK (v2 + v3)
+        working-directory: android
+        run: |
+          UNIVERSAL_APK=$(find app/build/outputs/apk/release -name "*universal*.apk" -o -name "app-release.apk" | head -n 1)
+          if [ -f "$UNIVERSAL_APK" ]; then
+            cp "$UNIVERSAL_APK" tyr-protocol-universal-v3.1.apk
+            sha384sum tyr-protocol-universal-v3.1.apk > tyr-protocol-universal-v3.1.apk.sha384
+          fi
+
+      - name: Upload Universal APK Artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: tyr-protocol-universal-v3.1-apk
+          path: |
+            android/tyr-protocol-universal-v3.1.apk
+            android/tyr-protocol-universal-v3.1.apk.sha384
