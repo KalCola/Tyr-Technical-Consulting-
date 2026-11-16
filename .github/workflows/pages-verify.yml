@@ -46,7 +46,7 @@ jobs:
           grep -q 'og:title' index.html || exit 1
           grep -q 'application/ld+json' index.html || exit 1
           node --check js/stripe-checkout.js js/forensics.js js/growth-kit.js js/deck.js js/app.js
-          node -e "const c = require('./data/catalog.json'); const count = c.pages.reduce((a, p) => a + (p.services ? p.services.length : 0), 0); console.log('Catalog SKU count:', count); if (count < 31) process.exit(1);"
+          node -e "const c = require('./data/catalog.json'); const count = c.pages.reduce((a, p) => a + (p.services ? p.services.length : 0), 0); console.log('Catalog SKU count:', count); if (count < 36 || !c.realms || c.realms.length < 14) process.exit(1);"
 
       - name: Upload Pages Artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
