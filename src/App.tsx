@@ -29,7 +29,8 @@ import {
   Calendar,
   UploadCloud,
   Layers,
-  Building2
+  Building2,
+  Grid2x2
 } from 'lucide-react';
 import {
   ORGANIZATION,
@@ -56,6 +57,8 @@ export default function App() {
   const [showBookingModal, setShowBookingModal] = useState<boolean>(false);
   const [bookingPreSku, setBookingPreSku] = useState<string | undefined>(undefined);
   const [showVaultModal, setShowVaultModal] = useState<boolean>(false);
+  const [showBrowseDrawer, setShowBrowseDrawer] = useState<boolean>(false);
+  const [browseSection, setBrowseSection] = useState<'realms' | 'business' | 'tools'>('realms');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedRealmFilter, setSelectedRealmFilter] = useState<string | null>(null);
   const [cart, setCart] = useState<ServiceItem[]>([]);
@@ -115,6 +118,41 @@ export default function App() {
   const [aiLoading, setAiLoading] = useState<boolean>(false);
   const [aiScopeSummary, setAiScopeSummary] = useState<string | null>(null);
   const [aiScopeLoading, setAiScopeLoading] = useState<boolean>(false);
+
+  const microServices = [
+    { id: 'b2c', label: 'B2C', icon: '🏪', action: () => setPortalMode('storefront') },
+    { id: 'b2b', label: 'B2B', icon: '🏢', action: () => setPortalMode('enterprise') },
+    { id: 'estimate', label: 'Estimate', icon: '🧮', action: () => setActiveTab(8) },
+    { id: 'call', label: 'Call', icon: '📞', action: handleDial },
+    { id: 'book', label: 'Book', icon: '📅', action: () => setShowBookingModal(true) },
+    { id: 'browse', label: 'Browse', icon: '🧭', action: () => setShowBrowseDrawer(true) }
+  ];
+
+  const browseSections = {
+    realms: [
+      { label: '3D Card', action: () => setActiveTab(0) },
+      { label: 'Midgard', action: () => setActiveTab(1) },
+      { label: 'Alfheim', action: () => setActiveTab(2) },
+      { label: 'Svartalfheim', action: () => setActiveTab(3) },
+      { label: 'Tech Care', action: () => setActiveTab(4) },
+      { label: 'Retainer Care', action: () => setActiveTab(5) },
+      { label: 'Workflow', action: () => setActiveTab(6) },
+      { label: 'All Realms', action: () => setActiveTab(7) }
+    ],
+    business: [
+      { label: 'Tier Matrix', action: () => setActiveTab(10) },
+      { label: 'Retainers', action: () => setActiveTab(11) },
+      { label: 'Enterprise Portal', action: () => setPortalMode('enterprise') },
+      { label: 'Estimate Cart', action: () => setActiveTab(8) }
+    ],
+    tools: [
+      { label: 'AI Advisor', action: () => setActiveTab(9) },
+      { label: 'Vault', action: () => setShowVaultModal(true) },
+      { label: 'Dispatch', action: () => { setDispatchInitialSubject(''); setShowDispatchModal(true); } },
+      { label: 'E-Sign', action: () => { setSignDocTitle('Service Estimate'); setSignDocCode(`EST-${Date.now().toString().slice(-6)}`); setSignContractValue('$0.00'); setShowSignModal(true); } },
+      { label: 'Intake', action: () => { setIntakePreServices([]); setShowIntakeModal(true); } }
+    ]
+  } as const;
 
   // Check URL parameters for direct card view or secret admin vault
   useEffect(() => {
@@ -326,10 +364,8 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
 
   return (
     <div className={`min-h-screen bg-[#060609] text-[#f4f5f8] flex flex-col items-center ${portalMode === 'storefront' && activeTab === 0 ? 'overflow-hidden h-screen' : ''}`}>
-      {/* Android Device Container with Max Width for Tablet & Desktop */}
-      <div className={`w-full max-w-3xl flex flex-col shadow-2xl relative ${portalMode === 'storefront' && activeTab === 0 ? 'h-screen overflow-hidden' : 'min-h-screen pb-20'}`}>
-        {/* Android Simulated Status Bar */}
-        <header className="bg-[#060609]/95 backdrop-blur-md px-4 py-1.5 flex items-center justify-between text-xs text-[#94a3b8] border-b border-[#232634]/50 shrink-0 z-50">
+      <div className={`tyr-app-frame w-full max-w-7xl flex flex-col shadow-2xl relative ${portalMode === 'storefront' && activeTab === 0 ? 'h-screen overflow-hidden' : 'min-h-screen pb-20'}`}>
+        <header className="tyr-device-status bg-[#060609]/95 backdrop-blur-md px-4 py-1.5 flex items-center justify-between text-xs text-[#94a3b8] border-b border-[#232634]/50 shrink-0 z-50">
           <span className="font-semibold text-white tracking-wider">9:41 AM</span>
           <div className="flex items-center space-x-2">
             <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-red-950/60 text-red-400 border border-red-800/40">
@@ -340,10 +376,9 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
           </div>
         </header>
 
-        {/* Material 3 App Bar */}
-        <div className="bg-[#0c0d13] px-4 py-2.5 border-b border-[#232634] flex items-center justify-between shrink-0 z-40 shadow-lg">
+        <div className="tyr-app-header bg-[#0c0d13] px-4 py-2.5 border-b border-[#232634] flex items-center justify-between shrink-0 z-40 shadow-lg">
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-red-600 to-red-900 border border-amber-400 flex items-center justify-center font-black text-base text-white shadow-md shadow-red-900/40">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-red-600 to-red-900 border border-amber-400 flex items-center justify-center font-black text-base text-white shadow-md shadow-red-950/80">
               ᛏ
             </div>
             <div>
@@ -440,7 +475,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
           </div>
         </div>
 
-        {/* Mode Switcher Pill Bar (Storefront vs Enterprise B2B) */}
         <div className="bg-[#090b12] border-b border-[#232634] px-3 py-1.5 flex items-center justify-between shrink-0 z-35">
           <div className="flex bg-[#05070d] p-0.5 rounded-lg border border-[#1e2738] w-full sm:w-auto">
             <button
@@ -451,7 +485,7 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
                   : 'text-[#94a3b8] hover:text-white'
               }`}
             >
-              <span>ᛏ Small Business Storefront</span>
+              <span>ᛏ B2C Storefront</span>
             </button>
             <button
               onClick={() => setPortalMode('enterprise')}
@@ -462,7 +496,7 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
               }`}
             >
               <Building2 className="w-3.5 h-3.5 text-cyan-300" />
-              <span>⚡ B2B Enterprise Portal</span>
+              <span>⚡ B2B Enterprise</span>
             </button>
           </div>
 
@@ -472,27 +506,27 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
           </div>
         </div>
 
-        {/* Deck Tabs Scrollable Bar - Only shown when in Small Business Storefront Mode */}
         {portalMode === 'storefront' && (
-          <div className="bg-[#0c0d13]/90 border-b border-[#232634] px-3 py-1.5 shrink-0 z-30">
-            <div className="flex space-x-1.5 overflow-x-auto scrollbar-none">
-              {tabTitles.map((t, idx) => {
-                const active = activeTab === idx;
+          <div className="bg-[#0c0d13]/90 border-b border-[#232634] px-3 py-2 shrink-0 z-30">
+            <div className="grid grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:justify-center sm:space-x-2">
+              {microServices.map((item) => {
+                const isActive =
+                  (item.id === 'b2c' && portalMode === 'storefront') ||
+                  (item.id === 'b2b' && portalMode === 'enterprise') ||
+                  (item.id === 'estimate' && activeTab === 8) ||
+                  (item.id === 'browse' && showBrowseDrawer);
+
                 return (
                   <button
-                    key={idx}
-                    onClick={() => setActiveTab(idx)}
-                    className={`px-2.5 py-1 rounded-md text-xs font-bold whitespace-nowrap transition border ${
-                      active
-                        ? idx === 0
-                          ? 'bg-purple-700 text-white border-amber-400 shadow-md shadow-purple-950/80'
-                          : idx === 9
-                          ? 'bg-amber-600 text-black border-amber-300 font-extrabold shadow-md shadow-amber-950/70'
-                          : 'bg-red-600 text-white border-amber-400 shadow-md shadow-red-950/60'
-                        : 'bg-[#11131a] text-[#cbd5e1] border-[#232634] hover:bg-[#1a1c26]'
+                    key={item.id}
+                    type="button"
+                    onClick={item.action}
+                    className={`tyr-micro-service flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl px-2 py-2 text-[10px] font-extrabold tracking-wide transition ${
+                      isActive ? 'active' : ''
                     }`}
                   >
-                    {t.label}
+                    <span className="text-sm">{item.icon}</span>
+                    <span>{item.label}</span>
                   </button>
                 );
               })}
@@ -500,9 +534,36 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
           </div>
         )}
 
-        {/* MAIN VIEW: ENTERPRISE B2B PORTAL vs 3D CARD vs 9 REALMS STOREFRONT */}
+        {portalMode === 'enterprise' && (
+          <div className="bg-[#0c0d13]/90 border-b border-[#232634] px-3 py-2 shrink-0 z-30">
+            <div className="grid grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:justify-center sm:space-x-2">
+              {[
+                { id: 'b2b', label: 'B2B', icon: '🏢', action: () => setPortalMode('enterprise') },
+                { id: 'estimate', label: 'Estimate', icon: '🧮', action: () => setActiveTab(8) },
+                { id: 'call', label: 'Call', icon: '📞', action: handleDial },
+                { id: 'book', label: 'Book', icon: '📅', action: () => setShowBookingModal(true) },
+                { id: 'browse', label: 'Browse', icon: '🧭', action: () => setShowBrowseDrawer(true) }
+              ].map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={item.action}
+                  className={`tyr-micro-service flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl px-2 py-2 text-[10px] font-extrabold tracking-wide transition ${
+                    (item.id === 'b2b' && portalMode === 'enterprise') || (item.id === 'estimate' && activeTab === 8) || (item.id === 'browse' && showBrowseDrawer)
+                      ? 'active'
+                      : ''
+                  }`}
+                >
+                  <span className="text-sm">{item.icon}</span>
+                  <span>{item.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
         {portalMode === 'enterprise' ? (
-          <main className="p-3 sm:p-4 flex-1 overflow-y-auto">
+          <main className="tyr-app-main p-3 sm:p-4 flex-1 overflow-y-auto">
             <EnterpriseB2BPortal
               onOpenIntakeWithTrack={(track) => {
                 const syntheticService: ServiceItem = {
@@ -547,7 +608,7 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
             />
           </main>
         ) : activeTab === 0 ? (
-          <div className="flex-1 flex flex-col p-3 overflow-hidden bg-[#060609] select-none touch-none">
+          <div className="tyr-app-main flex-1 flex flex-col p-3 overflow-hidden bg-[#060609] select-none touch-none">
             <div className="flex items-center justify-between pb-2 text-xs">
               <div className="flex items-center space-x-2">
                 <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/30 uppercase font-bold">
@@ -594,9 +655,7 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
               </div>
             </div>
 
-            {/* Standalone 3D Card Stage (Zero scrollbars, fits viewport cleanly) */}
             <div className="flex-1 w-full rounded-2xl overflow-hidden border border-[#232634] bg-[#060609] relative shadow-2xl">
-              {/* Subtle semi-transparent animated helper overlay targeting iframe (fades after 3s) */}
               {showCardGuide && (
                 <div
                   onClick={() => {
@@ -608,17 +667,16 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
                   }`}
                   aria-label="3D card interaction instructions"
                 >
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#060609]/90 backdrop-blur-md border border-amber-400/80 shadow-2xl shadow-black text-amber-200 text-xs font-bold animate-pulse">
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#060609]/90 backdrop-blur-md border border-amber-400/80 shadow-2xl shadow-black text-amber-200 text-[10px] sm:text-[11px]">
                     <span className="text-cyan-400 font-mono text-sm">⇄</span>
                     <span>Drag in any direction to rotate in 3D • Double-click to flip</span>
                   </div>
                 </div>
               )}
 
-              {/* Floating Quick-Share Button */}
               <button
                 onClick={handleShareCard}
-                className="absolute bottom-3 right-3 z-20 px-3 py-1.5 rounded-full bg-[#060609]/90 backdrop-blur-md border border-purple-500/60 shadow-xl text-purple-200 hover:text-white text-xs font-bold flex items-center space-x-1.5 transition active:scale-95"
+                className="absolute bottom-3 right-3 z-20 px-3 py-1.5 rounded-full bg-[#060609]/90 backdrop-blur-md border border-purple-500/60 shadow-xl text-purple-200 hover:text-white text-xs font-bold flex items-center gap-2"
                 title="Share 3D Card Link"
               >
                 <Share2 className="w-3.5 h-3.5 text-purple-400" />
@@ -633,7 +691,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
               />
             </div>
 
-            {/* Bottom Trust & Navigation Footer */}
             <div className="pt-2 flex items-center justify-between text-[11px] text-[#94a3b8] shrink-0">
               <span>🔒 <strong>Verified Identity:</strong> CALEB TR HOLCOMB (d/b/a TYR) • CP 575 G</span>
               <button
@@ -646,9 +703,7 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
             </div>
           </div>
         ) : (
-          /* VIEW 2: SCROLLABLE STOREFRONT & CATALOG PAGES */
-          <main className="p-4 space-y-4 flex-1 overflow-y-auto">
-            {/* Real-Time Client Work Order Intake Tracking Banner */}
+          <main className="tyr-app-main p-4 space-y-4 flex-1 overflow-y-auto">
             <ClientOrderTrackerBanner
               onOpenIntake={() => {
                 setIntakePreServices([]);
@@ -656,8 +711,7 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
               }}
             />
 
-            {/* Executive Hero Banner */}
-            <div className="rounded-xl bg-gradient-to-br from-[#160a0d] via-[#0b0c12] to-[#171108] border border-red-900/50 p-4 shadow-xl relative overflow-hidden">
+            <div className="tyr-hero rounded-xl bg-gradient-to-br from-[#160a0d] via-[#0b0c12] to-[#171108] border border-red-900/50 p-4 shadow-xl relative overflow-hidden">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#232634]/70">
                 <div className="space-y-1">
                   <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-red-950/80 text-red-400 border border-red-800/40">
@@ -675,7 +729,7 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
                 <div className="flex flex-wrap sm:flex-col gap-2 shrink-0">
                   <button
                     onClick={() => setActiveTab(0)}
-                    className="px-3 py-1.5 rounded-lg bg-purple-950/80 hover:bg-purple-900/80 text-purple-200 border border-purple-500/40 font-bold text-xs flex items-center justify-center space-x-1.5 transition"
+                    className="px-3 py-1.5 rounded-lg bg-purple-950/80 hover:bg-purple-900/80 text-purple-200 border border-purple-500/40 font-bold text-xs flex items-center justify-center space-x-1.5"
                   >
                     <span>🪪 View 3D Card</span>
                   </button>
@@ -684,14 +738,14 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
                       setIntakePreServices([]);
                       setShowIntakeModal(true);
                     }}
-                    className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-extrabold text-xs flex items-center justify-center space-x-1.5 shadow-md shadow-red-900/50 transition"
+                    className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-extrabold text-xs flex items-center justify-center space-x-1.5"
                   >
                     <FileText className="w-3.5 h-3.5" />
                     <span>Submit Project Intake</span>
                   </button>
                   <button
                     onClick={() => setShowBookingModal(true)}
-                    className="px-3 py-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 font-bold text-xs flex items-center justify-center space-x-1.5 transition"
+                    className="px-3 py-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 font-bold text-xs flex items-center justify-center space-x-1.5"
                   >
                     <Calendar className="w-3.5 h-3.5 text-amber-400" />
                     <span>Schedule Consult Call</span>
@@ -699,13 +753,13 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
                   <div className="flex gap-1.5">
                     <button
                       onClick={() => setActiveTab(10)}
-                      className="flex-1 px-2 py-1.5 rounded-lg bg-[#11131a] hover:bg-[#1f2330] text-cyan-300 border border-[#232634] font-bold text-[11px] flex items-center justify-center space-x-1 transition"
+                      className="flex-1 px-2 py-1.5 rounded-lg bg-[#11131a] hover:bg-[#1f2330] text-cyan-300 border border-[#232634] font-bold text-[11px] flex items-center justify-center space-x-1.5"
                     >
                       <span>⚖️ Tier Matrix</span>
                     </button>
                     <button
                       onClick={() => setActiveTab(11)}
-                      className="flex-1 px-2 py-1.5 rounded-lg bg-[#11131a] hover:bg-[#1f2330] text-purple-300 border border-[#232634] font-bold text-[11px] flex items-center justify-center space-x-1 transition"
+                      className="flex-1 px-2 py-1.5 rounded-lg bg-[#11131a] hover:bg-[#1f2330] text-purple-300 border border-[#232634] font-bold text-[11px] flex items-center justify-center space-x-1.5"
                     >
                       <span>🛡️ Retainers</span>
                     </button>
@@ -713,7 +767,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
                 </div>
               </div>
 
-              {/* Entity Attributes Grid */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-3">
                 <div className="bg-[#090a0f] p-2 rounded-lg border border-[#232634] border-l-2 border-l-red-600">
                   <span className="text-[9px] uppercase font-bold text-[#94a3b8] block">LEGAL ENTITY</span>
@@ -734,7 +787,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
               </div>
             </div>
 
-            {/* Page 1: Midgard, Asgard, Vanaheim */}
             {activeTab === 1 && (
               <div className="space-y-4">
                 <div className="flex items-center justify-between text-xs text-amber-400 px-1 font-semibold">
@@ -755,7 +807,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
               </div>
             )}
 
-            {/* Page 2: Alfheim, Nidavellir, Muspelheim */}
             {activeTab === 2 && (
               <div className="space-y-4">
                 <div className="flex items-center justify-between text-xs text-amber-400 px-1 font-semibold">
@@ -776,7 +827,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
               </div>
             )}
 
-            {/* Page 3: Svartalfheim, Niflheim, Jotunheim */}
             {activeTab === 3 && (
               <div className="space-y-4">
                 <div className="flex items-center justify-between text-xs text-amber-400 px-1 font-semibold">
@@ -797,7 +847,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
               </div>
             )}
 
-            {/* Page 4: Tech Care Plans */}
             {activeTab === 4 && (
               <div className="space-y-4">
                 <div className="flex items-center justify-between text-xs text-amber-400 px-1 font-semibold">
@@ -818,10 +867,8 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
               </div>
             )}
 
-            {/* Page 5: Monthly Expense Optimization & Flagship Retainer */}
             {activeTab === 5 && (
               <div className="space-y-4">
-                {/* Flagship Bundle Banner */}
                 <div className="rounded-xl bg-gradient-to-r from-red-950/70 via-[#10121b] to-amber-950/70 border border-amber-500/40 p-4 shadow-xl space-y-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
@@ -872,7 +919,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
                   </button>
                 </div>
 
-                {/* Subscriptions */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                   {SERVICES.filter((s) => s.page === 5).map((service) => (
                     <ServiceCardComponent
@@ -887,7 +933,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
               </div>
             )}
 
-            {/* Page 6: Bifröst 3-Step Workflow */}
             {activeTab === 6 && (
               <div className="space-y-4">
                 <div className="flex items-center justify-between text-xs text-amber-400 px-1 font-semibold">
@@ -929,10 +974,8 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
               </div>
             )}
 
-            {/* Page 7: All Realms Catalog with Search & Filter */}
             {activeTab === 7 && (
               <div className="space-y-4">
-                {/* Search & Realm Chips */}
                 <div className="space-y-2">
                   <div className="relative">
                     <Search className="w-4 h-4 text-[#94a3b8] absolute left-3 top-3" />
@@ -972,7 +1015,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
                   </div>
                 </div>
 
-                {/* Services Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                   {filteredServices.map((service) => (
                     <ServiceCardComponent
@@ -987,7 +1029,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
               </div>
             )}
 
-            {/* Page 8: Estimate Calculator & Cart */}
             {activeTab === 8 && (
               <div className="space-y-4">
                 <div className="rounded-xl bg-[#11131a] border border-amber-500/40 p-4 space-y-4 shadow-xl">
@@ -1042,7 +1083,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
                         ))}
                       </div>
 
-                      {/* Totals */}
                       <div className="bg-[#0c0d13] p-3 rounded-lg border border-[#232634] space-y-1.5 text-xs">
                         <div className="flex justify-between text-[#cbd5e1]">
                           <span>One-Time Builds:</span>
@@ -1058,13 +1098,12 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
                         </div>
                       </div>
 
-                      {/* Optional AI Scope Analysis Button in Cart */}
                       {aiEnabled ? (
                         <div className="space-y-2 pt-1">
                           <button
                             onClick={handleGenerateScopeSummary}
                             disabled={aiScopeLoading}
-                            className="w-full py-2 rounded-lg bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-black font-extrabold text-xs flex items-center justify-center space-x-1.5 shadow-md transition disabled:opacity-50"
+                            className="w-full py-2 rounded-lg bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-black font-extrabold text-xs flex items-center justify-center space-x-2 transition"
                           >
                             <Sparkles className="w-3.5 h-3.5 text-black" />
                             <span>
@@ -1113,7 +1152,7 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
                             setIntakePreServices(cart);
                             setShowIntakeModal(true);
                           }}
-                          className="w-full py-3 rounded-lg bg-gradient-to-r from-amber-500 via-amber-600 to-red-600 hover:from-amber-400 hover:to-red-500 text-white font-black text-xs flex items-center justify-center space-x-2 shadow-xl shadow-amber-950/80 transition active:scale-[0.98]"
+                          className="w-full py-3 rounded-lg bg-gradient-to-r from-amber-500 via-amber-600 to-red-600 hover:from-amber-400 hover:to-red-500 text-white font-black text-xs flex items-center justify-center space-x-2 transition"
                         >
                           <FileText className="w-4 h-4 text-amber-200" />
                           <span>Submit Work Order Intake (${cartOneTimeTotal + cartMonthlyTotal})</span>
@@ -1146,11 +1185,9 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
               </div>
             )}
 
-            {/* Page 9: AI Technical Scope Advisor (Optional - Tyr & Freyja Oracle) */}
             {activeTab === 9 && (
               <div className="space-y-4">
                 <div className="rounded-xl bg-[#11131a] border border-amber-500/40 p-4 space-y-4 shadow-xl">
-                  {/* Top Header */}
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#232634]">
                     <div>
                       <div className="flex items-center space-x-2">
@@ -1178,18 +1215,15 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
                     </div>
                   </div>
 
-                  {/* If AI is disabled: show zero-AI privacy shield banner with toggle */}
                   {!aiEnabled ? (
                     <div className="p-6 rounded-xl bg-[#090a0f] border border-emerald-500/30 text-center space-y-3">
                       <div className="w-12 h-12 mx-auto rounded-full bg-emerald-950/80 border border-emerald-500/50 flex items-center justify-center text-emerald-400">
                         <Shield className="w-6 h-6" />
                       </div>
                       <div className="space-y-1">
-                        <h4 className="text-sm font-extrabold text-white">
-                          AI Technical Advisor is Currently Disabled
-                        </h4>
+                        <h4 className="text-sm font-extrabold text-white">AI Technical Advisor is Currently Disabled</h4>
                         <p className="text-xs text-[#cbd5e1] max-w-md mx-auto leading-relaxed">
-                          We recognize that many clients prefer strict deterministic software with zero external AI processing. In accordance with sovereign privacy, all AI models remain inactive.
+                          We recognize that many clients prefer strict deterministic software with zero external AI processing. In accordance with sovereign privacy, all AI models remain inactive until you opt in.
                         </p>
                         <p className="text-[11px] text-[#94a3b8]">
                           All 15 flat-rate catalog items, direct phone calling, encrypted email, and 3D card work 100% without AI.
@@ -1213,9 +1247,7 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
                       </div>
                     </div>
                   ) : (
-                    /* AI is Enabled: Interactive Consultation Console */
                     <div className="space-y-3">
-                      {/* Suggestion Chips */}
                       <div className="space-y-1.5">
                         <span className="text-[10px] uppercase font-bold text-[#94a3b8] tracking-wider block">
                           Suggested Technical Inquiries:
@@ -1239,7 +1271,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
                         </div>
                       </div>
 
-                      {/* Chat Messages Log */}
                       <div className="bg-[#08090e] border border-[#232634] rounded-xl p-3.5 h-80 overflow-y-auto space-y-3">
                         {aiMessages.map((msg) => {
                           const isUser = msg.sender === 'user';
@@ -1265,7 +1296,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
                                   {msg.text}
                                 </p>
 
-                                {/* If response recommends specific catalog SKUs, render interactive cards */}
                                 {msg.recommendedSkus && msg.recommendedSkus.length > 0 && (
                                   <div className="mt-3 pt-2 border-t border-[#232634] space-y-1.5">
                                     <span className="text-[10px] uppercase font-bold text-amber-400 block tracking-wider">
@@ -1318,7 +1348,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
                         )}
                       </div>
 
-                      {/* Input Bar */}
                       <form
                         onSubmit={(e) => {
                           e.preventDefault();
@@ -1348,7 +1377,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
               </div>
             )}
 
-            {/* Page 10: Service Tier Matrix & Recommendations */}
             {activeTab === 10 && (
               <ServiceTierMatrix
                 onSelectTierSkus={(skus) => {
@@ -1358,7 +1386,7 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
                     const newItems = items.filter(it => !existingSkus.has(it.sku));
                     return [...prev, ...newItems];
                   });
-                  setActiveTab(8); // Switch to estimate cart
+                  setActiveTab(8);
                 }}
                 onOpenIntakeWithSkus={(skus) => {
                   const items = SERVICES.filter(s => skus.includes(s.sku));
@@ -1369,7 +1397,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
               />
             )}
 
-            {/* Page 11: Recurring Care & Retainer Subscriptions */}
             {activeTab === 11 && (
               <ClientRetainerPortal
                 onOpenIntakeWithPlan={(sku) => {
@@ -1384,7 +1411,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
               />
             )}
 
-            {/* Pager Indicator & Stepper (For Pages 1–6) */}
             {activeTab >= 1 && activeTab <= 6 && (
               <div className="bg-[#0c0d13] p-2.5 rounded-xl border border-[#232634] flex items-center justify-between text-xs">
                 <button
@@ -1408,7 +1434,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
               </div>
             )}
 
-            {/* Footer */}
             <footer className="pt-4 border-t border-[#232634]/60 text-center space-y-1 text-[11px] text-[#94a3b8]">
               <p className="font-semibold text-white">
                 © {ORGANIZATION.name} • {ORGANIZATION.legalName}
@@ -1429,28 +1454,96 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
           </main>
         )}
 
-        {/* Floating Action Bar (Only shown on catalog tabs) */}
-        {activeTab !== 0 && (
-          <div className="fixed bottom-3 right-3 z-30 flex items-center space-x-2">
-            <button
-              onClick={() => setShowBookingModal(true)}
-              className="flex items-center space-x-1.5 px-3.5 py-3 rounded-full bg-[#11131a] text-amber-300 font-bold text-xs shadow-xl shadow-black/80 border border-amber-500/60 hover:scale-105 active:scale-95 transition backdrop-blur-md"
-              title="Schedule Consultation Call"
+        {showBrowseDrawer && (
+          <div
+            className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm"
+            onMouseDown={(event) => {
+              if (event.target === event.currentTarget) setShowBrowseDrawer(false);
+            }}
+          >
+            <aside
+              role="dialog"
+              aria-modal="true"
+              aria-label="Browse services and realms"
+              className="ml-auto flex h-full w-full max-w-md flex-col border-l border-[#3b4252] bg-[#0c0d13] p-5 shadow-2xl"
             >
-              <Calendar className="w-4 h-4 text-amber-400" />
-              <span className="hidden sm:inline">Book Call</span>
-            </button>
-            <button
-              onClick={handleDial}
-              className="flex items-center space-x-2 px-4 py-3 rounded-full bg-gradient-to-r from-red-600 to-red-800 text-white font-bold text-xs shadow-xl shadow-red-950/80 border border-amber-400 hover:scale-105 active:scale-95 transition"
-            >
-              <Phone className="w-4 h-4 text-amber-300" />
-              <span>Call Consult</span>
-            </button>
+              <div className="mb-5 flex items-center justify-between">
+                <h2 className="text-lg font-extrabold text-white">Browse TYR</h2>
+                <button
+                  type="button"
+                  onClick={() => setShowBrowseDrawer(false)}
+                  className="rounded-lg p-2 text-[#cbd5e1] hover:bg-[#1a1c26]"
+                  aria-label="Close browse drawer"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+
+              <div className="grid grid-cols-3 gap-2">
+                {([
+                  ['realms', 'Realms'],
+                  ['business', 'Business'],
+                  ['tools', 'Tools']
+                ] as const).map(([key, label]) => (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => { setBrowseSection(key); setShowBrowseDrawer(true); }}
+                    className={`rounded-lg border px-3 py-2 text-xs font-bold ${
+                      browseSection === key
+                        ? 'border-amber-400 bg-amber-500/15 text-amber-200'
+                        : 'border-[#232634] bg-[#11131a] text-[#cbd5e1]'
+                    }`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+
+              <nav className="mt-4 flex-1 space-y-2 overflow-y-auto" aria-label="Browse navigation" >
+                {browseSections[browseSection].map((item) => (
+                  <button
+                    key={item.label}
+                    type="button"
+                    onClick={() => {
+                      item.action();
+                      setShowBrowseDrawer(false);
+                    }}
+                    className="flex min-h-11 w-full items-center justify-between rounded-lg border border-[#232634] bg-[#11131a] px-4 text-left text-sm font-semibold text-white hover:border-amber-400"
+                  >
+                    {item.label}
+                    <ChevronRight className="h-4 w-4 text-[#94a3b8]" />
+                  </button>
+                ))}
+              </nav>
+            </aside>
           </div>
         )}
 
-        {/* 3D Card Fullscreen Modal */}
+        <div className="fixed bottom-3 right-3 z-40">
+          <div className="flex items-center gap-2 rounded-full border border-[#b7793e]/60 bg-[#0c0d13]/95 px-2 py-2 shadow-[0_12px_32px_rgba(0,0,0,0.5)] backdrop-blur-md">
+            {microServices.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={item.action}
+                className={`tyr-micro-service flex items-center justify-center gap-1.5 rounded-full px-2.5 py-2 text-[10px] font-extrabold tracking-wide transition ${
+                  (item.id === 'b2c' && portalMode === 'storefront') ||
+                  (item.id === 'b2b' && portalMode === 'enterprise') ||
+                  (item.id === 'estimate' && activeTab === 8) ||
+                  (item.id === 'browse' && showBrowseDrawer)
+                    ? 'active'
+                    : ''
+                }`}
+                title={item.label}
+              >
+                <span className="text-sm">{item.icon}</span>
+                <span className="hidden sm:inline">{item.label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
         {showCardFullscreen && (
           <div className="fixed inset-0 bg-black/95 backdrop-blur-md z-50 flex flex-col p-2 sm:p-4">
             <div className="flex items-center justify-between pb-2 px-2 text-white border-b border-[#232634]">
@@ -1488,7 +1581,7 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
                     cardGuideFading ? 'opacity-0 -translate-y-2' : 'opacity-100 translate-y-0'
                   }`}
                 >
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#060609]/90 backdrop-blur-md border border-amber-400/80 shadow-2xl shadow-black text-amber-200 text-xs font-bold animate-pulse">
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#060609]/90 backdrop-blur-md border border-amber-400/80 shadow-2xl shadow-black text-amber-200 text-[10px] sm:text-[11px]">
                     <span className="text-cyan-400 font-mono text-sm">⇄</span>
                     <span>Drag in any direction to rotate in 3D • Double-click to flip</span>
                   </div>
@@ -1504,7 +1597,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
           </div>
         )}
 
-        {/* Settings & Privacy Modal (Strict Optional AI Toggle) */}
         {showSettingsModal && (
           <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
             <div className="bg-[#11131a] border border-amber-500/50 rounded-2xl max-w-md w-full p-5 space-y-4 shadow-2xl relative">
@@ -1531,7 +1623,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
                     </span>
                   </div>
 
-                  {/* Toggle Switch */}
                   <button
                     onClick={toggleAiEnabled}
                     className={`w-12 h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 ${
@@ -1583,7 +1674,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
           </div>
         )}
 
-        {/* Zero-Custody Modal */}
         {showZeroCustodyModal && (
           <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
             <div className="bg-[#11131a] border border-emerald-500/50 rounded-2xl max-w-md w-full p-5 space-y-4 shadow-2xl relative">
@@ -1628,7 +1718,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
           </div>
         )}
 
-        {/* Inquiry Modal */}
         {showInquiryModal && (
           <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
             <div className="bg-[#11131a] border border-red-600/50 rounded-2xl max-w-md w-full p-5 space-y-4 shadow-2xl relative">
@@ -1706,14 +1795,12 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
           </div>
         )}
 
-        {/* Client Work Order Intake Modal */}
         <ClientIntakeModal
           isOpen={showIntakeModal}
           onClose={() => setShowIntakeModal(false)}
           preSelectedServices={intakePreServices}
         />
 
-        {/* Secret Sovereign Admin Passcode Modal (Not viewable by clients) */}
         {showAdminPasscodeModal && (
           <div className="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
             <div className="bg-[#11131a] border border-amber-500/60 rounded-2xl max-w-sm w-full p-5 space-y-4 shadow-2xl relative">
@@ -1785,7 +1872,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
           </div>
         )}
 
-        {/* Consult Appointment Booking Scheduler Modal */}
         <AppointmentSchedulerModal
           isOpen={showBookingModal}
           onClose={() => {
@@ -1795,13 +1881,11 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
           preSelectedSku={bookingPreSku}
         />
 
-        {/* Zero-Custody Document Vault Modal */}
         <ZeroCustodyDocumentVaultModal
           isOpen={showVaultModal}
           onClose={() => setShowVaultModal(false)}
         />
 
-        {/* Direct Redundant Failover Dispatch Modal (Google Chat Relay) */}
         <DirectDispatchModal
           isOpen={showDispatchModal}
           onClose={() => setShowDispatchModal(false)}
@@ -1809,7 +1893,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
           initialSubject={dispatchInitialSubject}
         />
 
-        {/* Digital Contract Execution Modal (15 U.S.C. § 7001 & Alabama UETA) */}
         <DigitalContractSignModal
           isOpen={showSignModal}
           onClose={() => setShowSignModal(false)}
@@ -1822,7 +1905,6 @@ Provide a concise executive scope briefing, highlighting the anti-spoof/security
   );
 }
 
-// Individual Service Card Component
 function ServiceCardComponent({
   service,
   onInquire,
@@ -1845,7 +1927,6 @@ function ServiceCardComponent({
       }}
     >
       <div className="space-y-2">
-        {/* Top Header */}
         <div className="flex items-start justify-between gap-2">
           <div>
             <div className="flex items-center space-x-1.5 mb-1">
@@ -1877,7 +1958,6 @@ function ServiceCardComponent({
           </div>
         </div>
 
-        {/* 3-Cell Attribute Strip */}
         <div
           className="grid grid-cols-3 gap-1 bg-[#090a0f] p-1.5 rounded-lg border border-[#232634]"
           style={{ borderLeft: `2px solid ${realm.main}` }}
@@ -1895,7 +1975,6 @@ function ServiceCardComponent({
           ))}
         </div>
 
-        {/* Bullets */}
         <ul className="space-y-1 text-xs text-[#cbd5e1] leading-relaxed pt-1">
           {service.bullets.map((b, i) => (
             <li key={i} className="flex items-start space-x-1.5">
@@ -1908,7 +1987,6 @@ function ServiceCardComponent({
         </ul>
       </div>
 
-      {/* Footer & Actions */}
       <div className="pt-3 mt-3 border-t border-[#232634] space-y-2">
         <div className="flex items-center justify-between text-[10px]">
           <span className="px-1.5 py-0.5 rounded bg-[#090a0f] border border-[#232634] text-[#cbd5e1] font-semibold truncate max-w-[180px]">
