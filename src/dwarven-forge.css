@@ -1,0 +1,63 @@
+/* Dwarven forge accents for the compact service controls and tools.
+   Keep the existing Nine Realms colors; use worked iron and warm bronze as trim. */
+:root {
+  --forge-iron: #17191d;
+  --forge-iron-light: #252a30;
+  --forge-bronze: #b7793e;
+  --forge-bronze-light: #e0b875;
+  --forge-rune-glow: rgba(224, 184, 117, 0.18);
+}
+
+/* Compact actions remain easy to identify and tap; the metal treatment is decorative. */
+#root > div > div > div.fixed.bottom-3.right-3 {
+  gap: 0.625rem;
+  padding: 0.5rem;
+  border: 1px solid rgba(183, 121, 62, 0.45);
+  border-radius: 9999px;
+  background: rgba(12, 13, 19, 0.94);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55), 0 0 22px var(--forge-rune-glow);
+  backdrop-filter: blur(14px);
+}
+
+#root > div > div > div.fixed.bottom-3.right-3 > button {
+  min-height: 46px;
+  border-color: rgba(183, 121, 62, 0.55);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.06);
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+#root > div > div > div.fixed.bottom-3.right-3 > button:hover,
+#root > div > div > div.fixed.bottom-3.right-3 > button:focus-visible {
+  border-color: var(--forge-bronze-light);
+  box-shadow: 0 0 0 2px var(--forge-rune-glow), inset 0 1px rgba(255, 255, 255, 0.08);
+}
+
+#root > div > div > div.fixed.bottom-3.right-3 > button:active {
+  transform: translateY(1px);
+}
+
+/* Existing tool/service panels get a subtle forged edge without changing realm colors. */
+#root main div[class*="rounded-xl"][class*="bg-[#11131a]"] {
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.035), 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Keep keyboard focus clear and touch targets comfortable on hybrid devices. */
+#root button:focus-visible,
+#root a:focus-visible {
+  outline: 2px solid var(--forge-bronze-light);
+  outline-offset: 2px;
+}
+
+@media (max-width: 639px) {
+  #root > div > div > div.fixed.bottom-3.right-3 {
+    right: 0.5rem;
+    bottom: 0.5rem;
+    padding: 0.375rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #root > div > div > div.fixed.bottom-3.right-3 > button {
+    transition: none;
+  }
+}
