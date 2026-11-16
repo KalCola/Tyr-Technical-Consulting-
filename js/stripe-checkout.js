@@ -67,7 +67,7 @@
       .trim();
     let token = clean;
     if (clean.includes('–')) token = clean.split('–')[0].trim();
-    else if (clean.includes('-')) token = clean.split('-')[0].trim();
+    else if (clean.includes('/')) { token = clean.split('/')[0].trim(); }
     else if (clean.includes('|')) token = clean.split('|')[0].trim();
     token = token.replace(/[^0-9.]/g, '');
     const dollars = parseFloat(token);
