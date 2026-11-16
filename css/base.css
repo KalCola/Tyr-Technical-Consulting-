@@ -35,7 +35,21 @@
   --realm-09-sec: #818cf8;
   --realm-10-pri: #d97706; /* Yggdrasil (ᛇ) */
   --realm-10-sec: #fde047;
+--realm-11-pri: #d97706; --realm-11-sec: #fbbf24; /* Sindri's Hearth */
+--realm-12-pri: #c2410c; --realm-12-sec: #fb923c; /* Brokkr's Bellows */
+--realm-13-pri: #0891b2; --realm-13-sec: #22d3ee; /* Ivaldi's Workshop */
+--realm-14-pri: #7c3aed; --realm-14-sec: #a78bfa; /* Dvalinn's Vault */
 
+/* Freyja Personal (#fde047/#ec4899 + #4C Wolf-Eye Aurora) & Fenrir Business (#22d3ee/#6366f1 + #4A Brisingamen Gold) */
+--freyja-ring-inner: #fde047;
+--freyja-ring-outer: #ec4899;
+--freyja-violet: #a855f7;
+--fenrir-ring-inner: #22d3ee;
+--fenrir-ring-outer: #6366f1;
+--brisingamen-gold: #f0b429;
+--theme-ring-inner: var(--freyja-ring-inner);
+--theme-ring-outer: var(--freyja-ring-outer);
+--theme-accent: #f472b6;
   /* Font Stack */
   --font-display: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
@@ -185,4 +199,62 @@ button {
 }
 .btn-call:hover {
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+html[data-storefront-mode="business"] {
+  --theme-ring-inner: var(--fenrir-ring-inner);
+  --theme-ring-outer: var(--fenrir-ring-outer);
+  --theme-accent: #22d3ee;
+}
+/* Themed Cookie & Consent Scheme (Freyja / Fenrir Obsidian Aura) */
+#cookie-consent-banner {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 9999;
+  max-width: 380px;
+  padding: 14px 16px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--text-secondary);
+  background:
+    radial-gradient(circle at 16% 24%, rgba(168, 85, 247, 0.18) 0%, transparent 48%),
+    radial-gradient(circle at 84% 20%, rgba(6, 182, 212, 0.16) 0%, transparent 48%),
+    linear-gradient(145deg, #0b0711 0%, #07080d 58%, #040407 100%);
+  border: 1.5px solid var(--theme-ring-inner);
+  box-shadow: 0 0 0 2px var(--theme-ring-outer), 0 12px 32px rgba(0, 0, 0, 0.92);
+  border-radius: 12px;
+}
+#cookie-consent-banner[hidden] { display: none !important; }
+#cookie-consent-banner .consent-title {
+  font-weight: 700;
+  color: var(--freyja-ring-inner);
+  font-size: 13px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+#cookie-consent-banner .consent-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+}
+.consent-btn-accept {
+  background: linear-gradient(135deg, #ec4899 0%, #9333ea 100%);
+  border: 1px solid #fde047;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+.consent-btn-decline {
+  background: var(--bg-surface);
+  border: 1px solid var(--fenrir-ring-inner);
+  color: var(--text-main);
+  font-weight: 600;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 6px;
 }
