@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Patron Triad Neon Bind-Rune Emblem">
+  <defs>
+    <radialGradient id="plasmaCore" cx="50%" cy="48%" r="48%">
+      <stop offset="0%" stop-color="#f43f5e" stop-opacity="0.68"/>
+      <stop offset="50%" stop-color="#9333ea" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#050508" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="120" height="120" rx="16" fill="#050508"/>
+  <circle cx="60" cy="58" r="48" fill="url(#plasmaCore)"/>
+  <path d="M60,7 L105,23 L103,66 C101,88 83,105 60,114 C37,105 19,88 17,66 L15,23 Z" fill="none" stroke="#22d3ee" stroke-width="2.4"/>
+  <path d="M60,11 L100,26 L98,65 C96,84 80,100 60,109 C40,100 24,84 22,65 L20,26 Z" fill="none" stroke="#ec4899" stroke-width="2"/>
+  <path d="M28,46 C29,74 42,90 55,97" fill="none" stroke="#22d3ee" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M34,50 C35,71 45,84 55,91" fill="none" stroke="#ec4899" stroke-width="2.1" stroke-linecap="round"/>
+  <path d="M92,46 C91,74 78,90 65,97" fill="none" stroke="#22d3ee" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M86,50 C85,71 75,84 65,91" fill="none" stroke="#f0b429" stroke-width="2.1" stroke-linecap="round"/>
+  <path d="M60,19 L60,101 M35,42 L60,19 L85,42 M60,54 L89,35 M60,68 L89,49 M60,62 L33,48 L60,78" fill="none" stroke="#22d3ee" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.5"/>
+  <path d="M60,19 L60,101 M35,42 L60,19 L85,42 M60,54 L89,35 M60,68 L89,49 M60,62 L33,48 L60,78" fill="none" stroke="#f43f5e" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M60,21 L60,99 M37,42 L60,21 L83,42 M60,54 L87,36 M60,68 L87,50 M60,62 L35,49 L60,77" fill="none" stroke="#fde047" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
