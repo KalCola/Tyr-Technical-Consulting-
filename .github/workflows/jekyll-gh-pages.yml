@@ -13,6 +13,7 @@ jobs:
       name: github-pages
       url: ${{ steps.dep.outputs.page_url }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - run: mkdir -p _site && for f in CNAME .nojekyll robots.txt sitemap.xml index.html 404.html manifest.webmanifest sw.js css js data assets public; do [ -e "$f" ] && cp -r "$f" _site/; done
