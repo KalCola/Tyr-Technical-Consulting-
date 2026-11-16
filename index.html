@@ -184,7 +184,9 @@
     <header class="app-header">
       <div class="header-inner">
         <div class="brand-block">
-          <div class="brand-icon">ᛏ</div>
+          <div class="brand-icon">
+              <img id="header-brand-logo" src="./assets/logo-512.jpg" alt="TYR Technical Consulting 3D Neon Shield Logo" width="38" height="38">
+            </div>
           <div class="brand-text">
             <h1>TYR TECHNICAL CONSULTING</h1>
             <p>NAICS 541512 &amp; 541611 • Defensive Systems &amp; Storefront</p>
@@ -309,6 +311,7 @@
     <footer class="app-footer">
       <div class="footer-inner">
         <div class="footer-meta">
+          <div><button type="button" class="icon-cta" data-action="consent-open" onclick="window.openCookieConsentBanner && window.openCookieConsentBanner()">🍪 Cookie &amp; Consent Settings</button></div>
           <div><strong>Entity:</strong> CALEB TR HOLCOMB d/b/a TYR</div>
           <div><strong>Trade Name:</strong> TYR Technical Consulting</div>
           <div><strong>Application ID:</strong> pro.tyrprotocol.storefront</div>
@@ -574,6 +577,14 @@
     </div>
   </div>
 
+  <aside id="cookie-consent-banner" role="dialog" aria-label="Cookie and Telemetry Consent" hidden>
+    <div class="consent-title">🛡️ Zero-Custody Cookie &amp; Consent Scheme</div>
+    <p>Consent Mode v2 defaults to <strong>denied</strong>. We store zero raw financial data and only enable anonymous conversion telemetry if you explicitly accept.</p>
+    <div class="consent-actions">
+      <button type="button" id="cookie-consent-decline" class="consent-btn-decline" onclick="window.setCookieConsent && window.setCookieConsent('denied')">Decline (Stay Private)</button>
+      <button type="button" id="cookie-consent-accept" class="consent-btn-accept" onclick="window.setCookieConsent && window.setCookieConsent('granted')">Accept Telemetry</button>
+    </div>
+  </aside>
   <script src="./js/stripe-checkout.js"></script>
   <script src="./js/forensics.js"></script>
   <script src="./js/growth-kit.js"></script>
