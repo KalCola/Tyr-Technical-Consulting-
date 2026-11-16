@@ -8,7 +8,7 @@
   'use strict';
 
   const DEFAULT_REMOTE_ENDPOINT =
-    'https://raw.githubusercontent.com/kalcola/tyrs-technical-consultation-/main/data/catalog.json';
+    'https://raw.githubusercontent.com/KalCola/Tyr-Technical-Consulting-/main/data/catalog.json';
   const LOCAL_DYNAMIC_ENDPOINT = './data/catalog.json';
 
   let catalogData = null;
