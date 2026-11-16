@@ -1,4 +1,5 @@
 {
+  "version": "v3.2.0-dwarven-forge",
   "entity": {
     "legalName": "CALEB TR HOLCOMB d/b/a TYR",
     "tradeName": "TYR Technical Consulting",
@@ -50,7 +51,7 @@
     { "index": "07", "name": "Svartalfheim", "rune": "ᚠ", "meaning": "Subterranean Wealth / Ledgers & Audits", "primary": "#9333ea", "secondary": "#c084fc" },
     { "index": "08", "name": "Niflheim", "rune": "ᛟ", "meaning": "Primordial Mists / Vaults & Privacy Freeze", "primary": "#0d9488", "secondary": "#2dd4bf" },
     { "index": "09", "name": "Jotunheim", "rune": "ᚦ", "meaning": "Giants & Titans / Dispute Kit & FOSS Freedom", "primary": "#4f46e5", "secondary": "#818cf8" },
-    { "index": "10", "name": "Yggdrasil", "rune": "ᛇ", "meaning": "Cosmic Ash / Total Ecosystem Retainer", "primary": "#d97706", "secondary": "#fde047" }
+    { "index": "10", "name": "Yggdrasil", "rune": "ᛇ", "meaning": "Cosmic Ash / Total Ecosystem Retainer", "primary": "#d97706", "secondary": "#fde047" }, {"index": "11", "name": "11. Sindri's Hearth", "rune": "ᛊ", "meaning": "Dwarven Forge • Rapid DNS & SPF Quick-Lock", "primary": "#d97706", "secondary": "#fbbf24"}, {"index": "12", "name": "12. Brokkr's Bellows", "rune": "ᚦ", "meaning": "Master Bellows • Custom Domain Email Alias", "primary": "#c2410c", "secondary": "#fb923c"}, {"index": "13", "name": "13. Ívaldi's Workshop", "rune": "ᛚ", "meaning": "Precision Craft • Fillable Forms & Starter Pages", "primary": "#0891b2", "secondary": "#22d3ee"}, {"index": "14", "name": "14. Dvalinn's Vault", "rune": "ᛞ", "meaning": "Runic Artisan • High-Speed Link-in-Bio Hub", "primary": "#7c3aed", "secondary": "#a78bfa"}
   ],
   "pages": [
     {
@@ -64,7 +65,7 @@
           "realm": "01. Midgard",
           "rune": "ᛗ",
           "realmMeaning": "Static Web Core",
-          "price": "$245",
+          "price": "$265",
           "hosting": "Static GitHub / Cloudflare Pages",
           "turnaround": "48–72h Delivery",
           "bullets": [
@@ -81,7 +82,7 @@
           "realm": "02. Asgard",
           "rune": "ᛉ",
           "realmMeaning": "DNS & Email Armor",
-          "price": "$165",
+          "price": "$175",
           "hosting": "Cloudflare / Registrar DNS",
           "turnaround": "24–48h Delivery",
           "bullets": [
@@ -98,7 +99,7 @@
           "realm": "03. Vanaheim",
           "rune": "ᚱ",
           "realmMeaning": "Intake & Telemetry",
-          "price": "$150",
+          "price": "$165",
           "hosting": "Self-Hosted / Cloud-Form",
           "turnaround": "24–48h Delivery",
           "bullets": [
@@ -122,7 +123,7 @@
           "realm": "04. Alfheim",
           "rune": "ᚨ",
           "realmMeaning": "Executive Intellect",
-          "price": "$145",
+          "price": "$165",
           "hosting": "PDF & Markdown Deliverable",
           "turnaround": "48h Delivery",
           "bullets": [
@@ -139,7 +140,7 @@
           "realm": "05. Nidavellir",
           "rune": "ᚷ",
           "realmMeaning": "Binding Agreements",
-          "price": "$185",
+          "price": "$195",
           "hosting": "Template Deliverable",
           "turnaround": "48h Delivery",
           "bullets": [
@@ -156,7 +157,7 @@
           "realm": "06. Muspelheim",
           "rune": "ᚲ",
           "realmMeaning": "Purchase Intelligence",
-          "price": "$150",
+          "price": "$175",
           "hosting": "Audit Report Deliverable",
           "turnaround": "48h Delivery",
           "bullets": [
@@ -197,7 +198,7 @@
           "realm": "08. Niflheim",
           "rune": "ᛟ",
           "realmMeaning": "Encrypted Sanctuary",
-          "price": "$155",
+          "price": "$175",
           "hosting": "Client Offline Archive",
           "turnaround": "48h Delivery",
           "bullets": [
@@ -214,7 +215,7 @@
           "realm": "09. Jotunheim",
           "rune": "ᚦ",
           "realmMeaning": "Titan Challenger",
-          "price": "$175",
+          "price": "$195",
           "hosting": "Dispute Dossier",
           "turnaround": "48h Delivery",
           "bullets": [
@@ -229,16 +230,16 @@
     },
     {
       "page": 4,
-      "title": "Loki, Garm & Fenrir Tactical Kits",
+      "title": "Dwarven Forge Micro-Services & Tactical Kits",
       "subtitle": "Targeted rapid defense: promotional assets, personal privacy scrubbing, and open-source migration.",
       "services": [
         {
-          "sku": "SVC-LOK-10",
+          "sku": "MOD-DNS-03", "title": "Mjölnir DNS & SPF Quick-Lock", "realm": "11. Sindri's Hearth", "rune": "ᛊ", "realmMeaning": "Sindri's Hearth • Rapid DNS Shield", "price": "$65", "hosting": "Client DNS", "turnaround": "24 Hours", "bullets": ["Configure SPF, DKIM & DMARC records on your existing registrar", "Eliminate domain spoofing and improve inbox placement immediately", "Includes post-deployment DNS propagation and TXT verification report"], "badge": "24-Hr Quick-Lock", "spec": "SPF • DKIM • DMARC" }, {"sku": "MOD-EML-04", "title": "Gungnir Custom Email Alias Setup", "realm": "12. Brokkr's Bellows", "rune": "ᚦ", "realmMeaning": "Brokkr's Bellows • Unerring Mail Routing", "price": "$75", "hosting": "$0/Mo Routing", "turnaround": "24 Hours", "bullets": ["Route custom domain addresses to your existing inbox", "Configure authenticated SMTP send-as alias with TLS encryption", "Verified zero-bounce test delivery across Gmail and Outlook"], "badge": "Custom Address", "spec": "TLS • Alias • $0/Mo"}, {"sku": "MOD-FRM-05", "title": "Draupnir Single Fillable PDF or QR Card", "realm": "13. Ívaldi's Workshop", "rune": "ᛚ", "realmMeaning": "Ívaldi's Workshop • Self-Multiplying Utility", "price": "$85", "hosting": "100% Offline", "turnaround": "24 Hours", "bullets": ["1 custom interactive AcroForm fillable PDF or 300-DPI print QR standee", "Mobile and desktop tap-to-type fields with zero subscription fees", "Delivered with print-ready PDF and editable master file"], "badge": "1-Doc / QR Build", "spec": "AcroForm • 300-DPI"}, {"sku": "WEB-LP-01", "title": "Gullinbursti Single-Page Bio & Link Hub", "realm": "14. Dvalinn's Vault", "rune": "ᛞ", "realmMeaning": "Dvalinn's Vault • Golden Link Hub", "price": "$115", "hosting": "$0/Mo Static", "turnaround": "24–48 Hours", "bullets": ["Fast, mobile-first single-page digital business card and link hub", "Direct tap-to-call, SMS, email, and payment links with custom QR code", "Hosted free on GitHub Pages or Cloudflare Pages ($0/mo hosting)"], "badge": "Single-Page Hub", "spec": "HTML5 • QR • $0/Mo"}, {"sku": "WEB-ST-02", "title": "Skíðblaðnir 3-Section Starter Landing Page", "realm": "13. Ívaldi's Workshop", "rune": "ᛚ", "realmMeaning": "Ívaldi's Workshop • Modular Web Craft", "price": "$185", "hosting": "$0/Mo Static", "turnaround": "24–48 Hours", "bullets": ["3-section responsive landing page (Hero, Services/Menu, Contact Intake)", "SEO metadata, OpenGraph social card, and mobile zero-scroll layout", "Full source code ownership with zero recurring platform fees"], "badge": "3-Section Site", "spec": "Responsive • SEO"}, { "sku": "SVC-LOK-10",
           "title": "Loki Digital Flyer & Ad Pack",
           "realm": "06. Muspelheim",
           "rune": "ᚲ",
           "realmMeaning": "Cunning Promotion",
-          "price": "$85 / $115",
+          "price": "$95 / $135",
           "hosting": "High-Res Asset Kit",
           "turnaround": "24–48h Delivery",
           "bullets": [
@@ -255,7 +256,7 @@
           "realm": "08. Niflheim",
           "rune": "ᛟ",
           "realmMeaning": "Hound of the Gate",
-          "price": "$95 / $125",
+          "price": "$115 / $155",
           "hosting": "Opt-Out Dossier",
           "turnaround": "24–48h Delivery",
           "bullets": [
@@ -272,7 +273,7 @@
           "realm": "09. Jotunheim",
           "rune": "ᚦ",
           "realmMeaning": "Unbound Sovereign",
-          "price": "$115 / $145",
+          "price": "$135 / $175",
           "hosting": "Migration Playbook",
           "turnaround": "48h Delivery",
           "bullets": [
@@ -296,7 +297,7 @@
           "realm": "01. Midgard",
           "rune": "ᛗ",
           "realmMeaning": "Active Web Steward",
-          "price": "$55–$75 / mo",
+          "price": "$65-$85 / mo",
           "hosting": "Continuous Uptime",
           "turnaround": "24h Response SLA",
           "bullets": [
@@ -313,7 +314,7 @@
           "realm": "02. Asgard",
           "rune": "ᛉ",
           "realmMeaning": "Citadel Watchman",
-          "price": "$65–$85 / mo",
+          "price": "$75-$95 / mo",
           "hosting": "Security Sentinel",
           "turnaround": "Same-Day SLA",
           "bullets": [
@@ -330,7 +331,7 @@
           "realm": "05. Nidavellir",
           "rune": "ᚷ",
           "realmMeaning": "Vault Keeper",
-          "price": "$75–$95 / mo",
+          "price": "$85-$110 / mo",
           "hosting": "Archive Caretaker",
           "turnaround": "48h SLA",
           "bullets": [
@@ -354,7 +355,7 @@
           "realm": "07. Svartalfheim",
           "rune": "ᚠ",
           "realmMeaning": "Ledger Sentinel",
-          "price": "$85–$115 / mo",
+          "price": "$95-$135 / mo",
           "hosting": "Monthly Audit",
           "turnaround": "Monthly Reconciliation",
           "bullets": [
@@ -371,7 +372,7 @@
           "realm": "09. Jotunheim",
           "rune": "ᚦ",
           "realmMeaning": "Rate Enforcer",
-          "price": "$75–$105 / mo",
+          "price": "$85-$115 / mo",
           "hosting": "Quarterly Renegotiation",
           "turnaround": "Active Defense",
           "bullets": [
@@ -388,7 +389,7 @@
           "realm": "04. Alfheim",
           "rune": "ᚨ",
           "realmMeaning": "Digital Chancellor",
-          "price": "$80–$110 / mo",
+          "price": "$95-$135 / mo",
           "hosting": "Admin Desk",
           "turnaround": "24h Response",
           "bullets": [
@@ -405,7 +406,7 @@
           "realm": "10. Yggdrasil",
           "rune": "ᛇ",
           "realmMeaning": "All-Realm Steward",
-          "price": "$495 Launch | $165–$215 / mo",
+          "price": "$545 Launch | $185-$245 / mo",
           "hosting": "Full Spectrum",
           "turnaround": "Priority 12h SLA",
           "bullets": [
@@ -446,7 +447,7 @@
           "realm": "02. Asgard",
           "rune": "ᛉ",
           "realmMeaning": "Workstation Fortress",
-          "price": "$135",
+          "price": "$155",
           "hosting": "One-Time Kit",
           "turnaround": "24–48h Delivery",
           "bullets": [
@@ -463,7 +464,7 @@
           "realm": "07. Svartalfheim",
           "rune": "ᚠ",
           "realmMeaning": "Schedule C Shield",
-          "price": "$165",
+          "price": "$175",
           "hosting": "Custom Workbook",
           "turnaround": "24–48h Delivery",
           "bullets": [
@@ -480,7 +481,7 @@
           "realm": "08. Niflheim",
           "rune": "ᛟ",
           "realmMeaning": "3-2-1 Preservation",
-          "price": "$160",
+          "price": "$175",
           "hosting": "Automation Kit",
           "turnaround": "24–48h Delivery",
           "bullets": [
@@ -497,7 +498,7 @@
           "realm": "06. Muspelheim",
           "rune": "ᚲ",
           "realmMeaning": "High-Impact Proposal",
-          "price": "$140",
+          "price": "$165",
           "hosting": "Turnkey Templates",
           "turnaround": "24–48h Delivery",
           "bullets": [
@@ -521,7 +522,7 @@
           "realm": "05. Nidavellir",
           "rune": "ᚷ",
           "realmMeaning": "Master Forge / Procurement",
-          "price": "$295",
+          "price": "$325",
           "hosting": "Turnkey Suite",
           "turnaround": "24–48h Delivery",
           "bullets": [
@@ -538,7 +539,7 @@
           "realm": "02. Asgard",
           "rune": "ᛉ",
           "realmMeaning": "Anti-Fraud Citadel",
-          "price": "$245",
+          "price": "$265",
           "hosting": "Turnkey Governance",
           "turnaround": "24–48h Delivery",
           "bullets": [
@@ -562,7 +563,7 @@
           "realm": "02. Asgard",
           "rune": "ᛉ",
           "realmMeaning": "Perimeter Sentinel",
-          "price": "$125–$175 / Mo",
+          "price": "$135-$185 / Mo",
           "hosting": "Monthly Automated Scan",
           "turnaround": "Monthly Executive Scorecard",
           "bullets": [
@@ -579,7 +580,7 @@
           "realm": "07. Svartalfheim",
           "rune": "ᚠ",
           "realmMeaning": "Treasury Sentry",
-          "price": "$145–$195 / Mo",
+          "price": "$155-$215 / Mo",
           "hosting": "Monthly 30-Min Audit",
           "turnaround": "Monthly Savings Report",
           "bullets": [
@@ -596,7 +597,7 @@
           "realm": "09. Jotunheim",
           "rune": "ᚦ",
           "realmMeaning": "Giant-Slaying Defense",
-          "price": "$95–$135 / Mo",
+          "price": "$110-$150 / Mo",
           "hosting": "Automated Tracker",
           "turnaround": "30/60/90 Day Alerts",
           "bullets": [
@@ -613,7 +614,7 @@
           "realm": "01. Midgard",
           "rune": "ᛗ",
           "realmMeaning": "Bifröst Pulse",
-          "price": "$85–$120 / Mo",
+          "price": "$95-$135 / Mo",
           "hosting": "24/7 Synthetic Ping",
           "turnaround": "Continuous Alerts + Monthly Pulse",
           "bullets": [
@@ -630,7 +631,7 @@
           "realm": "04. Alfheim",
           "rune": "ᚨ",
           "realmMeaning": "Living Runbook Desk",
-          "price": "$165–$225 / Mo",
+          "price": "$185-$245 / Mo",
           "hosting": "Living Runbook Desk",
           "turnaround": "24h SLA per Doc",
           "bullets": [
