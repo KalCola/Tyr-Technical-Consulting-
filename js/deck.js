@@ -47,7 +47,8 @@
   const isAndroidAPK = navigator.userAgent.includes('TyrProtocolAndroidAPK');
   if (isMobileScreen || isAndroidAPK) {
     document.documentElement.setAttribute('data-device', 'mobile');
-  }
+  }  document.documentElement.setAttribute('data-storefront-mode', storefrontMode);
+  
 
   function escapeHtml(str) {
     return String(str ?? '')
@@ -118,7 +119,10 @@
 
   window.setStorefrontMode = function (mode) {
     storefrontMode = mode === 'business' ? 'business' : 'personal';
-    localStorage.setItem('tyr_storefront_mode_v1', storefrontMode);
+    localStorage.setItem('tyr_storefront_mode_v1', storefrontMode); 
+    document.documentElement.setAttribute('data-storefront-mode', storefrontMode);
+    const brandLogo = document.getElementById('header-brand-logo');
+    if (brandLogo) brandLogo.src = storefrontMode === 'personal' ? './assets/patron-triad-emblem.svg' : './assets/logo-512.jpg';
     updateModeSwitcherUi();
     if (currentPage === 0) {
       const cardEl = document.getElementById('omni-embed-3d');
@@ -763,7 +767,7 @@
             <div class="omni-embed-grid">
               <div style="display:flex;flex-direction:column;gap:8px;">
                 <div style="display:flex;align-items:center;gap:12px;">
-                  <div style="width:58px;height:58px;border-radius:10px;border:1.5px solid #dc2626;background:#090a0f;display:flex;align-items:center;justify-content:center;font-size:28px;color:#fbbf24;font-weight:800;flex-shrink:0;box-shadow:0 0 16px rgba(220,38,38,0.32);">ᛏ</div>
+                  <div style="width:58px;height:58px;border-radius:10px;border:1.5px solid #dc2626;background:#090a0f;display:flex;align-items:center;justify-content:center;font-size:28px;color:#fbbf24;font-weight:800;flex-shrink:0;box-shadow:0 0 16px rgba(220,38,38,0.32);"<img src="./assets/patron-triad-emblem.svg" alt="Patron Triad Neon Bind-Rune Emblem" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">ᛏ</div>
                   <div>
                     <h3 style="margin:0;font-size:17px;color:#fff;">CALEB TR HOLCOMB</h3>
                     <div style="font-size:12px;font-weight:700;color:#fbbf24;">Principal Systems Engineer &amp; Developer</div>
@@ -2550,4 +2554,22 @@ Monthly Cloud Fee: $185.00</textarea>
   };
 
   document.addEventListener('DOMContentLoaded', loadCatalog);
-})();
+})(); 
+window.openCookieConsentBanner = function () {
+  var b = document.getElementById('cookie-consent-banner');
+  if (b) b.hidden = false;
+  };
+window.setCookieConsent = function (choice) {
+  try { window.localStorage.setItem('tyr_gtag_consent', choice); } catch (e) {}
+  if (typeof window.gtag === 'function') {
+    window.gtag('consent', 'update', { ad_storage: choice, analytics_storage: choice, ad_user_data: choice, ad_personalization: choice });
+  }
+  var b = document.getElementById('cookie-consent-banner');
+  if (b) b.hidden = true;
+  };
+try {
+  if (!window.localStorage.getItem('tyr_gtag_consent')) {
+    var cb = document.getElementById('cookie-consent-banner');
+    if (cb) cb.hidden = false;
+  }
+  } catch (e) {}
