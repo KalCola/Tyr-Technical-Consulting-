@@ -453,6 +453,13 @@
         card.style.boxShadow = '0 0 24px rgba(251, 191, 36, 0.25)';
       }
       card.setAttribute('data-sku', svc.sku);
+const realmThemeMap = { '01': ['#dc2626', '#f87171'], '02': ['#d97706', '#fbbf24'], '03': ['#059669', '#34d399'], '04': ['#0284c7', '#38bdf8'], '05': ['#ea580c', '#fb923c'], '06': ['#e11d48', '#fb7185'], '07': ['#9333ea', '#c084fc'], '08': ['#0d9488', '#2dd4bf'], '09': ['#4f46e5', '#818cf8'], '10': ['#d97706', '#fde047'], '11': ['#d97706', '#fbbf24'], '12': ['#c2410c', '#fb923c'], '13': ['#0891b2', '#22d3ee'], '14': ['#7c3aed', '#a78bfa'] };
+const realmMatch = String(svc.realm || '').match(/^(\d{2})\b/);
+const realmNum = realmMatch ? realmMatch[1] : '01';
+const realmColors = realmThemeMap[realmNum] || realmThemeMap['01'];
+card.setAttribute('data-realm', realmNum);
+card.style.setProperty('--card-pri', realmColors[0]);
+card.style.setProperty('--card-sec', realmColors[1]);
 
       const bulletsHtml = (svc.bullets || []).map((b) => `<li>${escapeHtml(b)}</li>`).join('');
       const compactBtnHtml = compactMode
