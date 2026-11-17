@@ -1031,3 +1031,61 @@
     height: 82px;
   }
 }
+
+/* Per-Realm Card Theme Variables (Realms 01-14) */
+.card[data-realm="01"] { --card-pri: #dc2626; --card-sec: #f87171; }
+.card[data-realm="02"] { --card-pri: #d97706; --card-sec: #fbbf24; }
+.card[data-realm="03"] { --card-pri: #059669; --card-sec: #34d399; }
+.card[data-realm="04"] { --card-pri: #0284c7; --card-sec: #38bdf8; }
+.card[data-realm="05"] { --card-pri: #ea580c; --card-sec: #fb923c; }
+.card[data-realm="06"] { --card-pri: #e11d48; --card-sec: #fb7185; }
+.card[data-realm="07"] { --card-pri: #9333ea; --card-sec: #c084fc; }
+.card[data-realm="08"] { --card-pri: #0d9488; --card-sec: #2dd4bf; }
+.card[data-realm="09"] { --card-pri: #4f46e5; --card-sec: #818cf8; }
+.card[data-realm="10"] { --card-pri: #d97706; --card-sec: #fde047; }
+.card[data-realm="11"] { --card-pri: #d97706; --card-sec: #fbbf24; }
+.card[data-realm="12"] { --card-pri: #c2410c; --card-sec: #fb923c; }
+.card[data-realm="13"] { --card-pri: #0891b2; --card-sec: #22d3ee; }
+.card[data-realm="14"] { --card-pri: #7c3aed; --card-sec: #a78bfa; }
+
+.card[data-realm] {
+  border-color: color-mix(in srgb, var(--card-pri, #dc2626) 28%, rgba(255, 255, 255, 0.1));
+  border-top: 3px solid var(--card-pri, #dc2626);
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--card-pri, #dc2626) 16%, transparent) 0%, transparent 62%),
+    linear-gradient(180deg, rgba(15, 23, 42, 0.94) 0%, rgba(9, 13, 24, 0.98) 100%);
+}
+
+.card[data-realm] .rune-pill {
+  border-color: color-mix(in srgb, var(--card-pri, #dc2626) 55%, transparent);
+  background: color-mix(in srgb, var(--card-pri, #dc2626) 14%, rgba(15, 23, 42, 0.9));
+  color: var(--card-sec, #f87171);
+}
+
+.card[data-realm] .price-box,
+.card[data-realm] .price-badge,
+.card[data-realm] .price-pill {
+  background: color-mix(in srgb, var(--card-pri, #dc2626) 14%, transparent);
+  border-color: color-mix(in srgb, var(--card-pri, #dc2626) 35%, transparent);
+}
+
+.card[data-realm] .price-val,
+.card[data-realm] .price-badge,
+.card[data-realm] .price-pill {
+  color: var(--card-sec, #f87171);
+}
+
+.card[data-realm] .card-bullets li::before,
+.card[data-realm] .bullet-list li::before {
+  color: var(--card-pri, #dc2626);
+}
+
+.card[data-realm] .btn-primary {
+  background: linear-gradient(135deg, var(--card-pri, #dc2626), color-mix(in srgb, var(--card-pri, #dc2626) 72%, #000000));
+  border-color: color-mix(in srgb, var(--card-sec, #f87171) 45%, transparent);
+  color: #ffffff;
+}
+
+.card[data-realm] .btn-primary:hover {
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--card-pri, #dc2626) 35%, transparent);
+}
