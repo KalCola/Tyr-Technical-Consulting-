@@ -122,7 +122,7 @@
     localStorage.setItem('tyr_storefront_mode_v1', storefrontMode); 
     document.documentElement.setAttribute('data-storefront-mode', storefrontMode);
     const brandLogo = document.getElementById('header-brand-logo');
-    if (brandLogo) brandLogo.src = storefrontMode === 'personal' ? './assets/patron-triad-emblem.svg' : './assets/logo-512.jpg';
+    if (brandLogo) brandLogo.src = storefrontMode === 'personal' ? './assets/patron-triad-emblem.svg' : './assets/logo-240.webp';
     updateModeSwitcherUi();
     if (currentPage === 0) {
       const cardEl = document.getElementById('omni-embed-3d');
@@ -815,7 +815,7 @@
             <div class="omni-embed-grid">
               <div style="display:flex;flex-direction:column;gap:8px;">
                 <div style="display:flex;align-items:center;gap:12px;">
-                  <img src="./assets/logo-512.jpg" alt="TYR Technical Consulting Shield" style="width:58px;height:58px;border-radius:10px;border:1.5px solid #fbbf24;object-fit:cover;flex-shrink:0;box-shadow:0 0 16px rgba(251,191,36,0.3);">
+                  <img src="./assets/logo-240.webp" alt="TYR Technical Consulting Shield" style="width:58px;height:58px;border-radius:10px;border:1.5px solid #fbbf24;object-fit:cover;flex-shrink:0;box-shadow:0 0 16px rgba(251,191,36,0.3);">
                   <div>
                     <h3 style="margin:0;font-size:17px;color:#fff;">TYR TECHNICAL CONSULTING</h3>
                     <div style="font-size:12px;font-weight:700;color:#34d399;">CALEB TR HOLCOMB d/b/a TYR • Verified Practice</div>
