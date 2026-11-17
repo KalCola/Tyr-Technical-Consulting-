@@ -874,6 +874,7 @@
   background: linear-gradient(155deg, #131622 0%, var(--bg-card) 55%, var(--bg-obsidian) 100%);
   position: relative;
   overflow: hidden;
+  isolation: isolate;
 }
 
 .omni-embed-face.front-face {
@@ -915,20 +916,12 @@
   transform: rotateY(180deg) translateZ(2px);
 }
 
-.omni-embed-face.glow-tyr {
-  border-color: rgba(220, 38, 38, 0.85);
-  box-shadow: 0 0 0 1px rgba(248, 113, 113, 0.25), 0 0 32px rgba(220, 38, 38, 0.34), 0 18px 44px rgba(0, 0, 0, 0.9);
-}
-
-.omni-embed-face.glow-freyja {
-  border-color: rgba(251, 191, 36, 0.85);
-  box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.28), 0 0 32px rgba(217, 119, 6, 0.32), 0 18px 44px rgba(0, 0, 0, 0.9);
-}
-
-.omni-embed-face.glow-loki {
-  border-color: rgba(52, 211, 153, 0.82);
-  box-shadow: 0 0 0 1px rgba(225, 29, 72, 0.22), 0 0 32px rgba(5, 150, 105, 0.32), 0 18px 44px rgba(0, 0, 0, 0.9);
-}
+.omni-embed-face.front-face::before {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 1; background: radial-gradient(ellipse at 18% 16%, rgba(168, 85, 247, 0.28) 0%, transparent 55%), radial-gradient(ellipse at 82% 24%, rgba(225, 29, 72, 0.24) 0%, transparent 52%), radial-gradient(ellipse at 50% 88%, rgba(16, 185, 129, 0.24) 0%, transparent 56%);
+  } .omni-embed-face.front-face::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 2; mix-blend-mode: screen; background: conic-gradient(from 135deg at 50% 50%, rgba(168, 85, 247, 0.14) 0deg, rgba(225, 29, 72, 0.12) 110deg, rgba(16, 185, 129, 0.14) 220deg, rgba(6, 182, 212, 0.12) 310deg, rgba(168, 85, 247, 0.14) 360deg); }
+.omni-embed-face.back-face::before { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 1; background: radial-gradient(ellipse at 20% 18%, rgba(240, 180, 41, 0.28) 0%, transparent 55%), radial-gradient(ellipse at 82% 24%, rgba(236, 72, 153, 0.24) 0%, transparent 52%), radial-gradient(ellipse at 50% 88%, rgba(16, 185, 129, 0.24) 0%, transparent 56%); }
+.omni-embed-face.back-face::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 2; mix-blend-mode: screen; background: conic-gradient(from 45deg at 50% 50%, rgba(240, 180, 41, 0.14) 0deg, rgba(236, 72, 153, 0.12) 120deg, rgba(16, 185, 129, 0.14) 240deg, rgba(240, 180, 41, 0.14) 360deg); }
+.omni-embed-face .card-footer { position: relative; z-index: 5; }
 
 .omni-embed-top {
   display: flex;
@@ -941,6 +934,7 @@
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 700;
+  position: relative; z-index: 5;
 }
 
 .omni-embed-grid {
@@ -948,6 +942,7 @@
   grid-template-columns: 1fr auto;
   gap: 14px;
   align-items: center;
+  position: relative; z-index: 5;
 }
 
 .omni-qr-box {
