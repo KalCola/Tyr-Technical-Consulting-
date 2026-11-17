@@ -774,7 +774,7 @@ card.style.setProperty('--card-sec', realmColors[1]);
             <div class="omni-embed-grid">
               <div style="display:flex;flex-direction:column;gap:8px;">
                 <div style="display:flex;align-items:center;gap:12px;">
-                  <div style="width:58px;height:58px;border-radius:10px;border:1.5px solid #dc2626;background:#090a0f;display:flex;align-items:center;justify-content:center;font-size:28px;color:#fbbf24;font-weight:800;flex-shrink:0;box-shadow:0 0 16px rgba(220,38,38,0.32);"<img src="./assets/patron-triad-emblem.svg" alt="Patron Triad Neon Bind-Rune Emblem" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">ᛏ</div>
+                  <div style="width:58px;height:58px;border-radius:10px;border:1.5px solid #dc2626;background:#090a0f;display:flex;align-items:center;justify-content:center;font-size:28px;color:#fbbf24;font-weight:800;flex-shrink:0;box-shadow:0 0 16px rgba(220,38,38,0.32);"<img src="./assets/patron-triad-emblem.svg" alt="Patron Triad Neon Bind-Rune Emblem" style="width:100%;height:100%;object-fit:cover;border-radius:10px;"ᛏ</div>
                   <div>
                     <h3 style="margin:0;font-size:17px;color:#fff;">CALEB TR HOLCOMB</h3>
                     <div style="font-size:12px;font-weight:700;color:#fbbf24;">Principal Systems Engineer &amp; Developer</div>
