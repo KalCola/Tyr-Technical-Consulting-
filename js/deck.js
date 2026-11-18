@@ -184,12 +184,12 @@
     renderPage(currentPage);
   };
 
-  async function loadCatalog(overrideUrl = null) {
+  function isTrustedCatalogUrl(url) { if (!url || typeof url !== 'string') return false; try { const p = new URL(url, window.location.href); return p.origin === window.location.origin || (p.protocol === 'https:' && p.origin === 'https://raw.githubusercontent.com' && p.pathname.startsWith('/KalCola/Tyr-Technical-Consulting-/')); } catch (_) { return false; } } async function loadCatalog(overrideUrl = null) {
     const urlParams = new URLSearchParams(window.location.search);
     const paramUrl = urlParams.get('catalog_url') || urlParams.get('endpoint');
     const storedUrl = localStorage.getItem('tyr_catalog_endpoint');
 
-    const targetUrl = overrideUrl || paramUrl || storedUrl || LOCAL_DYNAMIC_ENDPOINT;
+    const candidateUrl = overrideUrl || paramUrl || storedUrl; const targetUrl = (candidateUrl && isTrustedCatalogUrl(candidateUrl)) ? candidateUrl : LOCAL_DYNAMIC_ENDPOINT;
     let fetched = false;
 
     async function tryFetch(url) {
