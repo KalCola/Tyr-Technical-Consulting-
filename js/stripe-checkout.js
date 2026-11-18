@@ -12,6 +12,31 @@
   const STORAGE_CART_KEY = 'tyr_storefront_cart_v1';
 
   const STRIPE_ACCOUNT_ID = 'acct_1Ub2VYRxlL3JK5Uq';
+  const STRIPE_TAX_CODE = 'txcd_20060048';
+// Canonical v3.2.0-dwarven-forge 36-SKU effort-calibrated base floor (in USD cents, >= $65.00)
+const SKU_FLOOR_CENTS_MAP = {
+'SVC-WEB-01': 26500, 'SVC-DOM-02': 17500, 'SVC-KIT-03': 16500,
+'SVC-CAR-04': 16500, 'SVC-OPS-05': 19500, 'SVC-BUY-06': 17500,
+'SVC-CMD-07': 19500, 'SVC-VLT-08': 17500, 'SVC-AUD-09': 19500,
+'MOD-DNS-03': 6500,  'MOD-EML-04': 7500,  'MOD-FRM-05': 8500,
+'WEB-LP-01': 11500,  'WEB-ST-02': 18500,
+'SVC-LOK-10': 9500,  'SVC-GRM-11': 11500, 'SVC-FEN-12': 13500,
+'SUB-WEB-01': 6500,  'SUB-DOM-02': 7500,  'SUB-OPS-03': 8500,
+'SUB-FIN-04': 9500,  'SUB-BIL-05': 8500,  'SUB-ADM-06': 9500,
+'RET-ALL-07': 54500,
+'SVC-SOP-11': 18500, 'SVC-SEC-12': 15500, 'SVC-TAX-13': 17500,
+'SVC-BCK-14': 17500, 'SVC-DCK-15': 16500,
+'SVC-B2B-16': 32500, 'SVC-B2B-17': 26500,
+'B2B-SEC-01': 13500, 'B2B-SLA-02': 15500, 'B2B-LGL-03': 11000,
+'B2B-SEO-04': 9500,  'B2B-SOP-05': 18500
+  };
+
+function getSkuBaseCents(svc) {
+  const parsed = parseServicePriceToCents(svc?.price);
+  const skuFloor = SKU_FLOOR_CENTS_MAP[String(svc?.sku || '').toUpperCase()] || 6500;
+  return parsed >= 6500 ? parsed : skuFloor;
+}
+  
   const CHECKOUT_PLAN_ID = 'chkplan_61VkmYCmcY0V8AnN216VkQSuURSQVGsDGT0SpcV9c';
   const CHECKOUT_STUDIO_DRAFT_URL =
     'https://dashboard.stripe.com/acct_1Ub2VYRxlL3JK5Uq/checkout/checkouts/draft/chkplan_61VkmYCmcY0V8AnN216VkQSuURSQVGsDGT0SpcV9c?mode=implement';
@@ -188,7 +213,7 @@
             if (customPrice && customPrice.startsWith('price_')) {
               return { price: customPrice, quantity: 1, sku: svc.sku };
             }
-            const baseCents = parseServicePriceToCents(svc.price) || 10000;
+          const baseCents = getSkuBaseCents(svc);
             const recurring = isMonthlyRecurringService(svc);
             const finalCents = recurring ? baseCents : applySplitToCents(baseCents, clampedSplit);
             return {
@@ -201,7 +226,9 @@
                     !recurring && clampedSplit < 100
                       ? `${svc.title} [${clampedSplit}% Milestone/Deposit]`
                       : svc.title,
-                  description: `TYR SKU ${svc.sku} • ${svc.badge || 'Standard Deliverable'}`
+                  description: `TYR SKU ${svc.sku} • ${svc.badge || 'Standard Deliverable'}`,
+tax_code: STRIPE_TAX_CODE,
+metadata: { sku: svc.sku, realm: svc.realm || '' }
                 },
                 ...(recurring ? { recurring: { interval: 'month' } } : {})
               },
@@ -533,6 +560,9 @@
 
   window.TyrStripe = {
     STRIPE_ACCOUNT_ID,
+SKU_FLOOR_CENTS_MAP,
+STRIPE_TAX_CODE,
+getSkuBaseCents,
     CHECKOUT_PLAN_ID,
     CHECKOUT_STUDIO_DRAFT_URL,
     SPLIT_OPTIONS,
