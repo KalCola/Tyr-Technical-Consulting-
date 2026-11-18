@@ -339,6 +339,14 @@ metadata: { sku: svc.sku, realm: svc.realm || '' }
     window.crypto.getRandomValues(randBytes);
     const suffix = Array.from(randBytes, (b) => b.toString(36).slice(-1)).join('').toUpperCase();
     const receiptNumber = `RCPT-${yyyymmdd}-${suffix}`;
+if (!hostedCheckoutUrl) {
+  const params = new URLSearchParams();
+  if (clientEmail) params.set('prefilled_email', clientEmail);
+if (totalTodayCents > 0) params.set('__prefilled_amount', String(totalTodayCents));
+params.set('client_reference_id', receiptNumber);
+hostedCheckoutUrl = 'https://donate.stripe.com/4gM3cxctj9ld6i5allgUM00?' + params.toString();
+gatewayMode = 'Stripe Hosted Payment Link (SAQ-A Live)';
+}
     const transactionId = `pi_${now.getTime().toString(36)}_${suffix.toLowerCase()}`;
     const stripeTokenId = `tok_saqa_${suffix.toLowerCase()}${now.getUTCSeconds()}`;
     const timestampIso = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
