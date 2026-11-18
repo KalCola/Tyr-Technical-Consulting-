@@ -149,14 +149,16 @@ function getSkuBaseCents(svc) {
     localStorage.removeItem(STORAGE_SKU_PRICES_KEY);
     return {};
   }
-
+const TRUSTED_BACKEND_ORIGINS = [window.location.origin, 'https://' + 'tyrprotocol.pro', 'https://' + 'www.tyrprotocol.pro', 'https://' + 'api.tyrprotocol.pro', 'https://' + 'checkout.tyrprotocol.pro'];
+  function isTrustedBackendUrl(url) { if (!url || typeof url !== 'string') return false; try { const p = new URL(url.trim()); return p.protocol === 'https:' && TRUSTED_BACKEND_ORIGINS.includes(p.origin); } catch (_) { return false; } }
+  
   function getBackendEndpoint() {
-    return (localStorage.getItem(STORAGE_BACKEND_URL_KEY) || '').trim();
+    const raw = (localStorage.getItem(STORAGE_BACKEND_URL_KEY) || '').trim(); return isTrustedBackendUrl(raw) ? raw : '';
   }
 
   function setBackendEndpoint(url) {
     const clean = String(url || '').trim();
-    if (clean) localStorage.setItem(STORAGE_BACKEND_URL_KEY, clean);
+    if (clean && isTrustedBackendUrl(clean)) localStorage.setItem(STORAGE_BACKEND_URL_KEY, clean);
     else localStorage.removeItem(STORAGE_BACKEND_URL_KEY);
     return clean;
   }
@@ -170,10 +172,11 @@ function getSkuBaseCents(svc) {
     }
   }
 
-  function saveReceipt(record) {
+  function maskEmailPii(email) { const raw = String(email || '').trim(); const i = raw.indexOf('@'); if (i <= 0) return '***'; const l = raw.slice(0, i); return (l.length <= 2 ? l[0] + '***' : l.slice(0, 2) + '***') + '@' + raw.slice(i + 1); }
+  function maskNamePii(name) { const raw = String(name || '').trim(); if (!raw) return 'Client ***'; return raw.split(/\s+/).map((p) => (p.length <= 1 ? '*' : p[0] + '***')).join(' '); } function saveReceipt(record) {
     const list = getReceipts();
     const filtered = list.filter((r) => r.receiptNumber !== record.receiptNumber);
-    filtered.unshift(record);
+    filtered.unshift({ ...record, clientName: maskNamePii(record.clientName), clientEmail: maskEmailPii(record.clientEmail) });
     localStorage.setItem(STORAGE_RECEIPTS_KEY, JSON.stringify(filtered));
     return filtered;
   }
@@ -396,7 +399,7 @@ gatewayMode = 'Stripe Hosted Payment Link (SAQ-A Live)';
       pciComplianceBadge: 'PCI-DSS v4.0 SAQ-A • Zero Raw PAN/CVV Stored',
       sha384IntegrityHash,
       scheduleCCategory: 'NAICS 541512 & 541611 • Gross Receipts (Line 1)',
-      intrusionStatus: hostedCheckoutUrl ? 'HOSTED_REDIRECT_DISPATCHED' : 'VERIFIED_AUTHORIZED'
+      intrusionStatus: 'PENDING_SETTLEMENT'
     };
 
     saveReceipt(record);
