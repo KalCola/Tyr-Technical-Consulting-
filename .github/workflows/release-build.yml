@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Package storefront release
         run: mkdir -p dist && tar -czf dist/tyr-storefront.tar.gz CNAME .nojekyll robots.txt sitemap.xml index.html 404.html manifest.webmanifest sw.js css js data assets public
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: tyr-storefront-release
           path: dist/tyr-storefront.tar.gz
