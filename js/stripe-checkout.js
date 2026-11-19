@@ -40,7 +40,92 @@ function getSkuBaseCents(svc) {
   const CHECKOUT_PLAN_ID = 'chkplan_61VkmYCmcY0V8AnN216VkQSuURSQVGsDGT0SpcV9c';
   const CHECKOUT_STUDIO_DRAFT_URL =
     'https://dashboard.stripe.com/acct_1Ub2VYRxlL3JK5Uq/checkout/checkouts/draft/chkplan_61VkmYCmcY0V8AnN216VkQSuURSQVGsDGT0SpcV9c?mode=implement';
+  const FALLBACK_CUSTOM_LINK = "https://donate.stripe.com/4gM3cxctj9ld6i5allgUM00";
 
+  const STRIPE_PACKAGE_LINKS = {
+    "Midgard Website Launch": "https://buy.stripe.com/aFabJ3ctj0OH5e1511gUM0A",
+    "Asgard Domain & Email Shield": "https://buy.stripe.com/fZu6oJgJzgNF21PdxxgUM0v",
+    "Vanaheim QR & Form Kit": "https://buy.stripe.com/fZu00ldxn2WP21PfFFgUM0u",
+    "Alfheim Resume & Bid Overhaul": "https://buy.stripe.com/7sYfZjbpffJB8qdfFFgUM0x",
+    "Nidavellir 3-Doc E-Sign Kit": "https://buy.stripe.com/aFa00l3WN9ldfSFfFFgUM0C",
+    "Muspelheim Buyer's Dossier": "https://buy.stripe.com/8x2eVf8d3dBt9uhdxxgUM0w",
+    "Svartalfheim Budget & Schedule C Hub": "https://buy.stripe.com/eVqcN7gJz7d5bCp1OPgUM0y",
+    "Niflheim Insurance & Legacy Vault": "https://buy.stripe.com/5kQ3cx1OF6916i59hhgUM0z",
+    "Jotunheim Billing & ISP Dispute Kit": "https://buy.stripe.com/28E5kF78Z2WP5e1allgUM0B",
+    "1099 Contractor Schedule C Ledger": "https://buy.stripe.com/cNi6oJalb54X0XLdxxgUM0K",
+    "Skíðblaðnir 3-Section Starter Landing Page": "https://buy.stripe.com/14AfZjalb7d549XfFFgUM0P",
+    "Gullinbursti Single-Page Bio & Link Hub": "https://buy.stripe.com/6oUeVf64VeFx9uh2STgUM0O",
+    "Gungnir Custom Email Alias Setup": "https://buy.stripe.com/3cI9AVctj8h9fSFallgUM0D",
+    "Mjölnir DNS & SPF Quick-Lock": "https://buy.stripe.com/7sY4gB78ZfJBgWJ3WXgUM0F",
+    "Draupnir Single Fillable PDF or QR Card": "https://buy.stripe.com/3cI28t2SJfJBbCpdxxgUM0I",
+    "Garm Privacy Scrub & Freeze Shield": "https://buy.stripe.com/14AeVf9h71SLgWJeBBgUM0J",
+    "Fenrir Free-Software Switch Kit": "https://buy.stripe.com/3cI00l2SJ9ld8qddxxgUM0L",
+    "Cold-Storage 3-2-1 Backup Runbook": "https://buy.stripe.com/28E6oJfFvcxpfSFcttgUM0M",
+    "B2B Vendor Onboarding & Master MSA Suite": "https://buy.stripe.com/fZu9AVgJzcxpgWJ799gUM0R",
+    "Corporate Anti-Phishing & Wire Protocol": "https://buy.stripe.com/8x2fZj9h76910XL3WXgUM0Q",
+    "SOP & Knowledge Base Blueprint": "https://buy.stripe.com/4gM5kF78Z0OHcGt1OPgUM0N",
+    "Remote Workstation Hardening & DNS Profile": "https://buy.stripe.com/14AcN79h7dBtbCpcttgUM0H",
+    "Executive Proposal & Pitch Deck Kit": "https://buy.stripe.com/5kQ14p78ZgNF6i5cttgUM0E",
+    "Loki Digital Flyer & Ad Pack": "https://buy.stripe.com/00w14pdxn40TeOB2STgUM0G",
+    "B2B Monthly Cyber Hygiene Retainer": "https://buy.stripe.com/4gM00l3WN54XbCpbppgUM0W",
+    "Vendor Contract Renewal Sentinel": "https://buy.stripe.com/cNi4gB9h740TfSF2STgUM0V",
+    "Cloud & SaaS Spend Drift Watchdog": "https://buy.stripe.com/dRm14p78Z7d5bCp3WXgUM0U",
+    "B2B Synthetic Uptime & Link Health": "https://buy.stripe.com/4gM9AVgJz54X8qd1OPgUM0T",
+    "Quarterly SOP Maintenance & Onboarding Desk": "https://buy.stripe.com/dRm9AV8d38h949X655gUM0S",
+    "Web & QR Care Retainer": {
+      personal: "https://buy.stripe.com/14A9AV1OFeFx21P655gUM0q",
+      business: "https://buy.stripe.com/6oU5kF0KB69135TcttgUM0s"
+    },
+    "Domain & Email Shield Retainer": {
+      personal: "https://buy.stripe.com/dRmbJ3gJzbtlfSF799gUM0g",
+      business: "https://buy.stripe.com/4gM4gBdxn1SL35TeBBgUM0m"
+    },
+    "Document & Vault Caretaker": {
+      personal: "https://buy.stripe.com/3cIcN7ctj54XeOBbppgUM0i",
+      business: "https://buy.stripe.com/14A28tctjfJB7m9eBBgUM0h"
+    },
+    "Expense Optimizer Retainer": {
+      personal: "https://buy.stripe.com/3cI8wReBr54X9uh0KLgUM0n",
+      business: "https://buy.stripe.com/bJebJ364VfJB0XLeBBgUM0k"
+    },
+    "Bill Watchdog Retainer": {
+      personal: "https://buy.stripe.com/8x2bJ3eBr54X35TfFFgUM0o",
+      business: "https://buy.stripe.com/9B65kF9h7btl0XL9hhgUM0l"
+    },
+    "Back-Office Admin Concierge": {
+      personal: "https://buy.stripe.com/28EeVf3WN7d5dKx3WXgUM0j",
+      business: "https://buy.stripe.com/bJe4gB1OFcxpfSF655gUM0f"
+    },
+    "Yggdrasil Complete Retainer & 3-Realm Launch": {
+      personal: "https://buy.stripe.com/bJe00lbpfeFx9uheBBgUM0p",
+      business: "https://buy.stripe.com/9B67sN2SJcxp35T2STgUM0r",
+      launch: "https://buy.stripe.com/6oU5kFgJz1SL0XL1OPgUM0t"
+    }
+  };
+
+  function resolveStripePackageLink(serviceTitle, mode, billingOption) {
+    const title = String(serviceTitle || '').trim();
+    if (!title) return null;
+    let entry = STRIPE_PACKAGE_LINKS[title];
+    if (!entry && (/yggdrasil/i.test(title) || /3-realm\s*launch/i.test(title))) {
+      entry = STRIPE_PACKAGE_LINKS['Yggdrasil Complete Retainer & 3-Realm Launch'];
+    }
+    if (!entry) return null;
+    if (typeof entry === 'string') return entry;
+    if (typeof entry === 'object') {
+      if (
+        entry.launch &&
+        (/3-realm\s*launch/i.test(title) || /launch/i.test(String(billingOption || '')))
+      ) {
+        return entry.launch;
+      }
+      const tier = mode === 'business' ? 'business' : 'personal';
+      return entry[tier] || entry.personal || null;
+    }
+    return null;
+  }
+
+  
   const SPLIT_OPTIONS = [
     {
       id: 'FULL_100',
@@ -343,12 +428,39 @@ metadata: { sku: svc.sku, realm: svc.realm || '' }
     const suffix = Array.from(randBytes, (b) => b.toString(36).slice(-1)).join('').toUpperCase();
     const receiptNumber = `RCPT-${yyyymmdd}-${suffix}`;
 if (!hostedCheckoutUrl) {
-  const params = new URLSearchParams();
-  if (clientEmail) params.set('prefilled_email', clientEmail);
-if (totalTodayCents > 0) params.set('__prefilled_amount', String(totalTodayCents));
-params.set('client_reference_id', receiptNumber);
-hostedCheckoutUrl = 'https://donate.stripe.com/4gM3cxctj9ld6i5allgUM00?' + params.toString();
-gatewayMode = 'Stripe Hosted Payment Link (SAQ-A Live)';
+      const storefrontMode =
+        typeof document !== 'undefined' &&
+        document.documentElement.getAttribute('data-storefront-mode') === 'business'
+          ? 'business'
+          : 'personal';
+      const singleItem = list.length === 1 ? list[0] : null;
+      const isCustomItem = Boolean(
+        singleItem &&
+          (singleItem.isCustom ||
+            singleItem.isCustomAmount ||
+            /^custom/i.test(String(singleItem.sku || '')) ||
+            /^custom/i.test(String(singleItem.title || '')))
+      );
+      const packageUrl =
+        clampedSplit === 100 && singleItem && !isCustomItem
+          ? resolveStripePackageLink(
+              singleItem.title,
+              storefrontMode,
+              singleItem.billingOption || singleItem.billing || ''
+            )
+          : null;
+      const params = new URLSearchParams();
+      if (clientEmail) params.set('prefilled_email', clientEmail);
+      if (packageUrl) {
+        params.set('client_reference_id', receiptNumber);
+        hostedCheckoutUrl = packageUrl + '?' + params.toString();
+        gatewayMode = 'Stripe Package Payment Link (SAQ-A Live)';
+      } else {
+        if (totalTodayCents > 0) params.set('__prefilled_amount', String(totalTodayCents));
+        params.set('client_reference_id', receiptNumber);
+        hostedCheckoutUrl = FALLBACK_CUSTOM_LINK + '?' + params.toString();
+        gatewayMode = 'Stripe Hosted Payment Link (SAQ-A Live)';
+      }
 }
     const transactionId = `pi_${now.getTime().toString(36)}_${suffix.toLowerCase()}`;
     const stripeTokenId = `tok_saqa_${suffix.toLowerCase()}${now.getUTCSeconds()}`;
