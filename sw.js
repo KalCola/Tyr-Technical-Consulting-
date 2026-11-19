@@ -1,5 +1,5 @@
 // File: sw.js
-const CACHE_NAME = 'tyr-protocol-v4.12';
+const CACHE_NAME = 'tyr-protocol-v4.13';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
