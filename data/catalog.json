@@ -239,7 +239,7 @@
           "realm": "06. Muspelheim",
           "rune": "ᚲ",
           "realmMeaning": "Cunning Promotion",
-          "price": "$95 / $135",
+          "price": "$135",
           "hosting": "High-Res Asset Kit",
           "turnaround": "24–48h Delivery",
           "bullets": [
@@ -256,7 +256,7 @@
           "realm": "08. Niflheim",
           "rune": "ᛟ",
           "realmMeaning": "Hound of the Gate",
-          "price": "$115 / $155",
+          "price": "$155",
           "hosting": "Opt-Out Dossier",
           "turnaround": "24–48h Delivery",
           "bullets": [
@@ -273,7 +273,7 @@
           "realm": "09. Jotunheim",
           "rune": "ᚦ",
           "realmMeaning": "Unbound Sovereign",
-          "price": "$135 / $175",
+          "price": "$175",
           "hosting": "Migration Playbook",
           "turnaround": "48h Delivery",
           "bullets": [
@@ -563,7 +563,7 @@
           "realm": "02. Asgard",
           "rune": "ᛉ",
           "realmMeaning": "Perimeter Sentinel",
-          "price": "$135-$185 / Mo",
+          "price": "$185 / Mo",
           "hosting": "Monthly Automated Scan",
           "turnaround": "Monthly Executive Scorecard",
           "bullets": [
@@ -580,7 +580,7 @@
           "realm": "07. Svartalfheim",
           "rune": "ᚠ",
           "realmMeaning": "Treasury Sentry",
-          "price": "$155-$215 / Mo",
+          "price": "$215 / Mo",
           "hosting": "Monthly 30-Min Audit",
           "turnaround": "Monthly Savings Report",
           "bullets": [
@@ -597,7 +597,7 @@
           "realm": "09. Jotunheim",
           "rune": "ᚦ",
           "realmMeaning": "Giant-Slaying Defense",
-          "price": "$110-$150 / Mo",
+          "price": "$110 / Mo",
           "hosting": "Automated Tracker",
           "turnaround": "30/60/90 Day Alerts",
           "bullets": [
@@ -614,7 +614,7 @@
           "realm": "01. Midgard",
           "rune": "ᛗ",
           "realmMeaning": "Bifröst Pulse",
-          "price": "$95-$135 / Mo",
+          "price": "$95 / Mo",
           "hosting": "24/7 Synthetic Ping",
           "turnaround": "Continuous Alerts + Monthly Pulse",
           "bullets": [
@@ -631,7 +631,7 @@
           "realm": "04. Alfheim",
           "rune": "ᚨ",
           "realmMeaning": "Living Runbook Desk",
-          "price": "$185-$245 / Mo",
+          "price": "$245 / Mo",
           "hosting": "Living Runbook Desk",
           "turnaround": "24h SLA per Doc",
           "bullets": [
