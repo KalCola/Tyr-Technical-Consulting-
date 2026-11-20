@@ -239,7 +239,7 @@
           "realm": "06. Muspelheim",
           "rune": "ᚲ",
           "realmMeaning": "Cunning Promotion",
-          "price": "$135",
+          "price": "$95",
           "hosting": "High-Res Asset Kit",
           "turnaround": "24–48h Delivery",
           "bullets": [
@@ -256,7 +256,7 @@
           "realm": "08. Niflheim",
           "rune": "ᛟ",
           "realmMeaning": "Hound of the Gate",
-          "price": "$155",
+          "price": "$115",
           "hosting": "Opt-Out Dossier",
           "turnaround": "24–48h Delivery",
           "bullets": [
@@ -273,7 +273,7 @@
           "realm": "09. Jotunheim",
           "rune": "ᚦ",
           "realmMeaning": "Unbound Sovereign",
-          "price": "$175",
+          "price": "$135",
           "hosting": "Migration Playbook",
           "turnaround": "48h Delivery",
           "bullets": [
@@ -430,7 +430,7 @@
           "realm": "05. Nidavellir",
           "rune": "ᛏ",
           "realmMeaning": "Operational Playbook",
-          "price": "$175",
+          "price": "$185",
           "hosting": "One-Time Build",
           "turnaround": "24–48h Delivery",
           "bullets": [
@@ -563,7 +563,7 @@
           "realm": "02. Asgard",
           "rune": "ᛉ",
           "realmMeaning": "Perimeter Sentinel",
-          "price": "$185 / Mo",
+          "price": "$135 / Mo",
           "hosting": "Monthly Automated Scan",
           "turnaround": "Monthly Executive Scorecard",
           "bullets": [
@@ -580,7 +580,7 @@
           "realm": "07. Svartalfheim",
           "rune": "ᚠ",
           "realmMeaning": "Treasury Sentry",
-          "price": "$215 / Mo",
+          "price": "$155 / Mo",
           "hosting": "Monthly 30-Min Audit",
           "turnaround": "Monthly Savings Report",
           "bullets": [
@@ -631,7 +631,7 @@
           "realm": "04. Alfheim",
           "rune": "ᚨ",
           "realmMeaning": "Living Runbook Desk",
-          "price": "$245 / Mo",
+          "price": "$185 / Mo",
           "hosting": "Living Runbook Desk",
           "turnaround": "24h SLA per Doc",
           "bullets": [
