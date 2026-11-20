@@ -570,7 +570,7 @@ card.style.setProperty('--card-sec', realmColors[1]);
       return;
     }
     if (pageNumber === 11) {
-      if (pageHeaderTitle) pageHeaderTitle.textContent = '🌐 All Realms Catalog (31 SKUs)';
+      if (pageHeaderTitle) pageHeaderTitle.textContent = '🌐 All Realms Catalog (36 SKUs)';
       if (pageHeaderSub) pageHeaderSub.textContent = 'Search all technical, remote, B2B governance, and monthly retainer SKUs.';
       renderAllRealmsPage(deckGrid);
       return;
@@ -859,7 +859,7 @@ card.style.setProperty('--card-sec', realmColors[1]);
       </div>
 
       <div style="width:100%;max-width:720px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
-        <button type="button" class="btn-secondary" onclick="navigateToPage(11)">🌐 Browse All 31 SKUs (${storefrontMode === 'business' ? 'Business Focus' : 'Personal Focus'})</button>
+        <button type="button" class="btn-secondary" onclick="navigateToPage(11)">🌐 Browse All 36 SKUs (${storefrontMode === 'business' ? 'Business Focus' : 'Personal Focus'})</button>
         <button type="button" class="btn-stripe" onclick="navigateToPage(22)">🚀 Run 60s Free Audit &amp; Print QR Flyers</button>
       </div>
     `;
@@ -1009,7 +1009,7 @@ card.style.setProperty('--card-sec', realmColors[1]);
 
     filterPanel.innerHTML = `
       <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-        <input type="search" id="all-realms-search-input" value="${escapeHtml(allRealmsSearch)}" placeholder="Search all 31 SKUs, realms, deliverables, or tags..." oninput="window.setAllRealmsSearch(this.value)" style="flex:1;min-width:220px;padding:9px 12px;border-radius:var(--radius-sm);background:var(--bg-attr);border:1px solid var(--border-subtle);color:#fff;font-size:13px;">
+        <input type="search" id="all-realms-search-input" value="${escapeHtml(allRealmsSearch)}" placeholder="Search all 36 SKUs, realms, deliverables, or tags..." oninput="window.setAllRealmsSearch(this.value)" style="flex:1;min-width:220px;padding:9px 12px;border-radius:var(--radius-sm);background:var(--bg-attr);border:1px solid var(--border-subtle);color:#fff;font-size:13px;">
         <button class="compact-toggle-pill ${compactMode ? 'active' : ''}" onclick="toggleCompactMode()">${compactMode ? '▤ Compact: ON' : '▤ Compact: OFF'}</button>
       </div>
       <div class="filter-pills-row">
@@ -1095,7 +1095,7 @@ card.style.setProperty('--card-sec', realmColors[1]);
           <h3 style="margin-bottom:8px;">Your Estimate Cart is Empty</h3>
           <p style="font-size:12px;color:var(--text-secondary);margin-bottom:14px;">Browse the Nine Realms catalog and tap "+ Quote" on any service SKU, or run the 60s Quick Audit.</p>
           <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
-            <button class="btn-primary" onclick="navigateToPage(11)">🌐 Browse All 31 SKUs</button>
+            <button class="btn-primary" onclick="navigateToPage(11)">🌐 Browse All 36 SKUs</button>
             <button class="btn-secondary" onclick="navigateToPage(22)">🚀 Run 60s Quick Audit</button>
           </div>
         </div>
